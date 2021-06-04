@@ -13,10 +13,10 @@ namespace DataAccess.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ReclamosAlcaldiaEntities : DbContext
+    public partial class ReclamosAlcaldia : DbContext
     {
-        public ReclamosAlcaldiaEntities()
-            : base("name=ReclamosAlcaldiaEntities")
+        public ReclamosAlcaldia()
+            : base("name=ReclamosAlcaldia")
         {
         }
     

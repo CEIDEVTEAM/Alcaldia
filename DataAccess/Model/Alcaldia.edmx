@@ -497,7 +497,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ReclamosAlcaldiaEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ReclamosAlcaldia" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Cuadrilla" EntityType="Self.Cuadrilla" />
           <EntitySet Name="LogReclamo" EntityType="Self.LogReclamo" />
           <EntitySet Name="Reclamo" EntityType="Self.Reclamo" />
@@ -553,7 +553,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ReclamosAlcaldiaModelStoreContainer" CdmEntityContainer="ReclamosAlcaldiaEntities">
+        <EntityContainerMapping StorageEntityContainer="ReclamosAlcaldiaModelStoreContainer" CdmEntityContainer="ReclamosAlcaldia">
           <EntitySetMapping Name="Cuadrilla">
             <EntityTypeMapping TypeName="ReclamosAlcaldiaModel.Cuadrilla">
               <MappingFragment StoreEntitySet="Cuadrilla">
