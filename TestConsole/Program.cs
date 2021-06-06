@@ -19,6 +19,10 @@ namespace TestConsole
             dto.descripcion = "Usuarios del sitio web de para funcionarios de la Alcaldía";
 
             test.AddUserType(dto);*/
+
+
+
+            /////*4556465464654654
         }
     }
 }
