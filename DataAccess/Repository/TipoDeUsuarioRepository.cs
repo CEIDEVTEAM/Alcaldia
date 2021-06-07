@@ -42,13 +42,6 @@ namespace DataAccess.Repository
                 }
 
             }
-
-
-
-
-
-
-
         }
     }
 }

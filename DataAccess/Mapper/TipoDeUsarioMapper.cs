@@ -17,9 +17,7 @@ namespace DataAccess.Mapper
             {
                 tipo = dto.tipo,
                 descripcion = dto.descripcion
-
             };
-
         }
 
         public DtoTipoUsuario MapToDto(Tipo_Usuario entity)
@@ -29,9 +27,7 @@ namespace DataAccess.Mapper
             {
                 tipo = entity.tipo,
                 descripcion = entity.descripcion
-
             };
-
         }
     }
 }

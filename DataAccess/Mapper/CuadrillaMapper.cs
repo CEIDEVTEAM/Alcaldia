@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CommonSolution.DTOs;
+using DataAccess.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +10,11 @@ namespace DataAccess.Mapper
 {
     public class CuadrillaMapper
     {
-        public dtoCuadrilla toDto(Cuadrilla entity)
+        public DtoCuadrilla MapToDto(Cuadrilla entity)
         {
 
-            return new dtoCuadrilla
+            return new DtoCuadrilla
             {
-
                 id = entity.id,
                 nombre = entity.nombre,
                 encargado = entity.encargado,
@@ -21,20 +22,18 @@ namespace DataAccess.Mapper
                 cantidadDePeones = entity.cantidadDePeones
             };
         }
-        public Cuadrilla toEntity(dtoCuadrilla dto)
-        {
 
+        public Cuadrilla MapToEntity(DtoCuadrilla dto)
+        {
 
             return new Cuadrilla
             {
-
                 id = dto.id,
                 nombre = dto.nombre,
                 encargado = dto.encargado,
                 idZona = dto.idZona,
                 cantidadDePeones = dto.cantidadDePeones
-
             };
-
         }
     }
+}

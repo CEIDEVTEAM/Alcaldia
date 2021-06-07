@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CommonSolution.DTOs;
+using DataAccess.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,39 +10,33 @@ namespace DataAccess.Mapper
 {
     public class UsuarioMapper
     {
-        public dtoUsuario toDto(Usuario entity)
+        public DtoUsuario MaptoDto(Usuario entity)
         {
 
-
-            return new dtoUsuario
+            return new DtoUsuario
             {
-
                 nombreDeUsuario = entity.nombreDeUsuario,
                 nombre = entity.nombre,
                 apellido = entity.apellido,
-                contraseña = entity.contraseña,
+                contrasenia = entity.contraseña,
                 telefono = entity.telefono,
                 email = entity.email,
-                tipo = entity.tipo,
-
+                tipoDeUsuario = entity.tipoDeUsuario,
             };
         }
-        public Usuario toEntity(dtoUsuario dto)
+        public Usuario MaptoEntity(DtoUsuario dto)
         {
 
             return new Usuario
             {
-
                 nombreDeUsuario = dto.nombreDeUsuario,
                 nombre = dto.nombre,
                 apellido = dto.apellido,
-                contraseña = dto.contraseña,
+                contraseña = dto.contrasenia,
                 telefono = dto.telefono,
                 email = dto.email,
-                tipo = dto.tipo,
-
+                tipoDeUsuario = dto.tipoDeUsuario,
             };
-
-
         }
     }
+}

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CommonSolution.DTOs;
+using DataAccess.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,30 +8,30 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Mapper
 {
-    public dtoUbicacion toDto(Ubicacion entity)
+    public class UbicacionMapper
     {
-
-        return new dtoUbicacion
+        public DtoUbicacion MaptoDto(Ubicacion entity)
         {
 
-            id = entity.id,
-            latitud = entity.latitud,
-            longitud = entity.longitud,
-            idZona = entity.idZona,
+            return new DtoUbicacion
+            {
+                id = entity.id,
+                latitud = entity.latitud,
+                longitud = entity.longitud,
+                idZona = entity.idZona,
+            };
+        }
 
-        };
-    }
-
-    public Ubicacion toEntity(dtoUbicacion dto)
-    {
-
-        return new Ubicacion
+        public Ubicacion MaptoEntity(DtoUbicacion dto)
         {
 
-            id = dto.id,
-            latitud = dto.latitud,
-            longitud = dto.longitud,
-            idZona = dto.idZona,
-
-        };
+            return new Ubicacion
+            {
+                id = dto.id,
+                latitud = dto.latitud,
+                longitud = dto.longitud,
+                idZona = dto.idZona,
+            };
+        }
     }
+}

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CommonSolution.DTOs;
+using DataAccess.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,32 +8,28 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Mapper
 {
-    class TipoDeReclamoMapper
+    public class TipoDeReclamoMapper
     {
-        public dtoTipoDeReclamo toDto(TipoDeReclamo entity)
+        public DtoTipoDeReclamo MaptoDto(Tipo_De_Reclamo entity)
         {
 
-            return new dtoTipoDeReclamo
+            return new DtoTipoDeReclamo
             {
-
                 id = entity.id,
                 nombre = entity.nombre,
                 descripcion = entity.descripcion,
-
             };
         }
-        public TipoDeReclamo toEntity(dtoTipoDeReclamo dto)
+
+        public Tipo_De_Reclamo MaptoEntity(DtoTipoDeReclamo dto)
         {
 
-            return new TipoDeReclamo
+            return new Tipo_De_Reclamo
             {
-
                 id = dto.id,
                 nombre = dto.nombre,
                 descripcion = dto.descripcion,
-
             };
-
         }
-
     }
+}

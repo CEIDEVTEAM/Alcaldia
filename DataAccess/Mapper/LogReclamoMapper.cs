@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CommonSolution.DTOs;
+using DataAccess.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +10,11 @@ namespace DataAccess.Mapper
 {
     public class LogReclamoMapper
     {
-        public dtoLogReclamo toDto(LogReclamo entity)
+        public DtoLogReclamo MapToDto(LogReclamo entity)
         {
 
-            return new dtoLogReclamo
+            return new DtoLogReclamo
             {
-
                 idLog = entity.idLog,
                 estadoLog = entity.estadoLog,
                 fechaYhoraLog = entity.fechaYhoraLog,
@@ -23,12 +24,12 @@ namespace DataAccess.Mapper
                 nombreDeUsuario = entity.nombreDeUsuario
             };
         }
-        public LogReclamo toEntity(dtoLogReclamo dto)
+
+        public LogReclamo MapToEntity(DtoLogReclamo dto)
         {
 
             return new LogReclamo
             {
-
                 idLog = dto.idLog,
                 estadoLog = dto.estadoLog,
                 fechaYhoraLog = dto.fechaYhoraLog,
@@ -37,7 +38,6 @@ namespace DataAccess.Mapper
                 idReclamo = dto.idReclamo,
                 nombreDeUsuario = dto.nombreDeUsuario
             };
-
-
         }
     }
+}
