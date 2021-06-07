@@ -11,17 +11,16 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repository
 {
-    public class TipoDeUsuarioRepository
+    public class CuadrillaRepository
     {
-        private TipoDeUsuarioMapper _TipoDeUsusarioMapper;
+        private CuadrillaMapper _cuadrillaMapper;
 
-        public TipoDeUsuarioRepository()
+        public CuadrillaRepository()
         {
-            this._TipoDeUsusarioMapper = new TipoDeUsuarioMapper();
+            this._cuadrillaMapper = new CuadrillaMapper();
         }
 
-
-        public void AddTipoUsuario(DtoTipoUsuario dto)
+        public void AddCuadrilla(DtoCuadrilla dto)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
             {
@@ -29,8 +28,8 @@ namespace DataAccess.Repository
                 {
                     try
                     {
-                        Tipo_Usuario newTipoUsuario = this._TipoDeUsusarioMapper.MapToEntity(dto);
-                        context.Tipo_Usuario.Add(newTipoUsuario);
+                        Cuadrilla newCuadrilla = this._cuadrillaMapper.MapToEntity(dto);
+                        context.Cuadrilla.Add(newCuadrilla);
                         context.SaveChanges();
                         trann.Commit();
                     }
@@ -38,39 +37,11 @@ namespace DataAccess.Repository
                     {
                         trann.Rollback();
                     }
-
-                }
-
-            }
-        }
-
-        public void ModifyTipoUsuario(DtoTipoUsuario dto)
-        {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
-            {
-                using(DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
-                {
-                    try
-                    {
-                        Tipo_Usuario currTipoUsuario = context.Tipo_Usuario.FirstOrDefault(f => f.tipo == dto.tipo);
-
-                        if(currTipoUsuario != null)
-                        {
-                            currTipoUsuario.descripcion = dto.descripcion;
-                        }
-
-                        context.SaveChanges();
-                        trann.Commit();
-                    }
-                    catch(Exception ex)
-                    {
-                        trann.Rollback();
-                    }
                 }
             }
         }
 
-        public void DeleteTipoUsuario(DtoTipoUsuario dto)
+        public void ModifyCuadrilla(DtoCuadrilla dto)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
             {
@@ -78,11 +49,40 @@ namespace DataAccess.Repository
                 {
                     try
                     {
-                        Tipo_Usuario currTipoUsuario = context.Tipo_Usuario.FirstOrDefault(f => f.tipo == dto.tipo);
+                        Cuadrilla currCuadrilla = context.Cuadrilla.FirstOrDefault(f => f.id == dto.id);
 
-                        if (currTipoUsuario != null)
+                        if (currCuadrilla != null)
                         {
-                            context.Tipo_Usuario.Remove(currTipoUsuario);
+                            currCuadrilla.nombre = dto.nombre;
+                            currCuadrilla.encargado = dto.encargado;
+                            currCuadrilla.cantidadDePeones = dto.cantidadDePeones;
+                            currCuadrilla.idZona = dto.idZona;
+                        }
+
+                        context.SaveChanges();
+                        trann.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        trann.Rollback();
+                    }
+                }
+            }
+        }
+
+        public void DeleteCuadrilla(int idCuadrilla)
+        {
+            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            {
+                using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
+                {
+                    try
+                    {
+                        Cuadrilla currCuadrilla = context.Cuadrilla.FirstOrDefault(f => f.id == idCuadrilla);
+
+                        if (currCuadrilla != null)
+                        {
+                            context.Cuadrilla.Remove(currCuadrilla);
                             context.SaveChanges();
                             trann.Commit();
                         }
@@ -96,12 +96,18 @@ namespace DataAccess.Repository
         }
 
 
-        public DtoTipoUsuario GetTipoUsuarioById(string tipo)
+        public DtoCuadrilla GetCuadrillaById(int idCuadrilla)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
-            {
-                return this._TipoDeUsusarioMapper.MapToDto(context.Tipo_Usuario.AsNoTracking().FirstOrDefault(f => f.tipo == tipo.ToUpper()));
-            }
+                return this._cuadrillaMapper.MapToDto(context.Cuadrilla.AsNoTracking().FirstOrDefault(f => f.id == idCuadrilla));
         }
+
+        public bool ExistCuadrillaById(int idCuadrilla)
+        {
+            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+                return context.Cuadrilla.AsNoTracking().Any(a => a.id == idCuadrilla);
+        }
+
     }
 }
+

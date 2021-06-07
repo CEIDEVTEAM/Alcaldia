@@ -11,6 +11,5 @@ namespace CommonSolution.DTOs
         public string tipo { get; set; }
         public string descripcion { get; set; }
 
-
     }
 }

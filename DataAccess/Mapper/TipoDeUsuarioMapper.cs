@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Mapper
 {
-    public class TipoDeUsarioMapper
+    public class TipoDeUsuarioMapper
     {
         public Tipo_Usuario MapToEntity(DtoTipoUsuario dto)
         {

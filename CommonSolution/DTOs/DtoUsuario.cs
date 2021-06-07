@@ -14,6 +14,6 @@ namespace CommonSolution.DTOs
         public string contrasenia { get; set; }
         public string telefono { get; set; }
         public string email { get; set; }
-        public string tipoDeUsuario { get; set; }
+        public DtoTipoUsuario tipoDeUsuario { get; set; }
     }
 }

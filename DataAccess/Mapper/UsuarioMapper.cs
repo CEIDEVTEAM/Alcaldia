@@ -10,8 +10,18 @@ namespace DataAccess.Mapper
 {
     public class UsuarioMapper
     {
+        private TipoDeUsuarioMapper _Tipo_UsuarioMapper;
+
+        public UsuarioMapper()
+        {
+            this._Tipo_UsuarioMapper = new TipoDeUsuarioMapper();
+        }
+
+
         public DtoUsuario MaptoDto(Usuario entity)
         {
+
+            DtoTipoUsuario DtoTipoUsuario = new DtoTipoUsuario();
 
             return new DtoUsuario
             {
@@ -21,9 +31,10 @@ namespace DataAccess.Mapper
                 contrasenia = entity.contraseña,
                 telefono = entity.telefono,
                 email = entity.email,
-                tipoDeUsuario = entity.tipoDeUsuario,
+                tipoDeUsuario = this._Tipo_UsuarioMapper.MapToDto(entity.Tipo_Usuario)
             };
         }
+
         public Usuario MaptoEntity(DtoUsuario dto)
         {
 
@@ -35,7 +46,7 @@ namespace DataAccess.Mapper
                 contraseña = dto.contrasenia,
                 telefono = dto.telefono,
                 email = dto.email,
-                tipoDeUsuario = dto.tipoDeUsuario,
+                tipoDeUsuario = dto.tipoDeUsuario.tipo,
             };
         }
     }
