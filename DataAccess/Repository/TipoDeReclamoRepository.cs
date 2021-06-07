@@ -11,16 +11,16 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repository
 {
-    public class CuadrillaRepository
+    public class TipoDeReclamoRepository
     {
-        private CuadrillaMapper _cuadrillaMapper;
+        private TipoDeReclamoMapper _TipoDeReclamoMapper;
 
-        public CuadrillaRepository()
+        public TipoDeReclamoRepository()
         {
-            this._cuadrillaMapper = new CuadrillaMapper();
+            this._TipoDeReclamoMapper = new TipoDeReclamoMapper();
         }
 
-        public void AddCuadrilla(DtoCuadrilla dto)
+        public void AddTipoDeReclamo(DtoTipoDeReclamo dto)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
             {
@@ -28,8 +28,8 @@ namespace DataAccess.Repository
                 {
                     try
                     {
-                        Cuadrilla newCuadrilla = this._cuadrillaMapper.MapToEntity(dto);
-                        context.Cuadrilla.Add(newCuadrilla);
+                        Tipo_De_Reclamo newTipoDeReclamo = this._TipoDeReclamoMapper.MaptoEntity(dto);
+                        context.Tipo_De_Reclamo.Add(newTipoDeReclamo);
                         context.SaveChanges();
                         trann.Commit();
                     }
@@ -41,7 +41,7 @@ namespace DataAccess.Repository
             }
         }
 
-        public void ModifyCuadrilla(DtoCuadrilla dto)
+        public void ModifyTipoDeReclamo(DtoTipoDeReclamo dto)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
             {
@@ -49,14 +49,12 @@ namespace DataAccess.Repository
                 {
                     try
                     {
-                        Cuadrilla currCuadrilla = context.Cuadrilla.FirstOrDefault(f => f.id == dto.id);
+                        Tipo_De_Reclamo currTipoDeReclamo = context.Tipo_De_Reclamo.FirstOrDefault(f => f.id == dto.id);
 
-                        if (currCuadrilla != null)
+                        if (currTipoDeReclamo != null)
                         {
-                            currCuadrilla.nombre = dto.nombre;
-                            currCuadrilla.encargado = dto.encargado;
-                            currCuadrilla.cantidadDePeones = dto.cantidadDePeones;
-                            currCuadrilla.idZona = dto.idZona;
+                            currTipoDeReclamo.nombre = dto.nombre;
+                            currTipoDeReclamo.descripcion = dto.descripcion;
                         }
 
                         context.SaveChanges();
@@ -70,7 +68,7 @@ namespace DataAccess.Repository
             }
         }
 
-        public void DeleteCuadrilla(int idCuadrilla)
+        public void DeleteTipoDeReclamo(int idTipoDeReclamo)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
             {
@@ -78,11 +76,11 @@ namespace DataAccess.Repository
                 {
                     try
                     {
-                        Cuadrilla currCuadrilla = context.Cuadrilla.FirstOrDefault(f => f.id == idCuadrilla);
+                        Tipo_De_Reclamo currTipoDeReclamo = context.Tipo_De_Reclamo.FirstOrDefault(f => f.id == idTipoDeReclamo);
 
-                        if (currCuadrilla != null)
+                        if (currTipoDeReclamo != null)
                         {
-                            context.Cuadrilla.Remove(currCuadrilla);
+                            context.Tipo_De_Reclamo.Remove(currTipoDeReclamo);
                             context.SaveChanges();
                             trann.Commit();
                         }
@@ -95,18 +93,11 @@ namespace DataAccess.Repository
             }
         }
 
-        public DtoCuadrilla GetCuadrillaById(int idCuadrilla)
+        public DtoTipoDeReclamo GetTipoDeReclamoById(int idTipoDeReclamo)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
-                return this._cuadrillaMapper.MapToDto(context.Cuadrilla.AsNoTracking().FirstOrDefault(f => f.id == idCuadrilla));
-        }
-
-        public bool ExistCuadrillaById(int idCuadrilla)
-        {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
-                return context.Cuadrilla.AsNoTracking().Any(a => a.id == idCuadrilla);
+                return this._TipoDeReclamoMapper.MaptoDto(context.Tipo_De_Reclamo.AsNoTracking().FirstOrDefault(f => f.id == idTipoDeReclamo));
         }
 
     }
 }
-

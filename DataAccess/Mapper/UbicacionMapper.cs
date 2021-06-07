@@ -12,6 +12,8 @@ namespace DataAccess.Mapper
     {
         public DtoUbicacion MaptoDto(Ubicacion entity)
         {
+            if (entity == null)
+                return null;
 
             return new DtoUbicacion
             {
@@ -24,6 +26,8 @@ namespace DataAccess.Mapper
 
         public Ubicacion MaptoEntity(DtoUbicacion dto)
         {
+            if (dto == null)
+                return null;
 
             return new Ubicacion
             {

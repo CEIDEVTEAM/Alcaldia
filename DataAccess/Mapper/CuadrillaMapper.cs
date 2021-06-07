@@ -12,6 +12,8 @@ namespace DataAccess.Mapper
     {
         public DtoCuadrilla MapToDto(Cuadrilla entity)
         {
+            if (entity == null)
+                return null;
 
             return new DtoCuadrilla
             {
@@ -25,6 +27,8 @@ namespace DataAccess.Mapper
 
         public Cuadrilla MapToEntity(DtoCuadrilla dto)
         {
+            if (dto == null)
+                return null;
 
             return new Cuadrilla
             {

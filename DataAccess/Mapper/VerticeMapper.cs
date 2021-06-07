@@ -12,6 +12,8 @@ namespace DataAccess.Mapper
     {
         public DtoVertice MaptoDto(Vertice entity)
         {
+            if (entity == null)
+                return null;
 
             return new DtoVertice
             {
@@ -24,6 +26,8 @@ namespace DataAccess.Mapper
 
         public Vertice MaptoEntity(DtoVertice dto)
         {
+            if (dto == null)
+                return null;
 
             return new Vertice
             {

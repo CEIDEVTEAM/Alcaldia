@@ -12,6 +12,8 @@ namespace DataAccess.Mapper
     {
         public DtoTipoDeReclamo MaptoDto(Tipo_De_Reclamo entity)
         {
+            if (entity == null)
+                return null;
 
             return new DtoTipoDeReclamo
             {
@@ -23,6 +25,8 @@ namespace DataAccess.Mapper
 
         public Tipo_De_Reclamo MaptoEntity(DtoTipoDeReclamo dto)
         {
+            if (dto == null)
+                return null;
 
             return new Tipo_De_Reclamo
             {

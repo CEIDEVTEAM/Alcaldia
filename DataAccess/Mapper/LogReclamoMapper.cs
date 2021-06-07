@@ -12,6 +12,8 @@ namespace DataAccess.Mapper
     {
         public DtoLogReclamo MapToDto(LogReclamo entity)
         {
+            if (entity == null)
+                return null;
 
             return new DtoLogReclamo
             {
@@ -27,6 +29,8 @@ namespace DataAccess.Mapper
 
         public LogReclamo MapToEntity(DtoLogReclamo dto)
         {
+            if (dto == null)
+                return null;
 
             return new LogReclamo
             {

@@ -20,6 +20,8 @@ namespace DataAccess.Mapper
 
         public DtoUsuario MaptoDto(Usuario entity)
         {
+            if (entity == null)
+                return null;
 
             DtoTipoUsuario DtoTipoUsuario = new DtoTipoUsuario();
 
@@ -37,6 +39,8 @@ namespace DataAccess.Mapper
 
         public Usuario MaptoEntity(DtoUsuario dto)
         {
+            if (dto == null)
+                return null;
 
             return new Usuario
             {

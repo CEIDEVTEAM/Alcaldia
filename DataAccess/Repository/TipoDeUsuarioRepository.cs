@@ -95,7 +95,6 @@ namespace DataAccess.Repository
             }
         }
 
-
         public DtoTipoUsuario GetTipoUsuarioById(string tipo)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())

@@ -12,6 +12,8 @@ namespace DataAccess.Mapper
     {
         public DtoZona MaptoDto(Zona entity)
         {
+            if (entity == null)
+                return null;
 
             return new DtoZona
             {
@@ -23,6 +25,8 @@ namespace DataAccess.Mapper
 
         public Zona MaptoEntity(DtoZona dto)
         {
+            if (dto == null)
+                return null;
 
             return new Zona
             {
