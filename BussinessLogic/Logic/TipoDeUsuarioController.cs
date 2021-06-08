@@ -17,14 +17,28 @@ namespace BussinessLogic.Logic
             this._Repository = new Repository();
         }
 
-
-        public void AddUserType(DtoTipoUsuario dto)
+        public List<string> AddTipoDeUsuario(DtoTipoUsuario dto)
         {
-           
-            this._Repository.GetTipoDeUsuarioRepository().AddUserType(dto);
-        
+            List<string> colerrors = new List<string>();
+
+            if(colerrors.Count == 0)
+            {
+            dto.tipo.ToUpper();
+            this._Repository.GetTipoDeUsuarioRepository().AddTipoUsuario(dto);
+            }
+
+            return colerrors;
         }
 
 
+        public List<string> ValidateUsuario(DtoTipoUsuario dto)
+        {
+            List<string> colerrors = new List<string>();
+
+            if (this._Repository.GetTipoDeUsuarioRepository().ExistTipoDeUsuarioById(dto.tipo))
+                colerrors.Add("El Tipo de Usuario ya existe");
+
+            return colerrors;
+        }
     }
 }

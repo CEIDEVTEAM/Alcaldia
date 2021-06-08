@@ -11,16 +11,16 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repository
 {
-    public class TipoDeUsuarioRepository
+    public class UbicacionRepository
     {
-        private TipoDeUsuarioMapper _TipoDeUsusarioMapper;
+        private UbicacionMapper _UbicacionMapper;
 
-        public TipoDeUsuarioRepository()
+        public UbicacionRepository()
         {
-            this._TipoDeUsusarioMapper = new TipoDeUsuarioMapper();
+            this._UbicacionMapper = new UbicacionMapper();
         }
 
-        public void AddTipoUsuario(DtoTipoUsuario dto)
+        public void AddUbicacion(DtoUbicacion dto)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
             {
@@ -28,8 +28,8 @@ namespace DataAccess.Repository
                 {
                     try
                     {
-                        Tipo_Usuario newTipoUsuario = this._TipoDeUsusarioMapper.MapToEntity(dto);
-                        context.Tipo_Usuario.Add(newTipoUsuario);
+                        Ubicacion newUbicacion = this._UbicacionMapper.MaptoEntity(dto);
+                        context.Ubicacion.Add(newUbicacion);
                         context.SaveChanges();
                         trann.Commit();
                     }
@@ -41,7 +41,7 @@ namespace DataAccess.Repository
             }
         }
 
-        public void ModifyTipoUsuario(DtoTipoUsuario dto)
+        public void ModifyUbicacion(DtoUbicacion dto)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
             {
@@ -49,11 +49,12 @@ namespace DataAccess.Repository
                 {
                     try
                     {
-                        Tipo_Usuario currTipoUsuario = context.Tipo_Usuario.FirstOrDefault(f => f.tipo == dto.tipo);
-
-                        if (currTipoUsuario != null)
+                        Ubicacion currUbicacion = context.Ubicacion.FirstOrDefault(f => f.id == dto.id);
+                        
+                        if(currUbicacion != null)
                         {
-                            currTipoUsuario.descripcion = dto.descripcion;
+                            currUbicacion.latitud = dto.latitud;
+                            currUbicacion.longitud = dto.longitud;
                         }
 
                         context.SaveChanges();
@@ -67,7 +68,7 @@ namespace DataAccess.Repository
             }
         }
 
-        public void DeleteTipoUsuario(DtoTipoUsuario dto)
+        public void DeleteUbicacion(DtoUbicacion dto)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
             {
@@ -75,11 +76,11 @@ namespace DataAccess.Repository
                 {
                     try
                     {
-                        Tipo_Usuario currTipoUsuario = context.Tipo_Usuario.FirstOrDefault(f => f.tipo == dto.tipo);
+                        Ubicacion currUbicacion = context.Ubicacion.FirstOrDefault(f => f.id == dto.id);
 
-                        if (currTipoUsuario != null)
+                        if (currUbicacion != null)
                         {
-                            context.Tipo_Usuario.Remove(currTipoUsuario);
+                            context.Ubicacion.Remove(currUbicacion);
                             context.SaveChanges();
                             trann.Commit();
                         }
@@ -92,16 +93,10 @@ namespace DataAccess.Repository
             }
         }
 
-        public DtoTipoUsuario GetTipoUsuarioById(string tipo)
+        public DtoUbicacion GetUbicacionById(int idUbicacion)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
-                return this._TipoDeUsusarioMapper.MapToDto(context.Tipo_Usuario.AsNoTracking().FirstOrDefault(f => f.tipo == tipo.ToUpper()));
-        }
-
-        public bool ExistTipoDeUsuarioById(string tipo)
-        {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
-                return context.Tipo_Usuario.AsNoTracking().Any(a => a.tipo == a.tipo.ToUpper());
+                return this._UbicacionMapper.MaptoDto(context.Ubicacion.AsNoTracking().FirstOrDefault(f => f.id == idUbicacion));
         }
     }
 }

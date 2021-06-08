@@ -110,6 +110,7 @@
     <Compile Include="Repository\ReclamoRepository.cs" />
     <Compile Include="Repository\TipoDeReclamoRepository.cs" />
     <Compile Include="Repository\TipoDeUsuarioRepository.cs" />
+    <Compile Include="Repository\UbicacionRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Model\Alcaldia.edmx">
