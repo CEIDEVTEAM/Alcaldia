@@ -21,10 +21,10 @@ namespace BussinessLogic.Logic
         {
             List<string> colerrors = new List<string>();
 
-            if(colerrors.Count == 0)
+            if (colerrors.Count == 0)
             {
-            dto.tipo.ToUpper();
-            this._Repository.GetTipoDeUsuarioRepository().AddTipoUsuario(dto);
+                dto.tipo.ToUpper();
+                this._Repository.GetTipoDeUsuarioRepository().AddTipoUsuario(dto);
             }
 
             return colerrors;
