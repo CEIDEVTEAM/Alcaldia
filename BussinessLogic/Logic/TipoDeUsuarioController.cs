@@ -19,7 +19,7 @@ namespace BussinessLogic.Logic
 
         public List<string> AddTipoDeUsuario(DtoTipoUsuario dto)
         {
-            List<string> colerrors = new List<string>();
+            List<string> colerrors = this.ValidateUsuario(dto, true);
 
             if (colerrors.Count == 0)
             {
@@ -30,12 +30,11 @@ namespace BussinessLogic.Logic
             return colerrors;
         }
 
-
-        public List<string> ValidateUsuario(DtoTipoUsuario dto)
+        public List<string> ValidateUsuario(DtoTipoUsuario dto, bool isAdd)
         {
             List<string> colerrors = new List<string>();
 
-            if (this._Repository.GetTipoDeUsuarioRepository().ExistTipoDeUsuarioById(dto.tipo))
+            if (isAdd == true && this._Repository.GetTipoDeUsuarioRepository().ExistTipoDeUsuarioById(dto.tipo))
                 colerrors.Add("El Tipo de Usuario ya existe");
 
             return colerrors;

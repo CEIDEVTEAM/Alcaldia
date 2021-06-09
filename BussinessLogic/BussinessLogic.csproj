@@ -51,7 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logic\CuadrillaController.cs" />
+    <Compile Include="Logic\ReclamoController.cs" />
+    <Compile Include="Logic\TipoDeReclamoController.cs" />
     <Compile Include="Logic\TipoDeUsuarioController.cs" />
+    <Compile Include="Logic\UbicacionController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
