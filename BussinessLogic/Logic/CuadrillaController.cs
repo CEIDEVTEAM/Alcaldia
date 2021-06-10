@@ -35,7 +35,7 @@ namespace BussinessLogic.Logic
 
             if (colerrors.Count == 0)
             {
-                this._Repository.GetCuadrillaRepository().DeleteCuadrilla(dto.id);
+                this._Repository.GetCuadrillaRepository().ModifyCuadrilla(dto);
             }
 
             return colerrors;

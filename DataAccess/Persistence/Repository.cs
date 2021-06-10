@@ -14,6 +14,10 @@ namespace DataAccess.Persistence
         private ReclamoRepository _ReclamoRepository;
         private UbicacionRepository _UbicacionRepository;
         private TipoDeReclamoRepository _TipoDeReclamoRepository;
+        private UsuarioRepository _UsuarioRepository;
+        private ZonaRepository _ZonaRepository;
+        private VerticeRepository _VerticeRepository;
+        private LogReclamoRepository _LogReclamoRepository;
 
         public Repository()
         {
@@ -22,6 +26,10 @@ namespace DataAccess.Persistence
             this._ReclamoRepository = new ReclamoRepository();
             this._UbicacionRepository = new UbicacionRepository();
             this._TipoDeReclamoRepository = new TipoDeReclamoRepository();
+            this._UsuarioRepository = new UsuarioRepository();
+            this._ZonaRepository = new ZonaRepository();
+            this._VerticeRepository = new VerticeRepository();
+            this._LogReclamoRepository = new LogReclamoRepository();
         }
 
 
@@ -48,6 +56,22 @@ namespace DataAccess.Persistence
         public TipoDeReclamoRepository GetTipoDeReclamoRepository()
         {
             return this._TipoDeReclamoRepository;
+        }
+        public UsuarioRepository GetUsuarioRepository()
+        {
+            return this._UsuarioRepository;
+        }
+        public ZonaRepository GetZonaRepository()
+        {
+            return this._ZonaRepository;
+        }
+        public VerticeRepository GetVerticeRepository()
+        {
+            return this._VerticeRepository;
+        }
+        public LogReclamoRepository GetLogReclamoRepository()
+        {
+            return this._LogReclamoRepository;
         }
     }
 }

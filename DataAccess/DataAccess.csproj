@@ -107,10 +107,14 @@
     <Compile Include="Persistence\Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\CuadrillaRepository.cs" />
+    <Compile Include="Repository\LogReclamoRepository.cs" />
     <Compile Include="Repository\ReclamoRepository.cs" />
     <Compile Include="Repository\TipoDeReclamoRepository.cs" />
     <Compile Include="Repository\TipoDeUsuarioRepository.cs" />
     <Compile Include="Repository\UbicacionRepository.cs" />
+    <Compile Include="Repository\UsuarioRepository.cs" />
+    <Compile Include="Repository\VerticeRepository.cs" />
+    <Compile Include="Repository\ZonaRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Model\Alcaldia.edmx">

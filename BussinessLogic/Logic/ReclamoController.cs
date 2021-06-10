@@ -29,7 +29,7 @@ namespace BussinessLogic.Logic
             return colerrors;
         }
 
-        public List<string> ModifyTipoDeReclamo(DtoReclamo dto)
+        public List<string> ModifyReclamo(DtoReclamo dto)
         {
             List<string> colerrors = this.ValidateReclamo(dto, false);
 
@@ -41,7 +41,7 @@ namespace BussinessLogic.Logic
             return colerrors;
         }
 
-        public List<string> DeleteTipoDeReclamo(DtoReclamo dto)
+        public List<string> DeleteReclamo(DtoReclamo dto)
         {
             List<string> colerrors = this.ValidateReclamo(dto, false);
 
