@@ -14,7 +14,6 @@ namespace DataAccess.Model
     
     public partial class Vertice
     {
-        public int id { get; set; }
         public decimal latitud { get; set; }
         public decimal longitud { get; set; }
         public Nullable<int> idZona { get; set; }

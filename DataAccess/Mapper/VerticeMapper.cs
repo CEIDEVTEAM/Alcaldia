@@ -17,7 +17,7 @@ namespace DataAccess.Mapper
 
             return new DtoVertice
             {
-                id = entity.id,
+                
                 latitud = entity.latitud,
                 longitud = entity.longitud,
                 idZona = entity.idZona
@@ -31,7 +31,7 @@ namespace DataAccess.Mapper
 
             return new Vertice
             {
-                id = dto.id,
+                
                 latitud = dto.latitud,
                 longitud = dto.longitud,
                 idZona = dto.idZona

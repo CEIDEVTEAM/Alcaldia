@@ -20,7 +20,6 @@ namespace DataAccess.Model
             this.Reclamo = new HashSet<Reclamo>();
         }
     
-        public int id { get; set; }
         public string nombre { get; set; }
         public string descripcion { get; set; }
     

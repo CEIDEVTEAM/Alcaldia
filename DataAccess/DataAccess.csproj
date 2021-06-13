@@ -117,11 +117,11 @@
     <Compile Include="Repository\ZonaRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <EntityDeploy Include="Model\Alcaldia.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Alcaldia.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="App.Config" />
     <None Include="Model\Alcaldia.edmx.diagram">
       <DependentUpon>Alcaldia.edmx</DependentUpon>
     </None>

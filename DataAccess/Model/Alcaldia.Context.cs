@@ -16,7 +16,7 @@ namespace DataAccess.Model
     public partial class ReclamosAlcaldia : DbContext
     {
         public ReclamosAlcaldia()
-            : base("name=ReclamosAlcaldia")
+            : base("name=ReclamosAlcaldiaEntities")
         {
         }
     
