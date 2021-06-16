@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace BussinessLogic.Logic
 {
-    public class ReclamoController
+    public class LReclamoController
     {
         private Repository _Repository;
 
-        public ReclamoController()
+        public LReclamoController()
         {
             this._Repository = new Repository();
         }

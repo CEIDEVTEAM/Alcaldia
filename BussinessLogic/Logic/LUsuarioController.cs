@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace BussinessLogic.Logic
 {
-   public class UsuarioController
+   public class LUsuarioController
     {
         private Repository _Repository;
 
-        public UsuarioController()
+        public LUsuarioController()
         {
             this._Repository = new Repository();
         }
@@ -59,6 +59,9 @@ namespace BussinessLogic.Logic
 
             if (isAdd == false && !this._Repository.GetUsuarioRepository().ExistUsuarioByNombre(dto.nombreDeUsuario))
                 colerrors.Add("El usuario no existe.");
+
+            if (isAdd == true && this._Repository.GetUsuarioRepository().ExistUsuarioByNombre(dto.nombreDeUsuario))
+                colerrors.Add("El usuario ya está registrado.");
 
             return colerrors;
         }

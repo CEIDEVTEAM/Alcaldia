@@ -17,7 +17,6 @@ namespace DataAccess.Mapper
 
             return new DtoTipoDeReclamo
             {
-                id = entity.id,
                 nombre = entity.nombre,
                 descripcion = entity.descripcion,
             };
@@ -30,7 +29,6 @@ namespace DataAccess.Mapper
 
             return new Tipo_De_Reclamo
             {
-                id = dto.id,
                 nombre = dto.nombre,
                 descripcion = dto.descripcion,
             };

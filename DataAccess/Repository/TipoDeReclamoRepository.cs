@@ -49,11 +49,10 @@ namespace DataAccess.Repository
                 {
                     try
                     {
-                        Tipo_De_Reclamo currTipoDeReclamo = context.Tipo_De_Reclamo.FirstOrDefault(f => f.id == dto.id);
+                        Tipo_De_Reclamo currTipoDeReclamo = context.Tipo_De_Reclamo.FirstOrDefault(f => f.nombre == dto.nombre);
 
                         if (currTipoDeReclamo != null)
                         {
-                            currTipoDeReclamo.nombre = dto.nombre;
                             currTipoDeReclamo.descripcion = dto.descripcion;
                         }
 
@@ -68,7 +67,7 @@ namespace DataAccess.Repository
             }
         }
 
-        public void DeleteTipoDeReclamo(int idTipoDeReclamo)
+        public void DeleteTipoDeReclamo(string nameTipoDeReclamo)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
             {
@@ -76,7 +75,7 @@ namespace DataAccess.Repository
                 {
                     try
                     {
-                        Tipo_De_Reclamo currTipoDeReclamo = context.Tipo_De_Reclamo.FirstOrDefault(f => f.id == idTipoDeReclamo);
+                        Tipo_De_Reclamo currTipoDeReclamo = context.Tipo_De_Reclamo.FirstOrDefault(f => f.nombre == nameTipoDeReclamo);
 
                         if (currTipoDeReclamo != null)
                         {
@@ -93,16 +92,16 @@ namespace DataAccess.Repository
             }
         }
 
-        public DtoTipoDeReclamo GetTipoDeReclamoById(int idTipoDeReclamo)
+        public DtoTipoDeReclamo GetTipoDeReclamoById(string nameTipoDeReclamo)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
-                return this._TipoDeReclamoMapper.MaptoDto(context.Tipo_De_Reclamo.AsNoTracking().FirstOrDefault(f => f.id == idTipoDeReclamo));
+                return this._TipoDeReclamoMapper.MaptoDto(context.Tipo_De_Reclamo.AsNoTracking().FirstOrDefault(f => f.nombre == nameTipoDeReclamo));
         }
 
-        public bool ExistTipoDeReclamoById(int idTipoDeReclamo)
+        public bool ExistTipoDeReclamoById(string nameTipoDeReclamo)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
-                return context.Tipo_De_Reclamo.AsNoTracking().Any(a => a.id == idTipoDeReclamo);
+                return context.Tipo_De_Reclamo.AsNoTracking().Any(a => a.nombre == nameTipoDeReclamo);
         }
 
 

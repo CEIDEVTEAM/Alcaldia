@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace BussinessLogic.Logic
 {
-    public class TipoDeUsuarioController
+    public class LTipoDeUsuarioController
     {
         private Repository _Repository;
 
-        public TipoDeUsuarioController()
+        public LTipoDeUsuarioController()
         {
             this._Repository = new Repository();
         }

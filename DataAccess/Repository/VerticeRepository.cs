@@ -49,12 +49,10 @@ namespace DataAccess.Repository
                 {
                     try
                     {
-                        Vertice currVertice = context.Vertice.FirstOrDefault(f => f.id == dto.id);
+                        Vertice currVertice = context.Vertice.FirstOrDefault(f => f.latitud == dto.latitud && f.longitud == dto.longitud);
 
                         if (currVertice != null)
                         {
-                            currVertice.latitud = dto.latitud;
-                            currVertice.longitud = dto.longitud;
                             currVertice.idZona = dto.idZona;
                         }
 
@@ -69,7 +67,7 @@ namespace DataAccess.Repository
             }
         }
 
-        public void DeleteVertice(int idVertice)
+        public void DeleteVertice(decimal lat, decimal lon)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
             {
@@ -77,7 +75,7 @@ namespace DataAccess.Repository
                 {
                     try
                     {
-                        Vertice currVertice = context.Vertice.FirstOrDefault(f => f.id == idVertice);
+                        Vertice currVertice = context.Vertice.FirstOrDefault(f => f.latitud == lat && f.longitud == lon);
 
                         if (currVertice != null)
                         {
@@ -94,16 +92,16 @@ namespace DataAccess.Repository
             }
         }
 
-        public DtoVertice GetVerticeById(int idVertice)
+        public DtoVertice GetVerticeByLatAndLon(decimal lat, decimal lon)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
-                return this._verticeMapper.MaptoDto(context.Vertice.AsNoTracking().FirstOrDefault(f => f.id == idVertice));
+                return this._verticeMapper.MaptoDto(context.Vertice.AsNoTracking().FirstOrDefault(f => f.latitud == lat && f.longitud == lon));
         }
 
-        public bool ExistVerticeById(int idVertice)
+        public bool ExistVerticeByLatAndLon(decimal lat, decimal lon)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
-                return context.Vertice.AsNoTracking().Any(a => a.id == idVertice);
+                return context.Vertice.AsNoTracking().Any(f => f.latitud == lat && f.longitud == lon);
         }
 
     }

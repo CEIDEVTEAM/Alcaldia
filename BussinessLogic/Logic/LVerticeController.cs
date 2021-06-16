@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace BussinessLogic.Logic
 {
-   public class VerticeController
+   public class LVerticeController
     {
         private Repository _Repository;
 
-        public VerticeController()
+        public LVerticeController()
         {
             this._Repository = new Repository();
         }
@@ -47,7 +47,7 @@ namespace BussinessLogic.Logic
 
             if (colerrors.Count == 0)
             {
-                this._Repository.GetVerticeRepository().DeleteVertice(dto.id);
+                this._Repository.GetVerticeRepository().DeleteVertice(dto.latitud, dto.longitud);
             }
 
             return colerrors;
@@ -57,8 +57,11 @@ namespace BussinessLogic.Logic
         {
             List<string> colerrors = new List<string>();
 
-            if (isAdd == false && !this._Repository.GetVerticeRepository().ExistVerticeById(dto.id))
+            if (isAdd == false && !this._Repository.GetVerticeRepository().ExistVerticeByLatAndLon(dto.latitud, dto.longitud))
                 colerrors.Add("El vertice no existe.");
+
+            if (isAdd == true && this._Repository.GetVerticeRepository().ExistVerticeByLatAndLon(dto.latitud, dto.longitud))
+                colerrors.Add("El vertice ya está registrado.");
 
             return colerrors;
         }

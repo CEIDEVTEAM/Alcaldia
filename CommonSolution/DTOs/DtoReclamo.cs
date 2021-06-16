@@ -13,8 +13,9 @@ namespace CommonSolution.DTOs
         public Nullable<System.DateTime> fechaYhora { get; set; }
         public string observaciones { get; set; }
         public string idCiudadano { get; set; }
-        public Nullable<int> idTipoReclamo { get; set; }
-        public Nullable<int> idUbicacion { get; set; }
+        public string nombreTipoReclamo { get; set; }
+        public Nullable<decimal> LatitudReclamo { get; set; }
+        public Nullable<decimal> LongitudReclamo { get; set; }
         public Nullable<int> idCuadrilla { get; set; }
     }
 }

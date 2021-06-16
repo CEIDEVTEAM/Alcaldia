@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace BussinessLogic.Logic
 {
-   public class ZonaController
+   public class LZonaController
     {
         private Repository _Repository;
 
-        public ZonaController()
+        public LZonaController()
         {
             this._Repository = new Repository();
         }

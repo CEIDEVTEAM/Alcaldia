@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace BussinessLogic.Logic
 {
-    public class CuadrillaController
+    public class LCuadrillaController
     {
         private Repository _Repository;
 
-        public CuadrillaController()
+        public LCuadrillaController()
         {
             this._Repository = new Repository();
         }

@@ -8,7 +8,6 @@ namespace CommonSolution.DTOs
 {
     public class DtoVertice
     {
-        public int id { get; set; }
         public decimal latitud { get; set; }
         public decimal longitud { get; set; }
         public Nullable<int> idZona { get; set; }

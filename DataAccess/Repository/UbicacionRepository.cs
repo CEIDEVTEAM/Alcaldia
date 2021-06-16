@@ -49,12 +49,11 @@ namespace DataAccess.Repository
                 {
                     try
                     {
-                        Ubicacion currUbicacion = context.Ubicacion.FirstOrDefault(f => f.id == dto.id);
+                        Ubicacion currUbicacion = context.Ubicacion.FirstOrDefault(f => f.latitud == dto.latitud && f.longitud == dto.longitud);
                         
                         if(currUbicacion != null)
                         {
-                            currUbicacion.latitud = dto.latitud;
-                            currUbicacion.longitud = dto.longitud;
+                            currUbicacion.idZona = dto.idZona;
                         }
 
                         context.SaveChanges();
@@ -76,7 +75,7 @@ namespace DataAccess.Repository
                 {
                     try
                     {
-                        Ubicacion currUbicacion = context.Ubicacion.FirstOrDefault(f => f.id == dto.id);
+                        Ubicacion currUbicacion = context.Ubicacion.FirstOrDefault(f => f.latitud == dto.latitud && f.longitud == dto.longitud);
 
                         if (currUbicacion != null)
                         {
@@ -93,10 +92,15 @@ namespace DataAccess.Repository
             }
         }
 
-        public DtoUbicacion GetUbicacionById(int idUbicacion)
+        public DtoUbicacion GetUbicacionByLatAndLon(decimal lat, decimal lon)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
-                return this._UbicacionMapper.MaptoDto(context.Ubicacion.AsNoTracking().FirstOrDefault(f => f.id == idUbicacion));
+                return this._UbicacionMapper.MaptoDto(context.Ubicacion.AsNoTracking().FirstOrDefault(f => f.latitud == lat && f.longitud == lon));
+        }
+        public bool ExistUbicacionByLatAndLon(decimal lat, decimal lon)
+        {
+            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+                return context.Ubicacion.AsNoTracking().Any(a => a.latitud == lat && a.longitud == lon);
         }
     }
 }

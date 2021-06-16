@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace BussinessLogic.Logic
 {
-    public class TipoDeReclamoController
+    public class LTipoDeReclamoController
     {
         private Repository _Repository;
 
-        public TipoDeReclamoController()
+        public LTipoDeReclamoController()
         {
             this._Repository = new Repository();
         }
@@ -48,7 +48,7 @@ namespace BussinessLogic.Logic
 
             if (colerrors.Count == 0)
             {
-                this._Repository.GetTipoDeReclamoRepository().DeleteTipoDeReclamo(dto.id);
+                this._Repository.GetTipoDeReclamoRepository().DeleteTipoDeReclamo(dto.nombre);
             }
 
             return colerrors;
@@ -58,7 +58,7 @@ namespace BussinessLogic.Logic
         {
             List<string> colerrors = new List<string>();
 
-            if (isAdd == false && !this._Repository.GetTipoDeReclamoRepository().ExistTipoDeReclamoById(dto.id))
+            if (isAdd == false && !this._Repository.GetTipoDeReclamoRepository().ExistTipoDeReclamoById(dto.nombre))
                 colerrors.Add("El Tipo de Reclamo no existe.");
 
             return colerrors;

@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace BussinessLogic.Logic
 {
-   public class LogReclamoController
+   public class LLogReclamoController
     {
         private Repository _Repository;
 
-            public LogReclamoController()
+            public LLogReclamoController()
             {
                 this._Repository = new Repository();
             }

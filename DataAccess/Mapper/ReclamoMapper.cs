@@ -22,8 +22,9 @@ namespace DataAccess.Mapper
                 fechaYhora = entity.fechaYhora,
                 observaciones = entity.observaciones,
                 idCiudadano = entity.idCiudadano,
-                idTipoReclamo = entity.idTipoReclamo,
-                idUbicacion = entity.idUbicacion,
+                nombreTipoReclamo = entity.nombreTipoReclamo,
+                LatitudReclamo = entity.LatitudReclamo,
+                LongitudReclamo = entity.LongitudReclamo,
                 idCuadrilla = entity.idCuadrilla
             };
         }
@@ -40,8 +41,9 @@ namespace DataAccess.Mapper
                 fechaYhora = dto.fechaYhora,
                 observaciones = dto.observaciones,
                 idCiudadano = dto.idCiudadano,
-                idTipoReclamo = dto.idTipoReclamo,
-                idUbicacion = dto.idUbicacion,
+                nombreTipoReclamo = dto.nombreTipoReclamo,
+                LatitudReclamo = dto.LatitudReclamo,
+                LongitudReclamo = dto.LongitudReclamo,
                 idCuadrilla = dto.idCuadrilla
             };
         }
