@@ -11,19 +11,19 @@
         <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Tipo_De_Reclamo" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Tipo_Usuario" Width="1.5" PointX="0.75" PointY="13.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Ubicacion" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Usuario" Width="1.5" PointX="3" PointY="13.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Vertice" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Zona" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
         <AssociationConnector Association="ReclamosAlcaldiaModel.fk_reclamoCuadrilla" ManuallyRouted="false" />
         <AssociationConnector Association="ReclamosAlcaldiaModel.fk_zonaCuadrilla" ManuallyRouted="false" />
         <AssociationConnector Association="ReclamosAlcaldiaModel.fk_reclamoRecLog" ManuallyRouted="false" />
-        <AssociationConnector Association="ReclamosAlcaldiaModel.fk_RecLogUsuario" ManuallyRouted="false" />
         <AssociationConnector Association="ReclamosAlcaldiaModel.FK_Reclamo_TipoReclamo" ManuallyRouted="false" />
         <AssociationConnector Association="ReclamosAlcaldiaModel.FK_Reclamo_Ubicacion" ManuallyRouted="false" />
-        <AssociationConnector Association="ReclamosAlcaldiaModel.fk_reclamoCiudadano" ManuallyRouted="false" />
-        <AssociationConnector Association="ReclamosAlcaldiaModel.fk_Tipo" ManuallyRouted="false" />
         <AssociationConnector Association="ReclamosAlcaldiaModel.fk_zonaUbicacion" ManuallyRouted="false" />
         <AssociationConnector Association="ReclamosAlcaldiaModel.fk_zonaVertice" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Usuario" Width="1.5" PointX="3" PointY="14.25" />
+        <AssociationConnector Association="ReclamosAlcaldiaModel.fk_RecLogUsuario" />
+        <AssociationConnector Association="ReclamosAlcaldiaModel.fk_reclamoCiudadano" />
+        <AssociationConnector Association="ReclamosAlcaldiaModel.fk_Tipo" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -56,7 +56,7 @@ namespace DataAccess.Repository
 
                             currUsuario.nombre = dto.nombre;
                             currUsuario.apellido = dto.apellido;
-                            currUsuario.contraseña = dto.contrasenia;
+                            currUsuario.contrasenia = dto.contrasenia;
                             currUsuario.telefono = dto.telefono;
                             currUsuario.email = dto.email;
                             currUsuario.tipoDeUsuario = dto.tipoDeUsuario.tipo;

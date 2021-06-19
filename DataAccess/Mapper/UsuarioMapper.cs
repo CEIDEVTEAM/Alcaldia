@@ -30,7 +30,7 @@ namespace DataAccess.Mapper
                 nombreDeUsuario = entity.nombreDeUsuario,
                 nombre = entity.nombre,
                 apellido = entity.apellido,
-                contrasenia = entity.contraseña,
+                contrasenia = entity.contrasenia,
                 telefono = entity.telefono,
                 email = entity.email,
                 tipoDeUsuario = this._Tipo_UsuarioMapper.MapToDto(entity.Tipo_Usuario)
@@ -47,7 +47,7 @@ namespace DataAccess.Mapper
                 nombreDeUsuario = dto.nombreDeUsuario,
                 nombre = dto.nombre,
                 apellido = dto.apellido,
-                contraseña = dto.contrasenia,
+                contrasenia = dto.contrasenia,
                 telefono = dto.telefono,
                 email = dto.email,
                 tipoDeUsuario = dto.tipoDeUsuario.tipo,

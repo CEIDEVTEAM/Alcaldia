@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ReclamosAlcaldiaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ReclamosAlcaldiaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cuadrilla">
           <Key>
             <PropertyRef Name="id" />
@@ -71,7 +71,7 @@
           <Property Name="nombreDeUsuario" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="apellido" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="contraseña" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="contrasenia" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="telefono" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="tipoDeUsuario" Type="varchar" MaxLength="40" Nullable="false" />
@@ -266,8 +266,7 @@
             <End Role="Vertice" EntitySet="Vertice" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ReclamosAlcaldiaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -295,7 +294,7 @@
           <Property Name="idReclamo" Type="Int32" />
           <Property Name="nombreDeUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Reclamo" Relationship="Self.fk_reclamoRecLog" FromRole="LogReclamo" ToRole="Reclamo" />
-          <NavigationProperty Name="Usuario" Relationship="Self.fk_RecLogUsuario" FromRole="LogReclamo" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario" Relationship="ReclamosAlcaldiaModel.fk_RecLogUsuario" FromRole="LogReclamo" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Reclamo">
           <Key>
@@ -314,7 +313,7 @@
           <NavigationProperty Name="LogReclamo" Relationship="Self.fk_reclamoRecLog" FromRole="Reclamo" ToRole="LogReclamo" />
           <NavigationProperty Name="Tipo_De_Reclamo" Relationship="Self.FK_Reclamo_TipoReclamo" FromRole="Reclamo" ToRole="Tipo_De_Reclamo" />
           <NavigationProperty Name="Ubicacion" Relationship="Self.FK_Reclamo_Ubicacion" FromRole="Reclamo" ToRole="Ubicacion" />
-          <NavigationProperty Name="Usuario" Relationship="Self.fk_reclamoCiudadano" FromRole="Reclamo" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario" Relationship="ReclamosAlcaldiaModel.fk_reclamoCiudadano" FromRole="Reclamo" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Tipo_De_Reclamo">
           <Key>
@@ -330,7 +329,7 @@
           </Key>
           <Property Name="tipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Usuario" Relationship="Self.fk_Tipo" FromRole="Tipo_Usuario" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario" Relationship="ReclamosAlcaldiaModel.fk_Tipo" FromRole="Tipo_Usuario" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Ubicacion">
           <Key>
@@ -342,21 +341,6 @@
           <Property Name="idZona" Type="Int32" />
           <NavigationProperty Name="Reclamo" Relationship="Self.FK_Reclamo_Ubicacion" FromRole="Ubicacion" ToRole="Reclamo" />
           <NavigationProperty Name="Zona" Relationship="Self.fk_zonaUbicacion" FromRole="Ubicacion" ToRole="Zona" />
-        </EntityType>
-        <EntityType Name="Usuario">
-          <Key>
-            <PropertyRef Name="nombreDeUsuario" />
-          </Key>
-          <Property Name="nombreDeUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="apellido" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="contraseña" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tipoDeUsuario" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="LogReclamo" Relationship="Self.fk_RecLogUsuario" FromRole="Usuario" ToRole="LogReclamo" />
-          <NavigationProperty Name="Reclamo" Relationship="Self.fk_reclamoCiudadano" FromRole="Usuario" ToRole="Reclamo" />
-          <NavigationProperty Name="Tipo_Usuario" Relationship="Self.fk_Tipo" FromRole="Usuario" ToRole="Tipo_Usuario" />
         </EntityType>
         <EntityType Name="Vertice">
           <Key>
@@ -415,18 +399,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_RecLogUsuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
-          <End Role="LogReclamo" Type="Self.LogReclamo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="nombreDeUsuario" />
-            </Principal>
-            <Dependent Role="LogReclamo">
-              <PropertyRef Name="nombreDeUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Reclamo_TipoReclamo">
           <End Role="Tipo_De_Reclamo" Type="Self.Tipo_De_Reclamo" Multiplicity="0..1" />
           <End Role="Reclamo" Type="Self.Reclamo" Multiplicity="*" />
@@ -450,30 +422,6 @@
             <Dependent Role="Reclamo">
               <PropertyRef Name="LatitudReclamo" />
               <PropertyRef Name="LongitudReclamo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_reclamoCiudadano">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
-          <End Role="Reclamo" Type="Self.Reclamo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="nombreDeUsuario" />
-            </Principal>
-            <Dependent Role="Reclamo">
-              <PropertyRef Name="idCiudadano" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Tipo">
-          <End Role="Tipo_Usuario" Type="Self.Tipo_Usuario" Multiplicity="1" />
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tipo_Usuario">
-              <PropertyRef Name="tipo" />
-            </Principal>
-            <Dependent Role="Usuario">
-              <PropertyRef Name="tipoDeUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -508,7 +456,6 @@
           <EntitySet Name="Tipo_De_Reclamo" EntityType="Self.Tipo_De_Reclamo" />
           <EntitySet Name="Tipo_Usuario" EntityType="Self.Tipo_Usuario" />
           <EntitySet Name="Ubicacion" EntityType="Self.Ubicacion" />
-          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
           <EntitySet Name="Vertice" EntityType="Self.Vertice" />
           <EntitySet Name="Zona" EntityType="Self.Zona" />
           <AssociationSet Name="fk_reclamoCuadrilla" Association="Self.fk_reclamoCuadrilla">
@@ -523,10 +470,6 @@
             <End Role="Reclamo" EntitySet="Reclamo" />
             <End Role="LogReclamo" EntitySet="LogReclamo" />
           </AssociationSet>
-          <AssociationSet Name="fk_RecLogUsuario" Association="Self.fk_RecLogUsuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="LogReclamo" EntitySet="LogReclamo" />
-          </AssociationSet>
           <AssociationSet Name="FK_Reclamo_TipoReclamo" Association="Self.FK_Reclamo_TipoReclamo">
             <End Role="Tipo_De_Reclamo" EntitySet="Tipo_De_Reclamo" />
             <End Role="Reclamo" EntitySet="Reclamo" />
@@ -534,14 +477,6 @@
           <AssociationSet Name="FK_Reclamo_Ubicacion" Association="Self.FK_Reclamo_Ubicacion">
             <End Role="Ubicacion" EntitySet="Ubicacion" />
             <End Role="Reclamo" EntitySet="Reclamo" />
-          </AssociationSet>
-          <AssociationSet Name="fk_reclamoCiudadano" Association="Self.fk_reclamoCiudadano">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Reclamo" EntitySet="Reclamo" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Tipo" Association="Self.fk_Tipo">
-            <End Role="Tipo_Usuario" EntitySet="Tipo_Usuario" />
-            <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
           <AssociationSet Name="fk_zonaUbicacion" Association="Self.fk_zonaUbicacion">
             <End Role="Zona" EntitySet="Zona" />
@@ -551,7 +486,71 @@
             <End Role="Zona" EntitySet="Zona" />
             <End Role="Vertice" EntitySet="Vertice" />
           </AssociationSet>
+          <EntitySet Name="Usuario" EntityType="ReclamosAlcaldiaModel.Usuario" />
+          <AssociationSet Name="fk_RecLogUsuario" Association="ReclamosAlcaldiaModel.fk_RecLogUsuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="LogReclamo" EntitySet="LogReclamo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_reclamoCiudadano" Association="ReclamosAlcaldiaModel.fk_reclamoCiudadano">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Reclamo" EntitySet="Reclamo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Tipo" Association="ReclamosAlcaldiaModel.fk_Tipo">
+            <End Role="Tipo_Usuario" EntitySet="Tipo_Usuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="nombreDeUsuario" />
+          </Key>
+          <Property Name="nombreDeUsuario" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="apellido" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="contrasenia" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tipoDeUsuario" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LogReclamo" Relationship="ReclamosAlcaldiaModel.fk_RecLogUsuario" FromRole="Usuario" ToRole="LogReclamo" />
+          <NavigationProperty Name="Reclamo" Relationship="ReclamosAlcaldiaModel.fk_reclamoCiudadano" FromRole="Usuario" ToRole="Reclamo" />
+          <NavigationProperty Name="Tipo_Usuario" Relationship="ReclamosAlcaldiaModel.fk_Tipo" FromRole="Usuario" ToRole="Tipo_Usuario" />
+        </EntityType>
+        <Association Name="fk_RecLogUsuario">
+          <End Type="ReclamosAlcaldiaModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="ReclamosAlcaldiaModel.LogReclamo" Role="LogReclamo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="nombreDeUsuario" />
+            </Principal>
+            <Dependent Role="LogReclamo">
+              <PropertyRef Name="nombreDeUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_reclamoCiudadano">
+          <End Type="ReclamosAlcaldiaModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="ReclamosAlcaldiaModel.Reclamo" Role="Reclamo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="nombreDeUsuario" />
+            </Principal>
+            <Dependent Role="Reclamo">
+              <PropertyRef Name="idCiudadano" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Tipo">
+          <End Type="ReclamosAlcaldiaModel.Tipo_Usuario" Role="Tipo_Usuario" Multiplicity="1" />
+          <End Type="ReclamosAlcaldiaModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Usuario">
+              <PropertyRef Name="tipo" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="tipoDeUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -622,19 +621,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Usuario">
-            <EntityTypeMapping TypeName="ReclamosAlcaldiaModel.Usuario">
-              <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="nombreDeUsuario" ColumnName="nombreDeUsuario" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="apellido" ColumnName="apellido" />
-                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
-                <ScalarProperty Name="telefono" ColumnName="telefono" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="tipoDeUsuario" ColumnName="tipoDeUsuario" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Vertice">
             <EntityTypeMapping TypeName="ReclamosAlcaldiaModel.Vertice">
               <MappingFragment StoreEntitySet="Vertice">
@@ -650,6 +636,19 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="color" ColumnName="color" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="ReclamosAlcaldiaModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="tipoDeUsuario" ColumnName="tipoDeUsuario" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="contrasenia" ColumnName="contrasenia" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="nombreDeUsuario" ColumnName="nombreDeUsuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

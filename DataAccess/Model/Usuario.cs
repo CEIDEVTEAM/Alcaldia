@@ -24,7 +24,7 @@ namespace DataAccess.Model
         public string nombreDeUsuario { get; set; }
         public string nombre { get; set; }
         public string apellido { get; set; }
-        public string contraseña { get; set; }
+        public string contrasenia { get; set; }
         public string telefono { get; set; }
         public string email { get; set; }
         public string tipoDeUsuario { get; set; }
