@@ -1,4 +1,5 @@
 ﻿using CommonSolution.DTOs;
+using CommonSolution.ENUMs;
 using DataAccess.Model;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace DataAccess.Mapper
             return new DtoReclamo
             {
                 id = entity.id,
-                estado = entity.estado,
+                estado = (EnumEstado)Enum.Parse(typeof(EnumEstado), entity.estado),
                 fechaYhora = entity.fechaYhora,
                 observaciones = entity.observaciones,
                 idCiudadano = entity.idCiudadano,
@@ -37,7 +38,7 @@ namespace DataAccess.Mapper
             return new Reclamo
             {
                 id = dto.id,
-                estado = dto.estado,
+                estado = (dto.estado).ToString(),
                 fechaYhora = dto.fechaYhora,
                 observaciones = dto.observaciones,
                 idCiudadano = dto.idCiudadano,

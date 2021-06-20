@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommonSolution.ENUMs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace CommonSolution.DTOs
     public class DtoReclamo
     {
         public int id { get; set; }
-        public string estado { get; set; }
+        public EnumEstado estado { get; set; }
         public Nullable<System.DateTime> fechaYhora { get; set; }
         public string observaciones { get; set; }
         public string idCiudadano { get; set; }
