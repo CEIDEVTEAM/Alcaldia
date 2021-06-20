@@ -29,6 +29,7 @@ namespace DataAccess.Repository
                     try
                     {
                         Tipo_Usuario newTipoUsuario = this._TipoDeUsusarioMapper.MapToEntity(dto);
+                        newTipoUsuario.tipo.ToUpper();
                         context.Tipo_Usuario.Add(newTipoUsuario);
                         context.SaveChanges();
                         trann.Commit();
@@ -101,7 +102,7 @@ namespace DataAccess.Repository
         public bool ExistTipoDeUsuarioById(string tipo)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
-                return context.Tipo_Usuario.AsNoTracking().Any(a => a.tipo == a.tipo.ToUpper());
+                return context.Tipo_Usuario.AsNoTracking().Any(a => a.tipo == tipo.ToUpper());
         }
     }
 }
