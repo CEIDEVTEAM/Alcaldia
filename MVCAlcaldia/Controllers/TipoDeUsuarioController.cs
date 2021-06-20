@@ -16,6 +16,12 @@ namespace MVCAlcaldia.Controllers
             return View();
         }
 
+        /// <summary>
+        /// PRUEBA
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+
 
         public ActionResult AgregarTipo(DtoTipoUsuario dto)
         {
