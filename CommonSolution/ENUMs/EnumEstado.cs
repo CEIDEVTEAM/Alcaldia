@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace CommonSolution.ENUMs
 {
-    class ENUMTipoDePedido
+    public enum EnumEstado
     {
+       PENDIENTE,
+       ASIGNADO,
+       EN_PROCESO,
+       RESUELTO,
+       DESESTIMADO
     }
 }
