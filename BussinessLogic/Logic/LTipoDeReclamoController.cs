@@ -54,6 +54,17 @@ namespace BussinessLogic.Logic
             return colerrors;
         }
 
+        public DtoTipoDeReclamo GetTipoDeReclamoByName(string nombre)
+        {
+            return this._Repository.GetTipoDeReclamoRepository().GetTipoDeReclamoByName(nombre);
+        }
+
+        public List<DtoTipoDeReclamo> GetAllTipoDeReclamo()
+        {
+            return this._Repository.GetTipoDeReclamoRepository().GetAllTipoDeReclamo();
+        }
+
+
         public List<string> ValidateTipoDeReclamo(DtoTipoDeReclamo dto, bool isAdd)
         {
             List<string> colerrors = new List<string>();

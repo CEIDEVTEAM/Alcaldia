@@ -92,7 +92,14 @@ namespace DataAccess.Repository
             }
         }
 
-        public DtoTipoDeReclamo GetTipoDeReclamoById(string nameTipoDeReclamo)
+        public List<DtoTipoDeReclamo> GetAllTipoDeReclamo()
+        {
+            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+                return this._TipoDeReclamoMapper.MapToDto(context.Tipo_De_Reclamo.AsNoTracking().Select(s => s).ToList());
+  
+        }
+
+        public DtoTipoDeReclamo GetTipoDeReclamoByName(string nameTipoDeReclamo)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
                 return this._TipoDeReclamoMapper.MaptoDto(context.Tipo_De_Reclamo.AsNoTracking().FirstOrDefault(f => f.nombre == nameTipoDeReclamo));

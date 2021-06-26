@@ -33,5 +33,18 @@ namespace DataAccess.Mapper
                 descripcion = dto.descripcion,
             };
         }
+
+        public List<DtoTipoDeReclamo> MapToDto(List<Tipo_De_Reclamo> colEntity)
+        {
+            List<DtoTipoDeReclamo> colDto = new List<DtoTipoDeReclamo>();
+
+            foreach (Tipo_De_Reclamo entity in colEntity)
+            {
+                colDto.Add(this.MaptoDto(entity));
+            }
+
+            return colDto;
+        }
+
     }
 }

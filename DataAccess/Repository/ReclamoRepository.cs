@@ -41,7 +41,6 @@ namespace DataAccess.Repository
             }
         }
 
-        //FALTA TERMINAR MODIFYRECLAMO - VER TEMA DEL ENUM
         public void ModifyReclamo(DtoReclamo dto)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
