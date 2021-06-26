@@ -29,6 +29,7 @@ namespace DataAccess.Repository
                     try
                     {
                         Zona newZona = this._zonaMapper.MaptoEntity(dto);
+                        newZona.situacion = "A";
                         context.Zona.Add(newZona);
                         context.SaveChanges();
                         trann.Commit();

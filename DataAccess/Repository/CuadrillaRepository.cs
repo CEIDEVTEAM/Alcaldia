@@ -29,6 +29,7 @@ namespace DataAccess.Repository
                     try
                     {
                         Cuadrilla newCuadrilla = this._cuadrillaMapper.MapToEntity(dto);
+                        newCuadrilla.situacion = "A";
                         context.Cuadrilla.Add(newCuadrilla);
                         context.SaveChanges();
                         trann.Commit();

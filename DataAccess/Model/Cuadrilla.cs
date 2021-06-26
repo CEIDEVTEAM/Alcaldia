@@ -25,6 +25,7 @@ namespace DataAccess.Model
         public string encargado { get; set; }
         public Nullable<int> idZona { get; set; }
         public int cantidadDePeones { get; set; }
+        public string situacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reclamo> Reclamo { get; set; }

@@ -16,7 +16,7 @@ namespace DataAccess.Model
     public partial class ReclamosAlcaldia : DbContext
     {
         public ReclamosAlcaldia()
-            : base("name=ReclamosAlcaldiaEntities")
+            : base("name=ReclamosAlcaldia")
         {
         }
     
@@ -25,14 +25,14 @@ namespace DataAccess.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Cuadrilla> Cuadrilla { get; set; }
         public virtual DbSet<LogReclamo> LogReclamo { get; set; }
         public virtual DbSet<Reclamo> Reclamo { get; set; }
-        public virtual DbSet<Tipo_De_Reclamo> Tipo_De_Reclamo { get; set; }
         public virtual DbSet<Tipo_Usuario> Tipo_Usuario { get; set; }
         public virtual DbSet<Ubicacion> Ubicacion { get; set; }
         public virtual DbSet<Vertice> Vertice { get; set; }
-        public virtual DbSet<Zona> Zona { get; set; }
+        public virtual DbSet<Cuadrilla> Cuadrilla { get; set; }
+        public virtual DbSet<Tipo_De_Reclamo> Tipo_De_Reclamo { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Zona> Zona { get; set; }
     }
 }

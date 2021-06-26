@@ -29,6 +29,7 @@ namespace DataAccess.Repository
                     try
                     {
                         Tipo_De_Reclamo newTipoDeReclamo = this._TipoDeReclamoMapper.MaptoEntity(dto);
+                        newTipoDeReclamo.situacion = "A";
                         context.Tipo_De_Reclamo.Add(newTipoDeReclamo);
                         context.SaveChanges();
                         trann.Commit();

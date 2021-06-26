@@ -29,6 +29,7 @@ namespace DataAccess.Repository
                     try
                     {
                         Usuario newUsuario = this._usuarioMapper.MaptoEntity(dto);
+                        newUsuario.situacion = "A";
                         context.Usuario.Add(newUsuario);
                         context.SaveChanges();
                         trann.Commit();
