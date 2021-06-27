@@ -1,10 +1,10 @@
 ﻿@model CommonSolution.DTOs.DtoTipoDeReclamo
 
 @{
-    ViewBag.Title = "Agregar";
+    ViewBag.Title = "Agregar Tipo de Reclamo";
 }
 
-<h2>Agregar</h2>
+<h2>Agregar Tipo de Reclamo</h2>
 
 
 @using (Html.BeginForm("AddTipoDeReclamo", "TipoDeReclamo")) 
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>DtoTipoDeReclamo</h4>
+        <h4></h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">

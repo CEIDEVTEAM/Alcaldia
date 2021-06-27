@@ -96,7 +96,7 @@ namespace DataAccess.Repository
         public List<DtoTipoDeReclamo> GetAllTipoDeReclamo()
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
-                return this._TipoDeReclamoMapper.MapToDto(context.Tipo_De_Reclamo.AsNoTracking().Select(s => s).ToList());
+                return this._TipoDeReclamoMapper.MapToDto(context.Tipo_De_Reclamo.AsNoTracking().Where(w => w.situacion == "A").ToList());
   
         }
 

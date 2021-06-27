@@ -103,7 +103,7 @@ namespace DataAccess.Repository
         public bool ExistZonaById(int idZona)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
-                return context.Zona.AsNoTracking().Any(a => a.id == idZona);
+                return context.Zona.AsNoTracking().Any(a => a.id == idZona && a.situacion == "A");
         }
 
     }

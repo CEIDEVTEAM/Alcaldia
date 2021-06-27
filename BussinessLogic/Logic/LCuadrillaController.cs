@@ -53,13 +53,24 @@ namespace BussinessLogic.Logic
             return colerrors;
         }
 
+        public DtoCuadrilla GetCuadrillaById(int id)
+        {
+            return this._Repository.GetCuadrillaRepository().GetCuadrillaById(id);
+        }
+
+        public List<DtoCuadrilla> GetAllCuadrillas()
+        {
+            return this._Repository.GetCuadrillaRepository().GetAllCuadrillas();
+        }
+
         public List<string> ValidateCuadrilla(DtoCuadrilla dto, bool isAdd)
         {
             List<string> colerrors = new List<string>();
 
             if (isAdd == false && !this._Repository.GetCuadrillaRepository().ExistCuadrillaById(dto.id))
                 colerrors.Add("La Cuadrilla no existe.");
-
+            if (dto.idZona != null && !this._Repository.GetZonaRepository().ExistZonaById(dto.idZona ?? -1))
+                colerrors.Add("La Zona asignada no existe");
             return colerrors;
         }
 
