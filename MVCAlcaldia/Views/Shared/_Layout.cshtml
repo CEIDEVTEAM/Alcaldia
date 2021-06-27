@@ -15,7 +15,9 @@
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" id="menu-toggle">
                 <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
             </button>
-            <a class="navbar-brand" href="#"><i class="fa fa-rocket fa-4"></i> M-33</a>
+            <a class="navbar-brand" href="#"><i class="fa fa-user-circle-o fa-4" aria-hidden="true"></i> @User.Identity.Name</a>
+            <a class="navbar-brand" href=@Url.Action("Login", "LogOut")>Cerrar sesión</a>
+
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">

@@ -99,6 +99,12 @@ namespace DataAccess.Repository
             }
         }
 
+        public bool ValidateLogin(DtoLogin dto)
+        {
+            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+                return context.Usuario.AsNoTracking().Any(a => a.nombreDeUsuario == dto.user && a.contrasenia == dto.pass && a.tipoDeUsuario == dto.tipoDeUsuario);
+        }
+
         public DtoUsuario GetUsuarioByNombre(string nombreUsuario)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())

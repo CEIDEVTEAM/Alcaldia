@@ -41,6 +41,17 @@ namespace BussinessLogic.Logic
             return colerrors;
         }
 
+        public bool ValidateCredentialsFuncionario(DtoLogin dto)
+        {
+            dto.tipoDeUsuario = "FUNCIONARIO";
+            return this._Repository.GetUsuarioRepository().ValidateLogin(dto);
+        }
+        public bool ValidateCredentialsCiudadano(DtoLogin dto)
+        {
+            dto.tipoDeUsuario = "CIUDADANO";
+            return this._Repository.GetUsuarioRepository().ValidateLogin(dto);
+        }
+
         public List<string> DeleteUsuario(DtoUsuario dto)
         {
             List<string> colerrors = this.ValidateUsuario(dto, false);

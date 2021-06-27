@@ -129,6 +129,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CuadrillaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\TipoDeReclamoController.cs" />
     <Compile Include="Controllers\TipoDeUsuarioController.cs" />
     <Compile Include="Global.asax.cs">
@@ -181,6 +182,7 @@
     <Content Include="Views\Cuadrilla\Add.cshtml" />
     <Content Include="Views\Cuadrilla\List.cshtml" />
     <Content Include="Views\Cuadrilla\Modify.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

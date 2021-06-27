@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace MVCAlcaldia.Controllers
 {
+    [AuthorizeAttribute]
     public class CuadrillaController : Controller
     {
         public ActionResult Add()
