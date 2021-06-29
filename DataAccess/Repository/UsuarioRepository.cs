@@ -112,10 +112,10 @@ namespace DataAccess.Repository
                 return this._usuarioMapper.MaptoDto(context.Usuario.AsNoTracking().FirstOrDefault(f => f.nombreDeUsuario == nombreUsuario));
         }
 
-        public bool ExistUsuarioByNombre(string nombreUsuario)
+        public bool ExistUsuario(DtoUsuario usuario)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
-                return context.Usuario.AsNoTracking().Any(a => a.nombreDeUsuario == nombreUsuario && a.situacion == CGlobals.ESTADO_ACTIVO);
+                return context.Usuario.AsNoTracking().Any(a => a.nombreDeUsuario == usuario.nombreDeUsuario && a.tipoDeUsuario == usuario.tipoDeUsuario.tipo && a.situacion == CGlobals.ESTADO_ACTIVO);
         }
     }
     
