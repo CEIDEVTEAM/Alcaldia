@@ -33,6 +33,7 @@ namespace DataAccess.Mapper
                 contrasenia = entity.contrasenia,
                 telefono = entity.telefono,
                 email = entity.email,
+                situacion = entity.situacion,
                 tipoDeUsuario = this._Tipo_UsuarioMapper.MapToDto(entity.Tipo_Usuario)
             };
         }
@@ -50,8 +51,18 @@ namespace DataAccess.Mapper
                 contrasenia = dto.contrasenia,
                 telefono = dto.telefono,
                 email = dto.email,
-                tipoDeUsuario = dto.tipoDeUsuario.tipo,
             };
+        }
+        public List<DtoUsuario> MapToDto(List<Usuario> colEntity)
+        {
+            List<DtoUsuario> colDto = new List<DtoUsuario>();
+
+            foreach (Usuario entity in colEntity)
+            {
+                colDto.Add(this.MaptoDto(entity));
+            }
+
+            return colDto;
         }
     }
 }

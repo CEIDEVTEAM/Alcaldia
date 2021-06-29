@@ -52,16 +52,23 @@ namespace BussinessLogic.Logic
 
             return colerrors;
         }
+        public DtoUsuario GetUsuarioByName(string nombreDeUsuario)
+        {
+            return this._Repository.GetUsuarioRepository().GetUsuarioByName(nombreDeUsuario);
+        }
+
+        public List<DtoUsuario> GetAllUsuario()
+        {
+            return this._Repository.GetUsuarioRepository().GetAllUsuario();
+        }
+
 
         public List<string> ValidateUsuario(DtoUsuario dto, bool isAdd)
         {
             List<string> colerrors = new List<string>();
 
-            if (isAdd == false && !this._Repository.GetUsuarioRepository().ExistUsuarioByNombre(dto.nombreDeUsuario))
-                colerrors.Add("El usuario no existe.");
-
-            if (isAdd == true && this._Repository.GetUsuarioRepository().ExistUsuarioByNombre(dto.nombreDeUsuario))
-                colerrors.Add("El usuario ya está registrado.");
+            if (isAdd == false && !this._Repository.GetUsuarioRepository().ExistUsuarioByName(dto.nombre))
+                colerrors.Add("El Tipo de Reclamo no existe.");
 
             return colerrors;
         }

@@ -19,7 +19,7 @@ namespace DataAccess.Repository
         {
             this._usuarioMapper = new UsuarioMapper();
         }
-        
+
         public void AddUsuario(DtoUsuario dto)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
@@ -41,7 +41,7 @@ namespace DataAccess.Repository
                 }
             }
         }
-
+       
         public void ModifyUsuario(DtoUsuario dto)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
@@ -60,6 +60,7 @@ namespace DataAccess.Repository
                             currUsuario.contrasenia = dto.contrasenia;
                             currUsuario.telefono = dto.telefono;
                             currUsuario.email = dto.email;
+                            currUsuario.situacion = dto.situacion;
                             currUsuario.tipoDeUsuario = dto.tipoDeUsuario.tipo;
                         };
 
@@ -83,13 +84,11 @@ namespace DataAccess.Repository
                     try
                     {
                         Usuario currUsuario = context.Usuario.FirstOrDefault(f => f.nombreDeUsuario == nombreUsuario);
-
-                        if (currUsuario != null)
-                        {
-                            context.Usuario.Remove(currUsuario);
+                        currUsuario.situacion = "I";
+                        
                             context.SaveChanges();
                             trann.Commit();
-                        }
+                        
                     }
                     catch (Exception ex)
                     {
@@ -99,13 +98,21 @@ namespace DataAccess.Repository
             }
         }
 
-        public DtoUsuario GetUsuarioByNombre(string nombreUsuario)
+        public List<DtoUsuario> GetAllUsuario()
+        {
+            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+                return this._usuarioMapper.MapToDto(context.Usuario.AsNoTracking().Where(w => w.situacion =="A").Select(s => s).ToList());
+
+        }
+
+        public DtoUsuario GetUsuarioByName(string nombreUsuario)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
                 return this._usuarioMapper.MaptoDto(context.Usuario.AsNoTracking().FirstOrDefault(f => f.nombreDeUsuario == nombreUsuario));
         }
+      
 
-        public bool ExistUsuarioByNombre(string nombreUsuario)
+        public bool ExistUsuarioByName(string nombreUsuario)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
                 return context.Usuario.AsNoTracking().Any(a => a.nombreDeUsuario == nombreUsuario);

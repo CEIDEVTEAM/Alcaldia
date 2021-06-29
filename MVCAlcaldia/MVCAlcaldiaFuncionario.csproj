@@ -130,6 +130,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TipoDeReclamoController.cs" />
     <Compile Include="Controllers\TipoDeUsuarioController.cs" />
+    <Compile Include="Controllers\UsuarioFuncionarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -175,6 +176,9 @@
     <Content Include="Views\TipoDeReclamo\Add.cshtml" />
     <Content Include="Views\TipoDeReclamo\Modify.cshtml" />
     <Content Include="Views\TipoDeReclamo\List.cshtml" />
+    <Content Include="Views\UsuarioFuncionario\Add.cshtml" />
+    <Content Include="Views\UsuarioFuncionario\List.cshtml" />
+    <Content Include="Views\UsuarioFuncionario\Modify.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

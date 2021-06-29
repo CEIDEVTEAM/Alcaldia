@@ -1,0 +1,74 @@
+﻿@model IEnumerable<CommonSolution.DTOs.DtoUsuario>
+
+@{
+    ViewBag.Title = "List";
+}
+<br>
+<br>
+<h2>Lista de Funcionarios</h2>
+
+<html>
+
+<body>
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Insertar", "Add", "UsuarioFuncionario")</li>
+        <li>@Html.ActionLink("Actualizar", "Modify", "UsuarioFuncionario")</li>
+        <li>@Html.ActionLink("Listar", "List", "UsuarioFuncionario")</li>
+    </ul>
+    <br>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nombreDeUsuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.contrasenia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombreDeUsuario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.contrasenia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.telefono)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @Html.ActionLink("Modificar", "Modify", new { nombreDeUsuario = item.nombreDeUsuario }) |
+                    @Html.ActionLink("Borrar", "DeleteUsuario", new { nombreDeUsuario = item.nombreDeUsuario }) |
+
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>
