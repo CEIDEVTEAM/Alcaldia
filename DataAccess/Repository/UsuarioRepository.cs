@@ -1,4 +1,5 @@
-﻿using CommonSolution.DTOs;
+﻿using CommonSolution.Constants;
+using CommonSolution.DTOs;
 using DataAccess.Mapper;
 using DataAccess.Model;
 using System;
@@ -29,7 +30,7 @@ namespace DataAccess.Repository
                     try
                     {
                         Usuario newUsuario = this._usuarioMapper.MaptoEntity(dto);
-                        newUsuario.situacion = "A";
+                        newUsuario.situacion = CGlobals.ESTADO_ACTIVO;
                         context.Usuario.Add(newUsuario);
                         context.SaveChanges();
                         trann.Commit();
@@ -114,7 +115,7 @@ namespace DataAccess.Repository
         public bool ExistUsuarioByNombre(string nombreUsuario)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
-                return context.Usuario.AsNoTracking().Any(a => a.nombreDeUsuario == nombreUsuario);
+                return context.Usuario.AsNoTracking().Any(a => a.nombreDeUsuario == nombreUsuario && a.situacion == CGlobals.ESTADO_ACTIVO);
         }
     }
     

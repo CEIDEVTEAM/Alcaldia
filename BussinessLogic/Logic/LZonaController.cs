@@ -41,6 +41,11 @@ namespace BussinessLogic.Logic
             return colerrors;
         }
 
+        public List<DtoZona> GetAllZonas()
+        {
+            return this._Repository.GetZonaRepository().GetAllZonas();
+        }
+
         public List<string> DeleteZona(DtoZona dto)
         {
             List<string> colerrors = this.ValidateZona(dto, false);

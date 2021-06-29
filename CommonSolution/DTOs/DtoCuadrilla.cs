@@ -23,7 +23,7 @@ namespace CommonSolution.DTOs
         [DisplayName("Encargado")]
         public string encargado { get; set; }
 
-        [DisplayName("Nro de Zona")]
+        [DisplayName("Zona")]
         public Nullable<int> idZona { get; set; }
 
 

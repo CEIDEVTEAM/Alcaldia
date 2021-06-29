@@ -1,4 +1,5 @@
-﻿using CommonSolution.DTOs;
+﻿using CommonSolution.Constants;
+using CommonSolution.DTOs;
 using DataAccess.Mapper;
 using DataAccess.Model;
 using System;
@@ -29,7 +30,7 @@ namespace DataAccess.Repository
                     try
                     {
                         Cuadrilla newCuadrilla = this._cuadrillaMapper.MapToEntity(dto);
-                        newCuadrilla.situacion = "A";
+                        newCuadrilla.situacion = CGlobals.ESTADO_ACTIVO;
                         context.Cuadrilla.Add(newCuadrilla);
                         context.SaveChanges();
                         trann.Commit();
@@ -99,7 +100,7 @@ namespace DataAccess.Repository
         public List<DtoCuadrilla> GetAllCuadrillas()
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
-                return this._cuadrillaMapper.MapToDto(context.Cuadrilla.AsNoTracking().Where(w => w.situacion == "A").ToList());
+                return this._cuadrillaMapper.MapToDto(context.Cuadrilla.AsNoTracking().Where(w => w.situacion == CGlobals.ESTADO_ACTIVO).ToList());
         }
 
         public DtoCuadrilla GetCuadrillaById(int idCuadrilla)

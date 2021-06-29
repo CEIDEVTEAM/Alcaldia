@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\CGlobals.cs" />
     <Compile Include="Constants\CLogin.cs" />
     <Compile Include="DTOs\DtoCuadrilla.cs" />
     <Compile Include="DTOs\DtoLogin.cs" />

@@ -13,6 +13,21 @@ namespace MVCAlcaldia.Controllers
     {
         public ActionResult Add()
         {
+            LZonaController zonaController = new LZonaController();
+            List<DtoZona> colDtoZona = zonaController.GetAllZonas();
+          
+            List<SelectListItem> colZonasSelect = new List<SelectListItem>();
+
+            foreach (DtoZona item in colDtoZona)
+            {
+                SelectListItem option = new SelectListItem();
+                option.Value = item.id.ToString();
+                option.Text = item.nombre;
+                colZonasSelect.Add(option);
+            }
+
+            ViewBag.colZonasSelect = colZonasSelect;
+
             return View();
         }
 

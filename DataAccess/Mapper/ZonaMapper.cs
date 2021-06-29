@@ -10,7 +10,7 @@ namespace DataAccess.Mapper
 {
     public class ZonaMapper
     {
-        public DtoZona MaptoDto(Zona entity)
+        public DtoZona MapToDto(Zona entity)
         {
             if (entity == null)
                 return null;
@@ -34,6 +34,18 @@ namespace DataAccess.Mapper
                 nombre = dto.nombre,
                 color = dto.color,
             };
+        }
+
+        public List<DtoZona> MapToDto(List<Zona> colEntity)
+        {
+            List<DtoZona> colDto = new List<DtoZona>();
+
+            foreach (Zona entity in colEntity)
+            {
+                colDto.Add(this.MapToDto(entity));
+            }
+
+            return colDto;
         }
     }
 

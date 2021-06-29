@@ -28,7 +28,6 @@ namespace BussinessLogic.Logic
 
             return colerrors;
         }
-
         public List<string> ModifyUsuario(DtoUsuario dto)
         {
             List<string> colerrors = this.ValidateUsuario(dto, false);
@@ -40,7 +39,6 @@ namespace BussinessLogic.Logic
 
             return colerrors;
         }
-
         public bool ValidateCredentialsFuncionario(DtoLogin dto)
         {
             dto.tipoDeUsuario = "FUNCIONARIO";
@@ -51,7 +49,6 @@ namespace BussinessLogic.Logic
             dto.tipoDeUsuario = "CIUDADANO";
             return this._Repository.GetUsuarioRepository().ValidateLogin(dto);
         }
-
         public List<string> DeleteUsuario(DtoUsuario dto)
         {
             List<string> colerrors = this.ValidateUsuario(dto, false);
@@ -63,7 +60,6 @@ namespace BussinessLogic.Logic
 
             return colerrors;
         }
-
         public List<string> ValidateUsuario(DtoUsuario dto, bool isAdd)
         {
             List<string> colerrors = new List<string>();
@@ -76,5 +72,6 @@ namespace BussinessLogic.Logic
 
             return colerrors;
         }
+   
     }
 }
