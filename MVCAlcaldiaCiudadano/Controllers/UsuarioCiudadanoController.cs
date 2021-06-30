@@ -19,7 +19,7 @@ namespace MVCAlcaldiaCiudadano.Controllers
         {
             LUsuarioController lgc = new LUsuarioController();
 
-            List<string> colErrores = lgc.AddUsuario(dto);
+            List<string> colErrores = lgc.AddUsuarioCiudadano(dto);
 
             foreach (string error in colErrores)
             {
@@ -32,10 +32,10 @@ namespace MVCAlcaldiaCiudadano.Controllers
 
 
 
-        public ActionResult DeleteUsuario(DtoUsuario dto)
+        public ActionResult DeleteUsuario(string nombreDeUsuario)
         {
             LUsuarioController lgc = new LUsuarioController();
-
+            DtoUsuario dto = lgc.GetUserByNombre(nombreDeUsuario);
             List<string> colErrores = lgc.DeleteUsuario(dto);
 
             foreach (string error in colErrores)
@@ -44,26 +44,26 @@ namespace MVCAlcaldiaCiudadano.Controllers
             }
 
 
-            return View("List");
+            return RedirectToAction("List");
         }
 
 
-        public ActionResult Modify(string nombre)
+        public ActionResult Modify(string nombreDeUsuario)
         {
 
             LUsuarioController lgc = new LUsuarioController();
-            DtoUsuario dto = lgc.GetUsuarioByName(nombre);
+            DtoUsuario dto = lgc.GetUserByNombre(nombreDeUsuario);
 
 
             return View(dto);
         }
-      
+
         [HttpPost]
         public ActionResult ModifyUsuario(DtoUsuario dto)
         {
             LUsuarioController lgc = new LUsuarioController();
 
-            List<string> colErrores = lgc.ModifyUsuario(dto);
+            List<string> colErrores = lgc.ModifyUsuarioCiudadano(dto);
 
             foreach (string error in colErrores)
             {
@@ -77,7 +77,7 @@ namespace MVCAlcaldiaCiudadano.Controllers
         public ActionResult List()
         {
             LUsuarioController lgc = new LUsuarioController();
-            List<DtoUsuario> colDto = lgc.GetAllUsuario();
+            List<DtoUsuario> colDto = lgc.GetAllUsers();
 
             return View(colDto);
         }

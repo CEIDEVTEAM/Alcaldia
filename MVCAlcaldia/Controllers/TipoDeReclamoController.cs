@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace MVCAlcaldia.Controllers
 {
+    [AuthorizeAttribute]
     public class TipoDeReclamoController : Controller
     {
         public ActionResult Add()
@@ -63,9 +64,9 @@ namespace MVCAlcaldia.Controllers
         {
             LTipoDeReclamoController lgc = new LTipoDeReclamoController();
 
-            List<string> colErrores = lgc.ModifyTipoDeReclamo(dto);
+            List<string> colErrors = lgc.ModifyTipoDeReclamo(dto);
 
-            foreach (string error in colErrores)
+            foreach (string error in colErrors)
             {
                 ModelState.AddModelError("ErrorGeneral", error);
             }

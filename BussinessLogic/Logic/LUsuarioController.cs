@@ -1,4 +1,5 @@
-﻿using CommonSolution.DTOs;
+﻿using CommonSolution.Constants;
+using CommonSolution.DTOs;
 using DataAccess.Persistence;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,22 @@ namespace BussinessLogic.Logic
             this._Repository = new Repository();
         }
 
-        public List<string> AddUsuario(DtoUsuario dto)
+        public List<string> AddUsuarioCiudadano(DtoUsuario dto)
         {
+            dto.tipoDeUsuario = this._Repository.GetTipoDeUsuarioRepository().GetTipoUsuarioById(CUsuario.USER_CIUDADANO);
+            List<string> colerrors = this.ValidateUsuario(dto, true);
+
+            if (colerrors.Count == 0)
+            {
+                
+                this._Repository.GetUsuarioRepository().AddUsuario(dto);
+            }
+
+            return colerrors;
+        }
+        public List<string> AddUsuarioFuncionario(DtoUsuario dto)
+        {
+            dto.tipoDeUsuario = this._Repository.GetTipoDeUsuarioRepository().GetTipoUsuarioById(CUsuario.USER_FUNCIONARIO);
             List<string> colerrors = this.ValidateUsuario(dto, true);
 
             if (colerrors.Count == 0)
@@ -28,10 +43,11 @@ namespace BussinessLogic.Logic
 
             return colerrors;
         }
-
-        public List<string> ModifyUsuario(DtoUsuario dto)
+        public List<string> ModifyUsuarioFuncionario(DtoUsuario dto)
         {
+            dto.tipoDeUsuario = this._Repository.GetTipoDeUsuarioRepository().GetTipoUsuarioById(CUsuario.USER_FUNCIONARIO);
             List<string> colerrors = this.ValidateUsuario(dto, false);
+
 
             if (colerrors.Count == 0)
             {
@@ -40,7 +56,29 @@ namespace BussinessLogic.Logic
 
             return colerrors;
         }
+        public List<string> ModifyUsuarioCiudadano(DtoUsuario dto)
+        {
+            dto.tipoDeUsuario = this._Repository.GetTipoDeUsuarioRepository().GetTipoUsuarioById(CUsuario.USER_CIUDADANO);
+            List<string> colerrors = this.ValidateUsuario(dto, false);
 
+
+            if (colerrors.Count == 0)
+            {
+                this._Repository.GetUsuarioRepository().ModifyUsuario(dto);
+            }
+
+            return colerrors;
+        }
+        public bool ValidateCredentialsFuncionario(DtoLogin dto)
+        {
+            dto.tipoDeUsuario = CUsuario.USER_FUNCIONARIO;
+            return this._Repository.GetUsuarioRepository().ValidateLogin(dto);
+        }
+        public bool ValidateCredentialsCiudadano(DtoLogin dto)
+        {
+            dto.tipoDeUsuario = CUsuario.USER_CIUDADANO;
+            return this._Repository.GetUsuarioRepository().ValidateLogin(dto);
+        }
         public List<string> DeleteUsuario(DtoUsuario dto)
         {
             List<string> colerrors = this.ValidateUsuario(dto, false);
@@ -52,25 +90,26 @@ namespace BussinessLogic.Logic
 
             return colerrors;
         }
-        public DtoUsuario GetUsuarioByName(string nombreDeUsuario)
-        {
-            return this._Repository.GetUsuarioRepository().GetUsuarioByName(nombreDeUsuario);
-        }
-
-        public List<DtoUsuario> GetAllUsuario()
-        {
-            return this._Repository.GetUsuarioRepository().GetAllUsuario();
-        }
-
-
         public List<string> ValidateUsuario(DtoUsuario dto, bool isAdd)
         {
             List<string> colerrors = new List<string>();
 
-            if (isAdd == false && !this._Repository.GetUsuarioRepository().ExistUsuarioByName(dto.nombre))
-                colerrors.Add("El Tipo de Reclamo no existe.");
+            if (isAdd == false && !this._Repository.GetUsuarioRepository().ExistUsuario(dto))
+                colerrors.Add("El usuario no existe.");
+
+            if (isAdd == true && this._Repository.GetUsuarioRepository().ExistUsuario(dto))
+                colerrors.Add("El usuario ya está registrado.");
 
             return colerrors;
         }
+        public List<DtoUsuario> GetAllUsers()
+        {
+            return this._Repository.GetUsuarioRepository().GetAllUsers();
+        }
+        public DtoUsuario GetUserByNombre(string nombreUsuario)
+        {
+            return this._Repository.GetUsuarioRepository().GetUsuarioByNombre(nombreUsuario);
+        }
+
     }
 }

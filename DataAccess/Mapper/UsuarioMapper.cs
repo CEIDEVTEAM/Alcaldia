@@ -51,6 +51,7 @@ namespace DataAccess.Mapper
                 contrasenia = dto.contrasenia,
                 telefono = dto.telefono,
                 email = dto.email,
+                tipoDeUsuario = dto.tipoDeUsuario.tipo
             };
         }
         public List<DtoUsuario> MapToDto(List<Usuario> colEntity)

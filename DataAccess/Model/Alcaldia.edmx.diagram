@@ -13,7 +13,7 @@
         <AssociationConnector Association="ReclamosAlcaldiaModel.fk_reclamoRecLog" ManuallyRouted="false" />
         <AssociationConnector Association="ReclamosAlcaldiaModel.FK_Reclamo_Ubicacion" ManuallyRouted="false" />
         <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Cuadrilla" Width="1.5" PointX="3.75" PointY="10.375" />
-        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Tipo_De_Reclamo" Width="1.5" PointX="3.75" PointY="1.875" />
+        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Tipo_De_Reclamo" Width="1.5" PointX="2.375" PointY="1.875" />
         <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Usuario" Width="1.5" PointX="0.75" PointY="2.875" />
         <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Zona" Width="1.5" PointX="1.5" PointY="7.75" />
         <AssociationConnector Association="ReclamosAlcaldiaModel.fk_reclamoCuadrilla" />

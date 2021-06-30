@@ -1,0 +1,52 @@
+﻿@model IEnumerable<CommonSolution.DTOs.DtoCuadrilla>
+
+@{
+    ViewBag.Title = "Listado de Cuadrillas";
+}
+
+<h2>Listado de Cuadrillas</h2>
+
+<p>
+    @Html.ActionLink("Agregar", "Add")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.encargado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idZona)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantidadDePeones)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.encargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.idZona)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cantidadDePeones)
+            </td>
+            <td>
+                @Html.ActionLink("Modificar", "Modify", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new {/* id=item.id */}) |
+                @Html.ActionLink("Delete", "Delete", new { /*id=item.id */})
+            </td>
+        </tr>
+    }
+
+</table>

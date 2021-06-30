@@ -1,4 +1,5 @@
-﻿using CommonSolution.DTOs;
+﻿using CommonSolution.Constants;
+using CommonSolution.DTOs;
 using DataAccess.Mapper;
 using DataAccess.Model;
 using System;
@@ -29,7 +30,7 @@ namespace DataAccess.Repository
                     try
                     {
                         Zona newZona = this._zonaMapper.MaptoEntity(dto);
-                        newZona.situacion = "A";
+                        newZona.situacion = CGlobals.ESTADO_ACTIVO;
                         context.Zona.Add(newZona);
                         context.SaveChanges();
                         trann.Commit();
@@ -94,16 +95,22 @@ namespace DataAccess.Repository
             }
         }
 
+        public List<DtoZona> GetAllZonas()
+        {
+            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+                return this._zonaMapper.MapToDto(context.Zona.AsNoTracking().Where(w => w.situacion == CGlobals.ESTADO_ACTIVO).ToList());
+        }
+
         public DtoZona GetZonaById(int idZona)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
-                return this._zonaMapper.MaptoDto(context.Zona.AsNoTracking().FirstOrDefault(f => f.id == idZona));
+                return this._zonaMapper.MapToDto(context.Zona.AsNoTracking().FirstOrDefault(f => f.id == idZona));
         }
 
         public bool ExistZonaById(int idZona)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
-                return context.Zona.AsNoTracking().Any(a => a.id == idZona);
+                return context.Zona.AsNoTracking().Any(a => a.id == idZona && a.situacion == CGlobals.ESTADO_ACTIVO);
         }
 
     }

@@ -39,5 +39,17 @@ namespace DataAccess.Mapper
                 cantidadDePeones = dto.cantidadDePeones
             };
         }
+
+        public List<DtoCuadrilla> MapToDto(List<Cuadrilla> colEntity)
+        {
+            List<DtoCuadrilla> colDto = new List<DtoCuadrilla>();
+
+            foreach (Cuadrilla entity in colEntity)
+            {
+                colDto.Add(this.MapToDto(entity));
+            }
+
+            return colDto;
+        }
     }
 }

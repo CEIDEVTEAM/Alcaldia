@@ -1,4 +1,5 @@
-﻿using CommonSolution.DTOs;
+﻿using CommonSolution.Constants;
+using CommonSolution.DTOs;
 using DataAccess.Mapper;
 using DataAccess.Model;
 using System;
@@ -29,7 +30,7 @@ namespace DataAccess.Repository
                     try
                     {
                         Tipo_De_Reclamo newTipoDeReclamo = this._TipoDeReclamoMapper.MaptoEntity(dto);
-                        newTipoDeReclamo.situacion = "A";
+                        newTipoDeReclamo.situacion = CGlobals.ESTADO_ACTIVO;
                         context.Tipo_De_Reclamo.Add(newTipoDeReclamo);
                         context.SaveChanges();
                         trann.Commit();
@@ -96,7 +97,7 @@ namespace DataAccess.Repository
         public List<DtoTipoDeReclamo> GetAllTipoDeReclamo()
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
-                return this._TipoDeReclamoMapper.MapToDto(context.Tipo_De_Reclamo.AsNoTracking().Select(s => s).ToList());
+                return this._TipoDeReclamoMapper.MapToDto(context.Tipo_De_Reclamo.AsNoTracking().Where(w => w.situacion == CGlobals.ESTADO_ACTIVO).ToList());
   
         }
 

@@ -1,4 +1,5 @@
-﻿using CommonSolution.DTOs;
+﻿using CommonSolution.Constants;
+using CommonSolution.DTOs;
 using DataAccess.Mapper;
 using DataAccess.Model;
 using System;
@@ -29,7 +30,7 @@ namespace DataAccess.Repository
                     try
                     {
                         Usuario newUsuario = this._usuarioMapper.MaptoEntity(dto);
-                        newUsuario.situacion = "A";
+                        newUsuario.situacion = CGlobals.ESTADO_ACTIVO;
                         context.Usuario.Add(newUsuario);
                         context.SaveChanges();
                         trann.Commit();
@@ -50,7 +51,7 @@ namespace DataAccess.Repository
                 {
                     try
                     {
-                        Usuario currUsuario = context.Usuario.FirstOrDefault(f => f.nombreDeUsuario == dto.nombreDeUsuario);
+                        Usuario currUsuario = context.Usuario.Include("Tipo_Usuario").FirstOrDefault(f => f.nombreDeUsuario == dto.nombreDeUsuario);
 
                         if (currUsuario != null)
                         {
@@ -60,8 +61,6 @@ namespace DataAccess.Repository
                             currUsuario.contrasenia = dto.contrasenia;
                             currUsuario.telefono = dto.telefono;
                             currUsuario.email = dto.email;
-                            currUsuario.situacion = dto.situacion;
-                            currUsuario.tipoDeUsuario = dto.tipoDeUsuario.tipo;
                         };
 
                         context.SaveChanges();
@@ -84,7 +83,7 @@ namespace DataAccess.Repository
                     try
                     {
                         Usuario currUsuario = context.Usuario.FirstOrDefault(f => f.nombreDeUsuario == nombreUsuario);
-                        currUsuario.situacion = "I";
+                        currUsuario.situacion = CGlobals.ESTADO_INACTIVO;
                         
                             context.SaveChanges();
                             trann.Commit();
@@ -98,27 +97,32 @@ namespace DataAccess.Repository
             }
         }
 
-        public List<DtoUsuario> GetAllUsuario()
+        public bool ValidateLogin(DtoLogin dto)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
-                return this._usuarioMapper.MapToDto(context.Usuario.AsNoTracking().Where(w => w.situacion =="A").Select(s => s).ToList());
-
+                return context.Usuario.AsNoTracking().Any(a => a.nombreDeUsuario == dto.user && a.contrasenia == dto.pass && a.tipoDeUsuario == dto.tipoDeUsuario);
         }
 
-        public DtoUsuario GetUsuarioByName(string nombreUsuario)
+        public DtoUsuario GetUsuarioByNombre(string nombreUsuario)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
                 return this._usuarioMapper.MaptoDto(context.Usuario.AsNoTracking().FirstOrDefault(f => f.nombreDeUsuario == nombreUsuario));
         }
-      
 
-        public bool ExistUsuarioByName(string nombreUsuario)
+        public bool ExistUsuario(DtoUsuario usuario)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
-                return context.Usuario.AsNoTracking().Any(a => a.nombreDeUsuario == nombreUsuario);
+                return context.Usuario.AsNoTracking().Any(a => a.nombreDeUsuario == usuario.nombreDeUsuario && a.tipoDeUsuario == usuario.tipoDeUsuario.tipo && a.situacion == CGlobals.ESTADO_ACTIVO);
+        }
+        public List<DtoUsuario> GetAllUsers()
+        {
+            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+                return this._usuarioMapper.MapToDto(context.Usuario.AsNoTracking().Where(w => w.situacion == CGlobals.ESTADO_ACTIVO).ToList());
+
         }
     }
     
+
 
 }
 
