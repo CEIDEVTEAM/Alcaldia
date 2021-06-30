@@ -36,7 +36,7 @@ namespace CommonSolution.DTOs
         public string telefono { get; set; } 
 
         [StringLength(50, ErrorMessage = "El email no puede superar los 50 caracteres")]
-        [Required(ErrorMessage = "El email es requerida")]
+        [Required(ErrorMessage = "El email es requerido")]
         [EmailAddress]
         [DisplayName("Email")]
         public string email { get; set; }
