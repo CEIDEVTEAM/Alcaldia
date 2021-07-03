@@ -92,12 +92,12 @@ namespace DataAccess.Repository
             }
         }
 
-        public DtoUbicacion GetUbicacionByLatAndLon(decimal lat, decimal lon)
+        public DtoUbicacion GetUbicacionByLatAndLon(string lat, string lon)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
                 return this._UbicacionMapper.MaptoDto(context.Ubicacion.AsNoTracking().FirstOrDefault(f => f.latitud == lat && f.longitud == lon));
         }
-        public bool ExistUbicacionByLatAndLon(decimal lat, decimal lon)
+        public bool ExistUbicacionByLatAndLon(string lat, string lon)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
                 return context.Ubicacion.AsNoTracking().Any(a => a.latitud == lat && a.longitud == lon);

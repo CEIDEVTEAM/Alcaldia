@@ -1,0 +1,57 @@
+﻿@model CommonSolution.DTOs.DtoZona
+
+@{
+    ViewBag.Title = "Alta de Zona";
+}
+
+<h2>Alta de Zona</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control", id = "nombre" } })
+                @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.color, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.color, new { htmlAttributes = new { @class = "form-control", type = "color", id = "colorPicker" } })
+                @Html.ValidationMessageFor(model => model.color, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div id="map" class="form-group" style="width: 800px; height: 500px">
+
+        </div>
+
+    </div>
+    <div>
+        <input onclick="deleteMarkers();" type="button" value="Borrar Markers" class="btn btn-default" />
+        <input id="btn2" type="button" value="Create Zona" class="btn btn-default" />
+        <input type="submit" id="btn1" value="Guardar Zona" class="btn btn-default" />
+    </div>
+    
+
+
+}
+
+@section Scripts {
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCewHvBMDcMrBFlu3aqp1OhShkwSjWLiBQ&callback=initMap"
+            async></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/maps")
+
+
+}

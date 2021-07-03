@@ -20,8 +20,8 @@ namespace DataAccess.Model
             this.Reclamo = new HashSet<Reclamo>();
         }
     
-        public decimal latitud { get; set; }
-        public decimal longitud { get; set; }
+        public string latitud { get; set; }
+        public string longitud { get; set; }
         public Nullable<int> idZona { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

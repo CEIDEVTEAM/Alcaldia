@@ -29,11 +29,23 @@ namespace DataAccess.Repository
                 {
                     try
                     {
-                        Zona newZona = this._zonaMapper.MaptoEntity(dto);
+                        Zona newZona = this._zonaMapper.MapToEntity(dto);
                         newZona.situacion = CGlobals.ESTADO_ACTIVO;
                         context.Zona.Add(newZona);
                         context.SaveChanges();
+
+                        foreach (DtoVertice item in dto.colVertices)
+                        {
+                            Vertice vertice = this._zonaMapper.MaptoEntity(item);
+                            vertice.idZona = newZona.id;
+                            context.Vertice.Add(vertice);
+                        }
+                        
+                       
+                        context.SaveChanges();
                         trann.Commit();
+
+                     
                     }
                     catch (Exception ex)
                     {
@@ -98,7 +110,7 @@ namespace DataAccess.Repository
         public List<DtoZona> GetAllZonas()
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
-                return this._zonaMapper.MapToDto(context.Zona.AsNoTracking().Where(w => w.situacion == CGlobals.ESTADO_ACTIVO).ToList());
+                return this._zonaMapper.MapToDto(context.Zona.Include("Vertice").AsNoTracking().Where(w => w.situacion == CGlobals.ESTADO_ACTIVO).ToList());
         }
 
         public DtoZona GetZonaById(int idZona)

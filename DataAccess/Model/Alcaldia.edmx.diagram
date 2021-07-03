@@ -4,25 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="86a25fd73f62459e8e2ddd59d74ddf8c" Name="Diagram1">
-        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.LogReclamo" Width="1.5" PointX="7.5" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Reclamo" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Tipo_Usuario" Width="1.5" PointX="0.75" PointY="13.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Ubicacion" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Vertice" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
-        <AssociationConnector Association="ReclamosAlcaldiaModel.fk_reclamoRecLog" ManuallyRouted="false" />
-        <AssociationConnector Association="ReclamosAlcaldiaModel.FK_Reclamo_Ubicacion" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Cuadrilla" Width="1.5" PointX="3.75" PointY="10.375" />
-        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Tipo_De_Reclamo" Width="1.5" PointX="2.375" PointY="1.875" />
-        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Usuario" Width="1.5" PointX="0.75" PointY="2.875" />
-        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Zona" Width="1.5" PointX="1.5" PointY="7.75" />
+      <Diagram DiagramId="86a25fd73f62459e8e2ddd59d74ddf8c" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Usuario" PointX="3.375" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Zona" PointX="0.75" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Cuadrilla" Width="1.5" PointX="3" PointY="13.875" />
+        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.LogReclamo" Width="1.5" PointX="7.875" PointY="4.25" />
+        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Reclamo" Width="1.5" PointX="5.625" PointY="6.75" />
+        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Tipo_De_Reclamo" Width="1.5" PointX="3.375" PointY="5.75" />
+        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Tipo_Usuario" Width="1.5" PointX="1.125" PointY="5.5" />
+        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Ubicacion" Width="1.5" PointX="3" PointY="8.625" />
         <AssociationConnector Association="ReclamosAlcaldiaModel.fk_reclamoCuadrilla" />
         <AssociationConnector Association="ReclamosAlcaldiaModel.fk_zonaCuadrilla" />
+        <AssociationConnector Association="ReclamosAlcaldiaModel.fk_reclamoRecLog" />
         <AssociationConnector Association="ReclamosAlcaldiaModel.fk_RecLogUsuario" />
         <AssociationConnector Association="ReclamosAlcaldiaModel.FK_Reclamo_TipoReclamo" />
+        <AssociationConnector Association="ReclamosAlcaldiaModel.FK_Reclamo_Ubicacion" />
         <AssociationConnector Association="ReclamosAlcaldiaModel.fk_reclamoCiudadano" />
         <AssociationConnector Association="ReclamosAlcaldiaModel.fk_Tipo" />
         <AssociationConnector Association="ReclamosAlcaldiaModel.fk_zonaUbicacion" />
+        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Vertice" Width="1.5" PointX="3" PointY="18" />
         <AssociationConnector Association="ReclamosAlcaldiaModel.fk_zonaVertice" />
         </Diagram>
     </edmx:Diagrams>

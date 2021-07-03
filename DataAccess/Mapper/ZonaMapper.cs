@@ -10,6 +10,7 @@ namespace DataAccess.Mapper
 {
     public class ZonaMapper
     {
+        #region ZONA
         public DtoZona MapToDto(Zona entity)
         {
             if (entity == null)
@@ -19,11 +20,12 @@ namespace DataAccess.Mapper
             {
                 id = entity.id,
                 nombre = entity.nombre,
-                color = entity.color
+                color = entity.color,
+                colVertices = this.MapToDto(entity.Vertice.ToList())
             };
         }
 
-        public Zona MaptoEntity(DtoZona dto)
+        public Zona MapToEntity(DtoZona dto)
         {
             if (dto == null)
                 return null;
@@ -33,8 +35,10 @@ namespace DataAccess.Mapper
                 id = dto.id,
                 nombre = dto.nombre,
                 color = dto.color,
+                
             };
         }
+
 
         public List<DtoZona> MapToDto(List<Zona> colEntity)
         {
@@ -47,6 +51,70 @@ namespace DataAccess.Mapper
 
             return colDto;
         }
+        #endregion
+
+
+        #region VERTICES
+        public DtoVertice MapToDto(Vertice entity)
+        {
+            if (entity == null)
+                return null;
+
+            return new DtoVertice
+            {
+
+                latitud = entity.latitud.ToString(),
+                longitud = entity.longitud.ToString(),
+                idZona = entity.idZona,
+                orden = (int)entity.orden
+            };
+        }
+        public List<DtoVertice> MapToDto(List<Vertice> ColEnt)
+        {
+            List<DtoVertice> colDtoVetices = new List<DtoVertice>();
+
+            foreach (Vertice item in ColEnt)
+            {
+                DtoVertice Dtovert = this.MapToDto(item);
+                colDtoVetices.Add(Dtovert);
+            }
+
+            return colDtoVetices;
+
+        }
+
+        public List<Vertice> MapToEntity(List<DtoVertice> Coldto)
+        {
+            List<Vertice> colVetices = new List<Vertice>();
+            
+            foreach (DtoVertice item in Coldto)
+            {
+                Vertice vert = this.MaptoEntity(item);
+                colVetices.Add(vert);
+            }
+
+            return colVetices;
+                
+        }
+
+        public Vertice MaptoEntity(DtoVertice dto)
+        {
+            if (dto == null)
+                return null;
+
+            return new Vertice
+            {
+
+                latitud = dto.latitud,
+                longitud = dto.longitud,
+                idZona = dto.idZona,
+                orden = dto.orden
+            };
+        }
+
+
+        #endregion
+
     }
 
 }

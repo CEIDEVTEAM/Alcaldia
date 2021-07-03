@@ -67,7 +67,7 @@ namespace DataAccess.Repository
             }
         }
 
-        public void DeleteVertice(decimal lat, decimal lon)
+        public void DeleteVertice(string lat, string lon)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
             {
@@ -92,13 +92,13 @@ namespace DataAccess.Repository
             }
         }
 
-        public DtoVertice GetVerticeByLatAndLon(decimal lat, decimal lon)
+        public DtoVertice GetVerticeByLatAndLon(string lat, string lon)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
                 return this._verticeMapper.MaptoDto(context.Vertice.AsNoTracking().FirstOrDefault(f => f.latitud == lat && f.longitud == lon));
         }
 
-        public bool ExistVerticeByLatAndLon(decimal lat, decimal lon)
+        public bool ExistVerticeByLatAndLon(string lat, string lon)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
                 return context.Vertice.AsNoTracking().Any(f => f.latitud == lat && f.longitud == lon);
