@@ -18,8 +18,8 @@ namespace DataAccess.Mapper
             return new DtoVertice
             {
                 
-                latitud = entity.latitud,
-                longitud = entity.longitud,
+                latitud = entity.latitud.ToString(),
+                longitud = entity.longitud.ToString(),
                 idZona = entity.idZona
             };
         }
@@ -37,5 +37,7 @@ namespace DataAccess.Mapper
                 idZona = dto.idZona
             };
         }
+
+
     }
 }

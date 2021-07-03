@@ -15,8 +15,8 @@ namespace CommonSolution.DTOs
         public string observaciones { get; set; }
         public string idCiudadano { get; set; }
         public string nombreTipoReclamo { get; set; }
-        public Nullable<decimal> LatitudReclamo { get; set; }
-        public Nullable<decimal> LongitudReclamo { get; set; }
+        public string LatitudReclamo { get; set; }
+        public string LongitudReclamo { get; set; }
         public Nullable<int> idCuadrilla { get; set; }
     }
 }

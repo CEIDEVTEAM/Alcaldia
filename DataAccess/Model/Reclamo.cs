@@ -27,14 +27,14 @@ namespace DataAccess.Model
         public string idCiudadano { get; set; }
         public string nombreTipoReclamo { get; set; }
         public Nullable<int> idCuadrilla { get; set; }
-        public Nullable<decimal> LatitudReclamo { get; set; }
-        public Nullable<decimal> LongitudReclamo { get; set; }
+        public string LatitudReclamo { get; set; }
+        public string LongitudReclamo { get; set; }
     
+        public virtual Cuadrilla Cuadrilla { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LogReclamo> LogReclamo { get; set; }
-        public virtual Ubicacion Ubicacion { get; set; }
-        public virtual Cuadrilla Cuadrilla { get; set; }
         public virtual Tipo_De_Reclamo Tipo_De_Reclamo { get; set; }
+        public virtual Ubicacion Ubicacion { get; set; }
         public virtual Usuario Usuario { get; set; }
     }
 }
