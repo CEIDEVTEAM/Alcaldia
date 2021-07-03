@@ -39,11 +39,6 @@ namespace MVCAlcaldia.Controllers
 
             List<string> colErrores = lgc.DeleteTipoDeReclamo(dto);
 
-            foreach (string error in colErrores)
-            {
-                ModelState.AddModelError("ErrorGeneral", error);
-            }
-
 
             return View("List");
         }
@@ -65,11 +60,6 @@ namespace MVCAlcaldia.Controllers
             LTipoDeReclamoController lgc = new LTipoDeReclamoController();
 
             List<string> colErrors = lgc.ModifyTipoDeReclamo(dto);
-
-            foreach (string error in colErrors)
-            {
-                ModelState.AddModelError("ErrorGeneral", error);
-            }
 
 
             return RedirectToAction("List");
