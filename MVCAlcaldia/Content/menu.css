@@ -171,3 +171,46 @@
     }
 
 }
+
+/*----------formularios----------*/
+
+form {
+    max-width: 600px;
+}
+
+input[type=button].active {
+    box-shadow: none !important;
+    border-color: #3b83bd;
+}
+
+    input[type=button].active:focus {
+        box-shadow: none !important;
+    }
+
+input[type=submit] {
+    box-shadow: 0.15rem .150rem .25rem rgba(0,0,0,.15) !important;
+    margin-bottom: 5px;
+}
+
+    input[type=submit]:active {
+        box-shadow: none !important;
+        transform: translateY(2px) translateX(2px);
+    }
+
+.btn-info {
+    background-color: gray;
+    text-shadow: 0.15rem .150rem .25rem rgba(0,0,0,.5) !important;
+    border-color: gray;
+}
+
+    .btn-info:hover {
+        background-color: #3b83bd;
+    }
+
+    .btn-info:active {
+        background-color: #3b83bd !important;
+        text-shadow: none !important;
+    }
+
+
+

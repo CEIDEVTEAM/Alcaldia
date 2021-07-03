@@ -69,10 +69,19 @@ namespace BussinessLogic.Logic
         {
             List<string> colerrors = new List<string>();
 
-            if (isAdd == false && !this._Repository.GetTipoDeReclamoRepository().ExistTipoDeReclamoById(dto.nombre))
+            if (isAdd == false && !this._Repository.GetTipoDeReclamoRepository().ExistTipoDeReclamoByNombre(dto.nombre))
                 colerrors.Add("El Tipo de Reclamo no existe.");
 
             return colerrors;
         }
+
+        #region VALIDATIONS FRONTEND
+        public bool ExistTipoDeReclamoByNombre(string name)
+        {
+            return this._Repository.GetTipoDeReclamoRepository().ExistTipoDeReclamoByNombre(name);
+        }
+
+        #endregion
+
     }
 }

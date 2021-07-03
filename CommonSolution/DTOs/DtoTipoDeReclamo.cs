@@ -5,11 +5,14 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace CommonSolution.DTOs
 {
    public class DtoTipoDeReclamo
     {
+
+        [Remote("ValidateNombre", "TipoDeReclamo", ErrorMessage = "El Nombre ingresado ya existe")]
         [StringLength(50, ErrorMessage = "El Nombre no puede superar los 50 caracteres")]
         [Required(ErrorMessage = "El Nombre es requerido")]
         [DisplayName("Nombre")]

@@ -29,3 +29,8 @@ function initMenu() {
 $(document).ready(function () {
     initMenu();
 });
+
+function resetForm() {
+    
+    
+}

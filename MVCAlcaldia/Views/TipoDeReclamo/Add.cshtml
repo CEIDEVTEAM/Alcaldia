@@ -4,15 +4,31 @@
     ViewBag.Title = "Agregar Tipo de Reclamo";
 }
 
-<h2>Agregar Tipo de Reclamo</h2>
-
-
-@using (Html.BeginForm("AddTipoDeReclamo", "TipoDeReclamo")) 
-{
-    @Html.AntiForgeryToken()
+<div class="wrapper d-flex align-items-stretch">
     
+        <div class="row p-4 p-md-5 pt-5" style="display: inline-flex;">
+            <div class="col">
+                <input type="submit" class="form-control disabled" value="Agregar" />
+            </div>
+            <div class="col">
+                <form action="@Url.Action("Modify", "TipoDeReclamo")" method="post">
+                    <input type="submit" class="form-control" value="Modificar/Borrar" />
+                </form>
+            </div>
+            <div class="col">
+                <form action="@Url.Action("List", "TipoDeReclamo")" method="post">
+                    <input type="submit" class="form-control" value="Listar" />
+                </form>
+            </div>
+        </div>
+    
+</div>
+       
+<h2>Agregar Tipo de Reclamo</h2>
+@Html.AntiForgeryToken()
+@using (Html.BeginForm("AddTipoDeReclamo", "TipoDeReclamo", FormMethod.Post, new { id = "TipoDeReclamoForm" }))
+{
     <div class="form-horizontal">
-        <h4></h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -38,11 +54,23 @@
         </div>
     </div>
 }
-
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+<div id="snackbar">
+    @ViewBag.Message
+</div>
+@{
+    if (ViewBag.Message != null)
+    {
+        <script>
+            var x = document.getElementById("snackbar");
+            x.className = "show";
+            setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
 
+        </script>
+    }
+}
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

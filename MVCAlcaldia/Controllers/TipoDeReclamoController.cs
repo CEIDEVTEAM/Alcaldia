@@ -19,14 +19,14 @@ namespace MVCAlcaldia.Controllers
         public ActionResult AddTipoDeReclamo(DtoTipoDeReclamo dto)
         {
             LTipoDeReclamoController lgc = new LTipoDeReclamoController();
-            
-            List<string> colErrores = lgc.AddTipoDeReclamo(dto);
 
-            foreach (string error in colErrores)
+            List<string> colErrors = lgc.AddTipoDeReclamo(dto);
+
+            if (colErrors.Count == 0)
             {
-                ModelState.AddModelError("ErrorGeneral", error);
+                ViewBag.Message = "Tipo de reclamo agregado con éxito";
+                ModelState.Clear();
             }
-
 
             return View("Add");
         }
@@ -82,6 +82,24 @@ namespace MVCAlcaldia.Controllers
 
             return View(colDto);
         }
+
+        #region VALIDATIONS
+
+        public JsonResult ValidateNombre(string nombre)
+        {
+            bool response = true;
+            LTipoDeReclamoController lgc = new LTipoDeReclamoController();
+            response = lgc.ExistTipoDeReclamoByNombre(nombre) ? false : true;
+
+
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        #endregion 
+
+
 
     }
 }

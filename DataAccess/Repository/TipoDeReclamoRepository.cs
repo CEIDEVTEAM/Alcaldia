@@ -107,7 +107,7 @@ namespace DataAccess.Repository
                 return this._TipoDeReclamoMapper.MaptoDto(context.Tipo_De_Reclamo.AsNoTracking().FirstOrDefault(f => f.nombre == nameTipoDeReclamo));
         }
 
-        public bool ExistTipoDeReclamoById(string nameTipoDeReclamo)
+        public bool ExistTipoDeReclamoByNombre(string nameTipoDeReclamo)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
                 return context.Tipo_De_Reclamo.AsNoTracking().Any(a => a.nombre == nameTipoDeReclamo);
