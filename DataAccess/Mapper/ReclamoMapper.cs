@@ -26,7 +26,8 @@ namespace DataAccess.Mapper
                 nombreTipoReclamo = entity.nombreTipoReclamo,
                 LatitudReclamo = entity.LatitudReclamo,
                 LongitudReclamo = entity.LongitudReclamo,
-                idCuadrilla = entity.idCuadrilla
+                idCuadrilla = entity.idCuadrilla,
+                idZona = (int)entity.idZona
             };
         }
 
@@ -45,7 +46,8 @@ namespace DataAccess.Mapper
                 nombreTipoReclamo = dto.nombreTipoReclamo,
                 LatitudReclamo = dto.LatitudReclamo,
                 LongitudReclamo = dto.LongitudReclamo,
-                idCuadrilla = dto.idCuadrilla
+                idCuadrilla = dto.idCuadrilla,
+                idZona = dto.idZona
             };
         }
     }

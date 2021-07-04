@@ -1,5 +1,7 @@
 ﻿using BussinessLogic.Logic;
+using CommonSolution.Constants;
 using CommonSolution.DTOs;
+using CommonSolution.ENUMs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +42,21 @@ namespace MVCAlcaldiaCiudadano.Controllers
             }
 
             return Json(colDto, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult AddReclamo(DtoReclamo dto)
+        {
+            List<string> colErrors = new List<string>();
+            //dto.idCiudadano = Session[CLogin.KEY_SESSION_USERNAME].ToString();
+            dto.fechaYhora = DateTime.Now;
+            dto.estado = EnumEstado.PENDIENTE;
+            //dto.idCuadrilla = funcion
+            LReclamoController lgc = new LReclamoController();
+            colErrors = lgc.AddReclamo(dto);
+            //funcion popUp de operación exitosa
+
+            return View();
         }
     }
 }

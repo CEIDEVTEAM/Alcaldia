@@ -24,7 +24,8 @@ function initMap() {
     });*/
     /*var point = $("#btn3").on("click", function () { createPoint(map); });*/
 
-
+    document.getElementById("smBut").addEventListener("click", addReclamo);
+    
     handleResponse();
 }
 
@@ -114,13 +115,17 @@ function showArrays(event) {
 
 }
 
-function addReclamo(){ 
+function addReclamo() {
+    var obs = document.getElementById("observaciones").value;
+    var tpReclamo = document.getElementById("tipoReclamo").value;
 
     if (dto.id != undefined) {
 
+        var jSon = { observaciones: obs, nombreTipoReclamo: tpReclamo, latitudReclamo: dto.latitud, longitudReclamo: dto.longitud, idZona: dto.id }
+
         $.ajax({
             type: 'POST',
-            data: dto,
+            data: jSon,
             url: 'AddReclamo',
             success: function (respuesta) {
 
@@ -263,10 +268,10 @@ function zonesPopulate(item) {
         name: nombre,
         paths: polyCoords,
         strokeColor: color,
-        strokeOpacity: 0.8,
+        strokeOpacity: 0.1,
         strokeWeight: 3,
         fillColor: color,
-        fillOpacity: 0.90,
+        fillOpacity: 0.1,
 
 
     });

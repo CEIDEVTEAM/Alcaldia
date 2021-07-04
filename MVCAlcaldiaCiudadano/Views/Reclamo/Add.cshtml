@@ -19,7 +19,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.observaciones, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.observaciones, new { @class = "form-control", @rows = "6" })
+                @Html.TextAreaFor(model => model.observaciones, new { @class = "form-control", @rows = "6", id = "observaciones" })
                 @Html.ValidationMessageFor(model => model.observaciones, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -27,7 +27,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.nombreTipoReclamo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.nombreTipoReclamo, (List<SelectListItem>)ViewBag.colTipoDeReclamoSelect, "-- Tipo de Reclamo --", new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.nombreTipoReclamo, (List<SelectListItem>)ViewBag.colTipoDeReclamoSelect, "-- Tipo de Reclamo --", new { @class = "form-control" ,id="tipoReclamo"})
                 @Html.ValidationMessageFor(model => model.nombreTipoReclamo, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -38,7 +38,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Ingresar" class="btn btn-default" />
+                <input type="submit" id="smBut" value="Ingresar" class="btn btn-default" />
             </div>
         </div>
     </div>
