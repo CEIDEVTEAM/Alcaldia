@@ -27,6 +27,7 @@ namespace CommonSolution.DTOs
 
         [StringLength(30, ErrorMessage = "La contraseña no puede superar los 20 caracteres")]
         [Required(ErrorMessage = "La contraseña es requerida")]
+        [DataType(DataType.Password)]
         [DisplayName("Contraseña")]
         public string contrasenia { get; set; }
 

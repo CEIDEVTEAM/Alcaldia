@@ -23,7 +23,7 @@ namespace DataAccess.Repository
 
         public void AddCuadrilla(DtoCuadrilla dto)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
@@ -45,7 +45,7 @@ namespace DataAccess.Repository
 
         public void ModifyCuadrilla(DtoCuadrilla dto)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
@@ -74,7 +74,7 @@ namespace DataAccess.Repository
 
         public void DeleteCuadrilla(int idCuadrilla)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
@@ -99,19 +99,19 @@ namespace DataAccess.Repository
 
         public List<DtoCuadrilla> GetAllCuadrillas()
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return this._cuadrillaMapper.MapToDto(context.Cuadrilla.AsNoTracking().Where(w => w.situacion == CGlobals.ESTADO_ACTIVO).ToList());
         }
 
         public DtoCuadrilla GetCuadrillaById(int idCuadrilla)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return this._cuadrillaMapper.MapToDto(context.Cuadrilla.AsNoTracking().FirstOrDefault(f => f.id == idCuadrilla));
         }
 
         public bool ExistCuadrillaById(int idCuadrilla)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return context.Cuadrilla.AsNoTracking().Any(a => a.id == idCuadrilla);
         }
 

@@ -22,7 +22,7 @@ namespace DataAccess.Repository
 
         public void AddTipoUsuario(DtoTipoUsuario dto)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
@@ -44,7 +44,7 @@ namespace DataAccess.Repository
 
         public void ModifyTipoUsuario(DtoTipoUsuario dto)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
@@ -70,7 +70,7 @@ namespace DataAccess.Repository
 
         public void DeleteTipoUsuario(DtoTipoUsuario dto)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
@@ -95,13 +95,13 @@ namespace DataAccess.Repository
 
         public DtoTipoUsuario GetTipoUsuarioById(string tipo)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return this._TipoDeUsusarioMapper.MapToDto(context.Tipo_Usuario.AsNoTracking().FirstOrDefault(f => f.tipo == tipo.ToUpper()));
         }
 
         public bool ExistTipoDeUsuarioById(string tipo)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return context.Tipo_Usuario.AsNoTracking().Any(a => a.tipo == tipo.ToUpper());
         }
     }

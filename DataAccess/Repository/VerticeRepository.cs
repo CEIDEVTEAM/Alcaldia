@@ -22,7 +22,7 @@ namespace DataAccess.Repository
 
         public void AddVertice(DtoVertice dto)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
@@ -43,7 +43,7 @@ namespace DataAccess.Repository
 
         public void ModifyVertice(DtoVertice dto)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
@@ -69,7 +69,7 @@ namespace DataAccess.Repository
 
         public void DeleteVertice(string lat, string lon)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
@@ -94,13 +94,13 @@ namespace DataAccess.Repository
 
         public DtoVertice GetVerticeByLatAndLon(string lat, string lon)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return this._verticeMapper.MaptoDto(context.Vertice.AsNoTracking().FirstOrDefault(f => f.latitud == lat && f.longitud == lon));
         }
 
         public bool ExistVerticeByLatAndLon(string lat, string lon)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return context.Vertice.AsNoTracking().Any(f => f.latitud == lat && f.longitud == lon);
         }
 

@@ -9,6 +9,17 @@
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
+    @{
+        if (User.Identity.Name == "")
+        {
+            ViewBag.User = "lalalalprueba";
+        }
+        else
+        {
+            ViewBag.User = @User.Identity.Name;
+        }
+
+    }
 <body style="padding: 0">
     <nav class="navbar navbar-default no-margin">
         <div class="navbar-header fixed-brand">
@@ -21,7 +32,7 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span>@User.Identity.Name</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span>@ViewBag.User</a></li>
                     <li><a href="@Url.Action("LogOut", "Login")"><span class="glyphicon glyphicon-log-in"></span> Cerrar sesión</a></li>
                 </ul>
             </div>
@@ -57,7 +68,6 @@
             </div>
         </div>
     </div>
-
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

@@ -22,7 +22,7 @@ namespace DataAccess.Repository
 
         public void AddLogReclamo(DtoLogReclamo dto)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
@@ -43,7 +43,7 @@ namespace DataAccess.Repository
 
         public void ModifyLogReclamo(DtoLogReclamo dto)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
@@ -74,7 +74,7 @@ namespace DataAccess.Repository
 
         public void DeleteLogReclamo(int idLogReclamo)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
@@ -99,13 +99,13 @@ namespace DataAccess.Repository
 
         public DtoLogReclamo GetLogReclamoById(int idLogReclamo)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return this._logReclamoMapper.MapToDto(context.LogReclamo.AsNoTracking().FirstOrDefault(f => f.idLog == idLogReclamo));
         }
 
         public bool ExistLogReclamoById(int idLogReclamo)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return context.LogReclamo.AsNoTracking().Any(a => a.idLog == idLogReclamo);
         }
     }

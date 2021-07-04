@@ -93,6 +93,16 @@
           <Property Name="color" Type="varchar" MaxLength="20" />
           <Property Name="situacion" Type="varchar" MaxLength="1" Nullable="false" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ReclamosAlcaldia.dbo.V_ReclamosAbiertosPorCuadrilla' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="V_ReclamosAbiertosPorCuadrilla">
+          <Key>
+            <PropertyRef Name="idCuadrilla" />
+          </Key>
+          <Property Name="idCuadrilla" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="int" />
+          <Property Name="idZona" Type="int" />
+        </EntityType>
         <Association Name="FK_Reclamo_TipoReclamo">
           <End Role="Tipo_De_Reclamo" Type="Self.Tipo_De_Reclamo" Multiplicity="0..1" />
           <End Role="Reclamo" Type="Self.Reclamo" Multiplicity="*" />
@@ -210,6 +220,13 @@
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vertice" EntityType="Self.Vertice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Zona" EntityType="Self.Zona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="V_ReclamosAbiertosPorCuadrilla" EntityType="Self.V_ReclamosAbiertosPorCuadrilla" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_ReclamosAbiertosPorCuadrilla].[idCuadrilla] AS [idCuadrilla], 
+    [V_ReclamosAbiertosPorCuadrilla].[cantidad] AS [cantidad], 
+    [V_ReclamosAbiertosPorCuadrilla].[idZona] AS [idZona]
+    FROM [dbo].[V_ReclamosAbiertosPorCuadrilla] AS [V_ReclamosAbiertosPorCuadrilla]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Reclamo_TipoReclamo" Association="Self.FK_Reclamo_TipoReclamo">
             <End Role="Tipo_De_Reclamo" EntitySet="Tipo_De_Reclamo" />
             <End Role="Reclamo" EntitySet="Reclamo" />
@@ -296,6 +313,7 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Reclamo" EntitySet="Reclamo" />
           </AssociationSet>
+          <EntitySet Name="V_ReclamosAbiertosPorCuadrilla" EntityType="ReclamosAlcaldiaModel.V_ReclamosAbiertosPorCuadrilla" />
           </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -511,6 +529,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="V_ReclamosAbiertosPorCuadrilla">
+          <Key>
+            <PropertyRef Name="idCuadrilla" />
+          </Key>
+          <Property Name="idCuadrilla" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" />
+          <Property Name="idZona" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -609,6 +635,15 @@
                 <ScalarProperty Name="fechaYhora" ColumnName="fechaYhora" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_ReclamosAbiertosPorCuadrilla">
+            <EntityTypeMapping TypeName="ReclamosAlcaldiaModel.V_ReclamosAbiertosPorCuadrilla">
+              <MappingFragment StoreEntitySet="V_ReclamosAbiertosPorCuadrilla">
+                <ScalarProperty Name="idZona" ColumnName="idZona" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="idCuadrilla" ColumnName="idCuadrilla" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
