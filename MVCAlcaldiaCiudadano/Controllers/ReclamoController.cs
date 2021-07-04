@@ -28,5 +28,18 @@ namespace MVCAlcaldiaCiudadano.Controllers
             ViewBag.colTipoDeReclamoSelect = colTipoDeReclamoSelect;
             return View();
         }
+
+
+        public JsonResult PopulatePolygons()
+        {
+            LZonaController lgc = new LZonaController();
+            List<DtoZona> colDto = lgc.GetAllZonas();
+            foreach (DtoZona item in colDto)
+            {
+                item.colVertices.OrderBy(o => o.orden);
+            }
+
+            return Json(colDto, JsonRequestBehavior.AllowGet);
+        }
     }
 }
