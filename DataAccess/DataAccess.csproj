@@ -58,7 +58,6 @@
     <Compile Include="Mapper\ReclamoMapper.cs" />
     <Compile Include="Mapper\TipoDeReclamoMapper.cs" />
     <Compile Include="Mapper\TipoDeUsuarioMapper.cs" />
-    <Compile Include="Mapper\UbicacionMapper.cs" />
     <Compile Include="Mapper\UsuarioMapper.cs" />
     <Compile Include="Mapper\VerticeMapper.cs" />
     <Compile Include="Mapper\ZonaMapper.cs" />
@@ -92,9 +91,6 @@
     <Compile Include="Model\Tipo_Usuario.cs">
       <DependentUpon>Alcaldia.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Ubicacion.cs">
-      <DependentUpon>Alcaldia.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\Usuario.cs">
       <DependentUpon>Alcaldia.tt</DependentUpon>
     </Compile>
@@ -111,7 +107,6 @@
     <Compile Include="Repository\ReclamoRepository.cs" />
     <Compile Include="Repository\TipoDeReclamoRepository.cs" />
     <Compile Include="Repository\TipoDeUsuarioRepository.cs" />
-    <Compile Include="Repository\UbicacionRepository.cs" />
     <Compile Include="Repository\UsuarioRepository.cs" />
     <Compile Include="Repository\VerticeRepository.cs" />
     <Compile Include="Repository\ZonaRepository.cs" />

@@ -12,7 +12,6 @@ namespace DataAccess.Persistence
         private TipoDeUsuarioRepository _TipoDeUsuarioRepository;
         private CuadrillaRepository _CuadrillaRepository;
         private ReclamoRepository _ReclamoRepository;
-        private UbicacionRepository _UbicacionRepository;
         private TipoDeReclamoRepository _TipoDeReclamoRepository;
         private UsuarioRepository _UsuarioRepository;
         private ZonaRepository _ZonaRepository;
@@ -24,7 +23,6 @@ namespace DataAccess.Persistence
             this._TipoDeUsuarioRepository = new TipoDeUsuarioRepository();
             this._CuadrillaRepository = new CuadrillaRepository();
             this._ReclamoRepository = new ReclamoRepository();
-            this._UbicacionRepository = new UbicacionRepository();
             this._TipoDeReclamoRepository = new TipoDeReclamoRepository();
             this._UsuarioRepository = new UsuarioRepository();
             this._ZonaRepository = new ZonaRepository();
@@ -46,11 +44,6 @@ namespace DataAccess.Persistence
         public ReclamoRepository GetReclamoRepository()
         {
             return this._ReclamoRepository;
-        }
-
-        public UbicacionRepository GetUbicacionRepository()
-        {
-            return this._UbicacionRepository;
         }
 
         public TipoDeReclamoRepository GetTipoDeReclamoRepository()
