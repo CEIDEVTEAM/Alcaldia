@@ -22,7 +22,7 @@ namespace DataAccess.Repository
 
         public void AddReclamo(DtoReclamo dto)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
@@ -43,7 +43,7 @@ namespace DataAccess.Repository
 
         public void ModifyReclamo(DtoReclamo dto)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
@@ -69,7 +69,7 @@ namespace DataAccess.Repository
 
         public void DeleteReclamo(DtoReclamo dto)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
@@ -94,13 +94,13 @@ namespace DataAccess.Repository
 
         public DtoReclamo GetReclamoById(int idReclamo)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return this._ReclamoMapper.MaptoDto(context.Reclamo.AsNoTracking().FirstOrDefault(f => f.id == idReclamo));
         }
 
         public bool ExistReclamoById(int idReclamo)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return context.Reclamo.AsNoTracking().Any(a => a.id == idReclamo);
         }
     }

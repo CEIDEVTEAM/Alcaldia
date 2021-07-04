@@ -23,7 +23,7 @@ namespace DataAccess.Repository
 
         public void AddUsuario(DtoUsuario dto)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
@@ -45,7 +45,7 @@ namespace DataAccess.Repository
 
         public void ModifyUsuario(DtoUsuario dto)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
@@ -77,7 +77,7 @@ namespace DataAccess.Repository
 
         public void DeleteUsuario(string nombreUsuario)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
@@ -99,29 +99,29 @@ namespace DataAccess.Repository
 
         public bool ValidateLogin(DtoLogin dto)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return context.Usuario.AsNoTracking().Any(a => a.nombreDeUsuario == dto.user && a.contrasenia == dto.pass && a.tipoDeUsuario == dto.tipoDeUsuario);
         }
 
         public DtoUsuario GetUsuarioByNombre(string nombreUsuario)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return this._usuarioMapper.MaptoDto(context.Usuario.AsNoTracking().FirstOrDefault(f => f.nombreDeUsuario == nombreUsuario));
         }
 
         public bool ExistUsuario(DtoUsuario usuario)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return context.Usuario.AsNoTracking().Any(a => a.nombreDeUsuario == usuario.nombreDeUsuario && a.tipoDeUsuario == usuario.tipoDeUsuario.tipo && a.situacion == CGlobals.ESTADO_ACTIVO);
         }
         public bool ExistUsuarioByCredentials(DtoLogin dto)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return context.Usuario.AsNoTracking().Any(a => a.nombreDeUsuario == dto.user && a.contrasenia == dto.pass && a.tipoDeUsuario == dto.tipoDeUsuario && a.situacion == CGlobals.ESTADO_ACTIVO);
         }
         public List<DtoUsuario> GetAllUsers()
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return this._usuarioMapper.MapToDto(context.Usuario.AsNoTracking().Where(w => w.situacion == CGlobals.ESTADO_ACTIVO).ToList());
 
         }
