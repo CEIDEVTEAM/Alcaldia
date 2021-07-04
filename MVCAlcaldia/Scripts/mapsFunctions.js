@@ -3,14 +3,15 @@
 var map;
 var markers = [];
 //-34.90414838859055, -54.95240618763575
+//39.866667°, -4.033333°
 function initMap() {
 
     var currentPoly = [];
-    const centro = { lat: -34.90414838859055, lng: -54.95240618763575 };
+    const centro = { lat: 39.866667, lng: -4.033333 };
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 12,
+        zoom: 14,
         center: centro,
-        mapTypeId: "terrain",
+        mapTypeId: "roadmap",
     });
     // This event listener will call addMarker() when the map is clicked.
     map.addListener("click", (event) => {
