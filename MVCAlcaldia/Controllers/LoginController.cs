@@ -22,8 +22,6 @@ namespace MVCAlcaldia.Controllers
             return View();
         }
 
-
-
         [HttpPost]
         public ActionResult Login(DtoLogin dto)
         {
