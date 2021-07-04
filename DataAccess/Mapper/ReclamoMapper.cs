@@ -50,5 +50,19 @@ namespace DataAccess.Mapper
                 idZona = dto.idZona
             };
         }
+
+        public List<DtoReclamo> MapToDto(List<Reclamo> ColEnt)
+        {
+            List<DtoReclamo> colDto = new List<DtoReclamo>();
+
+            foreach (Reclamo item in ColEnt)
+            {
+                DtoReclamo Dto = this.MaptoDto(item);
+                colDto.Add(Dto);
+            }
+
+            return colDto;
+
+        }
     }
 }

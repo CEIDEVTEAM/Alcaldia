@@ -57,7 +57,7 @@ namespace DataAccess.Repository
 
         public DtoZona GetZonaByNombre(string nombreZona)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return this._zonaMapper.MapToDto(context.Zona.AsNoTracking().FirstOrDefault(f => f.nombre == nombreZona));
         }
 
@@ -126,7 +126,7 @@ namespace DataAccess.Repository
 
         public bool ExistZonaByNombre(string nombre)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return context.Zona.AsNoTracking().Any(a => a.nombre == nombre);
         }
 

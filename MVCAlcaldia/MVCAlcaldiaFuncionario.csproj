@@ -130,6 +130,7 @@
     <Compile Include="Controllers\CuadrillaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ReclamoController.cs" />
     <Compile Include="Controllers\TipoDeReclamoController.cs" />
     <Compile Include="Controllers\TipoDeUsuarioController.cs" />
     <Compile Include="Controllers\UsuarioFuncionarioController.cs" />
@@ -195,6 +196,7 @@
     <Content Include="Views\Cuadrilla\Modify.cshtml" />
     <Content Include="Views\Zona\Add.cshtml" />
     <Content Include="Views\Zona\List.cshtml" />
+    <Content Include="Views\Reclamo\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

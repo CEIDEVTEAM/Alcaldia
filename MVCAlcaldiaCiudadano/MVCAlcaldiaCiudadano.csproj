@@ -200,6 +200,7 @@
     <Content Include="Views\UsuarioCiudadano\List.cshtml" />
     <Content Include="Views\Reclamo\Add.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Reclamo\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

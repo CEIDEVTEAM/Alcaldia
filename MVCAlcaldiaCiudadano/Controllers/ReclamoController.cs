@@ -49,15 +49,43 @@ namespace MVCAlcaldiaCiudadano.Controllers
         public ActionResult AddReclamo(DtoReclamo dto)
         {
             List<string> colErrors = new List<string>();
-            //dto.idCiudadano = Session[CLogin.KEY_SESSION_USERNAME].ToString();
+            LCuadrillaController lgcc = new LCuadrillaController();
+            dto.idCiudadano = Session[CLogin.KEY_SESSION_USERNAME].ToString();
             dto.fechaYhora = DateTime.Now;
             dto.estado = EnumEstado.PENDIENTE;
-            //dto.idCuadrilla = funcion
             LReclamoController lgc = new LReclamoController();
+            lgc.CuadrillaForReclamo(dto);
             colErrors = lgc.AddReclamo(dto);
             //funcion popUp de operación exitosa
 
             return View();
         }
+
+        public ActionResult List()
+        {
+            LReclamoController lgc = new LReclamoController();
+            string user = Session[CLogin.KEY_SESSION_USERNAME].ToString();
+            List<DtoReclamo> colDto = lgc.GetAllReclamosByUser(user);
+
+            return View(colDto);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            LReclamoController lgc = new LReclamoController();
+            DtoReclamo dto = lgc.GetReclamoById(id);
+            
+            List<string> colErrores = lgc.DeleteReclamo(dto);
+
+            foreach (string error in colErrores)
+            {
+                ModelState.AddModelError("ErrorGeneral", error);
+            }
+
+
+            return RedirectToAction("List");
+        }
+
+        //DeleteReclamo
     }
 }
