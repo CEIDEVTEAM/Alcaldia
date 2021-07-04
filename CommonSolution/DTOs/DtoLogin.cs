@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace CommonSolution.DTOs
 {
@@ -14,6 +15,7 @@ namespace CommonSolution.DTOs
         [DisplayName("Usuario")]
         public string user { get; set; }
 
+        [Remote("ValidateCredentials", "Login", AdditionalFields ="user", ErrorMessage = "Usuario o/y Contraseña incorrectos")]
         [Required(ErrorMessage = "La Contraseña es requerida")]
         [DisplayName("Contraseña")]
         [DataType(DataType.Password)]

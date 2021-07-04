@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace MVCAlcaldiaCiudadano.Controllers
 {
+    [AuthorizeAttribute]
     public class ReclamoController : Controller
     {
         public ActionResult Add()

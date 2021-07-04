@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
-namespace MVCAlcaldia.Controllers
+namespace MVCAlcaldiaCiudadano.Controllers
 {
     public class LoginController : Controller
     {
@@ -23,18 +23,18 @@ namespace MVCAlcaldia.Controllers
         }
 
 
-
         [HttpPost]
         public ActionResult Login(DtoLogin dto)
         {
             LUsuarioController lgc = new LUsuarioController();
-            if (lgc.ValidateCredentialsFuncionario(dto))
+            if (lgc.ValidateCredentialsCiudadano(dto))
             {
                 FormsAuthentication.SetAuthCookie(dto.user, false);
                 Session[CLogin.KEY_SESSION_USERNAME] = dto.user;
 
                 return Redirect("/Home");
             }
+
 
             return View();
         }
@@ -47,6 +47,7 @@ namespace MVCAlcaldia.Controllers
             return Redirect("/Home");
         }
 
+
         #region VALIDATIONS
 
         public JsonResult ValidateCredentials(string user, string pass)
@@ -56,13 +57,12 @@ namespace MVCAlcaldia.Controllers
             DtoLogin dtoLogin = new DtoLogin();
             dtoLogin.user = user;
             dtoLogin.pass = pass;
-            dtoLogin.tipoDeUsuario = CUsuario.USER_FUNCIONARIO;
+            dtoLogin.tipoDeUsuario = CUsuario.USER_CIUDADANO;
             response = lgc.ExistCredentialsByUserAndPass(dtoLogin) ? true : false;
 
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
         #endregion
-
     }
 }

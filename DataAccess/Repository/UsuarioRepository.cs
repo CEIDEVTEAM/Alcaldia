@@ -74,6 +74,7 @@ namespace DataAccess.Repository
             }
         }
 
+
         public void DeleteUsuario(string nombreUsuario)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
@@ -112,6 +113,11 @@ namespace DataAccess.Repository
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
                 return context.Usuario.AsNoTracking().Any(a => a.nombreDeUsuario == usuario.nombreDeUsuario && a.tipoDeUsuario == usuario.tipoDeUsuario.tipo && a.situacion == CGlobals.ESTADO_ACTIVO);
+        }
+        public bool ExistUsuarioByCredentials(DtoLogin dto)
+        {
+            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+                return context.Usuario.AsNoTracking().Any(a => a.nombreDeUsuario == dto.user && a.contrasenia == dto.pass && a.tipoDeUsuario == dto.tipoDeUsuario && a.situacion == CGlobals.ESTADO_ACTIVO);
         }
         public List<DtoUsuario> GetAllUsers()
         {
