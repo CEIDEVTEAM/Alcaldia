@@ -86,7 +86,6 @@
     <Compile Include="DTOs\DtoReclamo.cs" />
     <Compile Include="DTOs\DtoTipoDeReclamo.cs" />
     <Compile Include="DTOs\DtoTipoUsuario.cs" />
-    <Compile Include="DTOs\DtoUbicacion.cs" />
     <Compile Include="DTOs\DtoUsuario.cs" />
     <Compile Include="DTOs\DtoVertice.cs" />
     <Compile Include="DTOs\DtoZona.cs" />

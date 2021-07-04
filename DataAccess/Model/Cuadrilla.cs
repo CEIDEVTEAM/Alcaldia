@@ -27,8 +27,8 @@ namespace DataAccess.Model
         public int cantidadDePeones { get; set; }
         public string situacion { get; set; }
     
+        public virtual Zona Zona { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reclamo> Reclamo { get; set; }
-        public virtual Zona Zona { get; set; }
     }
 }

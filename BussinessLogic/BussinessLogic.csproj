@@ -56,7 +56,6 @@
     <Compile Include="Logic\LReclamoController.cs" />
     <Compile Include="Logic\LTipoDeReclamoController.cs" />
     <Compile Include="Logic\LTipoDeUsuarioController.cs" />
-    <Compile Include="Logic\LUbicacionController.cs" />
     <Compile Include="Logic\LUsuarioController.cs" />
     <Compile Include="Logic\LVerticeController.cs" />
     <Compile Include="Logic\LZonaController.cs" />
