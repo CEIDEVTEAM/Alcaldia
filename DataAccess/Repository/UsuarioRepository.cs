@@ -42,7 +42,7 @@ namespace DataAccess.Repository
                 }
             }
         }
-       
+
         public void ModifyUsuario(DtoUsuario dto)
         {
             using (ReclamosAlcaldia context = new ReclamosAlcaldia())
@@ -84,10 +84,9 @@ namespace DataAccess.Repository
                     {
                         Usuario currUsuario = context.Usuario.FirstOrDefault(f => f.nombreDeUsuario == nombreUsuario);
                         currUsuario.situacion = CGlobals.ESTADO_INACTIVO;
-                        
-                            context.SaveChanges();
-                            trann.Commit();
-                        
+
+                        context.SaveChanges();
+                        trann.Commit();
                     }
                     catch (Exception ex)
                     {
@@ -121,7 +120,7 @@ namespace DataAccess.Repository
 
         }
     }
-    
+
 
 
 }
