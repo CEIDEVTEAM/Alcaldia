@@ -58,14 +58,38 @@ namespace BussinessLogic.Logic
             return colerrors;
         }
 
+        public DtoZona GetZonaByNombre(string nombreZona)
+        {
+            return this._Repository.GetZonaRepository().GetZonaByNombre(nombreZona);
+        }
+
+        public DtoZona GetZonaById(int idZona)
+        {
+            return this._Repository.GetZonaRepository().GetZonaById(idZona);
+        }
+
         public List<string> ValidateZona(DtoZona dto, bool isAdd)
         {
             List<string> colerrors = new List<string>();
 
-            if (isAdd == false && !this._Repository.GetZonaRepository().ExistZonaById(dto.id))
-                colerrors.Add("La zona no existe.");
+            if (dto.nombre == null)
+            {
+                colerrors.Add("El nombre no puede ser nulo");
+                return colerrors;
+            }
+
+            if (isAdd == true && this._Repository.GetZonaRepository().ExistZonaByNombre(dto.nombre))
+                colerrors.Add("El nombre ya existe, ingrese otro.");
 
             return colerrors;
+        }
+
+
+
+
+        public bool ExisteZonaByNombre(string name)
+        {
+            return this._Repository.GetZonaRepository().ExistZonaByNombre(name);
         }
     }
 }

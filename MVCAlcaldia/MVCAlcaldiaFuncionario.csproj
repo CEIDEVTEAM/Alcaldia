@@ -194,6 +194,7 @@
     <Content Include="Views\Cuadrilla\List.cshtml" />
     <Content Include="Views\Cuadrilla\Modify.cshtml" />
     <Content Include="Views\Zona\Add.cshtml" />
+    <Content Include="Views\Zona\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
