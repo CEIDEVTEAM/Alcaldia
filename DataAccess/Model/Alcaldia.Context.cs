@@ -13,10 +13,10 @@ namespace DataAccess.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ReclamosAlcaldia : DbContext
+    public partial class ReclamosAlcaldiaEntities : DbContext
     {
-        public ReclamosAlcaldia()
-            : base("name=ReclamosAlcaldia")
+        public ReclamosAlcaldiaEntities()
+            : base("name=ReclamosAlcaldiaEntities")
         {
         }
     
@@ -33,5 +33,6 @@ namespace DataAccess.Model
         public virtual DbSet<Tipo_Usuario> Tipo_Usuario { get; set; }
         public virtual DbSet<Vertice> Vertice { get; set; }
         public virtual DbSet<Reclamo> Reclamo { get; set; }
+        public virtual DbSet<V_ReclamosAbiertosPorCuadrilla> V_ReclamosAbiertosPorCuadrilla { get; set; }
     }
 }

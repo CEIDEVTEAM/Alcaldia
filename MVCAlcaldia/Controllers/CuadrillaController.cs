@@ -39,12 +39,8 @@ namespace MVCAlcaldia.Controllers
             List<string> colErrors = new List<string>();
             colErrors = lgc.AddCuadrilla(dto);
 
-            foreach (string error in colErrors)
-            {
-                ModelState.AddModelError("ErrorGeneral", error);
-            }
 
-            return View("Add");
+            return RedirectToAction("Add");
         }
 
         public ActionResult List()
@@ -57,6 +53,20 @@ namespace MVCAlcaldia.Controllers
 
         public ActionResult Modify(int id)
         {
+            LZonaController zonaController = new LZonaController();
+            List<DtoZona> colDtoZona = zonaController.GetAllZonas();
+
+            List<SelectListItem> colZonasSelect = new List<SelectListItem>();
+
+            foreach (DtoZona item in colDtoZona)
+            {
+                SelectListItem option = new SelectListItem();
+                option.Value = item.id.ToString();
+                option.Text = item.nombre;
+                colZonasSelect.Add(option);
+            }
+
+            ViewBag.colZonasSelect = colZonasSelect;
 
             LCuadrillaController lgc = new LCuadrillaController();
             DtoCuadrilla dto = lgc.GetCuadrillaById(id);
@@ -71,10 +81,6 @@ namespace MVCAlcaldia.Controllers
 
             List<string> colErrors = lgc.ModifyCuadrilla(dto);
 
-            foreach (string error in colErrors)
-            {
-                ModelState.AddModelError("ErrorGeneral", error);
-            }
 
 
             return RedirectToAction("List");

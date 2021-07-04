@@ -23,7 +23,7 @@ namespace DataAccess.Repository
 
         public void AddZona(DtoZona dto)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
@@ -63,7 +63,7 @@ namespace DataAccess.Repository
 
         public void ModifyZona(DtoZona dto)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
@@ -92,7 +92,7 @@ namespace DataAccess.Repository
 
         public void DeleteZona(int idZona)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
@@ -114,13 +114,13 @@ namespace DataAccess.Repository
 
         public List<DtoZona> GetAllZonas()
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return this._zonaMapper.MapToDto(context.Zona.Include("Vertice").AsNoTracking().Where(w => w.situacion == CGlobals.ESTADO_ACTIVO).ToList());
         }
 
         public DtoZona GetZonaById(int idZona)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return this._zonaMapper.MapToDto(context.Zona.AsNoTracking().FirstOrDefault(f => f.id == idZona));
         }
 
@@ -132,7 +132,7 @@ namespace DataAccess.Repository
 
         public bool ExistZonaById(int idZona)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return context.Zona.AsNoTracking().Any(a => a.id == idZona && a.situacion == CGlobals.ESTADO_ACTIVO);
         }
 

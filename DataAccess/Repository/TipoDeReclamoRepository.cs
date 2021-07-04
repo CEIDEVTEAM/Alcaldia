@@ -23,7 +23,7 @@ namespace DataAccess.Repository
 
         public void AddTipoDeReclamo(DtoTipoDeReclamo dto)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
@@ -45,7 +45,7 @@ namespace DataAccess.Repository
 
         public void ModifyTipoDeReclamo(DtoTipoDeReclamo dto)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
@@ -71,7 +71,7 @@ namespace DataAccess.Repository
 
         public void DeleteTipoDeReclamo(string nameTipoDeReclamo)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
                 {
@@ -96,20 +96,20 @@ namespace DataAccess.Repository
 
         public List<DtoTipoDeReclamo> GetAllTipoDeReclamo()
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return this._TipoDeReclamoMapper.MapToDto(context.Tipo_De_Reclamo.AsNoTracking().Where(w => w.situacion == CGlobals.ESTADO_ACTIVO).ToList());
   
         }
 
         public DtoTipoDeReclamo GetTipoDeReclamoByName(string nameTipoDeReclamo)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return this._TipoDeReclamoMapper.MaptoDto(context.Tipo_De_Reclamo.AsNoTracking().FirstOrDefault(f => f.nombre == nameTipoDeReclamo));
         }
 
         public bool ExistTipoDeReclamoByNombre(string nameTipoDeReclamo)
         {
-            using (ReclamosAlcaldia context = new ReclamosAlcaldia())
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return context.Tipo_De_Reclamo.AsNoTracking().Any(a => a.nombre == nameTipoDeReclamo);
         }
 
