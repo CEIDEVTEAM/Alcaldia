@@ -1,7 +1,8 @@
 ﻿window.onload = initMap;
 
 var map;
-var markers = [];
+var marker;
+var dto = [];
 //-34.90414838859055, -54.95240618763575
 //39.866667°, -4.033333°
 function initMap() {
@@ -14,27 +15,29 @@ function initMap() {
         mapTypeId: "roadmap",
     });
     // This event listener will call addMarker() when the map is clicked.
-    map.addListener("click", (event) => {
+    /*map.addListener("click", (event) => {
         addMarker(event.latLng);
-    });
-    
-    document.getElementById("btn2").addEventListener("click", function () {
-        createPoly(markers)
-    });
+    });*/
 
+    /*document.getElementById("btn2").addEventListener("click", function () {
+        createPoly(markers)
+    });*/
+    /*var point = $("#btn3").on("click", function () { createPoint(map); });*/
+
+    document.getElementById("smBut").addEventListener("click", addReclamo);
     
     handleResponse();
 }
 
 
 // Adds a marker to the map and push to the array.
-function addMarker(location) {
+/*function addMarker(location) {
     const marker = new google.maps.Marker({
         position: location,
         map: map,
     });
     markers.push(marker);
-}
+}*/
 
 // Sets the map on all markers in the array.
 function setMapOnAll(map) {
@@ -69,29 +72,76 @@ function removeLine(name) {
 
 
 function showArrays(event) {
-    
+
+    if (marker != undefined) {
+        marker.setMap(null);
+    }
     const polygon = this;
     const vertices = polygon.getPath();
     const nombre = polygon.name;
+    const id = polygon.id;
     let contentString =
-        "<b>Zona: "+nombre+"</b><br>" +
+        "<b>Zona: " + nombre + "</b><br>" +
         "Esta Ubicación: <br>" +
         event.latLng.lat() +
         "," +
         event.latLng.lng() +
         "<br>";
 
-    // Iterate over the vertices.
-    /*for (let i = 0; i < vertices.getLength(); i++) {
-        const xy = vertices.getAt(i);
-        contentString +=
-            "<br>" + "Coordenada " + i + ":<br>" + xy.lat() + "," + xy.lng();
-    }*/
-    // Replace the info window's content and position.
-    infoWindow.setContent(contentString);
-    infoWindow.setPosition(event.latLng);
-    infoWindow.open(map);
+
+    marker = new google.maps.Marker({
+        position: event.latLng,
+        map,
+        animation: google.maps.Animation.DROP,
+        title: "Ubicación",
+    });
+
+    const consult = google.maps.geometry.poly.containsLocation(
+        event.latLng,
+        polygon
+    )
+        ? true
+        : false;
+
+    if (consult) {
+
+        idZona = id;
+        lat = event.latLng.lat();
+        long = event.latLng.lng();
+
+        dto = { id: idZona, latitud: lat, longitud: long };
+
+    }
+
 }
+
+function addReclamo() {
+    var obs = document.getElementById("observaciones").value;
+    var tpReclamo = document.getElementById("tipoReclamo").value;
+
+    if (dto.id != undefined) {
+
+        var jSon = { observaciones: obs, nombreTipoReclamo: tpReclamo, latitudReclamo: dto.latitud, longitudReclamo: dto.longitud, idZona: dto.id }
+
+        $.ajax({
+            type: 'POST',
+            data: jSon,
+            url: 'AddReclamo',
+            success: function (respuesta) {
+
+            },
+            error: function (respuesta) {
+
+            }
+        })
+    } else {
+
+        alert("Debe ingresar la ubicación del reclamo.");
+
+    }
+}
+
+
 
 function createPoly(coordinates) {
 
@@ -123,7 +173,7 @@ function createPoly(coordinates) {
     polygon.setMap(map);
 
     deleteMarkers();
-   
+
 
     polygon.addListener("click", showArrays);
     infoWindow = new google.maps.InfoWindow();
@@ -141,7 +191,7 @@ function getZona(polygon) {
     var valTxtNombre = document.getElementById("nombre").value;
     var valTxtColor = document.getElementById("colorPicker").value;
     var colCords = [];
-    
+
 
     for (let i = 0; i < vertices.getLength(); i++) {
         const xy = vertices.getAt(i);
@@ -149,27 +199,24 @@ function getZona(polygon) {
         let long = xy.lng();
         let hash = i;
 
-        colCords.push({ latitud: lat, longitud: long, orden:hash })
-        
+        colCords.push({ latitud: lat, longitud: long, orden: hash })
+
     }
-    var json = { nombre: valTxtNombre, color: valTxtColor, colVertices: colCords  }
+    var json = { nombre: valTxtNombre, color: valTxtColor, colVertices: colCords }
     $.ajax({
         type: 'POST',
         data: json,
         url: 'AddZona',
         success: function (respuesta) {
-            
+
         },
         error: function (respuesta) {
 
         }
     })
 
-    
+
 }
-
-
-
 
 
 
@@ -177,7 +224,7 @@ function handleResponse() {
 
     $.ajax({
         type: 'GET',
-        
+
         url: 'PopulatePolygons',
         success: function (response) {
             for (let i = 0; i < response.length; i++) {
@@ -212,19 +259,20 @@ function zonesPopulate(item) {
 
     var color = item.color;
     var nombre = item.nombre;
+    var id = item.id;
 
     const polyCoords = coords;
     // Construct the polygon.
     const polygon = new google.maps.Polygon({
-
+        id: id,
         name: nombre,
         paths: polyCoords,
         strokeColor: color,
-        strokeOpacity: 0.8,
+        strokeOpacity: 0.1,
         strokeWeight: 3,
         fillColor: color,
-        fillOpacity: 0.90,
-        
+        fillOpacity: 0.1,
+
 
     });
     polygon.setMap(map);
@@ -234,7 +282,27 @@ function zonesPopulate(item) {
     infoWindow = new google.maps.InfoWindow();
 
 }
+function createPoint(map) {
 
+    // creates a draggable marker to the given coords
+    var vMarker = new google.maps.Marker({
+        position: new google.maps.LatLng(39.866667, -4.033333),
+        draggable: true
+    });
+    google.maps.event.addListener(vMarker, 'dragend', function (evt) {
+        map.panTo(evt.latLng);
+    });
+
+    map.setCenter(vMarker.position);
+
+    // adds the marker on the map
+    vMarker.setMap(map);
+    var latitude = vMarker.getPosition().lat().toFixed(6);
+    var long = vMarker.getPosition().lng().toFixed(6);
+    var marcador = { latitud: latitude, longitud: long };
+
+    return marcador;
+}
 
 /*function initMap2() {
     map = new google.maps.Map(document.getElementById("map"), {

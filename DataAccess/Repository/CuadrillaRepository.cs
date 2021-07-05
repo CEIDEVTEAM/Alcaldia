@@ -115,6 +115,20 @@ namespace DataAccess.Repository
                 return context.Cuadrilla.AsNoTracking().Any(a => a.id == idCuadrilla);
         }
 
+        public int GetCuadrillaForReclamo(int idZona)
+        {
+            int nroCuadrilla = 0;
+
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
+            {
+                nroCuadrilla = context.V_ReclamosAbiertosPorCuadrilla.AsNoTracking().Where(w => w.idZona == idZona).OrderBy(o => o.cantidad).FirstOrDefault().idCuadrilla;
+
+            }
+
+
+            return nroCuadrilla;
+        }
+
     }
 }
 

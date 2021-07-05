@@ -130,6 +130,8 @@
     <Compile Include="Controllers\CuadrillaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ReclamoController.cs" />
+    <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Controllers\TipoDeReclamoController.cs" />
     <Compile Include="Controllers\TipoDeUsuarioController.cs" />
     <Compile Include="Controllers\UsuarioFuncionarioController.cs" />
@@ -167,6 +169,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\mapsReports.js" />
     <Content Include="Scripts\mapsFunctions.js" />
     <Content Include="Scripts\menu.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
@@ -194,6 +197,9 @@
     <Content Include="Views\Cuadrilla\List.cshtml" />
     <Content Include="Views\Cuadrilla\Modify.cshtml" />
     <Content Include="Views\Zona\Add.cshtml" />
+    <Content Include="Views\Zona\List.cshtml" />
+    <Content Include="Views\Reclamo\List.cshtml" />
+    <Content Include="Views\Reporte\VisorReclamosNoResueltos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

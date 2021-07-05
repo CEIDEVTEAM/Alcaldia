@@ -55,6 +55,12 @@ namespace DataAccess.Repository
             }
         }
 
+        public DtoZona GetZonaByNombre(string nombreZona)
+        {
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
+                return this._zonaMapper.MapToDto(context.Zona.AsNoTracking().FirstOrDefault(f => f.nombre == nombreZona));
+        }
+
         public void ModifyZona(DtoZona dto)
         {
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
@@ -82,6 +88,8 @@ namespace DataAccess.Repository
             }
         }
 
+        
+
         public void DeleteZona(int idZona)
         {
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
@@ -91,13 +99,10 @@ namespace DataAccess.Repository
                     try
                     {
                         Zona currZona = context.Zona.FirstOrDefault(f => f.id == idZona);
+                        currZona.situacion = CGlobals.ESTADO_INACTIVO;
 
-                        if (currZona != null)
-                        {
-                            context.Zona.Remove(currZona);
-                            context.SaveChanges();
-                            trann.Commit();
-                        }
+                        context.SaveChanges();
+                        trann.Commit();
                     }
                     catch (Exception ex)
                     {
@@ -117,6 +122,12 @@ namespace DataAccess.Repository
         {
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return this._zonaMapper.MapToDto(context.Zona.AsNoTracking().FirstOrDefault(f => f.id == idZona));
+        }
+
+        public bool ExistZonaByNombre(string nombre)
+        {
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
+                return context.Zona.AsNoTracking().Any(a => a.nombre == nombre);
         }
 
         public bool ExistZonaById(int idZona)

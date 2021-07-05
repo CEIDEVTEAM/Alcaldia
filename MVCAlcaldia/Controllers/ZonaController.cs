@@ -42,5 +42,39 @@ namespace MVCAlcaldia.Controllers
 
             return Json(colDto, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult List()
+        {
+            LZonaController lgc = new LZonaController();
+            List<DtoZona> colDto = lgc.GetAllZonas();
+
+            return View(colDto);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            LZonaController lgc = new LZonaController();
+            DtoZona dto = lgc.GetZonaById(id);
+            List<string> colErrores = lgc.DeleteZona(dto);
+
+            foreach (string error in colErrores)
+            {
+                ModelState.AddModelError("ErrorGeneral", error);
+            }
+
+
+            return RedirectToAction("List");
+        }
+
+
+        public JsonResult ValidateNombre(string nombre)
+        {
+            bool response = true;
+            LZonaController lgc = new LZonaController();
+            response = lgc.ExisteZonaByNombre(nombre) ? false : true;
+
+
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
     }
 }

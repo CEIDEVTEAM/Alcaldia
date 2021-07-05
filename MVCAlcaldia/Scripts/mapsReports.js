@@ -6,22 +6,15 @@ var markers = [];
 //39.866667°, -4.033333°
 function initMap() {
 
-    var currentPoly = [];
+   
     const centro = { lat: 39.866667, lng: -4.033333 };
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 14,
         center: centro,
         mapTypeId: "roadmap",
-    });
-    // This event listener will call addMarker() when the map is clicked.
-    map.addListener("click", (event) => {
-        addMarker(event.latLng);
+        
     });
     
-    document.getElementById("btn2").addEventListener("click", function () {
-        createPoly(markers)
-    });
-
     
     handleResponse();
 }
@@ -69,12 +62,11 @@ function removeLine(name) {
 
 
 function showArrays(event) {
+
+    const marker = this;
     
-    const polygon = this;
-    const vertices = polygon.getPath();
-    const nombre = polygon.name;
     let contentString =
-        "<b>Zona: "+nombre+"</b><br>" +
+        "<b>Zona: PEPE</b><br>" +
         "Esta Ubicación: <br>" +
         event.latLng.lat() +
         "," +
@@ -123,7 +115,7 @@ function createPoly(coordinates) {
     polygon.setMap(map);
 
     deleteMarkers();
-   
+
 
     polygon.addListener("click", showArrays);
     infoWindow = new google.maps.InfoWindow();
@@ -141,7 +133,7 @@ function getZona(polygon) {
     var valTxtNombre = document.getElementById("nombre").value;
     var valTxtColor = document.getElementById("colorPicker").value;
     var colCords = [];
-    
+
 
     for (let i = 0; i < vertices.getLength(); i++) {
         const xy = vertices.getAt(i);
@@ -149,23 +141,23 @@ function getZona(polygon) {
         let long = xy.lng();
         let hash = i;
 
-        colCords.push({ latitud: lat, longitud: long, orden:hash })
-        
+        colCords.push({ latitud: lat, longitud: long, orden: hash })
+
     }
-    var json = { nombre: valTxtNombre, color: valTxtColor, colVertices: colCords  }
+    var json = { nombre: valTxtNombre, color: valTxtColor, colVertices: colCords }
     $.ajax({
         type: 'POST',
         data: json,
         url: 'AddZona',
         success: function (respuesta) {
-            
+
         },
         error: function (respuesta) {
 
         }
     })
 
-    
+
 }
 
 
@@ -177,13 +169,13 @@ function handleResponse() {
 
     $.ajax({
         type: 'GET',
-        
-        url: 'PopulatePolygons',
+
+        url: 'PopulateMarkers',
         success: function (response) {
             for (let i = 0; i < response.length; i++) {
 
-                zonesPopulate(response[i]);
-                console.log(response[i]);
+                markersPopulate(response[i]);
+
             }
 
         },
@@ -194,44 +186,68 @@ function handleResponse() {
 
 }
 
-function zonesPopulate(item) {
+function markersPopulate(item) {
 
-    var coords = [];
-    var orderVerts = item.colVertices.sort((a, b) => {
-        return a.orden - b.orden;
-    });
-
-    for (let i = 0; i < orderVerts.length; i++) {
-
-        let latitude = parseFloat(item.colVertices[i].latitud);
-        let long = parseFloat(item.colVertices[i].longitud);
-        let singleCoord = { lat: latitude, lng: long };
-        coords.push(singleCoord);
-
-    }
-
-    var color = item.color;
-    var nombre = item.nombre;
-
-    const polyCoords = coords;
-    // Construct the polygon.
-    const polygon = new google.maps.Polygon({
-
-        name: nombre,
-        paths: polyCoords,
-        strokeColor: color,
-        strokeOpacity: 0.8,
-        strokeWeight: 3,
-        fillColor: color,
-        fillOpacity: 0.90,
+    
+    
+    let latitude = parseFloat(item.LatitudReclamo);
+    let long = parseFloat(item.LongitudReclamo);
+    let singleCoord = { lat: latitude, lng: long };
+    var fh = item.fechaYhora;
+    var res = fh.slice(6, 19);
+    var intres = parseInt(res);
+    var f = new Date(intres);
+   // const formatYmd = date => date.toISOString().slice(0, 10);
+    //let f = new Date(date);
         
+    let mes = f.getMonth() + 1;
+    if (mes < 10) {
+        mes = "0" + mes;
+    }
+    let dia = f.getDate();
+    if (dia < 10) {
+        dia = "0" + dia;
+    }
+    let anio = f.getFullYear();
+    let hora = f.getHours();
+    let min = f.getMinutes();
 
+    let nuevaFecha = (dia + "/" + mes + "/" + anio + " " + hora + ":" + min);
+    
+
+    const contentString =
+        '<div id="content">' +
+        '<div id="siteNotice">' +
+        "</div>" +
+        '<h5 id="firstHeading" class="firstHeading">Numero de Reclamo: '+item.id+'</h5>' +
+        '<div id="bodyContent"></hr>' +
+        "<p><b> Retraso:</b> " + item.tiempoDeRetraso + " </p>" +
+        "<p><b> Descripción:</b> " + item.observaciones + " </p>" +
+        "<p><b> Tipo de reclamo:</b> " + item.nombreTipoReclamo + " </p>" +
+        "<p><b> Cuadrilla:</b> " + item.idCuadrilla+ " </p>" +
+        "<p><b> Fecha:</b> " + nuevaFecha + "</p>" +
+
+        
+        "</div>" +
+        "</div>";
+
+    const infowindow = new google.maps.InfoWindow({
+        content: contentString,
     });
-    polygon.setMap(map);
+    const marker = new google.maps.Marker({
+        position: singleCoord,
+        map,
+        title: "Reclamo nro: "+item.id,
+    });
+    marker.addListener("click", () => {
+        infowindow.open({
+            anchor: marker,
+            map,
+            shouldFocus: false,
+        });
+    });
 
-
-    polygon.addListener("click", showArrays);
-    infoWindow = new google.maps.InfoWindow();
+    
 
 }
 

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<CommonSolution.DTOs.DtoReclamo>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>Reclamos Realizados</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Reclamo", "Add")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fechaYhora)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.observaciones)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.nombreTipoReclamo)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fechaYhora)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.observaciones)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.nombreTipoReclamo)
+        </td>
+        
+        <td>
+           
+            @Html.ActionLink("Detalle", "Details", new { id = item.id })| 
+            @if (item.estado == CommonSolution.ENUMs.EnumEstado.PENDIENTE) {  @Html.ActionLink("Cancelar", "Delete", new { id = item.id })}
+
+            
+        </td>
+    </tr>
+}
+
+</table>
