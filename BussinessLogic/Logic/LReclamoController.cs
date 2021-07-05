@@ -98,5 +98,23 @@ namespace BussinessLogic.Logic
             return this._Repository.GetReclamoRepository().GetAllReclamos();
         
         }
+
+        public List<DtoReclamo> GetReclamoWithRetraso()
+        {
+            List<DtoReclamo> dtoReclamo = this._Repository.GetReclamoRepository().GetAllReclamosActivos();
+            DateTime today = DateTime.Now;
+
+            foreach (DtoReclamo item in dtoReclamo)
+            {
+                TimeSpan ret = (TimeSpan)(today -item.fechaYhora);
+                string output = string.Format(@"{0} Dias, {1} Horas, {2} Minutos", ret.Days, ret.Hours,
+                            ret.Minutes); 
+
+                item.tiempoDeRetraso = output;
+
+            }
+
+            return dtoReclamo;
+        }
     }
 }

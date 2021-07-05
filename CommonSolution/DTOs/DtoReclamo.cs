@@ -28,5 +28,6 @@ namespace CommonSolution.DTOs
         public string LongitudReclamo { get; set; }
         public Nullable<int> idCuadrilla { get; set; }
         public int idZona { get; set; }
+        public string tiempoDeRetraso { get; set; }
     }
 }

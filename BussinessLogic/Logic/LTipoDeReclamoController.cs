@@ -65,6 +65,7 @@ namespace BussinessLogic.Logic
         }
 
 
+
         public List<string> ValidateTipoDeReclamo(DtoTipoDeReclamo dto, bool isAdd)
         {
             List<string> colerrors = new List<string>();
