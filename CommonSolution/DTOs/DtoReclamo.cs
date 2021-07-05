@@ -29,5 +29,6 @@ namespace CommonSolution.DTOs
         public Nullable<int> idCuadrilla { get; set; }
         public int idZona { get; set; }
         public string tiempoDeRetraso { get; set; }
+        public string color { get; set; }
     }
 }

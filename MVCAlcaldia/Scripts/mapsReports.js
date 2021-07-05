@@ -229,8 +229,7 @@ function handleResponse() {
 
 function markersPopulate(item) {
 
-    
-    
+       
     let latitude = parseFloat(item.LatitudReclamo);
     let long = parseFloat(item.LongitudReclamo);
     let singleCoord = { lat: latitude, lng: long };
@@ -272,25 +271,43 @@ function markersPopulate(item) {
         "</div>" +
         "</div>";
 
+    var pinColor = item.color;
+    var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+        new google.maps.Size(21, 34),
+        new google.maps.Point(0, 0),
+        new google.maps.Point(10, 34));
+    var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_shadow",
+        new google.maps.Size(40, 37),
+        new google.maps.Point(0, 0),
+        new google.maps.Point(12, 35));
+
+
+
+
     const infowindow = new google.maps.InfoWindow({
         content: contentString,
     });
     const marker = new google.maps.Marker({
         position: singleCoord,
         map,
-        title: "Reclamo nro: "+item.id,
+        title: "Reclamo nro: " + item.id,
+        icon: pinImage,
+        shadow: pinShadow
     });
     marker.addListener("click", () => {
         infowindow.open({
             anchor: marker,
             map,
             shouldFocus: false,
+        
         });
     });
 
     
 
 }
+
+
 
 
 /*function initMap2() {

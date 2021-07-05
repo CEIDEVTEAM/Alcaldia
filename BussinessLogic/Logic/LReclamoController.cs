@@ -97,7 +97,7 @@ namespace BussinessLogic.Logic
                 dto.idCuadrilla = currCuadrilla;
                 dto.estado = CommonSolution.ENUMs.EnumEstado.ASIGNADO;
             }
-        
+
         }
         public DtoReclamo GetReclamoById(int idReclamo)
         {
@@ -112,7 +112,7 @@ namespace BussinessLogic.Logic
         public List<DtoReclamo> GetAllReclamos()
         {
             return this._Repository.GetReclamoRepository().GetAllReclamos();
-        
+
         }
 
         public List<DtoReclamo> GetReclamoWithRetraso()
@@ -122,15 +122,38 @@ namespace BussinessLogic.Logic
 
             foreach (DtoReclamo item in dtoReclamo)
             {
-                TimeSpan ret = (TimeSpan)(today -item.fechaYhora);
+                TimeSpan ret = (TimeSpan)(today - item.fechaYhora);
                 string output = string.Format(@"{0} Dias, {1} Horas, {2} Minutos", ret.Days, ret.Hours,
-                            ret.Minutes); 
+                            ret.Minutes);
 
                 item.tiempoDeRetraso = output;
+                item.color = this.GetRetrasoColor(ret);
 
             }
 
             return dtoReclamo;
+        }
+
+        public string GetRetrasoColor(TimeSpan retraso)
+        {
+            double horasRetraso = retraso.TotalHours;
+            string color;
+
+            if (horasRetraso < 24)
+            {
+                color = "17FF00";
+                return color;
+            }
+            if (horasRetraso >= 24 && (horasRetraso <= 72))
+            {
+                color = "F3FF00";
+                return color;
+            }
+
+            color = "FF0000";
+            return color;
+
+
         }
     }
 }
