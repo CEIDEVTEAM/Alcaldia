@@ -43,7 +43,7 @@ function createMapaTermico() {
         url: 'PopulateLatLng',
         success: function (response) {
             for (let i = 0; i < response.length; i++) {
-                var cons = { location: new google.maps.LatLng(response[i].latitud, response[i].longitud), weight: 0.5 }; //new google.maps.LatLng(response[i].latitud, response[i].longitud);
+                var cons = { location: new google.maps.LatLng(response[i].latitud, response[i].longitud), weight: 0.5 };
                 
                 heatMapData.push(cons);
             }

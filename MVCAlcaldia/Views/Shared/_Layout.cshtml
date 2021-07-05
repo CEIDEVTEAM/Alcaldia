@@ -20,9 +20,12 @@
                         </button>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span>@User.Identity.Name</a></li>
-                    <li><a href="@Url.Action("LogOut", "Login")"><span class="glyphicon glyphicon-log-in"></span> Cerrar sesión</a></li>
+                <ul class="nav navbar-nav navbar-right" id="userLoged" style="display:none">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp @User.Identity.Name</a></li>
+                    <li><a href="@Url.Action("LogOut", "Login")"><span class="glyphicon glyphicon-log-out"></span>&nbsp Cerrar sesión</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" id="userNonLoged" style="display:block">
+                    <li><a href="@Url.Action("LogIn", "Login")"><span class="glyphicon glyphicon-log-in"></span>&nbsp Iniciar sesión</a></li>
                 </ul>
             </div>
         </div>
@@ -46,27 +49,39 @@
                 <li>
                     <a href=@Url.Action("List", "TipoDeReclamo")> <span class="fa-stack fa-lg pull-left"><i class="fa fa-pencil-square-o fa-stack-1x" aria-hidden="true"></i></span>Tipos de Reclamo</a>
                 </li>
-
                 <li>
                     <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-bar-chart fa-stack-1x" aria-hidden="true"></i></span>Reportes</a>
                 </li>
                 <li>
                     <a href=@Url.Action("List", "UsuarioFuncionario")><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>Funcionarios</a>
                 </li>
-               
+
             </ul>
         </div>
         <div id="page-content-wrapper">
             <div class="container-fluid xyz">
-                
-                    
-                        @RenderBody()
-                    
-                
+                @RenderBody()
             </div>
         </div>
     </div>
+    
+    @{
+        if (User.Identity.Name == "")
+        {
+            <script>
+                document.getElementById("userNonLoged").style.display = "block";
+                document.getElementById("userLoged").style.display = "none";
+            </script>
+        }
+        else
+        {
+            <script>
+                document.getElementById("userNonLoged").style.display = "none";
+                document.getElementById("userLoged").style.display = "block";
+            </script>
+        }
 
+    }
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

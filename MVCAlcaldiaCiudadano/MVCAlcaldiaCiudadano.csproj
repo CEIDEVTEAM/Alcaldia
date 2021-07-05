@@ -142,12 +142,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bgimage.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\img\EscudoToledo.png" />
+    <Content Include="Content\img\toledo.jpg" />
     <Content Include="Content\menu.css" />
+    <Content Include="Content\presentational-only.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -183,6 +186,7 @@
     <Content Include="Scripts\mapsFunctions.js" />
     <Content Include="Scripts\menu.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\presentational-only.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

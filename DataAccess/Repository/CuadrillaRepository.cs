@@ -118,11 +118,13 @@ namespace DataAccess.Repository
         public int GetCuadrillaForReclamo(int idZona)
         {
             int nroCuadrilla = 0;
-
+            List<V_ReclamosAbiertosPorCuadrilla> colZonas = new List<V_ReclamosAbiertosPorCuadrilla>();
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
-                nroCuadrilla = context.V_ReclamosAbiertosPorCuadrilla.AsNoTracking().Where(w => w.idZona == idZona).OrderBy(o => o.cantidad).FirstOrDefault().idCuadrilla;
-
+                colZonas = context.V_ReclamosAbiertosPorCuadrilla.AsNoTracking().Where(w => w.idZona == idZona).OrderBy(o => o.cantidad).ToList();
+                
+                if(colZonas.FirstOrDefault() != null)
+                nroCuadrilla = colZonas.FirstOrDefault().idCuadrilla;
             }
 
 
