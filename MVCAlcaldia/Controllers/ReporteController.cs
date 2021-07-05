@@ -24,5 +24,19 @@ namespace MVCAlcaldia.Controllers
             
             return Json(colDto, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult MapaTermico()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public JsonResult PopulateLatLng()
+        {
+            LReclamoController lgc = new LReclamoController();
+            List<DtoVertice> colDto = lgc.GetAllUbicacionesReclamos();
+
+            return Json(colDto, JsonRequestBehavior.AllowGet);
+        }
     }
 }

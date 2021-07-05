@@ -200,6 +200,7 @@
     <Content Include="Views\Zona\List.cshtml" />
     <Content Include="Views\Reclamo\List.cshtml" />
     <Content Include="Views\Reporte\VisorReclamosNoResueltos.cshtml" />
+    <Content Include="Views\Reporte\MapaTermico.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

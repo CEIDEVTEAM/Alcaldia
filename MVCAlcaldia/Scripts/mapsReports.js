@@ -1,5 +1,4 @@
-﻿window.onload = initMap;
-
+﻿
 var map;
 var markers = [];
 //-34.90414838859055, -54.95240618763575
@@ -19,6 +18,48 @@ function initMap() {
     handleResponse();
 }
 
+function initMapTermico() {
+
+
+    const centro = { lat: 39.866667, lng: -4.033333 };
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 14,
+        center: centro,
+        mapTypeId: "roadmap",
+
+    });
+
+
+    createMapaTermico();
+}
+
+
+function createMapaTermico() {
+    var heatMapData = [];
+
+    $.ajax({
+        type: 'GET',
+
+        url: 'PopulateLatLng',
+        success: function (response) {
+            for (let i = 0; i < response.length; i++) {
+                var cons = { location: new google.maps.LatLng(response[i].latitud, response[i].longitud), weight: 0.5 }; //new google.maps.LatLng(response[i].latitud, response[i].longitud);
+                
+                heatMapData.push(cons);
+            }
+
+        },
+        error: function (response) {
+
+        }
+    })
+
+    var heatmap = new google.maps.visualization.HeatmapLayer({
+        data: heatMapData
+    });
+    heatmap.setMap(map);
+
+}
 
 // Adds a marker to the map and push to the array.
 function addMarker(location) {

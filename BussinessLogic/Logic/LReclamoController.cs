@@ -41,6 +41,22 @@ namespace BussinessLogic.Logic
             return colerrors;
         }
 
+        public List<DtoVertice> GetAllUbicacionesReclamos()
+        {
+            List<DtoReclamo> colReclamos = this.GetAllReclamos();
+            List<DtoVertice> colUbicaciones = new List<DtoVertice>();
+
+            foreach (DtoReclamo item in colReclamos)
+            {
+                DtoVertice vert = new DtoVertice();
+                vert.latitud = item.LatitudReclamo;
+                vert.longitud = item.LongitudReclamo;
+                colUbicaciones.Add(vert);
+            }
+
+            return colUbicaciones;
+        }
+
         public List<string> DeleteReclamo(DtoReclamo dto)
         {
             List<string> colerrors = this.ValidateReclamo(dto, false);
