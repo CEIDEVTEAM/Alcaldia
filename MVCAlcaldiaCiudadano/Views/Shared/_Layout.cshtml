@@ -9,17 +9,6 @@
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
-    @{
-        if (User.Identity.Name == "")
-        {
-            ViewBag.User = "lalalalprueba";
-        }
-        else
-        {
-            ViewBag.User = @User.Identity.Name;
-        }
-
-    }
 <body style="padding: 0">
     <nav class="navbar navbar-default no-margin">
         <div class="navbar-header fixed-brand">
@@ -31,9 +20,13 @@
                         </button>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span>@ViewBag.User</a></li>
-                    <li><a href="@Url.Action("LogOut", "Login")"><span class="glyphicon glyphicon-log-in"></span> Cerrar sesión</a></li>
+                <ul class="nav navbar-nav navbar-right" id="userLoged" style="display:none">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp @User.Identity.Name</a></li>
+                    <li><a href="@Url.Action("LogOut", "Login")"><span class="glyphicon glyphicon-log-out"></span>&nbsp Cerrar sesión</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" id="userNonLoged" style="display:block">
+                    <li><a href="@Url.Action("Add", "UsuarioCiudadano")"><span class="glyphicon glyphicon-pencil"></span>&nbsp Registrarse</a></li>
+                    <li><a href="@Url.Action("LogIn", "Login")"><span class="glyphicon glyphicon-log-in"></span>&nbsp Iniciar sesión</a></li>
                 </ul>
             </div>
         </div>
@@ -69,6 +62,23 @@
         </div>
     </div>
 
+    @{
+        if (User.Identity.Name == "")
+        {
+            <script>
+                document.getElementById("userNonLoged").style.display = "block";
+                document.getElementById("userLoged").style.display = "none";
+            </script>
+        }
+        else
+        {
+            <script>
+                document.getElementById("userNonLoged").style.display = "none";
+                document.getElementById("userLoged").style.display = "block";
+            </script>
+        }
+
+    }
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
