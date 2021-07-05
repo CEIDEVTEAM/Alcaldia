@@ -43,7 +43,7 @@ function createMapaTermico() {
         url: 'PopulateLatLng',
         success: function (response) {
             for (let i = 0; i < response.length; i++) {
-                var cons = { location: new google.maps.LatLng(response[i].latitud, response[i].longitud), weight: 0.5 };
+                var cons = { location: new google.maps.LatLng(response[i].latitud, response[i].longitud), weight: 0.3 };
                 
                 heatMapData.push(cons);
             }
@@ -55,7 +55,9 @@ function createMapaTermico() {
     })
 
     var heatmap = new google.maps.visualization.HeatmapLayer({
-        data: heatMapData
+        data: heatMapData,
+        radius: 40,
+
     });
     heatmap.setMap(map);
 
@@ -219,6 +221,7 @@ function handleResponse() {
 
             }
 
+            GetColorReferences();
         },
         error: function (response) {
 
@@ -302,9 +305,27 @@ function markersPopulate(item) {
         
         });
     });
+}
 
-    
 
+function GetColorReferences(){
+
+    $.ajax({
+        type: 'GET',
+
+        url: 'ColorReferences',
+        success: function (response) {
+            document.getElementById("inputGreen").value = "#" + response.GREEN_COLOR_HEX;
+            document.getElementById("inputYellow").value = "#" + response.YELLOW_COLOR_HEX;
+            document.getElementById("inputRed").value = "#" + response.RED_COLOR_HEX;
+            document.getElementById("lbGreen").innerHTML = "Menos de " + response.LIMIT_GREEN_HOURS + " horas."
+            document.getElementById("lbYellow").innerHTML = "Entre " + response.LIMIT_GREEN_HOURS + " y " + response.START_RED_HOURS + " horas."
+            document.getElementById("lbRed").innerHTML = "Más de " + response.START_RED_HOURS + " horas.";
+
+        },
+        error: function (response) {
+        }
+    });
 }
 
 

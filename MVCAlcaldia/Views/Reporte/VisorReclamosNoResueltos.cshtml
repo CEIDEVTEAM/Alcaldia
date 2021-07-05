@@ -1,28 +1,41 @@
 ﻿
 @{
-    ViewBag.Title = "VisorReclamosNoResueltos";
+    ViewBag.Title = "Visor de Reclamos no resueltos";
 }
 
 <h2>Visor de Reclamos no resueltos</h2>
 
-
-
-
-
-<div id="map" class="form-group" style="width: 800px; height: 500px">
+<div id="map" class="form-group" style="width: auto; height: 600px">
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
+<form>
+    <div class="form-horizontal">
+        <h3>Referencias:</h3>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="color" class="form-control-color" id="inputGreen" value"" disabled />
+                <label id="lbGreen" class="control-label"></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="color" class="form-control-color" id="inputYellow" value"" disabled />
+                <label id="lbYellow" class="control-label"></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="color" class="form-control-color" id="inputRed" value"" disabled />
+                <label id="lbRed" class="control-label"></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <label class="control-label">(Horas desde la realización del Reclamo)</label>
+            </div>
+        </div>
+    </div>
+</form>
 
 
 @section Scripts{

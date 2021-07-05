@@ -79,7 +79,9 @@
   <ItemGroup>
     <Compile Include="Constants\CGlobals.cs" />
     <Compile Include="Constants\CLogin.cs" />
+    <Compile Include="Constants\CMapColor.cs" />
     <Compile Include="Constants\CUsuario.cs" />
+    <Compile Include="DTOs\DtoColorReferences.cs" />
     <Compile Include="DTOs\DtoCuadrilla.cs" />
     <Compile Include="DTOs\DtoLogin.cs" />
     <Compile Include="DTOs\DtoLogReclamo.cs" />

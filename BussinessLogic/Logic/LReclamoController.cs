@@ -1,4 +1,5 @@
-﻿using CommonSolution.DTOs;
+﻿using CommonSolution.Constants;
+using CommonSolution.DTOs;
 using DataAccess.Persistence;
 using System;
 using System.Collections.Generic;
@@ -123,8 +124,7 @@ namespace BussinessLogic.Logic
             foreach (DtoReclamo item in dtoReclamo)
             {
                 TimeSpan ret = (TimeSpan)(today - item.fechaYhora);
-                string output = string.Format(@"{0} Dias, {1} Horas, {2} Minutos", ret.Days, ret.Hours,
-                            ret.Minutes);
+                string output = string.Format(@"{0} Dias, {1} Horas, {2} Minutos", ret.Days, ret.Hours, ret.Minutes);
 
                 item.tiempoDeRetraso = output;
                 item.color = this.GetRetrasoColor(ret);
@@ -137,23 +137,14 @@ namespace BussinessLogic.Logic
         public string GetRetrasoColor(TimeSpan retraso)
         {
             double horasRetraso = retraso.TotalHours;
-            string color;
 
-            if (horasRetraso < 24)
-            {
-                color = "17FF00";
-                return color;
-            }
-            if (horasRetraso >= 24 && (horasRetraso <= 72))
-            {
-                color = "F3FF00";
-                return color;
-            }
-
-            color = "FF0000";
-            return color;
-
-
+            if (horasRetraso < CMapColor.LIMIT_GREEN_HOURS)
+                return CMapColor.GREEN_COLOR_HEX; //VERDE
+            
+            if (horasRetraso >= CMapColor.LIMIT_GREEN_HOURS && horasRetraso <= CMapColor.START_RED_HOURS)
+                return CMapColor.YELLOW_COLOR_HEX; //AMARILLO
+            
+            return CMapColor.RED_COLOR_HEX; //ROJO
         }
     }
 }
