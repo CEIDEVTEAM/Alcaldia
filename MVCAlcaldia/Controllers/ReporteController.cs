@@ -25,6 +25,14 @@ namespace MVCAlcaldia.Controllers
 
             return Json(colDto, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public JsonResult PopulateMarkersByCuadrilla(DtoCuadrilla dto)
+        {
+            LReclamoController lgc = new LReclamoController();
+            List<DtoReclamo> colDto = lgc.GetAllReclamosActivosByCuadrilla(dto.id);
+
+            return Json(colDto, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpGet]
         public JsonResult ColorReferences()
@@ -54,5 +62,41 @@ namespace MVCAlcaldia.Controllers
 
             return Json(colDto, JsonRequestBehavior.AllowGet);
         }
+
+
+        public ActionResult ReporteRecActPorCuadrilla()
+        {
+            LCuadrillaController lgcc = new LCuadrillaController();
+            List<DtoCuadrilla> colDtoZona = lgcc.GetAllCuadrillas();
+
+            List<SelectListItem> cuadrillaSelect = new List<SelectListItem>();
+
+            foreach (DtoCuadrilla item in colDtoZona)
+            {
+                SelectListItem option = new SelectListItem();
+                option.Value = item.id.ToString();
+                option.Text = item.nombre;
+                cuadrillaSelect.Add(option);
+            }
+
+            ViewBag.colCuadrillasSelect = cuadrillaSelect;
+
+            return View();
+            
+        }
+        [HttpPost]
+        public ActionResult GetReclamosActivosPorCuadrilla(DtoCuadrilla dto)
+        {
+            LReclamoController lgc = new LReclamoController();
+
+            List<DtoReclamo> colDto = lgc.GetAllReclamosActivosByCuadrilla(dto.id);
+
+            return PartialView("_Listado", colDto);
+
+        }
+
+
+
+
     }
 }

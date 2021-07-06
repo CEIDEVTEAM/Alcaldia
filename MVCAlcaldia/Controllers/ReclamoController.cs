@@ -24,5 +24,7 @@ namespace MVCAlcaldia.Controllers
 
             return View(colDto);
         }
+
+        
     }
 }

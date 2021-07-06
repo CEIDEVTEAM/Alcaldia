@@ -1,0 +1,53 @@
+﻿@model IEnumerable<CommonSolution.DTOs.DtoLogReclamo>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalle de Reclamo</h2>
+
+<p>
+    @Html.ActionLink("Volver", "List")
+</p>
+<table class="table">
+    <tr>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.estadoLog)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fechaYhoraLog)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.comentarioLog)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idReclamo)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.estadoLog)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fechaYhoraLog)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.comentarioLog)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idReclamo)
+        </td>
+        
+        
+    </tr>
+}
+
+</table>

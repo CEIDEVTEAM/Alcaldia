@@ -80,9 +80,9 @@ namespace DataAccess.Repository
                         if (currReclamo != null)
                         {
                             currReclamo.estado = EnumEstado.DESESTIMADO.ToString();
-                        
+
                         }
-                        
+
 
                         context.SaveChanges();
                         trann.Commit();
@@ -123,7 +123,8 @@ namespace DataAccess.Repository
             List<DtoReclamo> colReclamos = new List<DtoReclamo>();
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
-                colReclamos = this._ReclamoMapper.MapToDto(context.Reclamo.AsNoTracking().Where(w => w.idCiudadano == user).ToList());
+                colReclamos = this._ReclamoMapper.MapToDto(context.Reclamo.AsNoTracking().Where(w => w.idCiudadano == user).OrderByDescending(o => o.id).ToList());
+                
             }
 
             return colReclamos;
@@ -134,8 +135,21 @@ namespace DataAccess.Repository
             List<DtoReclamo> colReclamos = new List<DtoReclamo>();
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
-                colReclamos = this._ReclamoMapper.MapToDto(context.Reclamo.AsNoTracking().Where(w => w.estado == EnumEstado.ASIGNADO.ToString() || 
-                w.estado == EnumEstado.PENDIENTE.ToString()|| w.estado == EnumEstado.EN_PROCESO.ToString()).ToList());
+                colReclamos = this._ReclamoMapper.MapToDto(context.Reclamo.AsNoTracking().Where(w => w.estado == EnumEstado.ASIGNADO.ToString() ||
+                w.estado == EnumEstado.PENDIENTE.ToString() || w.estado == EnumEstado.EN_PROCESO.ToString()).ToList());
+            }
+
+            return colReclamos;
+        }
+
+        public List<DtoReclamo> GetAllReclamosActivosPorCuadrilla(int idCuadrilla)
+        {
+            List<DtoReclamo> colReclamos = new List<DtoReclamo>();
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
+            {
+                colReclamos = this._ReclamoMapper.MapToDto(context.Reclamo.AsNoTracking().Where(w => w.idCuadrilla == idCuadrilla && 
+                w.estado == EnumEstado.ASIGNADO.ToString()
+                || w.estado == EnumEstado.EN_PROCESO.ToString()).ToList());
             }
 
             return colReclamos;

@@ -42,6 +42,7 @@ namespace BussinessLogic.Logic
             return colerrors;
         }
 
+        
         public List<DtoVertice> GetAllUbicacionesReclamos()
         {
             List<DtoReclamo> colReclamos = this.GetAllReclamos();
@@ -91,9 +92,8 @@ namespace BussinessLogic.Logic
 
         public void CuadrillaForReclamo(DtoReclamo dto)
         {
-            List<string> colerrors = new List<string>();
             int currCuadrilla = this._Repository.GetCuadrillaRepository().GetCuadrillaForReclamo(dto.idZona);
-            if (!string.IsNullOrEmpty(currCuadrilla.ToString()))
+            if (currCuadrilla !=0)
             {
                 dto.idCuadrilla = currCuadrilla;
                 dto.estado = CommonSolution.ENUMs.EnumEstado.ASIGNADO;
@@ -116,6 +116,24 @@ namespace BussinessLogic.Logic
 
         }
 
+        public List<DtoReclamo> GetAllReclamosActivosByCuadrilla(int IdCuadrilla)
+        {
+            List<DtoReclamo> dtoReclamo = this._Repository.GetReclamoRepository().GetAllReclamosActivosPorCuadrilla(IdCuadrilla);
+            DateTime today = DateTime.Now;
+
+            foreach (DtoReclamo item in dtoReclamo)
+            {
+                TimeSpan ret = (TimeSpan)(today - item.fechaYhora);
+                string output = string.Format(@"{0} Dias, {1} Horas, {2} Minutos", ret.Days, ret.Hours, ret.Minutes);
+
+                item.tiempoDeRetraso = output;
+                item.color = this.GetRetrasoColor(ret);
+
+            }
+            return dtoReclamo;
+
+        }
+
         public List<DtoReclamo> GetReclamoWithRetraso()
         {
             List<DtoReclamo> dtoReclamo = this._Repository.GetReclamoRepository().GetAllReclamosActivos();
@@ -133,6 +151,8 @@ namespace BussinessLogic.Logic
 
             return dtoReclamo;
         }
+
+       
 
         public string GetRetrasoColor(TimeSpan retraso)
         {

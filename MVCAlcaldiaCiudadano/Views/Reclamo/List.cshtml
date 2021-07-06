@@ -20,39 +20,46 @@
         <th>
             @Html.DisplayNameFor(model => model.observaciones)
         </th>
-        
+
         <th>
             @Html.DisplayNameFor(model => model.nombreTipoReclamo)
         </th>
-        
+        <th>
+            @Html.DisplayNameFor(model => model.estado)
+        </th>
+
         <th></th>
     </tr>
 
 @foreach (var item in Model)
 {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fechaYhora)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.observaciones)
-        </td>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.nombreTipoReclamo)
-        </td>
-        
-        <td>
-           
-            @Html.ActionLink("Detalle", "Details", new { id = item.id })| 
-            @if (item.estado == CommonSolution.ENUMs.EnumEstado.PENDIENTE) {  @Html.ActionLink("Cancelar", "Delete", new { id = item.id })}
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.fechaYhora)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.observaciones)
+    </td>
 
-            
-        </td>
-    </tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.nombreTipoReclamo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.estado)
+    </td>
+
+    <td>
+
+        @Html.ActionLink("Detalle", "Details", new { id = item.id })|
+        @if (item.estado == CommonSolution.ENUMs.EnumEstado.PENDIENTE)
+        {@Html.ActionLink("Cancelar", "Delete", new { id = item.id })}
+
+
+    </td>
+</tr>
 }
 
 </table>
