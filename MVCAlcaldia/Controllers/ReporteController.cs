@@ -11,7 +11,6 @@ namespace MVCAlcaldia.Controllers
 {
     public class ReporteController : Controller
     {
-        // GET: Reporte
         public ActionResult VisorReclamosNoResueltos()
         {
             return View();
@@ -25,6 +24,7 @@ namespace MVCAlcaldia.Controllers
 
             return Json(colDto, JsonRequestBehavior.AllowGet);
         }
+
         [HttpPost]
         public JsonResult PopulateMarkersByCuadrilla(DtoCuadrilla dto)
         {
@@ -46,8 +46,6 @@ namespace MVCAlcaldia.Controllers
                 START_RED_HOURS = CMapColor.START_RED_HOURS
             }, JsonRequestBehavior.AllowGet);
         }
-
-
 
         public ActionResult MapaTermico()
         {
@@ -95,7 +93,13 @@ namespace MVCAlcaldia.Controllers
 
         }
 
+        public ActionResult ReclamosAtrasados()
+        {
+            LReclamoController lgc = new LReclamoController();
+            List<DtoReclamo> colDto = lgc.GetReclamoWithRetraso();
 
+            return View(colDto);
+        }
 
 
     }

@@ -11,7 +11,6 @@ namespace MVCAlcaldia.Controllers
 {
     public class ReclamoController : Controller
     {
-        // GET: Reclamo
         public ActionResult Index()
         {
             return View();

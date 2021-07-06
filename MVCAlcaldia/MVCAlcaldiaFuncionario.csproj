@@ -204,6 +204,7 @@
     <Content Include="Views\Reporte\MapaTermico.cshtml" />
     <Content Include="Views\Reporte\ReporteRecActPorCuadrilla.cshtml" />
     <Content Include="Views\Reporte\_Listado.cshtml" />
+    <Content Include="Views\Reporte\ReclamosAtrasados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

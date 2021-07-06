@@ -1,0 +1,79 @@
+﻿@model IEnumerable<CommonSolution.DTOs.DtoReclamo>
+
+@{
+    ViewBag.Title = "ReclamosAtrasados";
+}
+
+<h2>ReclamosAtrasados</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fechaYhora)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.observaciones)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idCiudadano)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombreTipoReclamo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LatitudReclamo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LongitudReclamo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idCuadrilla)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idZona)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tiempoDeRetraso)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.color)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fechaYhora)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.observaciones)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idCiudadano)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombreTipoReclamo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idCuadrilla)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idZona)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tiempoDeRetraso)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.color)
+        </td>
+        <td>
+            @Html.ActionLink("Actualizar Estado", "Details", new { id=item.id }) |
+        </td>
+    </tr>
+}
+
+</table>

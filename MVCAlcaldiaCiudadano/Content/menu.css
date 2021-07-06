@@ -26,7 +26,7 @@
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
-    background: #000;
+    background: #000; /*Color menú lateral*/
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -66,6 +66,7 @@
     padding: 0;
     list-style: none;
     margin-top: 2px;
+
 }
 
     .sidebar-nav li {
@@ -83,7 +84,7 @@
                 text-decoration: none;
                 color: #fff;
                 background: rgba(255, 255, 255, 0.2);
-                border-left: red 2px solid;
+                border-left: darkslategrey 2px solid;
             }
 
             .sidebar-nav li a:active,
@@ -113,6 +114,8 @@
 @media (min-width: 768px) {
     #wrapper {
         padding-left: 250px;
+        height: auto;
+
     }
 
     .fixed-brand {
@@ -125,6 +128,8 @@
 
     #sidebar-wrapper {
         width: 250px;
+        /*height: 100%;
+        position: fixed;   fija el contenido de la barra lateral*/
     }
 
     #wrapper.toggled #sidebar-wrapper {
@@ -163,11 +168,53 @@
         -o-transition: all 0.5s ease;
         transition: all 0.5s ease;
         width: auto;
+
     }
 
     .navbar-collapse {
         padding-right: 5px;
         padding-left: 5px;
     }
-
 }
+
+.navbar {
+    background: black;
+    border-color: black;
+    border-radius: 0px;
+}
+
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: white;
+}
+
+.navbar-default .navbar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+    border-top: darkslategrey 2px solid;
+}
+
+
+
+.navbar-default .navbar-nav li a {
+    color: white;
+}
+
+#menu-toggle-2 {
+    color: darkslategrey;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: darkslategrey;
+    border-color: darkslategrey;
+}
+
+    .btn-success :hover {
+        color: red !important;
+        background-color: green;
+        border-color: darkslategrey;
+    }
