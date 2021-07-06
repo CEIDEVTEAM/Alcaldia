@@ -1,0 +1,55 @@
+﻿@model IEnumerable<CommonSolution.DTOs.DtoReclamo>
+
+<h2>Reclamos activos por cuadrilla</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.idCuadrilla)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fechaYhora)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.observaciones)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.nombreTipoReclamo)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.tiempoDeRetraso)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idCuadrilla)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaYhora)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.observaciones)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.nombreTipoReclamo)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.tiempoDeRetraso)
+            </td>
+
+
+        </tr>
+    }
+
+</table>

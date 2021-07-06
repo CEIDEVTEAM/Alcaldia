@@ -220,10 +220,10 @@ function zonesPopulate(item) {
         name: nombre,
         paths: polyCoords,
         strokeColor: color,
-        strokeOpacity: 0.8,
+        strokeOpacity: 0.5,
         strokeWeight: 3,
         fillColor: color,
-        fillOpacity: 0.90,
+        fillOpacity: 0.2,
         
 
     });
@@ -236,29 +236,3 @@ function zonesPopulate(item) {
 }
 
 
-/*function initMap2() {
-    map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 5,
-        center: { lat: 24.886, lng: -70.268 },
-        mapTypeId: "terrain",
-    });
-    // Define the LatLng coordinates for the polygon.
-    const triangleCoords = [
-        { lat: 25.774, lng: -80.19 },
-        { lat: 18.466, lng: -66.118 },
-        { lat: 32.321, lng: -64.757 },
-    ];
-    // Construct the polygon.
-    const bermudaTriangle = new google.maps.Polygon({
-        paths: triangleCoords,
-        strokeColor: "#FF0000",
-        strokeOpacity: 0.8,
-        strokeWeight: 3,
-        fillColor: "#FF0000",
-        fillOpacity: 0.35,
-    });
-    bermudaTriangle.setMap(map);
-    // Add a listener for the click event.
-    bermudaTriangle.addListener("click", showArrays);
-    infoWindow = new google.maps.InfoWindow();
-}*/

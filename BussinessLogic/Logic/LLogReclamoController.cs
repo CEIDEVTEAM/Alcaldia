@@ -9,38 +9,38 @@ using System.Threading.Tasks;
 
 namespace BussinessLogic.Logic
 {
-   public class LLogReclamoController
+    public class LLogReclamoController
     {
         private Repository _Repository;
 
-            public LLogReclamoController()
+        public LLogReclamoController()
+        {
+            this._Repository = new Repository();
+        }
+
+        public List<string> AddLogReclamo(DtoLogReclamo dto)
+        {
+            List<string> colerrors = this.ValidateLogReclamo(dto, true);
+
+            if (colerrors.Count == 0)
             {
-                this._Repository = new Repository();
+                this._Repository.GetLogReclamoRepository().AddLogReclamo(dto);
             }
 
-            public List<string> AddLogReclamo(DtoLogReclamo dto)
+            return colerrors;
+        }
+
+        public List<string> ModifyLogReclamo(DtoLogReclamo dto)
+        {
+            List<string> colerrors = this.ValidateLogReclamo(dto, false);
+
+            if (colerrors.Count == 0)
             {
-                List<string> colerrors = this.ValidateLogReclamo(dto, true);
-
-                if (colerrors.Count == 0)
-                {
-                    this._Repository.GetLogReclamoRepository().AddLogReclamo(dto);
-                }
-
-                return colerrors;
+                this._Repository.GetLogReclamoRepository().ModifyLogReclamo(dto);
             }
 
-            public List<string> ModifyLogReclamo(DtoLogReclamo dto)
-            {
-                List<string> colerrors = this.ValidateLogReclamo(dto, false);
-
-                if (colerrors.Count == 0)
-                {
-                    this._Repository.GetLogReclamoRepository().ModifyLogReclamo(dto);
-                }
-
-                return colerrors;
-            }
+            return colerrors;
+        }
 
         public List<string> DeleteLogReclamo(DtoLogReclamo dto)
         {
@@ -55,14 +55,19 @@ namespace BussinessLogic.Logic
         }
 
         public List<string> ValidateLogReclamo(DtoLogReclamo dto, bool isAdd)
-            {
-                List<string> colerrors = new List<string>();
+        {
+            List<string> colerrors = new List<string>();
 
-                if (isAdd == false && !this._Repository.GetLogReclamoRepository().ExistLogReclamoById(dto.idLog))
-                    colerrors.Add("El LogReclamo no existe.");
+            if (isAdd == false && !this._Repository.GetLogReclamoRepository().ExistLogReclamoById(dto.idLog))
+                colerrors.Add("El LogReclamo no existe.");
 
-                return colerrors;
-            }
+            return colerrors;
+        }
 
+        public List<DtoLogReclamo> GetLogReclamoById(int id)
+        {
+            List<DtoLogReclamo> dtoLog = new List<DtoLogReclamo>();
+            return dtoLog = this._Repository.GetLogReclamoRepository().GetLogReclamoById(id);
         }
     }
+}

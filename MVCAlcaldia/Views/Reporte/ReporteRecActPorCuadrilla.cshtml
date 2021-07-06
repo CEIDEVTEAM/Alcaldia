@@ -1,0 +1,52 @@
+﻿@model CommonSolution.DTOs.DtoCuadrilla
+
+@{
+    ViewBag.Title = "ReporteRecActPorCuadrilla";
+}
+
+<h2>Reporte reclamos activos por cuadrilla</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4></h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <label class="control-label col-md-2" >Cuadrilla</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.id, (List<SelectListItem>)ViewBag.colCuadrillasSelect, "-- Cuadrillas --", new { @class = "form-control", id="selectValue" })
+                @Html.ValidationMessageFor(model => model.id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        
+    </div>
+}
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" id="filtrar" value="Filtrar Cuadrilla" class="btn btn-default" />
+    </div>
+</div>
+
+<div id="map" class="form-group" style="width: 500px; height: 300px">
+
+</div>
+<div id="divTblReclamos">
+
+    
+
+</div>
+
+
+@section Scripts {
+     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCewHvBMDcMrBFlu3aqp1OhShkwSjWLiBQ&callback=initMap"
+            async></script>
+    @Scripts.Render("~/bundles/jqueryval");
+    @Scripts.Render("~/bundles/reports");
+}

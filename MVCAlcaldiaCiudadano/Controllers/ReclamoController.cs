@@ -70,6 +70,15 @@ namespace MVCAlcaldiaCiudadano.Controllers
             return View(colDto);
         }
 
+        public ActionResult Details(int id)
+        {
+            LLogReclamoController lgc = new LLogReclamoController();
+            
+            List<DtoLogReclamo> colDto = lgc.GetLogReclamoById(id);
+
+            return View(colDto);
+        }
+
         public ActionResult Delete(int id)
         {
             LReclamoController lgc = new LReclamoController();

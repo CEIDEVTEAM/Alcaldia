@@ -97,10 +97,11 @@ namespace DataAccess.Repository
             }
         }
 
-        public DtoLogReclamo GetLogReclamoById(int idLogReclamo)
+        public List<DtoLogReclamo> GetLogReclamoById(int idReclamo)
         {
+            List<DtoLogReclamo> dtoLog = new List<DtoLogReclamo>();
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
-                return this._logReclamoMapper.MapToDto(context.LogReclamo.AsNoTracking().FirstOrDefault(f => f.idLog == idLogReclamo));
+                return dtoLog = this._logReclamoMapper.MapToDto(context.LogReclamo.AsNoTracking().Where(f => (int)f.idReclamo == idReclamo).ToList());
         }
 
         public bool ExistLogReclamoById(int idLogReclamo)

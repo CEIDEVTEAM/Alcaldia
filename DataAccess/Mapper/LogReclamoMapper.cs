@@ -43,5 +43,21 @@ namespace DataAccess.Mapper
                 nombreDeUsuario = dto.nombreDeUsuario
             };
         }
+
+        public List<DtoLogReclamo> MapToDto(List<LogReclamo> ColEntity)
+        {
+            List<DtoLogReclamo> dtoLog = new List<DtoLogReclamo>();
+
+            foreach (LogReclamo item in ColEntity)
+            {
+                DtoLogReclamo dto = MapToDto(item);
+                dtoLog.Add(dto);
+
+            }
+
+            return dtoLog;
+
+
+        }
     }
 }
