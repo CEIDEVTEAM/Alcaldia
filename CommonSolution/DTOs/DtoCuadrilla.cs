@@ -23,12 +23,23 @@ namespace CommonSolution.DTOs
         [DisplayName("Encargado")]
         public string encargado { get; set; }
 
-        [DisplayName("Zona")]
+        [DisplayName("Nro Zona")]
         public Nullable<int> idZona { get; set; }
-
 
         [Required(ErrorMessage = "La Cant. de Peones es requerida")]
         [DisplayName("Cant. de Peones")]
         public int cantidadDePeones { get; set; }
+
+        [DisplayName("Reclamos resueltos")]
+        public int? resueltos { get; set; }
+
+        public string situacion { get; set; }
+
+        public int? totalMin { get; set; }
+
+        public int promedioNum { get; set; }
+
+        [DisplayName("Promedio de resolución")]
+        public string promedioStg { get; set; }
     }
 }

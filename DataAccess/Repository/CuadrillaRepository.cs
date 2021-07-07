@@ -72,6 +72,7 @@ namespace DataAccess.Repository
             }
         }
 
+
         public void DeleteCuadrilla(int idCuadrilla)
         {
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
@@ -122,15 +123,20 @@ namespace DataAccess.Repository
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 colZonas = context.V_ReclamosAbiertosPorCuadrilla.AsNoTracking().Where(w => w.idZona == idZona).OrderBy(o => o.cantidad).ToList();
-                
-                if(colZonas.FirstOrDefault() != null)
-                nroCuadrilla = colZonas.FirstOrDefault().idCuadrilla;
+
+                if (colZonas.FirstOrDefault() != null)
+                    nroCuadrilla = colZonas.FirstOrDefault().idCuadrilla;
             }
 
 
             return nroCuadrilla;
         }
 
+        public List<DtoCuadrilla> GetCuadrillasWithAvg()
+        {
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
+                return this._cuadrillaMapper.MapToDto(context.V_ReclamosResueltosPorCuadrilla.AsNoTracking().Select(s => s).ToList());
+        }
     }
 }
 

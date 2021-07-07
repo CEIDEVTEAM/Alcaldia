@@ -97,10 +97,18 @@ namespace MVCAlcaldia.Controllers
         {
             LReclamoController lgc = new LReclamoController();
             List<DtoReclamo> colDto = lgc.GetReclamoWithRetraso();
+            colDto = colDto.OrderByDescending(o => o.tiempoDeRetraso).ToList();
+
 
             return View(colDto);
         }
 
+        public ActionResult ReporteCuadrillasMasEficientes()
+        {
+            LCuadrillaController lgc = new LCuadrillaController();
+            List<DtoCuadrilla> colDto = lgc.GetCuadrillasWithAvg();
 
+            return View(colDto);
+        }
     }
 }

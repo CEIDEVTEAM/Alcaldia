@@ -100,6 +100,9 @@
     <Compile Include="Model\V_ReclamosAbiertosPorCuadrilla.cs">
       <DependentUpon>Alcaldia.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\V_ReclamosResueltosPorCuadrilla.cs">
+      <DependentUpon>Alcaldia.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Zona.cs">
       <DependentUpon>Alcaldia.tt</DependentUpon>
     </Compile>

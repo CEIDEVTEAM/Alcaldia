@@ -51,5 +51,35 @@ namespace DataAccess.Mapper
 
             return colDto;
         }
+
+        public DtoCuadrilla MapToDto(V_ReclamosResueltosPorCuadrilla entity)
+        {
+            if (entity == null)
+                return null;
+
+            return new DtoCuadrilla
+            {
+                id = entity.idCuadrilla,
+                nombre = entity.nombre,
+                encargado = entity.encargado,
+                idZona = entity.idZona,
+                cantidadDePeones = entity.cantidadDePeones,
+                situacion = entity.situacion,
+                resueltos = entity.resueltos,
+                totalMin = entity.totalMin
+            };
+        }
+
+        public List<DtoCuadrilla> MapToDto(List<V_ReclamosResueltosPorCuadrilla> colEntity)
+        {
+            List<DtoCuadrilla> colDto = new List<DtoCuadrilla>();
+
+            foreach (V_ReclamosResueltosPorCuadrilla entity in colEntity)
+            {
+                colDto.Add(this.MapToDto(entity));
+            }
+
+            return colDto;
+        }
     }
 }

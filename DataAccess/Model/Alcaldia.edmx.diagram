@@ -23,6 +23,7 @@
         <AssociationConnector Association="ReclamosAlcaldiaModel.FK_Reclamo_Zona" />
         <AssociationConnector Association="ReclamosAlcaldiaModel.fk_reclamoCiudadano" />
         <EntityTypeShape EntityType="ReclamosAlcaldiaModel.V_ReclamosAbiertosPorCuadrilla" Width="1.5" PointX="5.375" PointY="0.75" FillColor="Red" />
+        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.V_ReclamosResueltosPorCuadrilla" Width="1.5" PointX="7.375" PointY="0.75" FillColor="Red" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,4 +1,5 @@
-﻿using CommonSolution.DTOs;
+﻿using CommonSolution.Constants;
+using CommonSolution.DTOs;
 using DataAccess.Persistence;
 using System;
 using System.Collections.Generic;
@@ -74,6 +75,27 @@ namespace BussinessLogic.Logic
             return colerrors;
         }
 
-       
+        public List<DtoCuadrilla> GetCuadrillasWithAvg()
+        {
+            List<DtoCuadrilla> colDto = new List<DtoCuadrilla>();
+            colDto = this._Repository.GetCuadrillaRepository().GetCuadrillasWithAvg();
+            foreach (DtoCuadrilla item in colDto)
+            {
+                
+                item.promedioNum = item.totalMin ?? 0 / item.totalMin ?? 1;
+                int tot_mins = item.totalMin ?? 0;
+                int days = tot_mins / 1440;
+                int hours = (tot_mins % 1440) / 60;
+                int mins = tot_mins % 60;
+
+                item.promedioStg = string.Format(@"{0} Dia/s, {1} Hora/s, {2} Minutos", days, hours, mins);
+
+            }
+
+            colDto = colDto.Where(w => w.situacion == CGlobals.ESTADO_ACTIVO).OrderBy(o => o.promedioNum).ToList();
+
+
+            return colDto;
+        }
     }
 }

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<CommonSolution.DTOs.DtoCuadrilla>
+
+@{
+    ViewBag.Title = "Reporte Cuadrillas Mas Eficientes";
+}
+
+<h2>Reporte Cuadrillas mas eficientes</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.encargado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idZona)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantidadDePeones)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.resueltos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.promedioStg)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.encargado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idZona)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cantidadDePeones)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.resueltos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.promedioStg)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>
