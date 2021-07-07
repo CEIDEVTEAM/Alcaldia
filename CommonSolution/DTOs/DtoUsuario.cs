@@ -46,5 +46,7 @@ namespace CommonSolution.DTOs
         public string situacion { get; set; }
 
         public DtoTipoUsuario tipoDeUsuario { get; set; }
+
+        public DtoChangePass changePass { get; set; }
     }
 }

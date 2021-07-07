@@ -202,11 +202,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\UsuarioCiudadano\Add.cshtml" />
     <Content Include="Views\UsuarioCiudadano\Modify.cshtml" />
-    <Content Include="Views\UsuarioCiudadano\List.cshtml" />
     <Content Include="Views\Reclamo\Add.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Reclamo\List.cshtml" />
     <Content Include="Views\Reclamo\Details.cshtml" />
+    <Content Include="Views\UsuarioCiudadano\ModifyPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,10 +1,10 @@
 ﻿
 var map;
 var markers = [];
+var heatMapData = [];
 //-34.90414838859055, -54.95240618763575
 //39.866667°, -4.033333°
 function initMap() {
-
 
     const centro = { lat: 39.866667, lng: -4.033333 };
     map = new google.maps.Map(document.getElementById('map'), {
@@ -13,8 +13,6 @@ function initMap() {
         mapTypeId: "roadmap",
 
     });
-
-
     handleResponse();
 }
 
@@ -27,79 +25,60 @@ function initMapTermico() {
         mapTypeId: "roadmap",
 
     });
-    createMapaTermico();
+    if (heatMapData.length == 0) {
+        createMapaTermico();
+    }
 
 }
 
 document.getElementById("btnFiltroMapaCalor").addEventListener("click", createMapaTermicoWithRange);
 
 function createMapaTermicoWithRange() {
+    heatMapData = [];
+    var fechaIn = document.getElementById("fechaInicio").value.toLocaleString();
+    var fechaFn = document.getElementById("fechaFinal").value.toLocaleString();
 
-    var fechaIn = document.getElementById("fechaInicio").value;
-    var fechaFn = document.getElementById("fechaFinal").value;
+    var json = {
+        fechaInicial: fechaIn + " 00:00:00",
+        fechaFinal: fechaFn + " 23:59:59"
+    }
 
-    var fechaIn = document.getElementById("fechaInicio").value;
-    var day = fechaIn.getDate();       // yields date
-    var month = fechaIn.getMonth() + 1;    // yields month (add one as '.getMonth()' is zero indexed)
-    var year = fechaIn.getFullYear();  // yields year
-    var hour = fechaIn.getHours();     // yields hours 
-    var minute = fechaIn.getMinutes(); // yields minutes
-    var second = fechaIn.getSeconds(); // yields seconds
+    $.ajax({
+        type: 'POST',
+        data: json,
+        url: 'PopulateLatLngWithRange',
+        success: function (response) {
+            for (let i = 0; i < response.length; i++) {
+                var cons = { location: new google.maps.LatLng(response[i].latitud, response[i].longitud), weight: 0.3 };
 
-    // After this construct a string with the above results as below
-    var fechaInStg = day + "/" + month + "/" + year + " " + hour + ':' + minute + ':' + second; 
-
-    var fechaFn = document.getElementById("fechaInicio").value;
-    var day = fechaFn.getDate();       // yields date
-    var month = fechaFn.getMonth() + 1;    // yields month (add one as '.getMonth()' is zero indexed)
-    var year = fechaFn.getFullYear();  // yields year
-    var hour = fechaFn.getHours();     // yields hours 
-    var minute = fechaFn.getMinutes(); // yields minutes
-    var second = fechaFn.getSeconds(); // yields seconds
-
-    // After this construct a string with the above results as below
-    var fechaFnStg = day + "/" + month + "/" + year + " " + hour + ':' + minute + ':' + second; 
-
-    if (fechaIn != "" && fechaFn != "") {
-
-        var dtoRango = {
-            fechaInicial: fechaInStg,
-            fechaFinal: fechaFnStg
-        }
-
-        $.ajax({
-            type: 'POST',
-            json: dtoRango,
-            url: 'PopulateLatLngWithRange',
-            success: function (response) {
-                for (let i = 0; i < response.length; i++) {
-                    var cons = { location: new google.maps.LatLng(response[i].latitud, response[i].longitud), weight: 0.3 };
-
-                    heatMapData.push(cons);
-                }
+                heatMapData.push(cons);
+            }
+            if (heatMapData.length > 0) {
+                $("#map").empty();
+                initMapTermico();
                 var heatmap = new google.maps.visualization.HeatmapLayer({
                     data: heatMapData,
-                    radius: 30,
+                    radius: 35,
 
                 });
                 heatmap.setMap(map);
-
-            },
-            error: function (response) {
-
             }
-        })
-    }
+            else {
+                alert("no hay datos en el rango");
+            }
 
 
 
+        },
+        error: function (response) {
 
+        }
+    })
 }
 
 
-
 function createMapaTermico() {
-    var heatMapData = [];
+    heatMapData = [];
 
     $.ajax({
         type: 'GET',
@@ -113,7 +92,7 @@ function createMapaTermico() {
             }
             var heatmap = new google.maps.visualization.HeatmapLayer({
                 data: heatMapData,
-                radius: 30,
+                radius: 35,
 
             });
             heatmap.setMap(map);
@@ -268,10 +247,6 @@ function getZona(polygon) {
 }
 
 
-
-
-
-
 function handleResponse() {
 
     $.ajax({
@@ -295,7 +270,6 @@ function handleResponse() {
 }
 
 function markersPopulate(item) {
-
 
     let latitude = parseFloat(item.LatitudReclamo);
     let long = parseFloat(item.LongitudReclamo);
@@ -347,9 +321,6 @@ function markersPopulate(item) {
         new google.maps.Size(40, 37),
         new google.maps.Point(0, 0),
         new google.maps.Point(12, 35));
-
-
-
 
     const infowindow = new google.maps.InfoWindow({
         content: contentString,

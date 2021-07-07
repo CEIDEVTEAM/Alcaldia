@@ -1,4 +1,5 @@
 ﻿using BussinessLogic.Logic;
+using CommonSolution.Constants;
 using CommonSolution.DTOs;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace MVCAlcaldiaCiudadano.Controllers
 {
+    [AuthorizeAttribute]
     public class UsuarioCiudadanoController : Controller
     {
         public ActionResult Add()
@@ -43,16 +45,15 @@ namespace MVCAlcaldiaCiudadano.Controllers
                 ModelState.AddModelError("ErrorGeneral", error);
             }
 
-
             return RedirectToAction("List");
         }
 
 
-        public ActionResult Modify(string nombreDeUsuario)
+        public ActionResult Modify()
         {
-
+            string nombreUsuario = Session[CLogin.KEY_SESSION_USERNAME].ToString();
             LUsuarioController lgc = new LUsuarioController();
-            DtoUsuario dto = lgc.GetUserByNombre(nombreDeUsuario);
+            DtoUsuario dto = lgc.GetUserByNombre(nombreUsuario);
 
 
             return View(dto);
@@ -65,21 +66,44 @@ namespace MVCAlcaldiaCiudadano.Controllers
 
             List<string> colErrores = lgc.ModifyUsuarioCiudadano(dto);
 
-            foreach (string error in colErrores)
-            {
-                ModelState.AddModelError("ErrorGeneral", error);
-            }
 
-
-            return RedirectToAction("List");
+            return RedirectToAction("Modify");
         }
 
-        public ActionResult List()
+
+
+
+        public ActionResult ModifyPass(DtoChangePass dto)
         {
             LUsuarioController lgc = new LUsuarioController();
-            List<DtoUsuario> colDto = lgc.GetAllUsers();
+            //List<string> colErrores = lgc.ModifyPassword(dto);
 
-            return View(colDto);
+            return RedirectToAction("Modify, UsuarioCiudadano");
         }
+
+        public ActionResult ModifyPassword()
+        {
+            DtoChangePass dto = new DtoChangePass();
+            dto.user = Session[CLogin.KEY_SESSION_USERNAME].ToString();
+
+            return View(dto);
+        }
+
+
+        #region VALIDATIONS
+
+        public JsonResult ValidateNewPassword(string newPass, string repNewPass)
+        {
+            bool response = false;
+            if (newPass == repNewPass)
+                response = true;
+
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
+
+
     }
 }

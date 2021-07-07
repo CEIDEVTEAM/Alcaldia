@@ -42,7 +42,6 @@ namespace DataAccess.Repository
                 }
             }
         }
-
         public void ModifyUsuario(DtoUsuario dto)
         {
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
@@ -55,10 +54,8 @@ namespace DataAccess.Repository
 
                         if (currUsuario != null)
                         {
-
                             currUsuario.nombre = dto.nombre;
                             currUsuario.apellido = dto.apellido;
-                            currUsuario.contrasenia = dto.contrasenia;
                             currUsuario.telefono = dto.telefono;
                             currUsuario.email = dto.email;
                         };
@@ -73,8 +70,31 @@ namespace DataAccess.Repository
                 }
             }
         }
+        public void ModifyPassword(DtoChangePass dto)
+        {
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
+            {
+                using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
+                {
+                    try
+                    {
+                        Usuario currUsuario = context.Usuario.FirstOrDefault(f => f.nombreDeUsuario == dto.user);
 
+                        if (currUsuario != null)
+                        {
+                            currUsuario.contrasenia = dto.newPass;
+                        };
 
+                        context.SaveChanges();
+                        trann.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        trann.Rollback();
+                    }
+                }
+            }
+        }
         public void DeleteUsuario(string nombreUsuario)
         {
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
@@ -96,19 +116,16 @@ namespace DataAccess.Repository
                 }
             }
         }
-
         public bool ValidateLogin(DtoLogin dto)
         {
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return context.Usuario.AsNoTracking().Any(a => a.nombreDeUsuario == dto.user && a.contrasenia == dto.pass && a.tipoDeUsuario == dto.tipoDeUsuario);
         }
-
         public DtoUsuario GetUsuarioByNombre(string nombreUsuario)
         {
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return this._usuarioMapper.MaptoDto(context.Usuario.AsNoTracking().FirstOrDefault(f => f.nombreDeUsuario == nombreUsuario));
         }
-
         public bool ExistUsuario(DtoUsuario usuario)
         {
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
@@ -126,8 +143,6 @@ namespace DataAccess.Repository
 
         }
     }
-
-
 
 }
 

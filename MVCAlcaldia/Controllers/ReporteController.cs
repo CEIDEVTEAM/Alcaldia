@@ -62,12 +62,12 @@ namespace MVCAlcaldia.Controllers
         }
 
         [HttpPost]
-        public ActionResult PopulateLatLngWithRange(DtoRangoFechas dto)
+        public JsonResult PopulateLatLngWithRange(DtoRangoFechas dto)
         {
             LReclamoController lgc = new LReclamoController();
             DateTime fi = DateTime.Parse(dto.fechaInicial);
             DateTime ff = DateTime.Parse(dto.fechaFinal);
-            //List<DtoVertice> colDto = lgc.GetAllUbicacionesReclamos(dto.fechaInicial, dto.fechaFinal);
+
             List<DtoVertice> colDto = lgc.GetAllUbicacionesReclamos(fi,ff);
             return Json(colDto, JsonRequestBehavior.AllowGet);
         }

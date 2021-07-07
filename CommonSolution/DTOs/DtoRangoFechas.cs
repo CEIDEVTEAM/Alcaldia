@@ -8,8 +8,8 @@ namespace CommonSolution.DTOs
 {
     public class DtoRangoFechas
     {
-        public string fechaInicial;
-        public string fechaFinal;
+        public string fechaInicial { get; set; }
+        public string fechaFinal { get; set; }
 
     }
 }
