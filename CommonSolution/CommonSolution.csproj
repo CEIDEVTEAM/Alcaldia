@@ -85,6 +85,7 @@
     <Compile Include="DTOs\DtoCuadrilla.cs" />
     <Compile Include="DTOs\DtoLogin.cs" />
     <Compile Include="DTOs\DtoLogReclamo.cs" />
+    <Compile Include="DTOs\DtoRangoFechas.cs" />
     <Compile Include="DTOs\DtoReclamo.cs" />
     <Compile Include="DTOs\DtoTipoDeReclamo.cs" />
     <Compile Include="DTOs\DtoTipoUsuario.cs" />

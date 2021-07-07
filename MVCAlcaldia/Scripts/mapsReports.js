@@ -5,22 +5,21 @@ var markers = [];
 //39.866667°, -4.033333°
 function initMap() {
 
-   
+
     const centro = { lat: 39.866667, lng: -4.033333 };
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 14,
         center: centro,
         mapTypeId: "roadmap",
-        
+
     });
-    
-    
+
+
     handleResponse();
 }
 
 function initMapTermico() {
 
-
     const centro = { lat: 39.866667, lng: -4.033333 };
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 14,
@@ -28,10 +27,75 @@ function initMapTermico() {
         mapTypeId: "roadmap",
 
     });
-
-
     createMapaTermico();
+
 }
+
+document.getElementById("btnFiltroMapaCalor").addEventListener("click", createMapaTermicoWithRange);
+
+function createMapaTermicoWithRange() {
+
+    var fechaIn = document.getElementById("fechaInicio").value;
+    var fechaFn = document.getElementById("fechaFinal").value;
+
+    var fechaIn = document.getElementById("fechaInicio").value;
+    var day = fechaIn.getDate();       // yields date
+    var month = fechaIn.getMonth() + 1;    // yields month (add one as '.getMonth()' is zero indexed)
+    var year = fechaIn.getFullYear();  // yields year
+    var hour = fechaIn.getHours();     // yields hours 
+    var minute = fechaIn.getMinutes(); // yields minutes
+    var second = fechaIn.getSeconds(); // yields seconds
+
+    // After this construct a string with the above results as below
+    var fechaInStg = day + "/" + month + "/" + year + " " + hour + ':' + minute + ':' + second; 
+
+    var fechaFn = document.getElementById("fechaInicio").value;
+    var day = fechaFn.getDate();       // yields date
+    var month = fechaFn.getMonth() + 1;    // yields month (add one as '.getMonth()' is zero indexed)
+    var year = fechaFn.getFullYear();  // yields year
+    var hour = fechaFn.getHours();     // yields hours 
+    var minute = fechaFn.getMinutes(); // yields minutes
+    var second = fechaFn.getSeconds(); // yields seconds
+
+    // After this construct a string with the above results as below
+    var fechaFnStg = day + "/" + month + "/" + year + " " + hour + ':' + minute + ':' + second; 
+
+    if (fechaIn != "" && fechaFn != "") {
+
+        var dtoRango = {
+            fechaInicial: fechaInStg,
+            fechaFinal: fechaFnStg
+        }
+
+        $.ajax({
+            type: 'POST',
+            json: dtoRango,
+            url: 'PopulateLatLngWithRange',
+            success: function (response) {
+                for (let i = 0; i < response.length; i++) {
+                    var cons = { location: new google.maps.LatLng(response[i].latitud, response[i].longitud), weight: 0.3 };
+
+                    heatMapData.push(cons);
+                }
+                var heatmap = new google.maps.visualization.HeatmapLayer({
+                    data: heatMapData,
+                    radius: 30,
+
+                });
+                heatmap.setMap(map);
+
+            },
+            error: function (response) {
+
+            }
+        })
+    }
+
+
+
+
+}
+
 
 
 function createMapaTermico() {
@@ -44,9 +108,15 @@ function createMapaTermico() {
         success: function (response) {
             for (let i = 0; i < response.length; i++) {
                 var cons = { location: new google.maps.LatLng(response[i].latitud, response[i].longitud), weight: 0.3 };
-                
+
                 heatMapData.push(cons);
             }
+            var heatmap = new google.maps.visualization.HeatmapLayer({
+                data: heatMapData,
+                radius: 30,
+
+            });
+            heatmap.setMap(map);
 
         },
         error: function (response) {
@@ -54,12 +124,6 @@ function createMapaTermico() {
         }
     })
 
-    var heatmap = new google.maps.visualization.HeatmapLayer({
-        data: heatMapData,
-        radius: 40,
-
-    });
-    heatmap.setMap(map);
 
 }
 
@@ -107,7 +171,7 @@ function removeLine(name) {
 function showArrays(event) {
 
     const marker = this;
-    
+
     let contentString =
         "<b>Zona: PEPE</b><br>" +
         "Esta Ubicación: <br>" +
@@ -232,7 +296,7 @@ function handleResponse() {
 
 function markersPopulate(item) {
 
-       
+
     let latitude = parseFloat(item.LatitudReclamo);
     let long = parseFloat(item.LongitudReclamo);
     let singleCoord = { lat: latitude, lng: long };
@@ -240,9 +304,9 @@ function markersPopulate(item) {
     var res = fh.slice(6, 19);
     var intres = parseInt(res);
     var f = new Date(intres);
-   // const formatYmd = date => date.toISOString().slice(0, 10);
+    // const formatYmd = date => date.toISOString().slice(0, 10);
     //let f = new Date(date);
-        
+
     let mes = f.getMonth() + 1;
     if (mes < 10) {
         mes = "0" + mes;
@@ -256,21 +320,21 @@ function markersPopulate(item) {
     let min = f.getMinutes();
 
     let nuevaFecha = (dia + "/" + mes + "/" + anio + " " + hora + ":" + min);
-    
+
 
     const contentString =
         '<div id="content">' +
         '<div id="siteNotice">' +
         "</div>" +
-        '<h5 id="firstHeading" class="firstHeading">Numero de Reclamo: '+item.id+'</h5>' +
+        '<h5 id="firstHeading" class="firstHeading">Numero de Reclamo: ' + item.id + '</h5>' +
         '<div id="bodyContent"></hr>' +
         "<p><b> Retraso:</b> " + item.tiempoDeRetraso + " </p>" +
         "<p><b> Descripción:</b> " + item.observaciones + " </p>" +
         "<p><b> Tipo de reclamo:</b> " + item.nombreTipoReclamo + " </p>" +
-        "<p><b> Cuadrilla:</b> " + item.idCuadrilla+ " </p>" +
+        "<p><b> Cuadrilla:</b> " + item.idCuadrilla + " </p>" +
         "<p><b> Fecha:</b> " + nuevaFecha + "</p>" +
 
-        
+
         "</div>" +
         "</div>";
 
@@ -302,13 +366,13 @@ function markersPopulate(item) {
             anchor: marker,
             map,
             shouldFocus: false,
-        
+
         });
     });
 }
 
 
-function GetColorReferences(){
+function GetColorReferences() {
 
     $.ajax({
         type: 'GET',

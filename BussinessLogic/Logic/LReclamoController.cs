@@ -46,6 +46,17 @@ namespace BussinessLogic.Logic
         public List<DtoVertice> GetAllUbicacionesReclamos()
         {
             List<DtoReclamo> colReclamos = this.GetAllReclamos();
+            return this.MapReclamosToVertices(colReclamos);
+        }
+
+        public List<DtoVertice> GetAllUbicacionesReclamos(DateTime fechaInicial, DateTime fechaFinal)
+        {
+            List<DtoReclamo> colReclamos = this._Repository.GetReclamoRepository().GetAllReclamos(fechaInicial, fechaFinal);
+            return this.MapReclamosToVertices(colReclamos);
+        }
+
+        public List<DtoVertice> MapReclamosToVertices(List<DtoReclamo> colReclamos)
+        {
             List<DtoVertice> colUbicaciones = new List<DtoVertice>();
 
             foreach (DtoReclamo item in colReclamos)
@@ -58,6 +69,7 @@ namespace BussinessLogic.Logic
 
             return colUbicaciones;
         }
+
 
         public List<string> DeleteReclamo(DtoReclamo dto)
         {

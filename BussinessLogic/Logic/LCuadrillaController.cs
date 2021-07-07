@@ -81,19 +81,15 @@ namespace BussinessLogic.Logic
             colDto = this._Repository.GetCuadrillaRepository().GetCuadrillasWithAvg();
             foreach (DtoCuadrilla item in colDto)
             {
-                
                 item.promedioNum = item.totalMin ?? 0 / item.totalMin ?? 1;
-                int tot_mins = item.totalMin ?? 0;
-                int days = tot_mins / 1440;
-                int hours = (tot_mins % 1440) / 60;
-                int mins = tot_mins % 60;
+                int totMin = item.totalMin ?? 0;
+                int days = totMin / 1440;
+                int hours = (totMin % 1440) / 60;
+                int mins = totMin % 60;
 
                 item.promedioStg = string.Format(@"{0} Dia/s, {1} Hora/s, {2} Minutos", days, hours, mins);
-
             }
-
             colDto = colDto.Where(w => w.situacion == CGlobals.ESTADO_ACTIVO).OrderBy(o => o.promedioNum).ToList();
-
 
             return colDto;
         }

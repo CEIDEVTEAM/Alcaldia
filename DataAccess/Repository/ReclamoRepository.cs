@@ -118,13 +118,24 @@ namespace DataAccess.Repository
             return colReclamos;
         }
 
+        public List<DtoReclamo> GetAllReclamos(DateTime fechaInicial, DateTime fechaFinal)
+        {
+            List<DtoReclamo> colReclamos = new List<DtoReclamo>();
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
+            {
+                colReclamos = this._ReclamoMapper.MapToDto(context.Reclamo.AsNoTracking().Where(w => w.fechaYhora >= fechaInicial && w.fechaYhora <= fechaFinal).ToList());
+            }
+
+            return colReclamos;
+        }
+
         public List<DtoReclamo> GetAllReclamosByUser(string user)
         {
             List<DtoReclamo> colReclamos = new List<DtoReclamo>();
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 colReclamos = this._ReclamoMapper.MapToDto(context.Reclamo.AsNoTracking().Where(w => w.idCiudadano == user).OrderByDescending(o => o.id).ToList());
-                
+
             }
 
             return colReclamos;
@@ -147,7 +158,7 @@ namespace DataAccess.Repository
             List<DtoReclamo> colReclamos = new List<DtoReclamo>();
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
-                colReclamos = this._ReclamoMapper.MapToDto(context.Reclamo.AsNoTracking().Where(w => w.idCuadrilla == idCuadrilla && 
+                colReclamos = this._ReclamoMapper.MapToDto(context.Reclamo.AsNoTracking().Where(w => w.idCuadrilla == idCuadrilla &&
                 w.estado == EnumEstado.ASIGNADO.ToString()
                 || w.estado == EnumEstado.EN_PROCESO.ToString()).ToList());
             }
