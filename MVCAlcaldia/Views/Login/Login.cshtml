@@ -7,7 +7,7 @@
 <h2>Iniciar Sesión</h2>
 
 
-@using (Html.BeginForm("Login", "Login")) 
+@using (Html.BeginForm("Login", "Login", new { returnUrl = ViewBag.ReturnUrl }))
 {
     @Html.AntiForgeryToken()
     

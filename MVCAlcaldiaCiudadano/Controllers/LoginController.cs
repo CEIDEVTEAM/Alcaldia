@@ -12,19 +12,22 @@ namespace MVCAlcaldiaCiudadano.Controllers
 {
     public class LoginController : Controller
     {
-        public ActionResult Login()
+        public ActionResult Login(string ReturnUrl)
         {
             if (User.Identity.IsAuthenticated == true)
             {
                 return Redirect("/Home");
             }
 
+            ViewBag.ReturnUrl = ReturnUrl;
             return View();
         }
 
 
         [HttpPost]
-        public ActionResult Login(DtoLogin dto)
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(DtoLogin dto, string returnUrl)
         {
             LUsuarioController lgc = new LUsuarioController();
             if (lgc.ValidateCredentialsCiudadano(dto))
@@ -32,7 +35,12 @@ namespace MVCAlcaldiaCiudadano.Controllers
                 FormsAuthentication.SetAuthCookie(dto.user, false);
                 Session[CLogin.KEY_SESSION_USERNAME] = dto.user;
 
-                return Redirect("/Home");
+                if (String.IsNullOrEmpty(returnUrl))
+                {
+                    return Redirect("/Home");
+
+                }
+                return Redirect(returnUrl);
             }
 
 

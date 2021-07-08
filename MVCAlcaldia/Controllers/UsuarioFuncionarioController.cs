@@ -1,4 +1,5 @@
 ﻿using BussinessLogic.Logic;
+using CommonSolution.Constants;
 using CommonSolution.DTOs;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace MVCAlcaldia.Controllers
 {
+    [AuthorizeAttribute]
     public class UsuarioFuncionarioController : Controller
     {
         public ActionResult Add()
@@ -48,11 +50,11 @@ namespace MVCAlcaldia.Controllers
         }
 
 
-        public ActionResult Modify(string nombreDeUsuario)
+        public ActionResult Modify()
         {
-
+            string nombreUsuario = Session[CLogin.KEY_SESSION_USERNAME].ToString();
             LUsuarioController lgc = new LUsuarioController();
-            DtoUsuario dto = lgc.GetUserByNombre(nombreDeUsuario);
+            DtoUsuario dto = lgc.GetUserByNombre(nombreUsuario);
 
 
             return View(dto);
