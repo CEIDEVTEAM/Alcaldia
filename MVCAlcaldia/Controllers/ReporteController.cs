@@ -1,8 +1,18 @@
 ﻿using BussinessLogic.Logic;
 using CommonSolution.Constants;
 using CommonSolution.DTOs;
+using iText.Barcodes;
+using iText.Kernel.Colors;
+using iText.Kernel.Pdf;
+using iText.Kernel.Pdf.Action;
+using iText.Kernel.Pdf.Canvas.Draw;
+using iText.Kernel.Pdf.Xobject;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Layout.Properties;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -122,5 +132,7 @@ namespace MVCAlcaldia.Controllers
 
             return View(colDto);
         }
+
+      
     }
 }
