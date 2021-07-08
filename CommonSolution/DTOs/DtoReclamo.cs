@@ -30,7 +30,10 @@ namespace CommonSolution.DTOs
         public int idZona { get; set; }
         public string tiempoDeRetraso { get; set; }
         public string color { get; set; }
-
+        
+        public string observacionCuadrilla { get; set; }
+        [Required(ErrorMessage = "La descripción es requerida")]
+        public string observacionFuncionario { get; set; }
         public DateTime fechaInicial { get; set; }
         public DateTime fechaFinal { get; set; }
     }

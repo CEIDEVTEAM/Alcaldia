@@ -76,12 +76,12 @@ namespace BussinessLogic.Logic
         public List<string> ValidateReclamo(DtoReclamo dto, bool isAdd)
         {
             List<string> colerrors = new List<string>();
-            if (dto.observaciones == null)
+            if (isAdd == true && dto.observaciones == null)
             {
                 colerrors.Add("El valor no puede ser nulo");
                 return colerrors;
             }
-            if (dto.nombreTipoReclamo == null)
+            if (isAdd == true && dto.nombreTipoReclamo == null)
             {
                 colerrors.Add("El valor no puede ser nulo");
                 return colerrors;
