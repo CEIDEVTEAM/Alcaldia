@@ -65,11 +65,11 @@ namespace MVCAlcaldia.Controllers
         public ActionResult ReporteRecActPorCuadrilla()
         {
             LCuadrillaController lgcc = new LCuadrillaController();
-            List<DtoCuadrilla> colDtoZona = lgcc.GetAllCuadrillas();
+            List<DtoCuadrilla> colDtoCuadrilla = lgcc.GetAllCuadrillas();
 
             List<SelectListItem> cuadrillaSelect = new List<SelectListItem>();
 
-            foreach (DtoCuadrilla item in colDtoZona)
+            foreach (DtoCuadrilla item in colDtoCuadrilla)
             {
                 SelectListItem option = new SelectListItem();
                 option.Value = item.id.ToString();

@@ -11,19 +11,40 @@ namespace MVCAlcaldia.Controllers
 {
     public class ReclamoController : Controller
     {
-        public ActionResult Index()
-        {
+        public ActionResult List()
+        {          
+
             return View();
         }
 
-        public ActionResult List()
+        [HttpPost]
+        public ActionResult GetReclamosPorFechaYestado(DtoReclamo dto)
         {
             LReclamoController lgc = new LReclamoController();
-            List<DtoReclamo> colDto = lgc.GetAllReclamos();
 
-            return View(colDto);
+            List<DtoReclamo> colDto = lgc.GetAllReclamosByFechaYestado(dto);
+
+            return PartialView("_D_List", colDto);
         }
 
-        
+
+        public ActionResult Modify(int id)
+        {
+            
+            LReclamoController lgc = new LReclamoController();
+            DtoReclamo dto = lgc.GetReclamoById(id);
+
+            return View(dto);
+        }
+
+        [HttpPost]
+        public ActionResult ModifyReclamo(DtoReclamo dto)
+        {
+            LReclamoController lgc = new LReclamoController();
+
+            List<string> colErrors = lgc.ModifyReclamo(dto);
+
+            return RedirectToAction("List");
+        }
     }
 }

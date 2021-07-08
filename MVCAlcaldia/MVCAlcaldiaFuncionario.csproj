@@ -171,6 +171,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\mapsReports.js" />
     <Content Include="Scripts\mapsFunctions.js" />
+    <Content Include="Scripts\reclamos.js" />
     <Content Include="Scripts\reclamosCuadrilla.js" />
     <Content Include="Scripts\menu.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
@@ -199,12 +200,14 @@
     <Content Include="Views\Cuadrilla\Modify.cshtml" />
     <Content Include="Views\Zona\Add.cshtml" />
     <Content Include="Views\Zona\List.cshtml" />
-    <Content Include="Views\Reclamo\List.cshtml" />
     <Content Include="Views\Reporte\VisorReclamosNoResueltos.cshtml" />
     <Content Include="Views\Reporte\MapaTermico.cshtml" />
     <Content Include="Views\Reporte\ReporteRecActPorCuadrilla.cshtml" />
     <Content Include="Views\Reporte\_Listado.cshtml" />
     <Content Include="Views\Reporte\ReclamosAtrasados.cshtml" />
+    <Content Include="Views\Reclamo\List.cshtml" />
+    <Content Include="Views\Reclamo\_D_List.cshtml" />
+    <Content Include="Views\Reclamo\Modify.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

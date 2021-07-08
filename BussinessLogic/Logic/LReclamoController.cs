@@ -30,6 +30,8 @@ namespace BussinessLogic.Logic
             return colerrors;
         }
 
+        
+
         public List<string> ModifyReclamo(DtoReclamo dto)
         {
             List<string> colerrors = this.ValidateReclamo(dto, false);
@@ -114,6 +116,14 @@ namespace BussinessLogic.Logic
         {
             return this._Repository.GetReclamoRepository().GetAllReclamos();
 
+        }
+
+        public List<DtoReclamo> GetAllReclamosByFechaYestado(DtoReclamo dto)
+        {
+            List<DtoReclamo> reclamosFiltrados= this._Repository.GetReclamoRepository().GetAllReclamosByFechasYestado(dto);
+            
+
+            return reclamosFiltrados;
         }
 
         public List<DtoReclamo> GetAllReclamosActivosByCuadrilla(int IdCuadrilla)

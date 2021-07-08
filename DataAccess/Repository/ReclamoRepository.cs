@@ -130,6 +130,19 @@ namespace DataAccess.Repository
             return colReclamos;
         }
 
+        public List<DtoReclamo> GetAllReclamosByFechasYestado(DtoReclamo dto)
+        {
+            List<DtoReclamo> colReclamos = new List<DtoReclamo>();
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
+            {
+                colReclamos = this._ReclamoMapper.MapToDto(context.Reclamo.AsNoTracking().Where(w => w.fechaYhora >= dto.fechaInicial &&
+                w.fechaYhora <= dto.fechaFinal && w.estado == dto.estado.ToString()).ToList());
+
+            }
+
+            return colReclamos;
+        }
+
         public List<DtoReclamo> GetAllReclamosActivos()
         {
             List<DtoReclamo> colReclamos = new List<DtoReclamo>();

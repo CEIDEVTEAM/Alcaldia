@@ -1,14 +1,12 @@
 ﻿@model IEnumerable<CommonSolution.DTOs.DtoReclamo>
 
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "_D_List";
 }
 
-<h2>Reclamos Realizados</h2>
+<h2>Reclamos Filtrados</h2>
 
-<p>
-    @Html.ActionLink("Nuevo Reclamo", "Add")
-</p>
+
 <table class="table">
     <tr>
         <th>
@@ -20,14 +18,24 @@
         <th>
             @Html.DisplayNameFor(model => model.observaciones)
         </th>
-
+        <th>
+            @Html.DisplayNameFor(model => model.idCiudadano)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.nombreTipoReclamo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.estado)
+            @Html.DisplayNameFor(model => model.LatitudReclamo)
         </th>
-
+        <th>
+            @Html.DisplayNameFor(model => model.LongitudReclamo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idCuadrilla)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idZona)
+        </th>
         <th></th>
     </tr>
 
@@ -43,28 +51,30 @@
             <td>
                 @Html.DisplayFor(modelItem => item.observaciones)
             </td>
-
+            <td>
+                @Html.DisplayFor(modelItem => item.idCiudadano)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.nombreTipoReclamo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.estado)
+                @Html.DisplayFor(modelItem => item.LatitudReclamo)
             </td>
-
             <td>
-
-                @Html.ActionLink("Detalle", "Details", new { id = item.id })|
-                @if (item.estado == CommonSolution.ENUMs.EnumEstado.PENDIENTE)
-                {
-                    <input id="Delete" onclick="confirmation('@item.id')"type="button" value="Cancelar" />
-                }
-
+                @Html.DisplayFor(modelItem => item.LongitudReclamo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.idCuadrilla)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.idZona)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                
             </td>
         </tr>
     }
 
 </table>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-}
+
