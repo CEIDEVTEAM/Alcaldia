@@ -12,9 +12,8 @@ function buscar() {
     var valorTxt = document.getElementById("selectValue").value;
     var fechaIni = document.getElementById("date1").value;
     var fechaFin = document.getElementById("date2").value;
-
-
-    var json = { estado: valorTxt, fechaInicial: fechaIni, fechaFinal: fechaFin };
+    
+    var json = { estado: valorTxt, fechaInicial: fechaIni + " 00:00:00", fechaFinal: fechaFin+" 23:59:59" };
 
     $.ajax({
         url: 'GetReclamosPorFechaYestado',

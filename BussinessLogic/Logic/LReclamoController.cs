@@ -30,7 +30,7 @@ namespace BussinessLogic.Logic
             return colerrors;
         }
 
-        
+
 
         public List<string> ModifyReclamo(DtoReclamo dto)
         {
@@ -44,7 +44,7 @@ namespace BussinessLogic.Logic
             return colerrors;
         }
 
-        
+
         public List<DtoVertice> GetAllUbicacionesReclamos()
         {
             List<DtoReclamo> colReclamos = this.GetAllReclamos();
@@ -107,7 +107,7 @@ namespace BussinessLogic.Logic
         public void CuadrillaForReclamo(DtoReclamo dto)
         {
             int currCuadrilla = this._Repository.GetCuadrillaRepository().GetCuadrillaForReclamo(dto.idZona);
-            if (currCuadrilla !=0)
+            if (currCuadrilla != 0)
             {
                 dto.idCuadrilla = currCuadrilla;
                 dto.estado = CommonSolution.ENUMs.EnumEstado.ASIGNADO;
@@ -132,8 +132,20 @@ namespace BussinessLogic.Logic
 
         public List<DtoReclamo> GetAllReclamosByFechaYestado(DtoReclamo dto)
         {
-            List<DtoReclamo> reclamosFiltrados= this._Repository.GetReclamoRepository().GetAllReclamosByFechasYestado(dto);
+            List<DtoReclamo> reclamosFiltrados = new List<DtoReclamo>();
+
+            if (string.IsNullOrEmpty(dto.estado.ToString()))
+            {
+                reclamosFiltrados = this._Repository.GetReclamoRepository().GetAllReclamos(dto.fechaInicial, dto.fechaFinal);
+                return reclamosFiltrados;
+            }
+            if (dto.fechaInicial == null)
+            {
+                reclamosFiltrados = this._Repository.GetReclamoRepository().GetAllReclamos();
+                return reclamosFiltrados;
+            }
             
+            reclamosFiltrados = this._Repository.GetReclamoRepository().GetAllReclamosByFechasYestado(dto);
 
             return reclamosFiltrados;
         }
@@ -174,7 +186,7 @@ namespace BussinessLogic.Logic
             return dtoReclamo;
         }
 
-       
+
 
         public string GetRetrasoColor(TimeSpan retraso)
         {
@@ -182,10 +194,10 @@ namespace BussinessLogic.Logic
 
             if (horasRetraso < CMapColor.LIMIT_GREEN_HOURS)
                 return CMapColor.GREEN_COLOR_HEX; //VERDE
-            
+
             if (horasRetraso >= CMapColor.LIMIT_GREEN_HOURS && horasRetraso <= CMapColor.START_RED_HOURS)
                 return CMapColor.YELLOW_COLOR_HEX; //AMARILLO
-            
+
             return CMapColor.RED_COLOR_HEX; //ROJO
         }
     }

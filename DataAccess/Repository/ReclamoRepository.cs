@@ -124,6 +124,7 @@ namespace DataAccess.Repository
         public List<DtoReclamo> GetAllReclamos(DateTime fechaInicial, DateTime fechaFinal)
         {
             List<DtoReclamo> colReclamos = new List<DtoReclamo>();
+            
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 colReclamos = this._ReclamoMapper.MapToDto(context.Reclamo.AsNoTracking().Where(w => w.fechaYhora >= fechaInicial && w.fechaYhora <= fechaFinal).ToList());

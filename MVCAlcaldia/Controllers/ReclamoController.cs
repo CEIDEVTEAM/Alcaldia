@@ -34,7 +34,7 @@ namespace MVCAlcaldia.Controllers
             LReclamoController lgc = new LReclamoController();
 
             List<DtoReclamo> colDto = lgc.GetAllReclamosByFechaYestado(dto);
-
+            
             return PartialView("_D_List", colDto);
         }
 
