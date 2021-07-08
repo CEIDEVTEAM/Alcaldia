@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace MVCAlcaldia.Controllers
 {
+    [AuthorizeAttribute]
     public class ReclamoController : Controller
     {
         public ActionResult Index()

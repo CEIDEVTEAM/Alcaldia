@@ -73,7 +73,7 @@ namespace MVCAlcaldia.Controllers
             }
 
 
-            return RedirectToAction("List");
+            return RedirectToAction("Modify");
         }
 
         public ActionResult List()
@@ -83,5 +83,28 @@ namespace MVCAlcaldia.Controllers
 
             return View(colDto);
         }
+
+        public ActionResult ModifyPass(DtoChangePass dto)
+        {
+            LUsuarioController lgc = new LUsuarioController();
+            lgc.ModifyPassword(dto);
+
+            return RedirectToAction("Modify");
+        }
+
+        public ActionResult ModifyPassword()
+        {
+            DtoChangePass dto = new DtoChangePass();
+            dto.user = Session[CLogin.KEY_SESSION_USERNAME].ToString();
+
+            return View(dto);
+        }
+
+
+        #region VALIDATIONS
+
+
+
+        #endregion
     }
 }

@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace MVCAlcaldiaCiudadano.Controllers
 {
-    [AuthorizeAttribute]
+
     public class UsuarioCiudadanoController : Controller
     {
         public ActionResult Add()
@@ -33,7 +33,7 @@ namespace MVCAlcaldiaCiudadano.Controllers
         }
 
 
-
+        [AuthorizeAttribute]
         public ActionResult DeleteUsuario(string nombreDeUsuario)
         {
             LUsuarioController lgc = new LUsuarioController();
@@ -48,7 +48,7 @@ namespace MVCAlcaldiaCiudadano.Controllers
             return RedirectToAction("List");
         }
 
-
+        [AuthorizeAttribute]
         public ActionResult Modify()
         {
             string nombreUsuario = Session[CLogin.KEY_SESSION_USERNAME].ToString();
@@ -59,6 +59,7 @@ namespace MVCAlcaldiaCiudadano.Controllers
             return View(dto);
         }
 
+        [AuthorizeAttribute]
         [HttpPost]
         public ActionResult ModifyUsuario(DtoUsuario dto)
         {
@@ -70,17 +71,16 @@ namespace MVCAlcaldiaCiudadano.Controllers
             return RedirectToAction("Modify");
         }
 
-
-
-
+        [AuthorizeAttribute]
         public ActionResult ModifyPass(DtoChangePass dto)
         {
             LUsuarioController lgc = new LUsuarioController();
-            //List<string> colErrores = lgc.ModifyPassword(dto);
+            lgc.ModifyPassword(dto);
 
-            return RedirectToAction("Modify, UsuarioCiudadano");
+            return RedirectToAction("Modify");
         }
 
+        [AuthorizeAttribute]
         public ActionResult ModifyPassword()
         {
             DtoChangePass dto = new DtoChangePass();
@@ -92,14 +92,6 @@ namespace MVCAlcaldiaCiudadano.Controllers
 
         #region VALIDATIONS
 
-        public JsonResult ValidateNewPassword(string newPass, string repNewPass)
-        {
-            bool response = false;
-            if (newPass == repNewPass)
-                response = true;
-
-            return Json(response, JsonRequestBehavior.AllowGet);
-        }
 
         #endregion
 

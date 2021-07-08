@@ -133,7 +133,7 @@
     <Compile Include="Controllers\ReclamoController.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Controllers\TipoDeReclamoController.cs" />
-    <Compile Include="Controllers\TipoDeUsuarioController.cs" />
+    <Compile Include="Controllers\UsuarioCommonController.cs" />
     <Compile Include="Controllers\UsuarioFuncionarioController.cs" />
     <Compile Include="Controllers\ZonaController.cs" />
     <Compile Include="Global.asax.cs">
@@ -206,6 +206,7 @@
     <Content Include="Views\Reporte\_Listado.cshtml" />
     <Content Include="Views\Reporte\ReclamosAtrasados.cshtml" />
     <Content Include="Views\Reporte\ReporteCuadrillasMasEficientes.cshtml" />
+    <Content Include="Views\UsuarioFuncionario\ModifyPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

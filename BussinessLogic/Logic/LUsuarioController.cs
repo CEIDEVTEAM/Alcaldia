@@ -62,6 +62,10 @@ namespace BussinessLogic.Logic
             return this._Repository.GetUsuarioRepository().ExistUsuarioByCredentials(dto);
         }
 
+        public bool ExistUsuarioByNombre(string nombre)
+        {
+            return this._Repository.GetUsuarioRepository().ExistUsuarioByName(nombre);
+        }
         public List<string> ModifyUsuarioCiudadano(DtoUsuario dto)
         {
             dto.tipoDeUsuario = this._Repository.GetTipoDeUsuarioRepository().GetTipoUsuarioById(CUsuario.USER_CIUDADANO);
@@ -75,6 +79,12 @@ namespace BussinessLogic.Logic
 
             return colerrors;
         }
+
+        public void ModifyPassword(DtoChangePass dto)
+        {
+            this._Repository.GetUsuarioRepository().ModifyPassword(dto);
+        }
+
         public bool ValidateCredentialsFuncionario(DtoLogin dto)
         {
             dto.tipoDeUsuario = CUsuario.USER_FUNCIONARIO;

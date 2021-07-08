@@ -5,11 +5,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace CommonSolution.DTOs
 {
     public class DtoUsuario
     {
+        [Remote("ValidateUserName", "UsuarioCommon", ErrorMessage = "El nombre de usuario ya existe")]
         [StringLength(20, ErrorMessage = "El Nombre de usuario no puede superar los 20 caracteres")]
         [Required(ErrorMessage = "El Nombre de usuario es requerido")]
         [DisplayName("Nombre de usuario")]
@@ -30,6 +32,14 @@ namespace CommonSolution.DTOs
         [DataType(DataType.Password)]
         [DisplayName("Contraseña")]
         public string contrasenia { get; set; }
+
+        [Remote("ValidatePasswordNewUser", "UsuarioCommon", AdditionalFields = "contrasenia", ErrorMessage = "Las contraseñas no coinciden")]
+        [Required(ErrorMessage = "Repita la contraseña")]
+        [DataType(DataType.Password)]
+        [DisplayName("Repita contraseña")]
+
+        public string repContrasenia { get; set; }
+
 
         [StringLength(20, ErrorMessage = "La telefono no puede superar los 20 caracteres")]
         [Required(ErrorMessage = "El telefono a es requerido")]

@@ -131,6 +131,11 @@ namespace DataAccess.Repository
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return context.Usuario.AsNoTracking().Any(a => a.nombreDeUsuario == usuario.nombreDeUsuario && a.tipoDeUsuario == usuario.tipoDeUsuario.tipo && a.situacion == CGlobals.ESTADO_ACTIVO);
         }
+        public bool ExistUsuarioByName(string nombre)
+        {
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
+                return context.Usuario.AsNoTracking().Any(a => a.nombreDeUsuario == nombre);
+        }
         public bool ExistUsuarioByCredentials(DtoLogin dto)
         {
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())

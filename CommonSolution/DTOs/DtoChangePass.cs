@@ -25,7 +25,7 @@ namespace CommonSolution.DTOs
         [DataType(DataType.Password)]
         public string newPass { get; set; }
 
-        [Remote("ValidateNewPassword", "UsuarioCiudadano", AdditionalFields = "newPass", ErrorMessage = "Las contraseñas no coinciden")]
+        [Remote("ValidateNewPassword", "UsuarioCommon", AdditionalFields = "newPass", ErrorMessage = "Las contraseñas no coinciden")]
         [Required(ErrorMessage = "Repita la nueva contraseña")]
         [DisplayName("Repita nueva contraseña")]
         [DataType(DataType.Password)]
