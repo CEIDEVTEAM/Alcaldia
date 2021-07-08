@@ -4,11 +4,32 @@
     ViewBag.Title = "Listado de Cuadrillas";
 }
 
+<div class="row">
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div>
+                <input type="button" onclick="location.href='@Url.Action("Add", "Cuadrilla")'" class="btn btn-default" value="Ingresar" style="width: 100%; max-width: initial"  />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div>
+                <input type="button" onclick="location.href='@Url.Action("Modify", "Cuadrilla")'" class="btn btn-default" value="Actualizar" style="width: 100%; max-width: initial" />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div>
+                <input type="button" onclick="location.href='@Url.Action("List", "Cuadrilla")'" class="btn btn-default" value="Listar" style="width: 100%; max-width: initial" disabled />
+            </div>
+        </div>
+    </div>
+</div>
+
 <h2>Listado de Cuadrillas</h2>
 
-<p>
-    @Html.ActionLink("Agregar", "Add")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -42,9 +63,7 @@
                 @Html.DisplayFor(modelItem => item.cantidadDePeones)
             </td>
             <td>
-                @Html.ActionLink("Modificar", "Modify", new { id = item.id }) |
-                @Html.ActionLink("Details", "Details", new {/* id=item.id */}) |
-                @Html.ActionLink("Delete", "Delete", new { /*id=item.id */})
+                @Html.ActionLink("Actualizar", "Modify", new { id = item.id })
             </td>
         </tr>
     }

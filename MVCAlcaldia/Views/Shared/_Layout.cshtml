@@ -67,6 +67,9 @@
             </div>
         </div>
     </div>
+    <div id="snackbar">
+        @ViewBag.Message
+    </div>
 
     @{
         if (User.Identity.Name == "")
@@ -82,6 +85,16 @@
                 document.getElementById("userNonLoged").style.display = "none";
                 document.getElementById("userLoged").style.display = "block";
             </script>
+        }
+
+        if (ViewBag.Message != null)
+        {
+            <script>
+                var x = document.getElementById("snackbar");
+                x.className = "show";
+                setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+            </script>
+            ViewBag.Message = null;
         }
 
     }

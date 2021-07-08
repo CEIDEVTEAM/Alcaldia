@@ -75,6 +75,11 @@ namespace BussinessLogic.Logic
             return colerrors;
         }
 
+        public bool ExistCuadrillaByName(string name)
+        {
+            return this._Repository.GetCuadrillaRepository().ExistCuadrillaByName(name);
+        }
+
         public List<DtoCuadrilla> GetCuadrillasWithAvg()
         {
             List<DtoCuadrilla> colDto = new List<DtoCuadrilla>();
@@ -92,6 +97,11 @@ namespace BussinessLogic.Logic
             colDto = colDto.Where(w => w.situacion == CGlobals.ESTADO_ACTIVO).OrderBy(o => o.promedioNum).ToList();
 
             return colDto;
+        }
+
+        public bool ExistCuadrillaByNameAndId(string name, int id)
+        {
+            return this._Repository.GetCuadrillaRepository().ExistCuadrillaByNameAndId(name, id);
         }
     }
 }

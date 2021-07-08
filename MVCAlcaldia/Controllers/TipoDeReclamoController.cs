@@ -1,4 +1,5 @@
 ﻿using BussinessLogic.Logic;
+using CommonSolution.Constants;
 using CommonSolution.DTOs;
 using System;
 using System.Collections.Generic;
@@ -13,19 +14,21 @@ namespace MVCAlcaldia.Controllers
     {
         public ActionResult Add()
         {
+
+            Session[CGlobals.USER_ACTION] = "A";
             return View();
         }
 
         public ActionResult AddTipoDeReclamo(DtoTipoDeReclamo dto)
         {
             LTipoDeReclamoController lgc = new LTipoDeReclamoController();
-
             List<string> colErrors = lgc.AddTipoDeReclamo(dto);
 
             if (colErrors.Count == 0)
             {
                 ViewBag.Message = "Tipo de reclamo agregado con éxito";
                 ModelState.Clear();
+                Session[CGlobals.USER_ACTION] = "";
             }
 
             return View("Add");
@@ -35,10 +38,15 @@ namespace MVCAlcaldia.Controllers
 
         public ActionResult DeleteTipoDeReclamo(DtoTipoDeReclamo dto)
         {
+
             LTipoDeReclamoController lgc = new LTipoDeReclamoController();
+            List<string> colErrors = lgc.DeleteTipoDeReclamo(dto);
 
-            List<string> colErrores = lgc.DeleteTipoDeReclamo(dto);
-
+            if (colErrors.Count == 0)
+            {
+                ViewBag.Message = "Tipo de reclamo dado de baja";
+                ModelState.Clear();
+            }
 
             return View("List");
         }
@@ -47,22 +55,26 @@ namespace MVCAlcaldia.Controllers
         public ActionResult Modify(string nombre)
         {
 
+            Session[CGlobals.USER_ACTION] = "M";
             LTipoDeReclamoController lgc = new LTipoDeReclamoController();
             DtoTipoDeReclamo dto = lgc.GetTipoDeReclamoByName(nombre);
-
 
             return View(dto);
         }
 
-        [HttpPost]
+ 
         public ActionResult ModifyTipoDeReclamo(DtoTipoDeReclamo dto)
         {
             LTipoDeReclamoController lgc = new LTipoDeReclamoController();
-
             List<string> colErrors = lgc.ModifyTipoDeReclamo(dto);
 
+            if (colErrors.Count == 0)
+            {
+                ViewBag.Message = "Tipo de reclamo actualizado con éxito";
+                Session[CGlobals.USER_ACTION] = "";
+            }
 
-            return RedirectToAction("List");
+            return View("Modify");
         }
 
         public ActionResult List()
@@ -79,7 +91,12 @@ namespace MVCAlcaldia.Controllers
         {
             bool response = true;
             LTipoDeReclamoController lgc = new LTipoDeReclamoController();
-            response = lgc.ExistTipoDeReclamoByNombre(nombre) ? false : true;
+
+            if (Session[CGlobals.USER_ACTION].ToString() == "A")
+                response = lgc.ExistTipoDeReclamoByNombre(nombre) ? false : true;
+
+            else if (Session[CGlobals.USER_ACTION].ToString() == "M")
+                response = lgc.ExistTipoDeReclamoByNombre(nombre) ? true : false;
 
 
             return Json(response, JsonRequestBehavior.AllowGet);
