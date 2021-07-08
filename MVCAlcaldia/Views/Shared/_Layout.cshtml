@@ -68,7 +68,7 @@
         </div>
     </div>
     <div id="snackbar">
-        @ViewBag.Message
+        @Session["MESSAGE"]
     </div>
 
     @{
@@ -87,14 +87,15 @@
             </script>
         }
 
-        if (ViewBag.Message != null)
+        if (Session["MESSAGE"] != null)
         {
+
             <script>
                 var x = document.getElementById("snackbar");
                 x.className = "show";
                 setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
             </script>
-            ViewBag.Message = null;
+            Session["MESSAGE"] = null;
         }
 
     }

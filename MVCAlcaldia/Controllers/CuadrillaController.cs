@@ -41,8 +41,14 @@ namespace MVCAlcaldia.Controllers
             List<string> colErrors = new List<string>();
             colErrors = lgc.AddCuadrilla(dto);
 
+            if (colErrors.Count == 0)
+            {
+                Session[CGlobals.USER_MESSAGE] = "Cuadrilla ingresada con éxito";
+                ModelState.Clear();
+                Session[CGlobals.USER_ACTION] = "";
+            }
 
-            return RedirectToAction("Add");
+            return View("Add");
         }
 
         public ActionResult List()
@@ -83,6 +89,12 @@ namespace MVCAlcaldia.Controllers
         {
             LCuadrillaController lgc = new LCuadrillaController();
             List<string> colErrors = lgc.ModifyCuadrilla(dto);
+
+            if (colErrors.Count == 0)
+            {
+                Session[CGlobals.USER_MESSAGE] = "Cuadrilla actualizada con éxito";
+                Session[CGlobals.USER_ACTION] = "";
+            }
 
             return View("Modify");
         }

@@ -26,7 +26,7 @@ namespace MVCAlcaldia.Controllers
 
             if (colErrors.Count == 0)
             {
-                ViewBag.Message = "Tipo de reclamo agregado con éxito";
+                Session[CGlobals.USER_MESSAGE] = "Tipo de reclamo agregado con éxito";
                 ModelState.Clear();
                 Session[CGlobals.USER_ACTION] = "";
             }
@@ -44,7 +44,7 @@ namespace MVCAlcaldia.Controllers
 
             if (colErrors.Count == 0)
             {
-                ViewBag.Message = "Tipo de reclamo dado de baja";
+                Session[CGlobals.USER_MESSAGE] = "Tipo de reclamo dado de baja";
                 ModelState.Clear();
             }
 
@@ -70,7 +70,7 @@ namespace MVCAlcaldia.Controllers
 
             if (colErrors.Count == 0)
             {
-                ViewBag.Message = "Tipo de reclamo actualizado con éxito";
+                Session[CGlobals.USER_MESSAGE] = "Tipo de reclamo actualizado con éxito";
                 Session[CGlobals.USER_ACTION] = "";
             }
 

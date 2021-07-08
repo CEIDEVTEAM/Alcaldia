@@ -189,6 +189,7 @@
     <Content Include="Content\img\toledo.jpg" />
     <Content Include="Content\menu.css" />
     <Content Include="Content\presentational-only.css" />
+    <Content Include="Content\snackbar.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
