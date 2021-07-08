@@ -78,13 +78,13 @@ namespace MVCAlcaldiaCiudadano.Controllers
 
             return View(colDto);
         }
-
-        public ActionResult Delete(int id)
+        [HttpPost]
+        public JsonResult Delete(DtoReclamo dto)
         {
             LReclamoController lgc = new LReclamoController();
-            DtoReclamo dto = lgc.GetReclamoById(id);
+            DtoReclamo DtoRec = lgc.GetReclamoById(dto.id);
             
-            List<string> colErrores = lgc.DeleteReclamo(dto);
+            List<string> colErrores = lgc.DeleteReclamo(DtoRec);
 
             foreach (string error in colErrores)
             {
@@ -92,7 +92,7 @@ namespace MVCAlcaldiaCiudadano.Controllers
             }
 
 
-            return RedirectToAction("List");
+            return Json(JsonRequestBehavior.AllowGet);
         }
 
         //DeleteReclamo

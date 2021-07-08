@@ -27,7 +27,9 @@ namespace DataAccess.Mapper
                 LatitudReclamo = entity.LatitudReclamo,
                 LongitudReclamo = entity.LongitudReclamo,
                 idCuadrilla = entity.idCuadrilla,
-                idZona = (int)entity.idZona
+                idZona = (int)entity.idZona,
+                observacionFuncionario = entity.observacionFuncionario,
+                observacionCuadrilla = entity.observacionCuadrilla
             };
         }
 
@@ -47,7 +49,9 @@ namespace DataAccess.Mapper
                 LatitudReclamo = dto.LatitudReclamo,
                 LongitudReclamo = dto.LongitudReclamo,
                 idCuadrilla = dto.idCuadrilla,
-                idZona = dto.idZona
+                idZona = dto.idZona,
+                observacionFuncionario = dto.observacionFuncionario,
+                observacionCuadrilla = dto.observacionCuadrilla
             };
         }
 

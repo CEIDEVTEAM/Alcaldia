@@ -12,7 +12,9 @@ namespace MVCAlcaldiaCiudadano
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+                        "~/Scripts/jquery.validate*",
+                        "~/Scripts/alerts.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/maps").Include(
                         "~/Scripts/mapsFunctions.js"));
 

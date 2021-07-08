@@ -20,6 +20,8 @@ namespace MVCAlcaldia
                         "~/Scripts/mapsReports.js"));
             bundles.Add(new ScriptBundle("~/bundles/reports").Include(
                         "~/Scripts/reclamosCuadrilla.js"));
+            bundles.Add(new ScriptBundle("~/bundles/manejoReclamos").Include(
+                        "~/Scripts/reclamos.js"));
 
             // Utilice la versión de desarrollo de Modernizr para desarrollar y obtener información. De este modo, estará
             // para la producción, use la herramienta de compilación disponible en https://modernizr.com para seleccionar solo las pruebas que necesite.

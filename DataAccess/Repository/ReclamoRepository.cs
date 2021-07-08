@@ -54,6 +54,9 @@ namespace DataAccess.Repository
 
                         if (currReclamo != null)
                         {
+                            currReclamo.estado = dto.estado.ToString();
+                            currReclamo.observacionFuncionario = dto.observacionFuncionario;
+                            currReclamo.observacionCuadrilla = dto.observacionCuadrilla;
 
                         }
 
@@ -135,6 +138,19 @@ namespace DataAccess.Repository
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 colReclamos = this._ReclamoMapper.MapToDto(context.Reclamo.AsNoTracking().Where(w => w.idCiudadano == user).OrderByDescending(o => o.id).ToList());
+
+            }
+
+            return colReclamos;
+        }
+
+        public List<DtoReclamo> GetAllReclamosByFechasYestado(DtoReclamo dto)
+        {
+            List<DtoReclamo> colReclamos = new List<DtoReclamo>();
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
+            {
+                colReclamos = this._ReclamoMapper.MapToDto(context.Reclamo.AsNoTracking().Where(w => w.fechaYhora >= dto.fechaInicial &&
+                w.fechaYhora <= dto.fechaFinal && w.estado == dto.estado.ToString()).ToList());
 
             }
 

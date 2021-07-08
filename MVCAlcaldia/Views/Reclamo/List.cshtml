@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CommonSolution.DTOs.DtoReclamo>
+﻿@model CommonSolution.DTOs.DtoReclamo
 
 @{
     ViewBag.Title = "List";
@@ -6,76 +6,51 @@
 
 <h2>Listado de Reclamos</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fechaYhora)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.observaciones)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idCiudadano)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nombreTipoReclamo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LatitudReclamo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LongitudReclamo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idCuadrilla)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idZona)
-        </th>
-        <th></th>
-    </tr>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fechaYhora)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.observaciones)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.idCiudadano)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombreTipoReclamo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LatitudReclamo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LongitudReclamo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.idCuadrilla)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.idZona)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Estado</label>
+            <div class="col-md-10">
+                @Html.DropDownList("Estado", EnumHelper.GetSelectList(typeof(CommonSolution.ENUMs.EnumEstado)), "---Seleccione estado---", new { @class = "form-control", id = "selectValue" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Desde</label>
+            <div class="col-md-10">
+                <input id="date1" type="date">
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Hasta</label>
+            <div class="col-md-10">
+                <input id="date2" type="date">
+            </div>
+
+        </div>
+
+    </div>
 }
+<div class="form-group">
 
-</table>
+    <input type="submit" id="filtrar" value="Filtrar" class="btn btn-default" />
+
+</div>
+
+<div id="divTblRec">
+
+
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval");
+    @Scripts.Render("~/bundles/manejoReclamos");
+}

@@ -39,10 +39,7 @@ function initMap() {
         mapTypeId: "roadmap",
 
     });
-
-    
-    
-    
+   
 }
 
 function handleResponse() {
