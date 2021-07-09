@@ -34,7 +34,9 @@ namespace MVCAlcaldiaCiudadano
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-                      "~/Content/menu.css"));
+                      "~/Content/menu.css",
+                      "~/Content/snackbar.css"));
+
 
             bundles.Add(new StyleBundle("~/Background/css").Include(
                       "~/Content/bgimage.css"));

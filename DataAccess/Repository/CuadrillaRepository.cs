@@ -73,6 +73,7 @@ namespace DataAccess.Repository
         }
 
 
+
         public void DeleteCuadrilla(int idCuadrilla)
         {
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
@@ -98,6 +99,7 @@ namespace DataAccess.Repository
             }
         }
 
+
         public List<DtoCuadrilla> GetAllCuadrillas()
         {
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
@@ -115,7 +117,16 @@ namespace DataAccess.Repository
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return context.Cuadrilla.AsNoTracking().Any(a => a.id == idCuadrilla);
         }
-
+        public bool ExistCuadrillaByName(string name)
+        {
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
+                return context.Cuadrilla.AsNoTracking().Any(a => a.nombre == name);
+        }
+        public bool ExistCuadrillaByNameAndId(string name, int id)
+        {
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
+                return context.Cuadrilla.AsNoTracking().Any(a => a.nombre == name && a.id == id);
+        }
         public int GetCuadrillaForReclamo(int idZona)
         {
             int nroCuadrilla = 0;

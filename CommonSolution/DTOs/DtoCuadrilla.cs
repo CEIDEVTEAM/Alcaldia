@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace CommonSolution.DTOs
 {
@@ -13,6 +14,7 @@ namespace CommonSolution.DTOs
         [DisplayName("Nro")]
         public int id { get; set; }
 
+        [Remote("ValidateNombre", "Cuadrilla", AdditionalFields = "id", ErrorMessage = "El Nombre ingresado ya existe")]
         [StringLength(30, ErrorMessage = "El Nombre no puede superar los 30 caracteres")]
         [Required(ErrorMessage = "El Nombre es requerido")]
         [DisplayName("Nombre")]

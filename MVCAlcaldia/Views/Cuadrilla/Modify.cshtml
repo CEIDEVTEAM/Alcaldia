@@ -1,11 +1,34 @@
 ﻿@model CommonSolution.DTOs.DtoCuadrilla
 
 @{
-    ViewBag.Title = "Modificar Cuadrilla";
+    ViewBag.Title = "Actualizar Cuadrilla";
 }
 
-<h2>Modificar Cuadrilla</h2>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div>
+                <input type="button" onclick="location.href='@Url.Action("Add", "Cuadrilla")'" class="btn btn-default" value="Ingresar" style="width: 100%; max-width: initial" />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div>
+                <input type="button" onclick="location.href='@Url.Action("Modify", "Cuadrilla")'" class="btn btn-default" value="Actualizar" style="width: 100%; max-width: initial" disabled/>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div>
+                <input type="button" onclick="location.href='@Url.Action("List", "Cuadrilla")'" class="btn btn-default" value="Listar" style="width: 100%; max-width: initial"  />
+            </div>
+        </div>
+    </div>
+</div>
 
+<h2>Actualizar Cuadrilla</h2>
 
 @using (Html.BeginForm("ModifyCuadrilla", "Cuadrilla"))
 {
@@ -40,7 +63,6 @@
             @Html.ValidationMessageFor(model => model.idZona, "", new { @class = "text-danger" })
         </div>
     </div>
-
     <div class="form-group">
         @Html.LabelFor(model => model.cantidadDePeones, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -51,15 +73,11 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Guardar" class="btn btn-default" />
+            <input type="submit" value="Actualizar" class="btn btn-default" />
         </div>
     </div>
 </div>
 }
-
-<div>
-    @Html.ActionLink("Volver al listado", "List")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -67,6 +67,9 @@
             </div>
         </div>
     </div>
+    <div id="snackbar">
+        @Session["MESSAGE"]
+    </div>
 
     @{
         if (User.Identity.Name == "")
@@ -82,6 +85,17 @@
                 document.getElementById("userNonLoged").style.display = "none";
                 document.getElementById("userLoged").style.display = "block";
             </script>
+        }
+
+        if (Session["MESSAGE"] != null)
+        {
+
+            <script>
+                var x = document.getElementById("snackbar");
+                x.className = "show";
+                setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+            </script>
+            Session["MESSAGE"] = null;
         }
 
     }

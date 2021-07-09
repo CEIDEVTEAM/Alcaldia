@@ -1,4 +1,5 @@
 ﻿using BussinessLogic.Logic;
+using CommonSolution.Constants;
 using CommonSolution.DTOs;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace MVCAlcaldia.Controllers
             }
 
             ViewBag.colZonasSelect = colZonasSelect;
+            Session[CGlobals.USER_ACTION] = "A";
 
             return View();
         }
@@ -39,8 +41,14 @@ namespace MVCAlcaldia.Controllers
             List<string> colErrors = new List<string>();
             colErrors = lgc.AddCuadrilla(dto);
 
+            if (colErrors.Count == 0)
+            {
+                Session[CGlobals.USER_MESSAGE] = "Cuadrilla ingresada con éxito";
+                ModelState.Clear();
+                Session[CGlobals.USER_ACTION] = "";
+            }
 
-            return RedirectToAction("Add");
+            return View("Add");
         }
 
         public ActionResult List()
@@ -51,7 +59,7 @@ namespace MVCAlcaldia.Controllers
             return View(colDto);
         }
 
-        public ActionResult Modify(int id)
+        public ActionResult Modify(int? id)
         {
             LZonaController zonaController = new LZonaController();
             List<DtoZona> colDtoZona = zonaController.GetAllZonas();
@@ -69,7 +77,9 @@ namespace MVCAlcaldia.Controllers
             ViewBag.colZonasSelect = colZonasSelect;
 
             LCuadrillaController lgc = new LCuadrillaController();
-            DtoCuadrilla dto = lgc.GetCuadrillaById(id);
+            DtoCuadrilla dto = lgc.GetCuadrillaById(id ?? 0);
+            Session[CGlobals.USER_ACTION] = "M";
+
 
             return View(dto);
         }
@@ -78,14 +88,34 @@ namespace MVCAlcaldia.Controllers
         public ActionResult ModifyCuadrilla(DtoCuadrilla dto)
         {
             LCuadrillaController lgc = new LCuadrillaController();
-
             List<string> colErrors = lgc.ModifyCuadrilla(dto);
 
+            if (colErrors.Count == 0)
+            {
+                Session[CGlobals.USER_MESSAGE] = "Cuadrilla actualizada con éxito";
+                Session[CGlobals.USER_ACTION] = "";
+            }
 
+            return View("Modify");
+        }
 
-            return RedirectToAction("List");
+        #region VALIDATIONS
+        public JsonResult ValidateNombre(string nombre, int? id)
+        {
+            bool response = true;
+            LCuadrillaController lgc = new LCuadrillaController();
+
+            if (Session[CGlobals.USER_ACTION].ToString() == "A")
+                response = lgc.ExistCuadrillaByName(nombre) ? false : true;
+
+            else if (Session[CGlobals.USER_ACTION].ToString() == "M")
+                response = lgc.ExistCuadrillaByNameAndId(nombre, id ?? 0) ? true : false;
+
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
 
+
+        #endregion
     }
 }

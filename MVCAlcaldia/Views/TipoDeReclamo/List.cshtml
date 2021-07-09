@@ -4,11 +4,33 @@
     ViewBag.Title = "Listado de Tipos de Reclamo";
 }
 
+
+<div class="row">
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div>
+                <input type="button" onclick="location.href='@Url.Action("Add", "TipoDeReclamo")'" class="btn btn-default" value="Ingresar" style="width: 100%; max-width: initial" />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div>
+                <input type="button" onclick="location.href='@Url.Action("Modify", "TipoDeReclamo")'" class="btn btn-default" value="Actualizar" style="width: 100%; max-width: initial" />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div>
+                <input type="button" onclick="location.href='@Url.Action("List", "TipoDeReclamo")'" class="btn btn-default" value="Listar" style="width: 100%; max-width: initial" disabled />
+            </div>
+        </div>
+    </div>
+</div>
+
 <h2>Listado de Tipos de Reclamo</h2>
 
-<p>
-    @Html.ActionLink("Agregar", "Add")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -20,20 +42,19 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.descripcion)
-        </td>
-        <td>
-            @Html.ActionLink("Modificar", "Modify", new { nombre = item.nombre}) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.descripcion)
+            </td>
+            <td>
+                @Html.ActionLink("Actualizar", "Modify", new { nombre = item.nombre })
+            </td>
+        </tr>
+    }
 
 </table>
