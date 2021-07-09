@@ -27,20 +27,20 @@
         <div class="form-group">
             @Html.LabelFor(model => model.nombreTipoReclamo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.nombreTipoReclamo, (List<SelectListItem>)ViewBag.colTipoDeReclamoSelect, "-- Tipo de Reclamo --", new { @class = "form-control" ,id="tipoReclamo"})
+                @Html.DropDownListFor(model => model.nombreTipoReclamo, (List<SelectListItem>)ViewBag.colTipoDeReclamoSelect, "-- Tipo de Reclamo --", new { @class = "form-control", id = "tipoReclamo" })
                 @Html.ValidationMessageFor(model => model.nombreTipoReclamo, "", new { @class = "text-danger" })
             </div>
+            <hr>
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" id="smBut" value="Ingresar" class="btn btn-primary btn-lg btn-block" />
+            </div>
+
         </div>
 
         <div id="map" class="form-group" style="width: auto; height: 600px">
 
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" id="smBut" value="Ingresar" class="btn btn-default" />
-            </div>
-        </div>
     </div>
 }
 

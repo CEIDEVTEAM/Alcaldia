@@ -1,53 +1,37 @@
 ﻿@model IEnumerable<CommonSolution.DTOs.DtoLogReclamo>
-
+@using GridMvc.Html
 @{
     ViewBag.Title = "Details";
 }
+<head>
 
+    @Styles.Render("~/Content/gridmvc")
+
+</head>
 <h2>Detalle de Reclamo</h2>
 
 <p>
-    @Html.ActionLink("Volver", "List")
+    @Html.ActionLink("Volver", "Grid",null, new {@class = "btn btn-primary" })
 </p>
-<table class="table">
-    <tr>
-        
-        <th>
-            @Html.DisplayNameFor(model => model.estadoLog)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fechaYhoraLog)
-        </th>
-        
-        <th>
-            @Html.DisplayNameFor(model => model.comentarioLog)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idReclamo)
-        </th>
-        
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.estadoLog)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fechaYhoraLog)
-        </td>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.comentarioLog)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.idReclamo)
-        </td>
-        
-        
-    </tr>
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(c => c.idReclamo).Titled("Nro Reclamo").SetWidth(30);
+    columns.Add(c => c.fechaYhoraLog).Titled("Fecha").SetWidth(30);
+    columns.Add(c => c.comentarioLog).Titled("Comentarios del ayuntamiento").SetWidth(30);
+    columns.Add(c => c.estadoLog).Titled("Evolución Estado").SetWidth(20);
+
+
+
+
+}).WithPaging(8).EmptyText("No hay nada que mostrar").Sortable().Filterable()
+
+@section Scripts {
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/grid")
+
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 }
-
-</table>

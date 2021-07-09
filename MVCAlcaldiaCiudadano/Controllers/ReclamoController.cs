@@ -69,6 +69,14 @@ namespace MVCAlcaldiaCiudadano.Controllers
 
             return View(colDto);
         }
+        public ActionResult Grid()
+        {
+            LReclamoController lgc = new LReclamoController();
+            string user = Session[CLogin.KEY_SESSION_USERNAME].ToString();
+            List<DtoReclamo> colDto = lgc.GetAllReclamosByUser(user);
+
+            return View(colDto);
+        }
 
         public ActionResult Details(int id)
         {

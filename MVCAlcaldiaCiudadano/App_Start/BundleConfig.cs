@@ -18,6 +18,10 @@ namespace MVCAlcaldiaCiudadano
             bundles.Add(new ScriptBundle("~/bundles/maps").Include(
                         "~/Scripts/mapsFunctions.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/grid").Include(
+                       "~/Scripts/gridmvc.js",
+                      "~/Scripts/gridmvc.min.js"));
+
             // Utilice la versión de desarrollo de Modernizr para desarrollar y obtener información. De este modo, estará
             // para la producción, use la herramienta de compilación disponible en https://modernizr.com para seleccionar solo las pruebas que necesite.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
@@ -34,6 +38,11 @@ namespace MVCAlcaldiaCiudadano
 
             bundles.Add(new StyleBundle("~/Background/css").Include(
                       "~/Content/bgimage.css"));
+
+            bundles.Add(new StyleBundle("~/Content/gridmvc").Include(
+                      "~/Content/Gridmvc.css"));
+            bundles.Add(new StyleBundle("~/Content/cards").Include(
+                     "~/Content/reclamosCards.css"));
         }
     }
 }

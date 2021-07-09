@@ -4,66 +4,75 @@
     ViewBag.Title = "List";
 }
 
-<h2>Reclamos Realizados</h2>
+
 
 <p>
-    @Html.ActionLink("Nuevo Reclamo", "Add")
+    @Html.ActionLink("Nuevo Reclamo", "Add", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Vista en Grilla", "Grid", null, new { @class = "btn btn-success" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fechaYhora)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.observaciones)
-        </th>
 
-        <th>
-            @Html.DisplayNameFor(model => model.nombreTipoReclamo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>
+<head>
 
-        <th></th>
-    </tr>
+    @Styles.Render("~/Content/cards")
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.fechaYhora)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.observaciones)
-            </td>
+</head>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.nombreTipoReclamo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.estado)
-            </td>
 
-            <td>
 
-                @Html.ActionLink("Detalle", "Details", new { id = item.id })|
-                @if (item.estado == CommonSolution.ENUMs.EnumEstado.PENDIENTE)
-                {
-                    <input id="Delete" onclick="confirmation('@item.id')"type="button" value="Cancelar" />
-                }
+<div class="pricing6 py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <h3 class="mb-3">Reclamos realizados</h3>
+                <h6 class="subtitle font-weight-normal">Listado de reclamos realizados, gracias por su aportación a la ciudad de Toledo.</h6>
+            </div>
+        </div>
+        <!-- row  -->
+        @foreach (var item in Model)
+        {
+            <div class="row mt-4">
+                <!-- column  -->
+                <div class="col-md-6">
+                    <div class="card card-shadow border-0 mb-4">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center">
+                                <h5 class="font-weight-medium mb-0">Reclamo</h5>
+                                <div class="ml-auto"><span class="badge badge-danger font-weight-normal p-2">Información</span></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-5 text-center">
+                                    <div class="price-box my-3">
+                                        <sup>Nro.</sup><span class="text-dark display-5">@Html.DisplayFor(modelItem => item.id)</span>
+                                        <h6 class="font-weight-light">@Html.DisplayFor(modelItem => item.fechaYhora)</h6>
+                                        <a> @Html.ActionLink("Detalle", "Details" , new { id = item.id }, new { @class="btn btn-success" }) </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7 align-self-center">
+                                    <ul class="list-inline pl-3 font-14 font-weight-medium text-dark">
+                                        <span>Observación proporcionada: </span>
+                                        <br />
+                                        <p class="contenedor">@Html.DisplayFor(modelItem => item.observaciones) <p>
+                                        <br />
+                                        <hr />
+                                        <li class="py-2"><i class="icon-check text-info mr-2"></i> <span>Estado actual de su reclamo:</span></li><br />
+                                        <li class="py-2"><i class="icon-check text-info mr-2"></i> @Html.DisplayFor(modelItem => item.estado) </li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            </td>
-        </tr>
-    }
+            </div>
+            <hr />
+        }
+    </div>
 
-</table>
+</div>
+
+
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
