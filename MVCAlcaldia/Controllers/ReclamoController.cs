@@ -92,10 +92,12 @@ namespace MVCAlcaldia.Controllers
             document.Add(ls);
 
             // Add paragraph1
-            Paragraph paragraph1 = new Paragraph("Docuento de uso interno, " +
+            Paragraph paragraph1 = new Paragraph("Documento de uso interno, " +
                 "orden de trabajo para cuadrillas.");
             document.Add(paragraph1);
-            var dirección = "https://www.google.com/maps/@" + dto.LatitudReclamo + "," + dto.LongitudReclamo + "," + "7z";
+            Paragraph paragraph3 = new Paragraph("Escanear código Qr para conocer ubicación exacta.");
+            document.Add(paragraph3);
+            var dirección = "https://maps.google.com/?q=" + dto.LatitudReclamo + "," + dto.LongitudReclamo;
             BarcodeQRCode qrCode = new BarcodeQRCode(dirección);
             PdfFormXObject barcodeObject = qrCode.CreateFormXObject(ColorConstants.BLACK, pdf);
             Image barcodeImage = new Image(barcodeObject).SetWidth(100f).SetHeight(100f);
@@ -128,16 +130,16 @@ namespace MVCAlcaldia.Controllers
             document.Add(newline);
             document.Add(table);
 
-            Paragraph paragraph2 = new Paragraph("Descripción: ");
+            Paragraph paragraph2 = new Paragraph(dto.observaciones);
             document.Add(paragraph2);
 
             // Hyper link
-            Link link = new Link("click here",
-               PdfAction.CreateURI("https://www.google.com"));
-            Paragraph hyperLink = new Paragraph("Please ")
+            Link link = new Link("click aquí",
+               PdfAction.CreateURI("https://maps.google.com/?q=" + dto.LatitudReclamo + "," + dto.LongitudReclamo));
+            Paragraph hyperLink = new Paragraph("Por favor ")
                .Add(link.SetBold().SetUnderline()
                .SetItalic().SetFontColor(ColorConstants.BLUE))
-               .Add(" to go www.google.com.");
+               .Add("Enlace a la dirección del reclamo");
 
             document.Add(newline);
             document.Add(hyperLink);

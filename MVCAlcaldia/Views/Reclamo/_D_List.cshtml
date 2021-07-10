@@ -70,6 +70,7 @@
                 @Html.DisplayFor(modelItem => item.idZona)
             </td>
             <td>
+               
                 @Html.ActionLink("Cambiar Estado", "Modify", new { id = item.id }) |
                 @Html.ActionLink("Generar Orden", "CreatePdf", new { id = item.id })
             </td>
