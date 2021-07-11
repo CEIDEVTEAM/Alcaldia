@@ -1,5 +1,6 @@
 ﻿document.getElementById("filtrar").onclick = load;
 var map;
+
 function load() {
 
     buscar(); 

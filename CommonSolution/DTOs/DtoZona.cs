@@ -21,5 +21,6 @@ namespace CommonSolution.DTOs
         public string color { get; set; }
         public List<DtoVertice> colVertices { get; set; }
 
+        public int reclamosActivos { get; set; }
     }
 }

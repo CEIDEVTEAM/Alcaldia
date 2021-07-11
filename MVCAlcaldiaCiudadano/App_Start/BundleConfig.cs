@@ -43,6 +43,7 @@ namespace MVCAlcaldiaCiudadano
 
             bundles.Add(new StyleBundle("~/Content/gridmvc").Include(
                       "~/Content/Gridmvc.css"));
+            
             bundles.Add(new StyleBundle("~/Content/cards").Include(
                      "~/Content/reclamosCards.css"));
         }

@@ -35,5 +35,6 @@ namespace DataAccess.Model
         public virtual DbSet<Reclamo> Reclamo { get; set; }
         public virtual DbSet<V_ReclamosAbiertosPorCuadrilla> V_ReclamosAbiertosPorCuadrilla { get; set; }
         public virtual DbSet<V_ReclamosResueltosPorCuadrilla> V_ReclamosResueltosPorCuadrilla { get; set; }
+        public virtual DbSet<V_ReclamosActivosPorZonas> V_ReclamosActivosPorZonas { get; set; }
     }
 }

@@ -3,8 +3,8 @@
 var map;
 var marker;
 var dto = [];
-//-34.90414838859055, -54.95240618763575
-//39.866667°, -4.033333°
+
+//iniciarMapa
 function initMap() {
 
     var currentPoly = [];
@@ -14,62 +14,36 @@ function initMap() {
         center: centro,
         mapTypeId: "roadmap",
     });
-    // This event listener will call addMarker() when the map is clicked.
-    /*map.addListener("click", (event) => {
-        addMarker(event.latLng);
-    });*/
-
-    /*document.getElementById("btn2").addEventListener("click", function () {
-        createPoly(markers)
-    });*/
-    /*var point = $("#btn3").on("click", function () { createPoint(map); });*/
-
+   
     document.getElementById("smBut").addEventListener("click", addReclamo);
     
     handleResponse();
 }
 
-
-// Adds a marker to the map and push to the array.
-/*function addMarker(location) {
-    const marker = new google.maps.Marker({
-        position: location,
-        map: map,
-    });
-    markers.push(marker);
-}*/
-
-// Sets the map on all markers in the array.
+//funciones auxiliares
 function setMapOnAll(map) {
     for (let i = 0; i < markers.length; i++) {
         markers[i].setMap(map);
     }
 }
 
-// Removes the markers from the map, but keeps them in the array.
 function clearMarkers() {
     setMapOnAll(null);
 }
 
-// Shows any markers currently in the array.
 function showMarkers() {
     setMapOnAll(map);
 }
 
-// Deletes all markers in the array by removing references to them.
 function deleteMarkers() {
     clearMarkers();
     markers = [];
 }
 
-//Delete Polygon
 function removeLine(name) {
 
     name.setMap(null);
 }
-
-
-
 
 function showArrays(event) {
 
@@ -115,6 +89,8 @@ function showArrays(event) {
 
 }
 
+
+//nuevo reclamo
 function addReclamo() {
     var obs = document.getElementById("observaciones").value;
     var tpReclamo = document.getElementById("tipoReclamo").value;
@@ -140,7 +116,6 @@ function addReclamo() {
 
     }
 }
-
 
 
 function createPoly(coordinates) {
@@ -185,6 +160,8 @@ function createPoly(coordinates) {
     return polygon;
 }
 
+
+//imprimir zonas
 function getZona(polygon) {
     var poligono = polygon;
     var vertices = poligono.getPath();
@@ -217,8 +194,6 @@ function getZona(polygon) {
 
 
 }
-
-
 
 function handleResponse() {
 

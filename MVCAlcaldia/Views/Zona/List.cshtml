@@ -1,38 +1,33 @@
 ﻿@model IEnumerable<CommonSolution.DTOs.DtoZona>
-
+@using GridMvc.Html
 @{
     ViewBag.Title = "Listar Zonas";
 }
+@Styles.Render("~/Content/gridmvc")
 
 <h2>Listado de Zonas</h2>
 
 <p>
-    @Html.ActionLink("Agregar", "Add")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.color)
-        </th>
-        <th></th>
-    </tr>
+    @Html.ActionLink("Agregar", "Add",null, new { @class = "btn btn-primary" })
+<p>
+ 
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.EditorFor(modelItem => item.color, new { htmlAttributes = new {@disabled="disabled", type = "color"} })
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(c => c.nombre).Titled("Nombre").SetWidth(30).Filterable(true);
+    columns.Add(c => c.color).Titled("Color").Sanitized(false).Encoded(false).RenderValueAs(c => new HtmlString(
+    "<div style='height: 20px; width: 20px; background-color: " + c.color + "'></div>"
+    )).SetWidth(50);
 
-        </td>
-        <td>
-            @Html.ActionLink("Borrar", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+    columns.Add(c => c.reclamosActivos).Titled("Reclamos activos").SetWidth(10).Filterable(true); ;
+    columns.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(o => Html.ActionLink("Borrar", "Delete", new { id = o.id }, new { @class = "btn btn-danger" }));
 
-</table>
+}).WithPaging(8).EmptyText("No hay nada que mostrar").Sortable()
+
+
+    @section Scripts {
+
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/bundles/grid")
+
+    }

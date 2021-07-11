@@ -4,7 +4,17 @@
     ViewBag.Title = "List";
 }
 
-<h2>Listado de Reclamos</h2>
+<div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+        <h1 class="mb-3">Gestión de reclamos</h1>
+        <h6 class="subtitle font-weight-normal">Seleccione filtro por estado y rango de fechas. Filtro por defecto: todos los reclamos ASIGNADOS</h6>
+    </div>
+</div>
+<hr>
+<p>
+    @Html.ActionLink("Listado General", "ListAll", null, new { @class = "btn btn-primary" })
+</p>
+
 
 @using (Html.BeginForm())
 {

@@ -2,8 +2,9 @@
 
 var map;
 var markers = [];
-//-34.90414838859055, -54.95240618763575
-//39.866667°, -4.033333°
+
+
+//funcion iniciadora del mapa
 function initMap() {
 
     var currentPoly = [];
@@ -26,8 +27,7 @@ function initMap() {
     handleResponse();
 }
 
-
-// Adds a marker to the map and push to the array.
+//pequeñas funcionalidades auxiliares
 function addMarker(location) {
     const marker = new google.maps.Marker({
         position: location,
@@ -36,105 +36,46 @@ function addMarker(location) {
     markers.push(marker);
 }
 
-// Sets the map on all markers in the array.
 function setMapOnAll(map) {
     for (let i = 0; i < markers.length; i++) {
         markers[i].setMap(map);
     }
 }
 
-// Removes the markers from the map, but keeps them in the array.
 function clearMarkers() {
     setMapOnAll(null);
 }
 
-// Shows any markers currently in the array.
 function showMarkers() {
     setMapOnAll(map);
 }
 
-// Deletes all markers in the array by removing references to them.
 function deleteMarkers() {
     clearMarkers();
     markers = [];
 }
 
-//Delete Polygon
 function removeLine(name) {
 
     name.setMap(null);
 }
-
-
-
 
 function showArrays(event) {
     
     const polygon = this;
     const vertices = polygon.getPath();
     const nombre = polygon.name;
+    const recAct = polygon.count;
     let contentString =
-        "<b>Zona: "+nombre+"</b><br>" +
-        "Esta Ubicación: <br>" +
-        event.latLng.lat() +
-        "," +
-        event.latLng.lng() +
-        "<br>";
-
-    // Iterate over the vertices.
-    /*for (let i = 0; i < vertices.getLength(); i++) {
-        const xy = vertices.getAt(i);
-        contentString +=
-            "<br>" + "Coordenada " + i + ":<br>" + xy.lat() + "," + xy.lng();
-    }*/
-    // Replace the info window's content and position.
+        "<b>Zona: " + nombre + "</b><br>" +
+        "<b>Reclamos activos actuales: " + recAct + "</b><br>" 
+        
     infoWindow.setContent(contentString);
     infoWindow.setPosition(event.latLng);
     infoWindow.open(map);
 }
 
-function createPoly(coordinates) {
-
-    var coords = [];
-    for (let i = 0; i < coordinates.length; i++) {
-
-        let latitude = parseFloat(coordinates[i].getPosition().lat().toFixed(6));
-        let long = parseFloat(coordinates[i].getPosition().lng().toFixed(6));
-        let singleCoord = { lat: latitude, lng: long };
-        coords.push(singleCoord);
-
-    }
-
-    var color = document.getElementById("colorPicker").value;
-    //var name = document.getElementById("zoneColor").value;
-
-    const polyCoords = coords;
-    // Construct the polygon.
-    const polygon = new google.maps.Polygon({
-        paths: polyCoords,
-        strokeColor: color,
-        strokeOpacity: 0.8,
-        strokeWeight: 3,
-        fillColor: color,
-        fillOpacity: 0.90,
-        editable: true
-
-    });
-    polygon.setMap(map);
-
-    deleteMarkers();
-   
-
-    polygon.addListener("click", showArrays);
-    infoWindow = new google.maps.InfoWindow();
-
-    document.getElementById("btn1").addEventListener("click", function () {
-        getZona(polygon)
-    });
-
-    return polygon;
-}
-
+//guardar zona
 function getZona(polygon) {
     var poligono = polygon;
     var vertices = poligono.getPath();
@@ -167,12 +108,48 @@ function getZona(polygon) {
 
     
 }
+function createPoly(coordinates) {
+
+    var coords = [];
+    for (let i = 0; i < coordinates.length; i++) {
+
+        let latitude = parseFloat(coordinates[i].getPosition().lat().toFixed(6));
+        let long = parseFloat(coordinates[i].getPosition().lng().toFixed(6));
+        let singleCoord = { lat: latitude, lng: long };
+        coords.push(singleCoord);
+
+    }
+
+    var color = document.getElementById("colorPicker").value;
+    //var name = document.getElementById("zoneColor").value;
+
+    const polyCoords = coords;
+    // Construct the polygon.
+    const polygon = new google.maps.Polygon({
+        paths: polyCoords,
+        strokeColor: color,
+        strokeOpacity: 0.8,
+        strokeWeight: 3,
+        fillColor: color,
+        fillOpacity: 0.90,
+        editable: true
+
+    });
+    polygon.setMap(map);
+
+    deleteMarkers();
 
 
+    polygon.addListener("click", showArrays);
+    infoWindow = new google.maps.InfoWindow();
 
+    document.getElementById("btn1").addEventListener("click", function () {
+        getZona(polygon)
+    });
 
-
-
+    return polygon;
+}
+//graficar zonas
 function handleResponse() {
 
     $.ajax({
@@ -212,12 +189,14 @@ function zonesPopulate(item) {
 
     var color = item.color;
     var nombre = item.nombre;
+    var rActivos = item.reclamosActivos;
 
     const polyCoords = coords;
     // Construct the polygon.
     const polygon = new google.maps.Polygon({
 
         name: nombre,
+        count: rActivos,
         paths: polyCoords,
         strokeColor: color,
         strokeOpacity: 0.5,

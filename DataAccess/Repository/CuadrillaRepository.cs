@@ -143,6 +143,8 @@ namespace DataAccess.Repository
             return nroCuadrilla;
         }
 
+
+
         public List<DtoCuadrilla> GetCuadrillasWithAvg()
         {
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())

@@ -136,5 +136,19 @@ namespace DataAccess.Repository
                 return context.Zona.AsNoTracking().Any(a => a.id == idZona && a.situacion == CGlobals.ESTADO_ACTIVO);
         }
 
+        public int GetReclamosActivosZona(int idZona)
+        {
+            int cantidad = 0;
+            V_ReclamosAbiertosPorCuadrilla entity = new V_ReclamosAbiertosPorCuadrilla();
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
+            {
+                entity = context.V_ReclamosAbiertosPorCuadrilla.AsNoTracking().FirstOrDefault(w => w.idZona == idZona);
+                if (entity != null)
+                    cantidad = (int)entity.cantidad; 
+            }
+
+            return cantidad;
+        }
+
     }
 }

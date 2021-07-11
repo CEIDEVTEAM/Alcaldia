@@ -37,6 +37,14 @@ namespace MVCAlcaldia.Controllers
             
             return PartialView("_D_List", colDto);
         }
+        public ActionResult ListAll()
+        {
+            LReclamoController lgc = new LReclamoController();
+
+            List<DtoReclamo> colDto = lgc.GetAllReclamos(); 
+
+            return View(colDto);
+        }
 
 
         public ActionResult Modify(int id)
@@ -57,7 +65,14 @@ namespace MVCAlcaldia.Controllers
 
             return RedirectToAction("List");
         }
+        public ActionResult Details(int id)
+        {
+            LLogReclamoController lgc = new LLogReclamoController();
 
+            List<DtoLogReclamo> colDto = lgc.GetLogReclamoById(id);
+
+            return View(colDto);
+        }
         public ActionResult CreatePdf(int id)
         {
             LReclamoController lgc = new LReclamoController();
@@ -103,13 +118,6 @@ namespace MVCAlcaldia.Controllers
             Image barcodeImage = new Image(barcodeObject).SetWidth(100f).SetHeight(100f);
             document.Add(new Paragraph().Add(barcodeImage));
 
-
-            /*// Add image
-            Image img = new Image(ImageDataFactory
-               .Create("image.jpg"))
-               .SetTextAlignment(TextAlignment.CENTER);
-            document.Add(img);*/
-
             // Table
             Table table = new Table(2, false);
             Cell cell11 = new Cell(1, 1)
@@ -122,15 +130,13 @@ namespace MVCAlcaldia.Controllers
                .Add(new Paragraph("Fecha: "+ dto.fechaYhora));
 
 
-
             table.AddCell(cell11);
             table.AddCell(cell12);
-
 
             document.Add(newline);
             document.Add(table);
 
-            Paragraph paragraph2 = new Paragraph(dto.observaciones);
+            Paragraph paragraph2 = new Paragraph("OBSERVACIÓN CIUDADANO: "+dto.observaciones);
             document.Add(paragraph2);
 
             // Hyper link

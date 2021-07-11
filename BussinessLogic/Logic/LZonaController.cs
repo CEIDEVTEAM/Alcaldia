@@ -43,7 +43,14 @@ namespace BussinessLogic.Logic
 
         public List<DtoZona> GetAllZonas()
         {
-            return this._Repository.GetZonaRepository().GetAllZonas();
+            List<DtoZona> colDto = new List<DtoZona>();
+            colDto = this._Repository.GetZonaRepository().GetAllZonas();
+            foreach (DtoZona item in colDto)
+            {
+                item.reclamosActivos = this._Repository.GetZonaRepository().GetReclamosActivosZona(item.id);
+            }
+
+            return colDto;
         }
 
         public List<string> DeleteZona(DtoZona dto)

@@ -7,7 +7,7 @@
       <Diagram DiagramId="86a25fd73f62459e8e2ddd59d74ddf8c" Name="Diagram1" ZoomLevel="72">
         <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Usuario" PointX="3.375" PointY="0.75" Width="1.5" />
         <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Zona" PointX="0.75" PointY="0.75" Width="1.5" />
-        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Cuadrilla" Width="1.5" PointX="3" PointY="13.875" />
+        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Cuadrilla" Width="1.5" PointX="4.375" PointY="12.5" />
         <EntityTypeShape EntityType="ReclamosAlcaldiaModel.LogReclamo" Width="1.5" PointX="7.875" PointY="4.25" />
         <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Tipo_De_Reclamo" Width="1.5" PointX="3.375" PointY="5.75" />
         <EntityTypeShape EntityType="ReclamosAlcaldiaModel.Tipo_Usuario" Width="1.5" PointX="1.125" PointY="5.5" />
@@ -24,6 +24,7 @@
         <AssociationConnector Association="ReclamosAlcaldiaModel.fk_reclamoCiudadano" />
         <EntityTypeShape EntityType="ReclamosAlcaldiaModel.V_ReclamosAbiertosPorCuadrilla" Width="1.5" PointX="5.375" PointY="0.75" FillColor="Red" />
         <EntityTypeShape EntityType="ReclamosAlcaldiaModel.V_ReclamosResueltosPorCuadrilla" Width="1.5" PointX="7.375" PointY="0.75" FillColor="Red" />
+        <EntityTypeShape EntityType="ReclamosAlcaldiaModel.V_ReclamosActivosPorZonas" Width="1.5" PointX="10.625" PointY="0.875" FillColor="Red" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

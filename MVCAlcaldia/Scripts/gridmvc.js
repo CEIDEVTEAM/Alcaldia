@@ -383,21 +383,21 @@ GridMvc = (function ($) {
 if (typeof (GridMvc.lang) == 'undefined')
     GridMvc.lang = {};
 GridMvc.lang.en = {
-    filterTypeLabel: "Type: ",
-    filterValueLabel: "Value:",
-    applyFilterButtonText: "Apply",
+    filterTypeLabel: "Tipo: ",
+    filterValueLabel: "Valor:",
+    applyFilterButtonText: "Aplicar",
     filterSelectTypes: {
-        Equals: "Equals",
-        StartsWith: "StartsWith",
-        Contains: "Contains",
-        EndsWith: "EndsWith",
-        GreaterThan: "Greater than",
-        LessThan: "Less than"
+        Equals: "Igual a",
+        StartsWith: "Comienza..",
+        Contains: "Contiene",
+        EndsWith: "..Temina",
+        GreaterThan: "Mayor que",
+        LessThan: "Menor que"
     },
     code: 'en',
-    boolTrueLabel: "Yes",
+    boolTrueLabel: "Si",
     boolFalseLabel: "No",
-    clearFilterLabel: "Clear filter"
+    clearFilterLabel: "Limpiar filtro"
 };
 /***
 * ============= FILTER WIDGETS =============
@@ -623,10 +623,10 @@ DateTimeFilterWidget = (function ($) {
                             <option value="6" ' + (this.value.filterType == "6" ? "selected=\"selected\"" : "") + '>' + this.lang.filterSelectTypes.LessThan + '</option>\
                         </select>\
                     </div>' +
-                        (this.datePickerIncluded ?
-                            '<div class="grid-filter-datepicker"></div>'
-                            :
-                            '<div class="form-group">\
+            (this.datePickerIncluded ?
+                '<div class="grid-filter-datepicker"></div>'
+                :
+                '<div class="form-group">\
                                 <label>' + this.lang.filterValueLabel + '</label>\
                                 <input type="text" class="grid-filter-input form-control" value="' + this.value.filterValue + '" />\
                              </div>\

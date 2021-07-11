@@ -132,22 +132,9 @@ namespace BussinessLogic.Logic
 
         public List<DtoReclamo> GetAllReclamosByFechaYestado(DtoReclamo dto)
         {
-            List<DtoReclamo> reclamosFiltrados = new List<DtoReclamo>();
 
-            if (string.IsNullOrEmpty(dto.estado.ToString()))
-            {
-                reclamosFiltrados = this._Repository.GetReclamoRepository().GetAllReclamos(dto.fechaInicial, dto.fechaFinal);
-                return reclamosFiltrados;
-            }
-            if (dto.fechaInicial == null)
-            {
-                reclamosFiltrados = this._Repository.GetReclamoRepository().GetAllReclamos();
-                return reclamosFiltrados;
-            }
-            
-            reclamosFiltrados = this._Repository.GetReclamoRepository().GetAllReclamosByFechasYestado(dto);
+            return this._Repository.GetReclamoRepository().GetAllReclamosByFechasYestado(dto);
 
-            return reclamosFiltrados;
         }
 
         public List<DtoReclamo> GetAllReclamosActivosByCuadrilla(int IdCuadrilla)

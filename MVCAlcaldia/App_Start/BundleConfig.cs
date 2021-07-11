@@ -18,10 +18,16 @@ namespace MVCAlcaldia
                         "~/Scripts/mapsFunctions.js"));
             bundles.Add(new ScriptBundle("~/bundles/mapsReports").Include(
                         "~/Scripts/mapsReports.js"));
+            bundles.Add(new ScriptBundle("~/bundles/heatMap").Include(
+                        "~/Scripts/mapaTermico.js"));
             bundles.Add(new ScriptBundle("~/bundles/reports").Include(
                         "~/Scripts/reclamosCuadrilla.js"));
             bundles.Add(new ScriptBundle("~/bundles/manejoReclamos").Include(
                         "~/Scripts/reclamos.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/grid").Include(
+                       "~/Scripts/gridmvc.js",
+                      "~/Scripts/gridmvc.min.js"));
 
             // Utilice la versión de desarrollo de Modernizr para desarrollar y obtener información. De este modo, estará
             // para la producción, use la herramienta de compilación disponible en https://modernizr.com para seleccionar solo las pruebas que necesite.
@@ -37,6 +43,11 @@ namespace MVCAlcaldia
                       "~/Content/site.css",
                       "~/Content/menu.css",
                       "~/Content/snackbar.css"));
+            bundles.Add(new StyleBundle("~/Content/gridmvc").Include(
+                      "~/Content/Gridmvc.css"));
+
+            bundles.Add(new StyleBundle("~/Content/cards").Include(
+                     "~/Content/reclamosCards.css"));
         }
     }
 }

@@ -1,21 +1,31 @@
 ﻿@model IEnumerable<CommonSolution.DTOs.DtoReclamo>
-    
+@using GridMvc.Html
 @{
-    ViewBag.Title = "_D_List";
+    ViewBag.Title = "ListAll";
 }
+
 @Styles.Render("~/Content/gridmvc")
 
-<h2>Reclamos:</h2>
+<div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+        <h1 class="mb-3">Gestión de reclamos</h1>
+        
+    </div>
+</div>
+<hr>
+<p>
+    @Html.ActionLink("Filtro por Estado", "List", null, new { @class = "btn btn-primary" })
+</p>
 
 @Html.Grid(Model).Columns(columns =>
 {
-    columns.Add(c => c.id).Titled("Nro Reclamo").SetWidth(30);
+    columns.Add(c => c.id).Titled("Nro Reclamo").SetWidth(30).Filterable(true);
     columns.Add(c => c.fechaYhora).Titled("Fecha").SetWidth(30);
     columns.Add(c => c.observaciones).Titled("Comentarios").SetWidth(30);
-    columns.Add(c => c.idCiudadano).Titled("Id Ciudadano").SetWidth(20);
-    columns.Add(c => c.nombreTipoReclamo).Titled("Tipo").SetWidth(20);
-    columns.Add(c => c.idCuadrilla).Titled("Cuadrilla").SetWidth(20);
-    columns.Add(c => c.idZona).Titled("Zona").SetWidth(20);
+    columns.Add(c => c.idCiudadano).Titled("Id Ciudadano").SetWidth(20).Filterable(true);
+    columns.Add(c => c.nombreTipoReclamo).Titled("Tipo").SetWidth(20).Filterable(true);
+    columns.Add(c => c.idCuadrilla).Titled("Cuadrilla").SetWidth(20).Filterable(true);
+    columns.Add(c => c.estado).Titled("Estado").SetWidth(20);
 
     columns.Add().Encoded(false).Sanitized(false).SetWidth(10).RenderValueAs(o => Html.ActionLink("Estado", "Modify", new { id = o.id }, new { @class = "btn btn-success" }));
     columns.Add().Encoded(false).Sanitized(false).SetWidth(10).RenderValueAs(o => Html.ActionLink("Detalle", "Details", new { id = o.id }, new { @class = "btn btn-success" }));
@@ -23,7 +33,7 @@
 
 
 
-}).WithPaging(8).EmptyText("No hay nada que mostrar")
+}).WithPaging(8).EmptyText("No hay nada que mostrar").Sortable()
 
 
 @section Scripts {

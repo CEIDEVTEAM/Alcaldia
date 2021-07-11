@@ -11,16 +11,16 @@
 <h2>Detalle de Reclamo</h2>
 
 <p>
-    @Html.ActionLink("Volver", "Grid",null, new {@class = "btn btn-primary" })
+    @Html.ActionLink("Volver", "List",null, new {@class = "btn btn-primary" })
 </p>
 
 @Html.Grid(Model).Columns(columns =>
 {
     columns.Add(c => c.idReclamo).Titled("Nro Reclamo").SetWidth(30);
     columns.Add(c => c.fechaYhoraLog).Titled("Fecha").SetWidth(30);
-    columns.Add(c => c.comentarioLog).Titled("Comentarios del ayuntamiento").SetWidth(30);
+    columns.Add(c => c.comentarioLog).Titled("Comentarios").SetWidth(30);
     columns.Add(c => c.estadoLog).Titled("Evolución Estado").SetWidth(20);
-    
+    columns.Add(c => c.nombreDeUsuario).Titled("Funcionario").SetWidth(20);
 
 
 

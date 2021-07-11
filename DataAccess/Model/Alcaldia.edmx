@@ -104,6 +104,15 @@ advertencia 6002: La tabla o vista 'ReclamosAlcaldia.dbo.V_ReclamosAbiertosPorCu
           <Property Name="idZona" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ReclamosAlcaldia.dbo.V_ReclamosActivosPorZonas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="V_ReclamosActivosPorZonas">
+          <Key>
+            <PropertyRef Name="ZonaID" />
+          </Key>
+          <Property Name="ZonaID" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ReclamosAlcaldia.dbo.V_ReclamosResueltosPorCuadrilla' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_ReclamosResueltosPorCuadrilla">
           <Key>
@@ -246,6 +255,12 @@ advertencia 6002: La tabla o vista 'ReclamosAlcaldia.dbo.V_ReclamosResueltosPorC
     [V_ReclamosAbiertosPorCuadrilla].[idZona] AS [idZona]
     FROM [dbo].[V_ReclamosAbiertosPorCuadrilla] AS [V_ReclamosAbiertosPorCuadrilla]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="V_ReclamosActivosPorZonas" EntityType="Self.V_ReclamosActivosPorZonas" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_ReclamosActivosPorZonas].[ZonaID] AS [ZonaID], 
+    [V_ReclamosActivosPorZonas].[Cantidad] AS [Cantidad]
+    FROM [dbo].[V_ReclamosActivosPorZonas] AS [V_ReclamosActivosPorZonas]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="V_ReclamosResueltosPorCuadrilla" EntityType="Self.V_ReclamosResueltosPorCuadrilla" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [V_ReclamosResueltosPorCuadrilla].[idCuadrilla] AS [idCuadrilla], 
@@ -346,6 +361,7 @@ advertencia 6002: La tabla o vista 'ReclamosAlcaldia.dbo.V_ReclamosResueltosPorC
 					</AssociationSet>
 					<EntitySet Name="V_ReclamosAbiertosPorCuadrilla" EntityType="ReclamosAlcaldiaModel.V_ReclamosAbiertosPorCuadrilla" />
           <EntitySet Name="V_ReclamosResueltosPorCuadrilla" EntityType="ReclamosAlcaldiaModel.V_ReclamosResueltosPorCuadrilla" />
+          <EntitySet Name="V_ReclamosActivosPorZonas" EntityType="ReclamosAlcaldiaModel.V_ReclamosActivosPorZonas" />
 				</EntityContainer>
 				<EntityType Name="Usuario">
 					<Key>
@@ -586,6 +602,13 @@ advertencia 6002: La tabla o vista 'ReclamosAlcaldia.dbo.V_ReclamosResueltosPorC
           <Property Name="resueltos" Type="Int32" />
           <Property Name="totalMin" Type="Int32" />
         </EntityType>
+        <EntityType Name="V_ReclamosActivosPorZonas">
+          <Key>
+            <PropertyRef Name="ZonaID" />
+          </Key>
+          <Property Name="ZonaID" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" />
+        </EntityType>
 			</Schema>
 		</edmx:ConceptualModels>
 		<!-- C-S mapping content -->
@@ -707,6 +730,14 @@ advertencia 6002: La tabla o vista 'ReclamosAlcaldia.dbo.V_ReclamosResueltosPorC
                 <ScalarProperty Name="encargado" ColumnName="encargado" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="idCuadrilla" ColumnName="idCuadrilla" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_ReclamosActivosPorZonas">
+            <EntityTypeMapping TypeName="ReclamosAlcaldiaModel.V_ReclamosActivosPorZonas">
+              <MappingFragment StoreEntitySet="V_ReclamosActivosPorZonas">
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="ZonaID" ColumnName="ZonaID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
