@@ -4,8 +4,10 @@
     ViewBag.Title = "Alta de Zona";
 }
 
-<h2>Alta de Zona</h2>
-
+<h2>Alta/Visualización de Zonas</h2>
+<p>
+    @Html.ActionLink("Listar Zonas", "List", null, new { @class = "btn btn-primary" })
+</p>
 
 @using (Html.BeginForm())
 {

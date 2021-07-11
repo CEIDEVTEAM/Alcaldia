@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<CommonSolution.DTOs.DtoTipoDeReclamo>
-
+@using GridMvc.Html
 @{
     ViewBag.Title = "Listado de Tipos de Reclamo";
 }
-
+@Styles.Render("~/Content/gridmvc")
 
 <div class="row">
     <div class="col-sm-4">
@@ -31,30 +31,16 @@
 
 <h2>Listado de Tipos de Reclamo</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.descripcion)
-        </th>
-        <th></th>
-    </tr>
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(c => c.nombre).Titled("Nombre").SetWidth(30);
+    columns.Add(c => c.descripcion).Titled("Descripción").SetWidth(30);
+    columns.Add().Encoded(false).Sanitized(false).SetWidth(10).RenderValueAs(o => Html.ActionLink("Actualizar", "Modify", new { id = o.nombre }, new { @class = "btn btn-success" }));
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.descripcion)
-            </td>
-            <td>
-                @Html.ActionLink("Actualizar", "Modify", new { nombre = item.nombre })
-            </td>
-        </tr>
-    }
+}).WithPaging(8).EmptyText("No hay nada que mostrar").Selectable(true).Filterable()
 
-</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/grid")
+}

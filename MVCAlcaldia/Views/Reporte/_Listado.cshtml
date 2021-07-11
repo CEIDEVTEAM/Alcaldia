@@ -1,53 +1,29 @@
 ﻿@model IEnumerable<CommonSolution.DTOs.DtoReclamo>
 
-<br />
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.idCuadrilla)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fechaYhora)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.observaciones)
-        </th>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "_Listado";
+}
+@Styles.Render("~/Content/gridmvc")
 
-        <th>
-            @Html.DisplayNameFor(model => model.nombreTipoReclamo)
-        </th>
+<h2>Reclamos:</h2>
 
-        <th>
-            @Html.DisplayNameFor(model => model.tiempoDeRetraso)
-        </th>
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(c => c.id).Titled("Nro Reclamo").SetWidth(30);
+    columns.Add(c => c.fechaYhora).Titled("Fecha").SetWidth(30);
+    columns.Add(c => c.observaciones).Titled("Comentarios").SetWidth(30);
+    columns.Add(c => c.idCiudadano).Titled("Id Ciudadano").SetWidth(20);
+    columns.Add(c => c.nombreTipoReclamo).Titled("Tipo").SetWidth(20);
+    columns.Add(c => c.idCuadrilla).Titled("Cuadrilla").SetWidth(20);
+    columns.Add(c => c.idZona).Titled("Zona").SetWidth(20);
 
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.idCuadrilla)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.fechaYhora)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.observaciones)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.nombreTipoReclamo)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.tiempoDeRetraso)
-            </td>
+    
+}).WithPaging(8).EmptyText("No hay nada que mostrar")
 
 
-        </tr>
-    }
+@section Scripts {
+   
+    @Scripts.Render("~/bundles/grid")
+}
 
-</table>

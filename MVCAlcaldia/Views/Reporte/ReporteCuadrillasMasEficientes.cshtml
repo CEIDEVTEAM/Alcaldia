@@ -1,58 +1,24 @@
 ﻿@model IEnumerable<CommonSolution.DTOs.DtoCuadrilla>
-
+@using GridMvc.Html
 @{
     ViewBag.Title = "Reporte Cuadrillas Mas Eficientes";
 }
-
+@Styles.Render("~/Content/gridmvc")
 <h2>Reporte Cuadrillas mas eficientes</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.encargado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idZona)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cantidadDePeones)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.resueltos)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.promedioStg)
-        </th>
-        <th></th>
-    </tr>
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(c => c.id).Titled("Nombre").SetWidth(30).Filterable(true);
+    columns.Add(c => c.encargado).Titled("Encargado").SetWidth(30);
+    columns.Add(c => c.idZona).Titled("id Zona").SetWidth(30).Filterable(true);
+    columns.Add(c => c.cantidadDePeones).Titled("Cantidad de Peones").SetWidth(20);
+    columns.Add(c => c.resueltos).Titled("Rec. Resueltos").SetWidth(20);
+    columns.Add(c => c.promedioStg).Titled("Tiemo promedio de Resulución").SetWidth(20);
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.encargado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.idZona)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cantidadDePeones)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.resueltos)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.promedioStg)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.id })
-        </td>
-    </tr>
+}).WithPaging(8).EmptyText("No hay nada que mostrar").Selectable(true)
+
+
+@section Scripts {
+    
+    @Scripts.Render("~/bundles/grid")
 }
-
-</table>

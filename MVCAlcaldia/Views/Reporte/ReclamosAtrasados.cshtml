@@ -1,77 +1,28 @@
 ﻿@model IEnumerable<CommonSolution.DTOs.DtoReclamo>
+@using GridMvc.Html
 
 @{
     ViewBag.Title = "Reclamos Atrasados";
 }
-
+@Styles.Render("~/Content/gridmvc")
 <h2>Reclamos Atrasados</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fechaYhora)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.observaciones)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idCiudadano)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nombreTipoReclamo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idCuadrilla)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idZona)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tiempoDeRetraso)
-        </th>
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(c => c.id).Titled("Nro Reclamo").SetWidth(30);
+    columns.Add(c => c.fechaYhora).Titled("Fecha").SetWidth(30);
+    columns.Add(c => c.observaciones).Titled("Comentarios").SetWidth(30);
+    columns.Add(c => c.estado).Titled("Id Ciudadano").SetWidth(20);
+    columns.Add(c => c.idCiudadano).Titled("Id Ciudadano").SetWidth(20);
+    columns.Add(c => c.nombreTipoReclamo).Titled("Tipo").SetWidth(20);
+    columns.Add(c => c.idCuadrilla).Titled("Cuadrilla").SetWidth(20);
+    columns.Add(c => c.idZona).Titled("Zona").SetWidth(20);
 
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.id)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.fechaYhora)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.observaciones)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.estado)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.idCiudadano)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.nombreTipoReclamo)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.idCuadrilla)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.idZona)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.tiempoDeRetraso)
-    </td>
-    <td>
-        @Html.ActionLink("Actualizar Estado", "Details", new { id = item.id })
-    </td>
-</tr>
+}).WithPaging(8).EmptyText("No hay nada que mostrar").Sortable(true)
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/grid")
 }
-
-</table>
