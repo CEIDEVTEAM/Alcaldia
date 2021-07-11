@@ -228,7 +228,7 @@
     <Content Include="Views\TipoDeReclamo\Modify.cshtml" />
     <Content Include="Views\TipoDeReclamo\List.cshtml" />
     <Content Include="Views\UsuarioFuncionario\Add.cshtml" />
-    <Content Include="Views\UsuarioFuncionario\List.cshtml" />
+    <Content Include="Views\UsuarioFuncionario\ListFuncionario.cshtml" />
     <Content Include="Views\UsuarioFuncionario\Modify.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Cuadrilla\Add.cshtml" />
@@ -246,6 +246,7 @@
     <Content Include="Views\Reclamo\Modify.cshtml" />
     <Content Include="Views\Reporte\ReporteCuadrillasMasEficientes.cshtml" />
     <Content Include="Views\UsuarioFuncionario\ModifyPassword.cshtml" />
+    <Content Include="Views\UsuarioFuncionario\ListCiudadano.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

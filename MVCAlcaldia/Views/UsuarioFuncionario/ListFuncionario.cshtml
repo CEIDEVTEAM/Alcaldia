@@ -1,0 +1,84 @@
+﻿@model IEnumerable<CommonSolution.DTOs.DtoUsuario>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<div class="row">
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div>
+                <input type="button" onclick="location.href='@Url.Action("Add", "UsuarioFuncionario")'" class="btn btn-default" value="Ingresar" style="width: 100%; max-width: initial" />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div>
+                <input type="button" onclick="location.href='@Url.Action("Modify", "UsuarioFuncionario")'" class="btn btn-default" value="Actualizar" style="width: 100%; max-width: initial" />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div>
+                <input type="button" onclick="location.href='@Url.Action("ListFuncionario", "UsuarioFuncionario")'" class="btn btn-default" value="Listar" style="width: 100%; max-width: initial" disabled />
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2>Lista de Funcionarios</h2>
+
+<html>
+
+<body>
+    <br>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nombreDeUsuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombreDeUsuario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.telefono)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @Html.ActionLink("Modificar", "Modify", new { nombreDeUsuario = item.nombreDeUsuario }) |
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>
