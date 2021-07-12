@@ -25,7 +25,6 @@ namespace DataAccess.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Zona> Zona { get; set; }
         public virtual DbSet<Cuadrilla> Cuadrilla { get; set; }
         public virtual DbSet<LogReclamo> LogReclamo { get; set; }
@@ -36,5 +35,6 @@ namespace DataAccess.Model
         public virtual DbSet<V_ReclamosAbiertosPorCuadrilla> V_ReclamosAbiertosPorCuadrilla { get; set; }
         public virtual DbSet<V_ReclamosResueltosPorCuadrilla> V_ReclamosResueltosPorCuadrilla { get; set; }
         public virtual DbSet<V_ReclamosActivosPorZonas> V_ReclamosActivosPorZonas { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
     }
 }

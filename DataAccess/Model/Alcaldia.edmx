@@ -68,7 +68,7 @@
           <Property Name="nombreDeUsuario" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="apellido" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="contrasenia" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="contrasenia" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="telefono" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="tipoDeUsuario" Type="varchar" MaxLength="40" Nullable="false" />
@@ -315,7 +315,6 @@ advertencia 6002: La tabla o vista 'ReclamosAlcaldia.dbo.V_ReclamosResueltosPorC
 		<edmx:ConceptualModels>
 			<Schema Namespace="ReclamosAlcaldiaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
 				<EntityContainer Name="ReclamosAlcaldiaEntities" annotation:LazyLoadingEnabled="true">
-					<EntitySet Name="Usuario" EntityType="ReclamosAlcaldiaModel.Usuario" />
 					<EntitySet Name="Zona" EntityType="ReclamosAlcaldiaModel.Zona" />
 					<EntitySet Name="Cuadrilla" EntityType="ReclamosAlcaldiaModel.Cuadrilla" />
 					<EntitySet Name="LogReclamo" EntityType="ReclamosAlcaldiaModel.LogReclamo" />
@@ -324,14 +323,6 @@ advertencia 6002: La tabla o vista 'ReclamosAlcaldia.dbo.V_ReclamosResueltosPorC
 					<AssociationSet Name="fk_zonaCuadrilla" Association="ReclamosAlcaldiaModel.fk_zonaCuadrilla">
 						<End Role="Zona" EntitySet="Zona" />
 						<End Role="Cuadrilla" EntitySet="Cuadrilla" />
-					</AssociationSet>
-					<AssociationSet Name="fk_RecLogUsuario" Association="ReclamosAlcaldiaModel.fk_RecLogUsuario">
-						<End Role="Usuario" EntitySet="Usuario" />
-						<End Role="LogReclamo" EntitySet="LogReclamo" />
-					</AssociationSet>
-					<AssociationSet Name="fk_Tipo" Association="ReclamosAlcaldiaModel.fk_Tipo">
-						<End Role="Tipo_Usuario" EntitySet="Tipo_Usuario" />
-						<End Role="Usuario" EntitySet="Usuario" />
 					</AssociationSet>
 					<EntitySet Name="Vertice" EntityType="ReclamosAlcaldiaModel.Vertice" />
 					<AssociationSet Name="fk_zonaVertice" Association="ReclamosAlcaldiaModel.fk_zonaVertice">
@@ -355,30 +346,23 @@ advertencia 6002: La tabla o vista 'ReclamosAlcaldia.dbo.V_ReclamosResueltosPorC
 						<End Role="Zona" EntitySet="Zona" />
 						<End Role="Reclamo" EntitySet="Reclamo" />
 					</AssociationSet>
-					<AssociationSet Name="fk_reclamoCiudadano" Association="ReclamosAlcaldiaModel.fk_reclamoCiudadano">
-						<End Role="Usuario" EntitySet="Usuario" />
-						<End Role="Reclamo" EntitySet="Reclamo" />
-					</AssociationSet>
 					<EntitySet Name="V_ReclamosAbiertosPorCuadrilla" EntityType="ReclamosAlcaldiaModel.V_ReclamosAbiertosPorCuadrilla" />
           <EntitySet Name="V_ReclamosResueltosPorCuadrilla" EntityType="ReclamosAlcaldiaModel.V_ReclamosResueltosPorCuadrilla" />
           <EntitySet Name="V_ReclamosActivosPorZonas" EntityType="ReclamosAlcaldiaModel.V_ReclamosActivosPorZonas" />
-				</EntityContainer>
-				<EntityType Name="Usuario">
-					<Key>
-						<PropertyRef Name="nombreDeUsuario" />
-					</Key>
-					<Property Name="nombreDeUsuario" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" Type="String" />
-					<Property Name="nombre" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" Type="String" />
-					<Property Name="apellido" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" Type="String" />
-					<Property Name="contrasenia" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" Type="String" />
-					<Property Name="telefono" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" Type="String" />
-					<Property Name="email" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
-					<Property Name="tipoDeUsuario" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" Type="String" />
-					<Property Name="situacion" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" Type="String" />
-					<NavigationProperty Name="LogReclamo" Relationship="ReclamosAlcaldiaModel.fk_RecLogUsuario" FromRole="Usuario" ToRole="LogReclamo" />
-					<NavigationProperty Name="Tipo_Usuario" Relationship="ReclamosAlcaldiaModel.fk_Tipo" FromRole="Usuario" ToRole="Tipo_Usuario" />
-					<NavigationProperty Name="Reclamo" Relationship="ReclamosAlcaldiaModel.fk_reclamoCiudadano" FromRole="Usuario" ToRole="Reclamo" />
-				</EntityType>
+          <EntitySet Name="Usuario" EntityType="ReclamosAlcaldiaModel.Usuario" />
+          <AssociationSet Name="fk_RecLogUsuario" Association="ReclamosAlcaldiaModel.fk_RecLogUsuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="LogReclamo" EntitySet="LogReclamo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_reclamoCiudadano" Association="ReclamosAlcaldiaModel.fk_reclamoCiudadano">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Reclamo" EntitySet="Reclamo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Tipo" Association="ReclamosAlcaldiaModel.fk_Tipo">
+            <End Role="Tipo_Usuario" EntitySet="Tipo_Usuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          </EntityContainer>
 				<EntityType Name="Zona">
 					<Key>
 						<PropertyRef Name="id" />
@@ -415,8 +399,8 @@ advertencia 6002: La tabla o vista 'ReclamosAlcaldia.dbo.V_ReclamosResueltosPorC
 					<Property Name="comentarioLog" Type="String" MaxLength="140" FixedLength="false" Unicode="false" />
 					<Property Name="idReclamo" Type="Int32" />
 					<Property Name="nombreDeUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-					<NavigationProperty Name="Usuario" Relationship="ReclamosAlcaldiaModel.fk_RecLogUsuario" FromRole="LogReclamo" ToRole="Usuario" />
 					<NavigationProperty Name="Reclamo" Relationship="ReclamosAlcaldiaModel.fk_reclamoRecLog" FromRole="LogReclamo" ToRole="Reclamo" />
+          <NavigationProperty Name="Usuario" Relationship="ReclamosAlcaldiaModel.fk_RecLogUsuario" FromRole="LogReclamo" ToRole="Usuario" />
 				</EntityType>
 				<EntityType Name="Tipo_De_Reclamo">
 					<Key>
@@ -433,7 +417,7 @@ advertencia 6002: La tabla o vista 'ReclamosAlcaldia.dbo.V_ReclamosResueltosPorC
 					</Key>
 					<Property Name="tipo" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
 					<Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-					<NavigationProperty Name="Usuario" Relationship="ReclamosAlcaldiaModel.fk_Tipo" FromRole="Tipo_Usuario" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario" Relationship="ReclamosAlcaldiaModel.fk_Tipo" FromRole="Tipo_Usuario" ToRole="Usuario" />
 				</EntityType>
 				<Association Name="fk_zonaCuadrilla">
 					<End Type="ReclamosAlcaldiaModel.Zona" Role="Zona" Multiplicity="0..1" />
@@ -444,30 +428,6 @@ advertencia 6002: La tabla o vista 'ReclamosAlcaldia.dbo.V_ReclamosResueltosPorC
 						</Principal>
 						<Dependent Role="Cuadrilla">
 							<PropertyRef Name="idZona" />
-						</Dependent>
-					</ReferentialConstraint>
-				</Association>
-				<Association Name="fk_RecLogUsuario">
-					<End Type="ReclamosAlcaldiaModel.Usuario" Role="Usuario" Multiplicity="0..1" />
-					<End Type="ReclamosAlcaldiaModel.LogReclamo" Role="LogReclamo" Multiplicity="*" />
-					<ReferentialConstraint>
-						<Principal Role="Usuario">
-							<PropertyRef Name="nombreDeUsuario" />
-						</Principal>
-						<Dependent Role="LogReclamo">
-							<PropertyRef Name="nombreDeUsuario" />
-						</Dependent>
-					</ReferentialConstraint>
-				</Association>
-				<Association Name="fk_Tipo">
-					<End Type="ReclamosAlcaldiaModel.Tipo_Usuario" Role="Tipo_Usuario" Multiplicity="1" />
-					<End Type="ReclamosAlcaldiaModel.Usuario" Role="Usuario" Multiplicity="*" />
-					<ReferentialConstraint>
-						<Principal Role="Tipo_Usuario">
-							<PropertyRef Name="tipo" />
-						</Principal>
-						<Dependent Role="Usuario">
-							<PropertyRef Name="tipoDeUsuario" />
 						</Dependent>
 					</ReferentialConstraint>
 				</Association>
@@ -515,7 +475,7 @@ advertencia 6002: La tabla o vista 'ReclamosAlcaldia.dbo.V_ReclamosResueltosPorC
 					<NavigationProperty Name="LogReclamo" Relationship="ReclamosAlcaldiaModel.fk_reclamoRecLog" FromRole="Reclamo" ToRole="LogReclamo" />
 					<NavigationProperty Name="Tipo_De_Reclamo" Relationship="ReclamosAlcaldiaModel.FK_Reclamo_TipoReclamo" FromRole="Reclamo" ToRole="Tipo_De_Reclamo" />
 					<NavigationProperty Name="Zona" Relationship="ReclamosAlcaldiaModel.FK_Reclamo_Zona" FromRole="Reclamo" ToRole="Zona" />
-					<NavigationProperty Name="Usuario" Relationship="ReclamosAlcaldiaModel.fk_reclamoCiudadano" FromRole="Reclamo" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario" Relationship="ReclamosAlcaldiaModel.fk_reclamoCiudadano" FromRole="Reclamo" ToRole="Usuario" />
 				</EntityType>
 				<Association Name="fk_reclamoCuadrilla">
 					<End Type="ReclamosAlcaldiaModel.Cuadrilla" Role="Cuadrilla" Multiplicity="0..1" />
@@ -565,18 +525,6 @@ advertencia 6002: La tabla o vista 'ReclamosAlcaldia.dbo.V_ReclamosResueltosPorC
 						</Dependent>
 					</ReferentialConstraint>
 				</Association>
-				<Association Name="fk_reclamoCiudadano">
-					<End Type="ReclamosAlcaldiaModel.Usuario" Role="Usuario" Multiplicity="0..1" />
-					<End Type="ReclamosAlcaldiaModel.Reclamo" Role="Reclamo" Multiplicity="*" />
-					<ReferentialConstraint>
-						<Principal Role="Usuario">
-							<PropertyRef Name="nombreDeUsuario" />
-						</Principal>
-						<Dependent Role="Reclamo">
-							<PropertyRef Name="idCiudadano" />
-						</Dependent>
-					</ReferentialConstraint>
-				</Association>
 				<EntityType Name="V_ReclamosAbiertosPorCuadrilla">
 					<Key>
 						<PropertyRef Name="idCuadrilla" />
@@ -609,26 +557,64 @@ advertencia 6002: La tabla o vista 'ReclamosAlcaldia.dbo.V_ReclamosResueltosPorC
           <Property Name="ZonaID" Type="Int32" Nullable="false" />
           <Property Name="Cantidad" Type="Int32" />
         </EntityType>
-			</Schema>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="nombreDeUsuario" />
+          </Key>
+          <Property Name="nombreDeUsuario" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="apellido" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="contrasenia" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tipoDeUsuario" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="situacion" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LogReclamo" Relationship="ReclamosAlcaldiaModel.fk_RecLogUsuario" FromRole="Usuario" ToRole="LogReclamo" />
+          <NavigationProperty Name="Reclamo" Relationship="ReclamosAlcaldiaModel.fk_reclamoCiudadano" FromRole="Usuario" ToRole="Reclamo" />
+          <NavigationProperty Name="Tipo_Usuario" Relationship="ReclamosAlcaldiaModel.fk_Tipo" FromRole="Usuario" ToRole="Tipo_Usuario" />
+        </EntityType>
+        <Association Name="fk_RecLogUsuario">
+          <End Type="ReclamosAlcaldiaModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="ReclamosAlcaldiaModel.LogReclamo" Role="LogReclamo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="nombreDeUsuario" />
+            </Principal>
+            <Dependent Role="LogReclamo">
+              <PropertyRef Name="nombreDeUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_reclamoCiudadano">
+          <End Type="ReclamosAlcaldiaModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="ReclamosAlcaldiaModel.Reclamo" Role="Reclamo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="nombreDeUsuario" />
+            </Principal>
+            <Dependent Role="Reclamo">
+              <PropertyRef Name="idCiudadano" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Tipo">
+          <End Type="ReclamosAlcaldiaModel.Tipo_Usuario" Role="Tipo_Usuario" Multiplicity="1" />
+          <End Type="ReclamosAlcaldiaModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Usuario">
+              <PropertyRef Name="tipo" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="tipoDeUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
 		</edmx:ConceptualModels>
 		<!-- C-S mapping content -->
 		<edmx:Mappings>
 			<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
 				<EntityContainerMapping StorageEntityContainer="ReclamosAlcaldiaModelStoreContainer" CdmEntityContainer="ReclamosAlcaldiaEntities">
-					<EntitySetMapping Name="Usuario">
-						<EntityTypeMapping TypeName="ReclamosAlcaldiaModel.Usuario">
-							<MappingFragment StoreEntitySet="Usuario">
-								<ScalarProperty Name="situacion" ColumnName="situacion" />
-								<ScalarProperty Name="tipoDeUsuario" ColumnName="tipoDeUsuario" />
-								<ScalarProperty Name="email" ColumnName="email" />
-								<ScalarProperty Name="telefono" ColumnName="telefono" />
-								<ScalarProperty Name="contrasenia" ColumnName="contrasenia" />
-								<ScalarProperty Name="apellido" ColumnName="apellido" />
-								<ScalarProperty Name="nombre" ColumnName="nombre" />
-								<ScalarProperty Name="nombreDeUsuario" ColumnName="nombreDeUsuario" />
-							</MappingFragment>
-						</EntityTypeMapping>
-					</EntitySetMapping>
 					<EntitySetMapping Name="Zona">
 						<EntityTypeMapping TypeName="ReclamosAlcaldiaModel.Zona">
 							<MappingFragment StoreEntitySet="Zona">
@@ -741,7 +727,21 @@ advertencia 6002: La tabla o vista 'ReclamosAlcaldia.dbo.V_ReclamosResueltosPorC
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-				</EntityContainerMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="ReclamosAlcaldiaModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="situacion" ColumnName="situacion" />
+                <ScalarProperty Name="tipoDeUsuario" ColumnName="tipoDeUsuario" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="contrasenia" ColumnName="contrasenia" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="nombreDeUsuario" ColumnName="nombreDeUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
 			</Mapping>
 		</edmx:Mappings>
 	</edmx:Runtime>
@@ -756,7 +756,7 @@ advertencia 6002: La tabla o vista 'ReclamosAlcaldia.dbo.V_ReclamosResueltosPorC
 			<DesignerInfoPropertySet>
 				<DesignerProperty Name="ValidateOnBuild" Value="true" />
 				<DesignerProperty Name="EnablePluralization" Value="false" />
-				<DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+				<DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
 				<DesignerProperty Name="UseLegacyProvider" Value="false" />
 				<DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
 			</DesignerInfoPropertySet>

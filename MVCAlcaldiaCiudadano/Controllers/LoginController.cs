@@ -1,6 +1,7 @@
 ﻿using BussinessLogic.Logic;
 using CommonSolution.Constants;
 using CommonSolution.DTOs;
+using CommonSolution.Encrypt;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,7 @@ namespace MVCAlcaldiaCiudadano.Controllers
         public ActionResult Login(DtoLogin dto, string returnUrl)
         {
             LUsuarioController lgc = new LUsuarioController();
+            
             if (lgc.ValidateCredentialsCiudadano(dto))
             {
                 FormsAuthentication.SetAuthCookie(dto.user, false);

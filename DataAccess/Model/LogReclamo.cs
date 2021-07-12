@@ -22,7 +22,7 @@ namespace DataAccess.Model
         public Nullable<int> idReclamo { get; set; }
         public string nombreDeUsuario { get; set; }
     
-        public virtual Usuario Usuario { get; set; }
         public virtual Reclamo Reclamo { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

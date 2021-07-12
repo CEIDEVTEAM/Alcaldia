@@ -93,6 +93,7 @@
     <Compile Include="DTOs\DtoUsuario.cs" />
     <Compile Include="DTOs\DtoVertice.cs" />
     <Compile Include="DTOs\DtoZona.cs" />
+    <Compile Include="Encrypt\Encrypt.cs" />
     <Compile Include="ENUMs\EnumEstado.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

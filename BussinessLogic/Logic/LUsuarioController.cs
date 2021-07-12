@@ -1,5 +1,6 @@
 ﻿using CommonSolution.Constants;
 using CommonSolution.DTOs;
+using CommonSolution.Encrypt;
 using DataAccess.Persistence;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace BussinessLogic.Logic
 
             if (colerrors.Count == 0)
             {
-                
+                dto.contrasenia = Encrypt.GetSHA256(dto.contrasenia);
                 this._Repository.GetUsuarioRepository().AddUsuario(dto);
             }
 
@@ -66,6 +67,7 @@ namespace BussinessLogic.Logic
 
         public bool ExistCredentialsByUserAndPass(DtoLogin dto)
         {
+            dto.pass = Encrypt.GetSHA256(dto.pass);
             return this._Repository.GetUsuarioRepository().ExistUsuarioByCredentials(dto);
         }
 
@@ -89,6 +91,7 @@ namespace BussinessLogic.Logic
 
         public void ModifyPassword(DtoChangePass dto)
         {
+            dto.newPass = Encrypt.GetSHA256(dto.newPass);
             this._Repository.GetUsuarioRepository().ModifyPassword(dto);
         }
 
@@ -100,6 +103,7 @@ namespace BussinessLogic.Logic
         public bool ValidateCredentialsCiudadano(DtoLogin dto)
         {
             dto.tipoDeUsuario = CUsuario.USER_CIUDADANO;
+            dto.pass = Encrypt.GetSHA256(dto.pass);
             return this._Repository.GetUsuarioRepository().ValidateLogin(dto);
         }
         public List<string> DeleteUsuario(DtoUsuario dto)
