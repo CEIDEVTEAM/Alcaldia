@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace MVCAlcaldia.Controllers
 {
-    [AuthorizeAttribute]
+
     public class UsuarioFuncionarioController : Controller
     {
         public ActionResult Add()

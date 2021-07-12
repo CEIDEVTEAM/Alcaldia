@@ -39,6 +39,7 @@ namespace BussinessLogic.Logic
 
             if (colerrors.Count == 0)
             {
+                dto.contrasenia = Encrypt.GetSHA256(dto.contrasenia);
                 this._Repository.GetUsuarioRepository().AddUsuario(dto);
             }
 
@@ -98,6 +99,7 @@ namespace BussinessLogic.Logic
         public bool ValidateCredentialsFuncionario(DtoLogin dto)
         {
             dto.tipoDeUsuario = CUsuario.USER_FUNCIONARIO;
+            dto.pass = Encrypt.GetSHA256(dto.pass);
             return this._Repository.GetUsuarioRepository().ValidateLogin(dto);
         }
         public bool ValidateCredentialsCiudadano(DtoLogin dto)
