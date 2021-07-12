@@ -1,4 +1,5 @@
 ﻿using BussinessLogic.Logic;
+using CommonSolution.Constants;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,22 @@ namespace MVCAlcaldia.Controllers
     public class UsuarioCommonController : Controller
     {
         #region VALIDATIONS
+
         public JsonResult ValidateUserName(string nombreDeUsuario)
         {
             bool response = true;
             LUsuarioController lgc = new LUsuarioController();
-            response = lgc.ExistUsuarioByNombre(nombreDeUsuario) ? false : true;
+
+            if (Session[CGlobals.USER_ACTION].ToString() == "A")
+                response = lgc.ExistUsuarioByNombre(nombreDeUsuario) ? false : true;
+
+            else if (Session[CGlobals.USER_ACTION].ToString() == "M")
+                response = lgc.ExistUsuarioByNombre(nombreDeUsuario) ? true : false;
+
 
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+
 
         public JsonResult ValidatePasswordNewUser(string contrasenia, string repContrasenia)
         {

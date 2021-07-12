@@ -8,9 +8,9 @@ using System.Web.Mvc;
 
 namespace MVCAlcaldia.Controllers
 {
+    [AuthorizeAttribute]
     public class ZonaController : Controller
     {
-        // GET: Zona
         public ActionResult Add()
         {
             return View();

@@ -43,6 +43,13 @@ namespace BussinessLogic.Logic
 
             return colerrors;
         }
+
+        public string GetCompleteNameByUsuario(string user)
+        {
+            DtoUsuario usuario = this._Repository.GetUsuarioRepository().GetUsuarioByNombre(user);
+            return (usuario != null) ? usuario.nombre + " " + usuario.apellido : "";
+        }
+
         public List<string> ModifyUsuarioFuncionario(DtoUsuario dto)
         {
             dto.tipoDeUsuario = this._Repository.GetTipoDeUsuarioRepository().GetTipoUsuarioById(CUsuario.USER_FUNCIONARIO);

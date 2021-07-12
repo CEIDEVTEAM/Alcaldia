@@ -14,6 +14,8 @@ namespace MVCAlcaldiaCiudadano.Controllers
     {
         public ActionResult Add()
         {
+
+            Session[CGlobals.USER_ACTION] = "A";
             return View();
         }
 
@@ -21,15 +23,17 @@ namespace MVCAlcaldiaCiudadano.Controllers
         {
             LUsuarioController lgc = new LUsuarioController();
 
-            List<string> colErrores = lgc.AddUsuarioCiudadano(dto);
+            List<string> colErrors = lgc.AddUsuarioCiudadano(dto);
 
-            foreach (string error in colErrores)
+            if (colErrors.Count == 0)
             {
-                ModelState.AddModelError("ErrorGeneral", error);
+                Session[CGlobals.USER_MESSAGE] = "Usuario registrado con éxito";
+                ModelState.Clear();
+                Session[CGlobals.USER_ACTION] = null;
             }
 
 
-            return View("Add");
+            return RedirectToAction("Add");
         }
 
 
@@ -38,11 +42,11 @@ namespace MVCAlcaldiaCiudadano.Controllers
         {
             LUsuarioController lgc = new LUsuarioController();
             DtoUsuario dto = lgc.GetUserByNombre(nombreDeUsuario);
-            List<string> colErrores = lgc.DeleteUsuario(dto);
+            List<string> colErrors = lgc.DeleteUsuario(dto);
 
-            foreach (string error in colErrores)
+            if (colErrors.Count == 0)
             {
-                ModelState.AddModelError("ErrorGeneral", error);
+                Session[CGlobals.USER_MESSAGE] = "Usuario dado de baja con éxito";
             }
 
             return RedirectToAction("List");
@@ -54,7 +58,7 @@ namespace MVCAlcaldiaCiudadano.Controllers
             string nombreUsuario = Session[CLogin.KEY_SESSION_USERNAME].ToString();
             LUsuarioController lgc = new LUsuarioController();
             DtoUsuario dto = lgc.GetUserByNombre(nombreUsuario);
-
+            Session[CGlobals.USER_ACTION] = "M";
 
             return View(dto);
         }
@@ -64,9 +68,13 @@ namespace MVCAlcaldiaCiudadano.Controllers
         public ActionResult ModifyUsuario(DtoUsuario dto)
         {
             LUsuarioController lgc = new LUsuarioController();
+            List<string> colErrors = lgc.ModifyUsuarioCiudadano(dto);
 
-            List<string> colErrores = lgc.ModifyUsuarioCiudadano(dto);
-
+            if (colErrors.Count == 0)
+            {
+                Session[CGlobals.USER_MESSAGE] = "Usuario actualizado con éxito";
+                Session[CGlobals.USER_ACTION] = null;
+            }
 
             return RedirectToAction("Modify");
         }
@@ -76,6 +84,7 @@ namespace MVCAlcaldiaCiudadano.Controllers
         {
             LUsuarioController lgc = new LUsuarioController();
             lgc.ModifyPassword(dto);
+            Session[CGlobals.USER_MESSAGE] = "Contraseña actualizada con éxito";
 
             return RedirectToAction("Modify");
         }
@@ -88,14 +97,6 @@ namespace MVCAlcaldiaCiudadano.Controllers
 
             return View(dto);
         }
-
-
-        #region VALIDATIONS
-
-
-        #endregion
-
-
 
     }
 }

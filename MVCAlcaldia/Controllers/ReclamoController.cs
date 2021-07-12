@@ -63,7 +63,7 @@ namespace MVCAlcaldia.Controllers
 
             List<string> colErrors = lgc.ModifyReclamo(dto);
 
-            return RedirectToAction("List");
+            return RedirectToAction("ListAll");
         }
         public ActionResult Details(int id)
         {

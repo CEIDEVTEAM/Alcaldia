@@ -70,6 +70,12 @@ namespace DataAccess.Repository
                 }
             }
         }
+
+        public void GetCompleteNameByUsuario(string user)
+        {
+            throw new NotImplementedException();
+        }
+
         public void ModifyPassword(DtoChangePass dto)
         {
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())

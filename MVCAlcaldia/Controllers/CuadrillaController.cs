@@ -45,10 +45,10 @@ namespace MVCAlcaldia.Controllers
             {
                 Session[CGlobals.USER_MESSAGE] = "Cuadrilla ingresada con éxito";
                 ModelState.Clear();
-                Session[CGlobals.USER_ACTION] = "";
+                Session[CGlobals.USER_ACTION] = null;
             }
 
-            return View("Add");
+            return RedirectToAction("Add");
         }
 
         public ActionResult List()
@@ -93,10 +93,10 @@ namespace MVCAlcaldia.Controllers
             if (colErrors.Count == 0)
             {
                 Session[CGlobals.USER_MESSAGE] = "Cuadrilla actualizada con éxito";
-                Session[CGlobals.USER_ACTION] = "";
+                Session[CGlobals.USER_ACTION] = null;
             }
 
-            return View("Modify");
+            return RedirectToAction("Modify");
         }
 
         #region VALIDATIONS
@@ -109,7 +109,11 @@ namespace MVCAlcaldia.Controllers
                 response = lgc.ExistCuadrillaByName(nombre) ? false : true;
 
             else if (Session[CGlobals.USER_ACTION].ToString() == "M")
+            {
                 response = lgc.ExistCuadrillaByNameAndId(nombre, id ?? 0) ? true : false;
+                if(!response)
+                    response = lgc.ExistCuadrillaByName(nombre) ? false : true;
+            }
 
             return Json(response, JsonRequestBehavior.AllowGet);
         }

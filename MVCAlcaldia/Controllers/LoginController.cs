@@ -34,7 +34,8 @@ namespace MVCAlcaldia.Controllers
             {
                 FormsAuthentication.SetAuthCookie(dto.user, false);
                 Session[CLogin.KEY_SESSION_USERNAME] = dto.user;
-                Session[CGlobals.USER_MESSAGE] = "Bienvenido " + dto.user;
+                string completeName = lgc.GetCompleteNameByUsuario(dto.user);
+                Session[CGlobals.USER_MESSAGE] = "Bienvenido " + completeName;
 
                 if (String.IsNullOrEmpty(returnUrl))
                 {

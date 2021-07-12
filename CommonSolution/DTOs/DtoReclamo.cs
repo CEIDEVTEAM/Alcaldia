@@ -43,11 +43,18 @@ namespace CommonSolution.DTOs
         [DisplayName("Retraso")]
         public string tiempoDeRetraso { get; set; }
         public string color { get; set; }
-        
+
+        [StringLength(140, ErrorMessage = "El comentario no puede superar los 140 caracteres")]
+        [DisplayName("Comentarios Cuadrilla")]
         public string observacionCuadrilla { get; set; }
+
+        [StringLength(140, ErrorMessage = "El comentario no puede superar los 140 caracteres")]
+        [DisplayName("Comentarios Funcionario")]
         [Required(ErrorMessage = "La descripción es requerida")]
         public string observacionFuncionario { get; set; }
         public DateTime fechaInicial { get; set; }
         public DateTime fechaFinal { get; set; }
     }
 }
+
+

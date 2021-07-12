@@ -10,7 +10,7 @@ function initMap() {
     var currentPoly = [];
     const centro = { lat: 39.866667, lng: -4.033333 };
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 10,
+        zoom: 14,
         center: centro,
         mapTypeId: "roadmap",
     });

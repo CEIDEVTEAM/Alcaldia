@@ -33,6 +33,8 @@ namespace DataAccess.Repository
                         context.Reclamo.Add(newReclamo);
                         context.SaveChanges();
                         trann.Commit();
+
+                        dto.id = newReclamo.id;
                     }
                     catch (Exception ex)
                     {

@@ -18,9 +18,10 @@
 {
     columns.Add(c => c.idReclamo).Titled("Nro Reclamo").SetWidth(30);
     columns.Add(c => c.fechaYhoraLog).Titled("Fecha").SetWidth(30);
-    columns.Add(c => c.comentarioLog).Titled("Comentarios").SetWidth(30);
+    columns.Add(c => c.comentarioLog).Titled("Comentarios").SetWidth(80);
+    columns.Add(c => c.observacionesCuadrilla).Titled("Comentarios Cuadrilla").SetWidth(80);
     columns.Add(c => c.estadoLog).Titled("Evolución Estado").SetWidth(20);
-    columns.Add(c => c.nombreDeUsuario).Titled("Funcionario").SetWidth(20);
+    columns.Add(c => c.nombreDeUsuario).Titled("Usuario Fun/Ciu").SetWidth(20);
 
 
 

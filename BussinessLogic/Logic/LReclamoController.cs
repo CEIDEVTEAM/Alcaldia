@@ -25,6 +25,7 @@ namespace BussinessLogic.Logic
             if (colerrors.Count == 0)
             {
                 this._Repository.GetReclamoRepository().AddReclamo(dto);
+                this.CuadrillaForReclamo(dto);
             }
 
             return colerrors;
@@ -111,6 +112,8 @@ namespace BussinessLogic.Logic
             {
                 dto.idCuadrilla = currCuadrilla;
                 dto.estado = CommonSolution.ENUMs.EnumEstado.ASIGNADO;
+                dto.observacionFuncionario = "Cuadrilla asignada automaticamente por el sistema";
+                this.ModifyReclamo(dto);
             }
 
         }

@@ -14,6 +14,8 @@ namespace MVCAlcaldia.Controllers
     {
         public ActionResult Add()
         {
+
+            Session[CGlobals.USER_ACTION] = "A";
             return View();
         }
 
@@ -21,11 +23,13 @@ namespace MVCAlcaldia.Controllers
         {
             LUsuarioController lgc = new LUsuarioController();
 
-            List<string> colErrores = lgc.AddUsuarioFuncionario(dto);
+            List<string> colErrors = lgc.AddUsuarioFuncionario(dto);
 
-            foreach (string error in colErrores)
+            if (colErrors.Count == 0)
             {
-                ModelState.AddModelError("ErrorGeneral", error);
+                Session[CGlobals.USER_MESSAGE] = "Usuario registrado con éxito";
+                ModelState.Clear();
+                Session[CGlobals.USER_ACTION] = null;
             }
 
 
@@ -38,13 +42,12 @@ namespace MVCAlcaldia.Controllers
         {
             LUsuarioController lgc = new LUsuarioController();
             DtoUsuario dto = lgc.GetUserByNombre(nombreDeUsuario);
-            List<string> colErrores = lgc.DeleteUsuario(dto);
+            List<string> colErrors = lgc.DeleteUsuario(dto);
 
-            foreach (string error in colErrores)
+            if (colErrors.Count == 0)
             {
-                ModelState.AddModelError("ErrorGeneral", error);
+                Session[CGlobals.USER_MESSAGE] = "Usuario dado de baja con éxito";
             }
-
 
             return RedirectToAction("List");
         }
@@ -55,7 +58,7 @@ namespace MVCAlcaldia.Controllers
             string nombreUsuario = Session[CLogin.KEY_SESSION_USERNAME].ToString();
             LUsuarioController lgc = new LUsuarioController();
             DtoUsuario dto = lgc.GetUserByNombre(nombreUsuario);
-
+            Session[CGlobals.USER_ACTION] = "M";
 
             return View(dto);
         }
@@ -64,14 +67,13 @@ namespace MVCAlcaldia.Controllers
         public ActionResult ModifyUsuario(DtoUsuario dto)
         {
             LUsuarioController lgc = new LUsuarioController();
+            List<string> colErrors = lgc.ModifyUsuarioFuncionario(dto);
 
-            List<string> colErrores = lgc.ModifyUsuarioFuncionario(dto);
-
-            foreach (string error in colErrores)
+            if (colErrors.Count == 0)
             {
-                ModelState.AddModelError("ErrorGeneral", error);
+                Session[CGlobals.USER_MESSAGE] = "Usuario actualizado con éxito";
+                Session[CGlobals.USER_ACTION] = null;
             }
-
 
             return RedirectToAction("Modify");
         }
@@ -88,6 +90,7 @@ namespace MVCAlcaldia.Controllers
         {
             LUsuarioController lgc = new LUsuarioController();
             lgc.ModifyPassword(dto);
+            Session[CGlobals.USER_MESSAGE] = "Contraseña actualizada con éxito";
 
             return RedirectToAction("Modify");
         }
@@ -101,10 +104,5 @@ namespace MVCAlcaldia.Controllers
         }
 
 
-        #region VALIDATIONS
-
-
-
-        #endregion
     }
 }

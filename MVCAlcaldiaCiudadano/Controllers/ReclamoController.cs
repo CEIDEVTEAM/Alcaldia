@@ -49,14 +49,18 @@ namespace MVCAlcaldiaCiudadano.Controllers
         public ActionResult AddReclamo(DtoReclamo dto)
         {
             List<string> colErrors = new List<string>();
-            LCuadrillaController lgcc = new LCuadrillaController();
             dto.idCiudadano = Session[CLogin.KEY_SESSION_USERNAME].ToString();
             dto.fechaYhora = DateTime.Now;
             dto.estado = EnumEstado.PENDIENTE;
             LReclamoController lgc = new LReclamoController();
-            lgc.CuadrillaForReclamo(dto);
             colErrors = lgc.AddReclamo(dto);
-            //funcion popUp de operación exitosa
+
+            if (colErrors.Count == 0)
+            {
+                Session[CGlobals.USER_MESSAGE] = "Reclamo registrado con éxito";
+                ModelState.Clear();
+
+            }
 
             return View();
         }
