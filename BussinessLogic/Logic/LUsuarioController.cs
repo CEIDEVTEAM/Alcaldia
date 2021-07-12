@@ -118,9 +118,13 @@ namespace BussinessLogic.Logic
 
             return colerrors;
         }
-        public List<DtoUsuario> GetAllUsers()
+        public List<DtoUsuario> GetAllUsersCiudadano()
         {
-            return this._Repository.GetUsuarioRepository().GetAllUsers();
+            return this._Repository.GetUsuarioRepository().GetAllUsersCiudadano();
+        }
+        public List<DtoUsuario> GetAllUsersFuncionario()
+        {
+            return this._Repository.GetUsuarioRepository().GetAllUsersFuncionario();
         }
         public DtoUsuario GetUserByNombre(string nombreUsuario)
         {

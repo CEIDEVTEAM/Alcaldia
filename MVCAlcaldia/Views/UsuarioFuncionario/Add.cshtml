@@ -3,8 +3,29 @@
 @{
     ViewBag.Title = "Add";
 }
-<br>
-<br>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div>
+                <input type="button" onclick="location.href='@Url.Action("Add", "UsuarioFuncionario")'" class="btn btn-default" value="Ingresar" style="width: 100%; max-width: initial" />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div>
+                <input type="button" onclick="location.href='@Url.Action("Modify", "UsuarioFuncionario")'" class="btn btn-default" value="Actualizar" style="width: 100%; max-width: initial" />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div>
+                <input type="button" onclick="location.href='@Url.Action("ListFuncionario", "UsuarioFuncionario")'" class="btn btn-default" value="Listar" style="width: 100%; max-width: initial" disabled />
+            </div>
+        </div>
+    </div>
+</div>
 <h2>Registro Funcionario</h2>
 
 

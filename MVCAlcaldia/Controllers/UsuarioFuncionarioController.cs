@@ -32,8 +32,7 @@ namespace MVCAlcaldia.Controllers
             return View("Add");
         }
 
-
-
+        [HttpPost]
         public ActionResult DeleteUsuario(string nombreDeUsuario)
         {
             LUsuarioController lgc = new LUsuarioController();
@@ -76,10 +75,17 @@ namespace MVCAlcaldia.Controllers
             return RedirectToAction("Modify");
         }
 
-        public ActionResult List()
+        public ActionResult ListFuncionario()
         {
             LUsuarioController lgc = new LUsuarioController();
-            List<DtoUsuario> colDto = lgc.GetAllUsers();
+            List<DtoUsuario> colDto = lgc.GetAllUsersFuncionario();
+
+            return View(colDto);
+        }
+        public ActionResult ListCiudadano()
+        {
+            LUsuarioController lgc = new LUsuarioController();
+            List<DtoUsuario> colDto = lgc.GetAllUsersCiudadano();
 
             return View(colDto);
         }

@@ -5,17 +5,15 @@
 }
 <br>
 <br>
-<h2>Lista de Funcionarios</h2>
 
+<h2>Lista de Ciudadanos</h2>
 <html>
-
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ListCiudadano</title>
+</head>
 <body>
-    <ul class="nav navbar-nav">
-        <li>@Html.ActionLink("Insertar", "Add", "UsuarioFuncionario")</li>
-        <li>@Html.ActionLink("Actualizar", "Modify", "UsuarioFuncionario")</li>
-        <li>@Html.ActionLink("Listar", "List", "UsuarioFuncionario")</li>
-    </ul>
-    <br>
+
     <table class="table">
         <tr>
             <th>
@@ -26,9 +24,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.apellido)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.contrasenia)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.telefono)
@@ -52,20 +47,12 @@
                     @Html.DisplayFor(modelItem => item.apellido)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.contrasenia)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.telefono)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.email)
                 </td>
-                <td>
-                    @Html.ActionLink("Modificar", "Modify", new { nombreDeUsuario = item.nombreDeUsuario }) |
-                    @Html.ActionLink("Borrar", "DeleteUsuario", new { nombreDeUsuario = item.nombreDeUsuario }) |
-
-
-                </td>
+                
             </tr>
         }
 
