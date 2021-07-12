@@ -10,7 +10,7 @@
 <p>
     @Html.ActionLink("Agregar", "Add",null, new { @class = "btn btn-primary" })
 <p>
- 
+
 
     @Html.Grid(Model).Columns(columns =>
 {
@@ -20,7 +20,12 @@
     )).SetWidth(50);
 
     columns.Add(c => c.reclamosActivos).Titled("Reclamos activos").SetWidth(10).Filterable(true); ;
-    columns.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(o => Html.ActionLink("Borrar", "Delete", new { id = o.id }, new { @class = "btn btn-danger" }));
+    columns.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(o => new HtmlString
+                       (
+                         "<button type='button' id=idZona value="+o.id+">Borrar</button>"
+                       )
+               );
+    //RenderValueAs(o => Html.ActionLink("Borrar", "Delete", new { id = o.id }, new { @class = "btn btn-danger", id="idZona", value=o.id }));
 
 }).WithPaging(8).EmptyText("No hay nada que mostrar").Sortable()
 
@@ -29,5 +34,6 @@
 
         @Scripts.Render("~/bundles/jqueryval")
         @Scripts.Render("~/bundles/grid")
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     }

@@ -50,7 +50,7 @@ namespace MVCAlcaldia.Controllers
 
             return View(colDto);
         }
-
+        [HttpPost]
         public ActionResult Delete(int id)
         {
             LZonaController lgc = new LZonaController();

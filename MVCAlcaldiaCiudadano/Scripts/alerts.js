@@ -1,4 +1,5 @@
-﻿function confirmation(id) {
+﻿
+function confirmation(id) {
 
     swal({
         title: "Cancelar Reclamo",

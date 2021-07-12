@@ -49,10 +49,23 @@ namespace MVCAlcaldia.Controllers
 
         public ActionResult Modify(int id)
         {
-            
+            LCuadrillaController lgcc = new LCuadrillaController();
+            List<DtoCuadrilla> colDtoCuadrilla = lgcc.GetAllCuadrillas();
+
+            List<SelectListItem> cuadrillaSelect = new List<SelectListItem>();
+
+            foreach (DtoCuadrilla item in colDtoCuadrilla)
+            {
+                SelectListItem option = new SelectListItem();
+                option.Value = item.id.ToString();
+                option.Text = item.nombre;
+                cuadrillaSelect.Add(option);
+            }
+
             LReclamoController lgc = new LReclamoController();
             DtoReclamo dto = lgc.GetReclamoById(id);
-
+            ViewBag.colCuadrillasSelect = cuadrillaSelect;
+            
             return View(dto);
         }
 
