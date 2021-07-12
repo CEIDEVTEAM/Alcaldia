@@ -147,10 +147,16 @@ namespace DataAccess.Repository
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return context.Usuario.AsNoTracking().Any(a => a.nombreDeUsuario == dto.user && a.contrasenia == dto.pass && a.tipoDeUsuario == dto.tipoDeUsuario && a.situacion == CGlobals.ESTADO_ACTIVO);
         }
-        public List<DtoUsuario> GetAllUsers()
+        public List<DtoUsuario> GetAllUsersCiudadano()
         {
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
-                return this._usuarioMapper.MapToDto(context.Usuario.AsNoTracking().Where(w => w.situacion == CGlobals.ESTADO_ACTIVO).ToList());
+                return this._usuarioMapper.MapToDto(context.Usuario.AsNoTracking().Where(w => w.situacion == CGlobals.ESTADO_ACTIVO && w.tipoDeUsuario == CUsuario.USER_CIUDADANO).ToList());
+
+        }
+        public List<DtoUsuario> GetAllUsersFuncionario()
+        {
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
+                return this._usuarioMapper.MapToDto(context.Usuario.AsNoTracking().Where(w => w.situacion == CGlobals.ESTADO_ACTIVO && w.tipoDeUsuario== CUsuario.USER_FUNCIONARIO).ToList());
 
         }
     }
