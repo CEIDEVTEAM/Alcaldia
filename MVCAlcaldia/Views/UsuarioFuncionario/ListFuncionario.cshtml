@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CommonSolution.DTOs.DtoUsuario>
 
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "Listado de Funcionarios";
 }
 
 <div class="row">
@@ -28,7 +28,7 @@
     </div>
 </div>
 
-<h2>Lista de Funcionarios</h2>
+<h2>Listado de Funcionarios</h2>
 
 <html>
 
@@ -73,7 +73,7 @@
                     @Html.DisplayFor(modelItem => item.email)
                 </td>
                 <td>
-                    @Html.ActionLink("Modificar", "Modify", new { nombreDeUsuario = item.nombreDeUsuario }) |
+                    @Html.ActionLink("Actualizar", "Modify", new { nombreDeUsuario = item.nombreDeUsuario })
 
                 </td>
             </tr>

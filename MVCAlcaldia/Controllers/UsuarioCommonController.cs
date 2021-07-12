@@ -1,5 +1,6 @@
 ﻿using BussinessLogic.Logic;
 using CommonSolution.Constants;
+using CommonSolution.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Web.Mvc;
 
 namespace MVCAlcaldia.Controllers
 {
-    public class UsuarioCommonController : Controller
+    public class UsuarioCommonController : Controller, IUsuarioCommon
     {
         #region VALIDATIONS
 
@@ -23,10 +24,8 @@ namespace MVCAlcaldia.Controllers
             else if (Session[CGlobals.USER_ACTION].ToString() == "M")
                 response = lgc.ExistUsuarioByNombre(nombreDeUsuario) ? true : false;
 
-
             return Json(response, JsonRequestBehavior.AllowGet);
         }
-
 
         public JsonResult ValidatePasswordNewUser(string contrasenia, string repContrasenia)
         {
@@ -36,6 +35,7 @@ namespace MVCAlcaldia.Controllers
 
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+
         public JsonResult ValidateNewPassword(string newPass, string repNewPass)
         {
             bool response = false;

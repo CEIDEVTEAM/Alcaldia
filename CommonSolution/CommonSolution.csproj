@@ -95,6 +95,7 @@
     <Compile Include="DTOs\DtoZona.cs" />
     <Compile Include="Encrypt\Encrypt.cs" />
     <Compile Include="ENUMs\EnumEstado.cs" />
+    <Compile Include="Interface\IUsuarioCommon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

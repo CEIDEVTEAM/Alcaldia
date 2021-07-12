@@ -3,17 +3,28 @@
 @{
     ViewBag.Title = "Listar Zonas";
 }
-@Styles.Render("~/Content/gridmvc")
-
+<div class="row">
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div>
+                <input type="button" onclick="location.href='@Url.Action("Add", "Zona")'" class="btn btn-default" value="Ingresar" style="width: 100%; max-width: initial"  />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div>
+                <input type="button" onclick="location.href='@Url.Action("List", "Zona")'" class="btn btn-default" value="Listar/Actualizar" style="width: 100%; max-width: initial" disabled/>
+            </div>
+        </div>
+    </div>
+</div>
 <h2>Listado de Zonas</h2>
 
-<p>
-    @Html.ActionLink("Agregar", "Add",null, new { @class = "btn btn-primary" })
-<p>
- 
 
-    @Html.Grid(Model).Columns(columns =>
+@Html.Grid(Model).Columns(columns =>
 {
+    columns.Add(c => c.id).Titled("Nro").SetWidth(30).Filterable(true);
     columns.Add(c => c.nombre).Titled("Nombre").SetWidth(30).Filterable(true);
     columns.Add(c => c.color).Titled("Color").Sanitized(false).Encoded(false).RenderValueAs(c => new HtmlString(
     "<div style='height: 20px; width: 20px; background-color: " + c.color + "'></div>"
@@ -24,10 +35,11 @@
 
 }).WithPaging(8).EmptyText("No hay nada que mostrar").Sortable()
 
+@Styles.Render("~/Content/gridmvc")
 
-    @section Scripts {
+@section Scripts {
 
-        @Scripts.Render("~/bundles/jqueryval")
-        @Scripts.Render("~/bundles/grid")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/grid")
 
-    }
+}

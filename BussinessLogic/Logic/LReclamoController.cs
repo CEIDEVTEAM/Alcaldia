@@ -112,7 +112,7 @@ namespace BussinessLogic.Logic
             {
                 dto.idCuadrilla = currCuadrilla;
                 dto.estado = CommonSolution.ENUMs.EnumEstado.ASIGNADO;
-                dto.observacionFuncionario = "Cuadrilla asignada automaticamente por el sistema";
+                dto.observacionFuncionario = "Cuadrilla asignada automaticamente por el sistema.";
                 this.ModifyReclamo(dto);
             }
 

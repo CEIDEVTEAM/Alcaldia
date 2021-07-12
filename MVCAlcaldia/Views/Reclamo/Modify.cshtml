@@ -36,7 +36,15 @@
                 @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        @if (Model.estado == CommonSolution.ENUMs.EnumEstado.PENDIENTE)
+        {
+            <div class="form-group">
+                <label class="control-label col-md-2">Cuadrilla</label>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.idCuadrilla, (List<SelectListItem>)ViewBag.colCuadrillasSelect, "-- Cuadrillas --", new { @class = "form-control", id = "selectValue" })
+                    @Html.ValidationMessageFor(model => model.idCuadrilla, "", new { @class = "text-danger" })
+                </div>
+            </div>}
         <div class="form-group">
             @Html.LabelFor(model => model.observacionFuncionario, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
