@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CommonSolution.DTOs.DtoUsuario>
 @using GridMvc.Html
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "Listado de Funcionarios";
 }
 @Styles.Render("~/Content/gridmvc")
 <div class="row">
@@ -28,7 +28,7 @@
     </div>
 </div>
 
-<h2>Lista de Funcionarios</h2>
+<h2>Listado de Funcionarios</h2>
 
 
 @Html.Grid(Model).Columns(columns =>

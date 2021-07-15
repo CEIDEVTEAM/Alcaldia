@@ -1,5 +1,6 @@
 ﻿using BussinessLogic.Logic;
 using CommonSolution.Constants;
+using CommonSolution.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Web.Mvc;
 
 namespace MVCAlcaldia.Controllers
 {
-    public class UsuarioCommonController : Controller
+    public class UsuarioCommonController : Controller, IUsuarioCommon
     {
         #region VALIDATIONS
 

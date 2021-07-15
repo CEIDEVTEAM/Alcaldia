@@ -1,4 +1,5 @@
 ﻿using BussinessLogic.Logic;
+using CommonSolution.Constants;
 using CommonSolution.DTOs;
 using System;
 using System.Collections.Generic;
@@ -20,11 +21,11 @@ namespace MVCAlcaldia.Controllers
         {
             LZonaController lgc = new LZonaController();
 
-            List<string> colErrores = lgc.AddZona(dto);
+            List<string> colErrors = lgc.AddZona(dto);
 
-            foreach (string error in colErrores)
+            if (colErrors.Count == 0)
             {
-                ModelState.AddModelError("ErrorGeneral", error);
+                Session[CGlobals.USER_MESSAGE] = "Zona ingresada con éxito";
             }
 
 
@@ -55,17 +56,17 @@ namespace MVCAlcaldia.Controllers
         {
             LZonaController lgc = new LZonaController();
             DtoZona dto = lgc.GetZonaById(id);
-            List<string> colErrores = lgc.DeleteZona(dto);
+            List<string> colErrors = lgc.DeleteZona(dto);
 
-            foreach (string error in colErrores)
+            if (colErrors.Count == 0)
             {
-                ModelState.AddModelError("ErrorGeneral", error);
+                Session[CGlobals.USER_MESSAGE] = "Zona dada de baja con éxito";
             }
-
 
             return RedirectToAction("List");
         }
 
+        #region VALIDATIONS
 
         public JsonResult ValidateNombre(string nombre)
         {
@@ -73,8 +74,9 @@ namespace MVCAlcaldia.Controllers
             LZonaController lgc = new LZonaController();
             response = lgc.ExisteZonaByNombre(nombre) ? false : true;
 
-
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
     }
 }

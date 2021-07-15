@@ -49,7 +49,20 @@ namespace MVCAlcaldia.Controllers
 
         public ActionResult Modify(int id)
         {
-            
+            LCuadrillaController lgcc = new LCuadrillaController();
+            List<DtoCuadrilla> colDtoCuadrilla = lgcc.GetAllCuadrillas();
+
+            List<SelectListItem> cuadrillaSelect = new List<SelectListItem>();
+
+            foreach (DtoCuadrilla item in colDtoCuadrilla)
+            {
+                SelectListItem option = new SelectListItem();
+                option.Value = item.id.ToString();
+                option.Text = item.nombre;
+                cuadrillaSelect.Add(option);
+            }
+
+            ViewBag.colCuadrillasSelect = cuadrillaSelect;
             LReclamoController lgc = new LReclamoController();
             DtoReclamo dto = lgc.GetReclamoById(id);
 
@@ -60,10 +73,14 @@ namespace MVCAlcaldia.Controllers
         public ActionResult ModifyReclamo(DtoReclamo dto)
         {
             LReclamoController lgc = new LReclamoController();
-
+           
             List<string> colErrors = lgc.ModifyReclamo(dto);
+            if (colErrors.Count == 0)
+            {
+                Session[CGlobals.USER_MESSAGE] = "Reclamo actualizado con éxito";
+            }
 
-            return RedirectToAction("ListAll");
+                return RedirectToAction("ListAll");
         }
         public ActionResult Details(int id)
         {
