@@ -28,7 +28,6 @@ namespace MVCAlcaldia.Controllers
             }
 
             ViewBag.colZonasSelect = colZonasSelect;
-            Session[CGlobals.USER_ACTION] = "A";
 
             return View();
         }
@@ -78,7 +77,6 @@ namespace MVCAlcaldia.Controllers
 
             LCuadrillaController lgc = new LCuadrillaController();
             DtoCuadrilla dto = lgc.GetCuadrillaById(id ?? 0);
-            Session[CGlobals.USER_ACTION] = "M";
 
 
             return View(dto);

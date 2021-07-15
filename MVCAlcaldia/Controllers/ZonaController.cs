@@ -20,7 +20,6 @@ namespace MVCAlcaldia.Controllers
         public ActionResult AddZona(DtoZona dto)
         {
             LZonaController lgc = new LZonaController();
-
             List<string> colErrors = lgc.AddZona(dto);
 
             if (colErrors.Count == 0)
@@ -36,10 +35,6 @@ namespace MVCAlcaldia.Controllers
         {
             LZonaController lgc = new LZonaController();
             List<DtoZona> colDto = lgc.GetAllZonas();
-            foreach (DtoZona item in colDto)
-            {
-                item.colVertices.OrderBy(o => o.orden);
-            }
 
             return Json(colDto, JsonRequestBehavior.AllowGet);
         }

@@ -12,7 +12,7 @@ namespace CommonSolution.DTOs
    public class DtoTipoDeReclamo
     {
 
-        [Remote("ValidateNombre", "TipoDeReclamo", ErrorMessage = "El Nombre ingresado ya existe")]
+        [Remote("ValidateNombre", "TipoDeReclamo", AdditionalFields = "task", ErrorMessage = "El Nombre ingresado ya existe")]
         [StringLength(50, ErrorMessage = "El Nombre no puede superar los 50 caracteres")]
         [Required(ErrorMessage = "El Nombre es requerido")]
         [DisplayName("Nombre")]
@@ -22,5 +22,7 @@ namespace CommonSolution.DTOs
         [Required(ErrorMessage = "La Descripción es requerida")]
         [DisplayName("Descripción")]
         public string descripcion { get; set; }
+        public string task { get; set; }
+
     }
 }

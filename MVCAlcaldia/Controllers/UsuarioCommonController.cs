@@ -9,19 +9,20 @@ using System.Web.Mvc;
 
 namespace MVCAlcaldia.Controllers
 {
-    public class UsuarioCommonController : Controller, IUsuarioCommon
+    [AuthorizeAttribute]
+    public class UsuarioCommonController : Controller
     {
         #region VALIDATIONS
 
-        public JsonResult ValidateUserName(string nombreDeUsuario)
+        public JsonResult ValidateUserName(string nombreDeUsuario, string task)
         {
-            bool response = true;
+            bool response = false;
             LUsuarioController lgc = new LUsuarioController();
 
-            if (Session[CGlobals.USER_ACTION].ToString() == "A")
+            if (task == CGlobals.USER_ACTION_ADD)
                 response = lgc.ExistUsuarioByNombre(nombreDeUsuario) ? false : true;
 
-            else if (Session[CGlobals.USER_ACTION].ToString() == "M")
+            else if (task == CGlobals.USER_ACTION_MOD)
                 response = lgc.ExistUsuarioByNombre(nombreDeUsuario) ? true : false;
 
             return Json(response, JsonRequestBehavior.AllowGet);

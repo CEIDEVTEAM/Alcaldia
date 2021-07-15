@@ -11,7 +11,8 @@ namespace CommonSolution.DTOs
 {
     public class DtoUsuario
     {
-        [Remote("ValidateUserName", "UsuarioCommon", ErrorMessage = "El nombre de usuario ya existe")]
+
+        [Remote("ValidateUserName", "UsuarioCommon", AdditionalFields = "task", ErrorMessage = "El nombre de usuario ya existe")]
         [StringLength(20, ErrorMessage = "El Nombre de usuario no puede superar los 20 caracteres")]
         [Required(ErrorMessage = "El Nombre de usuario es requerido")]
         [DisplayName("Nombre de usuario")]
@@ -52,8 +53,8 @@ namespace CommonSolution.DTOs
         [DisplayName("Email")]
         public string email { get; set; }
 
-
         public string situacion { get; set; }
+        public string task { get; set; }
 
         public DtoTipoUsuario tipoDeUsuario { get; set; }
 

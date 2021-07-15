@@ -15,7 +15,6 @@ namespace MVCAlcaldia.Controllers
         public ActionResult Add()
         {
 
-            Session[CGlobals.USER_ACTION] = "A";
             return View();
         }
 
@@ -28,7 +27,6 @@ namespace MVCAlcaldia.Controllers
             {
                 Session[CGlobals.USER_MESSAGE] = "Tipo de reclamo agregado con éxito";
                 ModelState.Clear();
-                Session[CGlobals.USER_ACTION] = null;
             }
 
             return View("Add");
@@ -38,7 +36,6 @@ namespace MVCAlcaldia.Controllers
 
         public ActionResult DeleteTipoDeReclamo(DtoTipoDeReclamo dto)
         {
-
             LTipoDeReclamoController lgc = new LTipoDeReclamoController();
             List<string> colErrors = lgc.DeleteTipoDeReclamo(dto);
 
@@ -54,8 +51,6 @@ namespace MVCAlcaldia.Controllers
 
         public ActionResult Modify(string nombre)
         {
-
-            Session[CGlobals.USER_ACTION] = "M";
             LTipoDeReclamoController lgc = new LTipoDeReclamoController();
             DtoTipoDeReclamo dto = lgc.GetTipoDeReclamoByName(nombre);
 
@@ -71,7 +66,6 @@ namespace MVCAlcaldia.Controllers
             if (colErrors.Count == 0)
             {
                 Session[CGlobals.USER_MESSAGE] = "Tipo de reclamo actualizado con éxito";
-                Session[CGlobals.USER_ACTION] = null;
             }
 
             return View("Modify");
@@ -87,15 +81,15 @@ namespace MVCAlcaldia.Controllers
 
         #region VALIDATIONS
 
-        public JsonResult ValidateNombre(string nombre)
+        public JsonResult ValidateNombre(string nombre, string task)
         {
-            bool response = true;
+            bool response = false;
             LTipoDeReclamoController lgc = new LTipoDeReclamoController();
 
-            if (Session[CGlobals.USER_ACTION].ToString() == "A")
+            if (task == CGlobals.USER_ACTION_ADD)
                 response = lgc.ExistTipoDeReclamoByNombre(nombre) ? false : true;
 
-            else if (Session[CGlobals.USER_ACTION].ToString() == "M")
+            else if (task == CGlobals.USER_ACTION_MOD)
                 response = lgc.ExistTipoDeReclamoByNombre(nombre) ? true : false;
 
 

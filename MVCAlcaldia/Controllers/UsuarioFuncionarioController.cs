@@ -9,13 +9,12 @@ using System.Web.Mvc;
 
 namespace MVCAlcaldia.Controllers
 {
-    [AuthorizeAttribute]
+
     public class UsuarioFuncionarioController : Controller
     {
         public ActionResult Add()
         {
 
-            Session[CGlobals.USER_ACTION] = "A";
             return View();
         }
 
@@ -29,9 +28,8 @@ namespace MVCAlcaldia.Controllers
             {
                 Session[CGlobals.USER_MESSAGE] = "Usuario registrado con éxito";
                 ModelState.Clear();
-                Session[CGlobals.USER_ACTION] = null;
-            }
 
+            }
 
             return View("Add");
         }
@@ -54,12 +52,17 @@ namespace MVCAlcaldia.Controllers
 
         public ActionResult Modify()
         {
-            string nombreUsuario = Session[CLogin.KEY_SESSION_USERNAME].ToString();
-            LUsuarioController lgc = new LUsuarioController();
-            DtoUsuario dto = lgc.GetUserByNombre(nombreUsuario);
-            Session[CGlobals.USER_ACTION] = "M";
+            if (Session[CLogin.KEY_SESSION_USERNAME] != null)
+            {
+                string nombreUsuario = Session[CLogin.KEY_SESSION_USERNAME].ToString();
+                LUsuarioController lgc = new LUsuarioController();
+                DtoUsuario dto = lgc.GetUserByNombre(nombreUsuario);
+                return View(dto);
+            }
 
-            return View(dto);
+            Session[CGlobals.USER_ALERT] = "La sesión expiró, vuelvea a loguearse.";
+            return RedirectToAction("Login", "Login");
+
         }
 
         [HttpPost]
@@ -71,7 +74,6 @@ namespace MVCAlcaldia.Controllers
             if (colErrors.Count == 0)
             {
                 Session[CGlobals.USER_MESSAGE] = "Usuario actualizado con éxito";
-                Session[CGlobals.USER_ACTION] = null;
             }
 
             return RedirectToAction("Modify");
@@ -103,10 +105,15 @@ namespace MVCAlcaldia.Controllers
 
         public ActionResult ModifyPassword()
         {
-            DtoChangePass dto = new DtoChangePass();
-            dto.user = Session[CLogin.KEY_SESSION_USERNAME].ToString();
+            if (Session[CLogin.KEY_SESSION_USERNAME] != null)
+            {
+                DtoChangePass dto = new DtoChangePass();
+                dto.user = Session[CLogin.KEY_SESSION_USERNAME].ToString();
+                return View(dto);
+            }
 
-            return View(dto);
+            Session[CGlobals.USER_ALERT] = "La sesión expiró, vuelvea a loguearse.";
+            return RedirectToAction("Login", "Login");
         }
 
 
