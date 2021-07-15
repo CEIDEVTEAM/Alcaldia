@@ -7,14 +7,14 @@
     <div class="col-sm-4">
         <div class="panel panel-default">
             <div>
-                <input type="button" onclick="location.href='@Url.Action("Add", "Zona")'" class="btn btn-default" value="Ingresar" style="width: 100%; max-width: initial"  />
+                <input type="button" onclick="location.href='@Url.Action("Add", "Zona")'" class="btn btn-default" value="Ingresar" style="width: 100%; max-width: initial" />
             </div>
         </div>
     </div>
     <div class="col-sm-4">
         <div class="panel panel-default">
             <div>
-                <input type="button" onclick="location.href='@Url.Action("List", "Zona")'" class="btn btn-default" value="Listar/Actualizar" style="width: 100%; max-width: initial" disabled/>
+                <input type="button" onclick="location.href='@Url.Action("List", "Zona")'" class="btn btn-default" value="Listar/Actualizar" style="width: 100%; max-width: initial" disabled />
             </div>
         </div>
     </div>
@@ -32,6 +32,7 @@
 
     columns.Add(c => c.reclamosActivos).Titled("Reclamos activos").SetWidth(10).Filterable(true); ;
     columns.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(o => Html.ActionLink("Borrar", "Delete", new { id = o.id }, new { @class = "btn btn-danger" }));
+
 
 }).WithPaging(8).EmptyText("No hay nada que mostrar").Sortable()
 

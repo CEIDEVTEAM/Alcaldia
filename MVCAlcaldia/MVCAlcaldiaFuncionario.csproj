@@ -200,6 +200,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Gridmvc.css" />
     <Content Include="Content\img\EscudoToledo.png" />
+    <Content Include="Content\styleS.css" />
     <Content Include="Content\menu.css" />
     <Content Include="Content\snackbar.css" />
     <Content Include="favicon.ico" />

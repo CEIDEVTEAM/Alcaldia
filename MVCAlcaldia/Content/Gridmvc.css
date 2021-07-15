@@ -16,6 +16,7 @@ table.grid-table { margin: 0; }
     /* Grid body */
     table.grid-table tr.grid-row-selected td { background: #4888C2 !important; color: white; }
     table.grid-table tr.grid-row-selected a { color: white; }
+       
 
 /* Grid filtering */
 input.grid-filter-input { padding: 4px; font-size: 13px; }

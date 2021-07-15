@@ -99,6 +99,24 @@ namespace MVCAlcaldia.Controllers
             return RedirectToAction("Modify");
         }
 
+        public ActionResult Delete(int id)
+        {
+            LCuadrillaController lgc = new LCuadrillaController();
+            DtoCuadrilla dto = lgc.GetCuadrillaById(id);
+            List<string> colErrors = lgc.DeleteCuadrilla(dto);
+
+            if (colErrors.Count == 0)
+            {
+                Session[CGlobals.USER_MESSAGE] = "Cuadrilla dada de baja con éxito";
+            }
+            else
+            {
+                Session[CGlobals.USER_MESSAGE] = "Cuadrilla NO se ha dado de baja, tiene reclamos activos";
+            }
+
+            return RedirectToAction("List");
+        }
+
         #region VALIDATIONS
         public JsonResult ValidateNombre(string nombre, int? id)
         {

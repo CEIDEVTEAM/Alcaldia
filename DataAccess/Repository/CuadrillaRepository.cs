@@ -86,10 +86,10 @@ namespace DataAccess.Repository
 
                         if (currCuadrilla != null)
                         {
-                            context.Cuadrilla.Remove(currCuadrilla);
-                            context.SaveChanges();
-                            trann.Commit();
+                            currCuadrilla.situacion = CGlobals.ESTADO_INACTIVO;
                         }
+                        context.SaveChanges();
+                        trann.Commit();
                     }
                     catch (Exception ex)
                     {

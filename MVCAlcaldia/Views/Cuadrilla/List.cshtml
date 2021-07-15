@@ -37,6 +37,7 @@
     columns.Add(c => c.idZona).Titled("Nro. Zona").SetWidth(30);
     columns.Add(c => c.cantidadDePeones).Titled("Can. Peones").SetWidth(20);
     columns.Add().Encoded(false).Sanitized(false).SetWidth(10).RenderValueAs(o => Html.ActionLink("Actualizar", "Modify", new { id = o.id }, new { @class = "btn btn-success" }));
+    columns.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(o => Html.ActionLink("Borrar", "Delete", new { id = o.id }, new { @class = "btn btn-danger" }));
 
 }).WithPaging(8).EmptyText("No hay nada que mostrar").Selectable(true).Filterable()
 

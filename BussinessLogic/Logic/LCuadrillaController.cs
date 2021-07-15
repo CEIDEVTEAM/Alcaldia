@@ -45,8 +45,9 @@ namespace BussinessLogic.Logic
         public List<string> DeleteCuadrilla(DtoCuadrilla dto)
         {
             List<string> colerrors = this.ValidateCuadrilla(dto, false);
+            bool hayReclamo = this._Repository.GetReclamoRepository().ExistenReclamosParaCuadilla(dto.id);
 
-            if (colerrors.Count == 0)
+            if (colerrors.Count == 0 && !hayReclamo)
             {
                 this._Repository.GetCuadrillaRepository().DeleteCuadrilla(dto.id);
             }
