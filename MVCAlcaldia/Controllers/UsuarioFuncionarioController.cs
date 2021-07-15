@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace MVCAlcaldia.Controllers
 {
-
+    [AuthorizeAttribute]
     public class UsuarioFuncionarioController : Controller
     {
         public ActionResult Add()
@@ -28,7 +28,14 @@ namespace MVCAlcaldia.Controllers
             {
                 Session[CGlobals.USER_MESSAGE] = "Usuario registrado con éxito";
                 ModelState.Clear();
+            }
+            else
+            {
+                string errorShow = "";
+                foreach (string item in colErrors)
+                    errorShow += "<< " + item + " >>";
 
+                Session[CGlobals.USER_ALERT] = errorShow;
             }
 
             return View("Add");
@@ -44,6 +51,14 @@ namespace MVCAlcaldia.Controllers
             if (colErrors.Count == 0)
             {
                 Session[CGlobals.USER_MESSAGE] = "Usuario dado de baja con éxito";
+            }
+            else
+            {
+                string errorShow = "";
+                foreach (string item in colErrors)
+                    errorShow += "<< " + item + " >>";
+
+                Session[CGlobals.USER_ALERT] = errorShow;
             }
 
             return RedirectToAction("ListFuncionario");
@@ -74,6 +89,14 @@ namespace MVCAlcaldia.Controllers
             if (colErrors.Count == 0)
             {
                 Session[CGlobals.USER_MESSAGE] = "Usuario actualizado con éxito";
+            }
+            else
+            {
+                string errorShow = "";
+                foreach (string item in colErrors)
+                    errorShow += "<< " + item + " >>";
+
+                Session[CGlobals.USER_ALERT] = errorShow;
             }
 
             return RedirectToAction("Modify");

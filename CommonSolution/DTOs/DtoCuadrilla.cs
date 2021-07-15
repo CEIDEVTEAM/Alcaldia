@@ -14,7 +14,7 @@ namespace CommonSolution.DTOs
         [DisplayName("Nro")]
         public int id { get; set; }
 
-        [Remote("ValidateNombre", "Cuadrilla", AdditionalFields = "id", ErrorMessage = "El Nombre ingresado ya existe")]
+        [Remote("ValidateNombre", "Cuadrilla", AdditionalFields = "id, task", ErrorMessage = "El Nombre ingresado ya existe")]
         [StringLength(30, ErrorMessage = "El Nombre no puede superar los 30 caracteres")]
         [Required(ErrorMessage = "El Nombre es requerido")]
         [DisplayName("Nombre")]
@@ -43,5 +43,7 @@ namespace CommonSolution.DTOs
 
         [DisplayName("Promedio de resolución")]
         public string promedioStg { get; set; }
+        public string task { get; set; }
+
     }
 }

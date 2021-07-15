@@ -9,7 +9,6 @@ using System.Web.Mvc;
 
 namespace MVCAlcaldia.Controllers
 {
-    [AuthorizeAttribute]
     public class UsuarioCommonController : Controller
     {
         #region VALIDATIONS

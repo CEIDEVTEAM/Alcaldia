@@ -15,14 +15,15 @@
     <div class="col-sm-4">
         <div class="panel panel-default">
             <div>
-                <input type="button" onclick="location.href='@Url.Action("Modify", "Cuadrilla")'" class="btn btn-default" value="Actualizar" style="width: 100%; max-width: initial" disabled/>
+                <input type="button" onclick="location.href='@Url.Action("Modify", "Cuadrilla")'" class="btn btn-default" value="Actualizar" style="width: 100%; max-width: initial" disabled />
             </div>
         </div>
     </div>
+    @Html.TextBoxFor(model => model.task, new { @class = "hidden", @readonly = "readonly", Value = CommonSolution.Constants.CGlobals.USER_ACTION_MOD })
     <div class="col-sm-4">
         <div class="panel panel-default">
             <div>
-                <input type="button" onclick="location.href='@Url.Action("List", "Cuadrilla")'" class="btn btn-default" value="Listar" style="width: 100%; max-width: initial"  />
+                <input type="button" onclick="location.href='@Url.Action("List", "Cuadrilla")'" class="btn btn-default" value="Listar" style="width: 100%; max-width: initial" />
             </div>
         </div>
     </div>
@@ -70,7 +71,7 @@
             @Html.ValidationMessageFor(model => model.cantidadDePeones, "", new { @class = "text-danger" })
         </div>
     </div>
-
+    @Html.TextBoxFor(model => model.task, new { @class = "hidden", @readonly = "readonly", Value = CommonSolution.Constants.CGlobals.USER_ACTION_MOD })
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Actualizar" class="btn btn-default" />

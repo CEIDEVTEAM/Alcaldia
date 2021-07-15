@@ -36,15 +36,12 @@ namespace MVCAlcaldia.Controllers
         public ActionResult AddCuadrilla(DtoCuadrilla dto)
         {
             LCuadrillaController lgc = new LCuadrillaController();
-
-            List<string> colErrors = new List<string>();
-            colErrors = lgc.AddCuadrilla(dto);
+            List<string> colErrors = lgc.AddCuadrilla(dto);
 
             if (colErrors.Count == 0)
             {
                 Session[CGlobals.USER_MESSAGE] = "Cuadrilla ingresada con éxito";
                 ModelState.Clear();
-                Session[CGlobals.USER_ACTION] = null;
             }
 
             return RedirectToAction("Add");
@@ -91,7 +88,14 @@ namespace MVCAlcaldia.Controllers
             if (colErrors.Count == 0)
             {
                 Session[CGlobals.USER_MESSAGE] = "Cuadrilla actualizada con éxito";
-                Session[CGlobals.USER_ACTION] = null;
+            }
+            else
+            {
+                string errorShow = "";
+                foreach (string item in colErrors)
+                    errorShow += "<< " + item + " >>";
+
+                Session[CGlobals.USER_ALERT] = errorShow;
             }
 
             return RedirectToAction("Modify");
@@ -102,29 +106,35 @@ namespace MVCAlcaldia.Controllers
             LCuadrillaController lgc = new LCuadrillaController();
             DtoCuadrilla dto = lgc.GetCuadrillaById(id);
             List<string> colErrors = lgc.DeleteCuadrilla(dto);
-
+            colErrors.Add("asdfasdf");
+            colErrors.Add("LInea 2           fdsf");
+            colErrors.Add("asdfasdfasdf");
             if (colErrors.Count == 0)
             {
                 Session[CGlobals.USER_MESSAGE] = "Cuadrilla dada de baja con éxito";
             }
             else
             {
-                Session[CGlobals.USER_MESSAGE] = "Cuadrilla NO se ha dado de baja, tiene reclamos activos";
+                string errorShow = "";
+                foreach (string item in colErrors)
+                    errorShow += "<< " + item + " >>";
+
+                Session[CGlobals.USER_ALERT] = errorShow;
             }
 
             return RedirectToAction("List");
         }
 
         #region VALIDATIONS
-        public JsonResult ValidateNombre(string nombre, int? id)
+        public JsonResult ValidateNombre(string nombre, int? id, string task)
         {
-            bool response = true;
+            bool response = false;
             LCuadrillaController lgc = new LCuadrillaController();
 
-            if (Session[CGlobals.USER_ACTION].ToString() == "A")
+            if (task == CGlobals.USER_ACTION_ADD)
                 response = lgc.ExistCuadrillaByName(nombre) ? false : true;
 
-            else if (Session[CGlobals.USER_ACTION].ToString() == "M")
+            else if (task == CGlobals.USER_ACTION_MOD)
             {
                 response = lgc.ExistCuadrillaByNameAndId(nombre, id ?? 0) ? true : false;
                 if(!response)

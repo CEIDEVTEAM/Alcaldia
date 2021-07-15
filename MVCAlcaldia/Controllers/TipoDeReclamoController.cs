@@ -28,6 +28,14 @@ namespace MVCAlcaldia.Controllers
                 Session[CGlobals.USER_MESSAGE] = "Tipo de reclamo agregado con éxito";
                 ModelState.Clear();
             }
+            else
+            {
+                string errorShow = "";
+                foreach (string item in colErrors)
+                    errorShow += "<< " + item + " >>";
+
+                Session[CGlobals.USER_ALERT] = errorShow;
+            }
 
             return View("Add");
         }
@@ -43,6 +51,14 @@ namespace MVCAlcaldia.Controllers
             {
                 Session[CGlobals.USER_MESSAGE] = "Tipo de reclamo dado de baja";
                 ModelState.Clear();
+            }
+            else
+            {
+                string errorShow = "";
+                foreach (string item in colErrors)
+                    errorShow += "<< " + item + " >>";
+
+                Session[CGlobals.USER_ALERT] = errorShow;
             }
 
             return View("List");
@@ -66,6 +82,14 @@ namespace MVCAlcaldia.Controllers
             if (colErrors.Count == 0)
             {
                 Session[CGlobals.USER_MESSAGE] = "Tipo de reclamo actualizado con éxito";
+            }
+            else
+            {
+                string errorShow = "";
+                foreach (string item in colErrors)
+                    errorShow += "<< " + item + " >>";
+
+                Session[CGlobals.USER_ALERT] = errorShow;
             }
 
             return View("Modify");
