@@ -9,7 +9,7 @@ namespace CommonSolution.Interface
 {
     public interface IUsuarioCommon
     {
-        JsonResult ValidateUserName(string userName);
+        JsonResult ValidateUserName(string userName, string task);
         JsonResult ValidatePasswordNewUser(string pass, string repPass);
         JsonResult ValidateNewPassword(string newPass, string repNewPass);
     }

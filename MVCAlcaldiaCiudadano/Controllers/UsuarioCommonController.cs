@@ -13,15 +13,15 @@ namespace MVCAlcaldia.Controllers
     {
         #region VALIDATIONS
 
-        public JsonResult ValidateUserName(string nombreDeUsuario)
+        public JsonResult ValidateUserName(string nombreDeUsuario, string task)
         {
             bool response = true;
             LUsuarioController lgc = new LUsuarioController();
 
-            if (Session[CGlobals.USER_ACTION].ToString() == "A")
+            if (task == CGlobals.USER_ACTION_ADD)
                 response = lgc.ExistUsuarioByNombre(nombreDeUsuario) ? false : true;
 
-            else if (Session[CGlobals.USER_ACTION].ToString() == "M")
+            else if (task == CGlobals.USER_ACTION_MOD)
                 response = lgc.ExistUsuarioByNombre(nombreDeUsuario) ? true : false;
 
 

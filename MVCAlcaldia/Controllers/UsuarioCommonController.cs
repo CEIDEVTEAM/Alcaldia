@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace MVCAlcaldia.Controllers
 {
-    public class UsuarioCommonController : Controller
+    public class UsuarioCommonController : Controller, IUsuarioCommon
     {
         #region VALIDATIONS
 

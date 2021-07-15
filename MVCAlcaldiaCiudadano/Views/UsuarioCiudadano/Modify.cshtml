@@ -50,6 +50,7 @@
                 @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
             </div>
         </div>
+        @Html.TextBoxFor(model => model.task, new { @class = "hidden", @readonly = "readonly", Value = CommonSolution.Constants.CGlobals.USER_ACTION_MOD })
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Actualizar" class="btn btn-default" />

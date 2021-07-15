@@ -48,65 +48,94 @@ namespace MVCAlcaldiaCiudadano.Controllers
         [HttpPost]
         public ActionResult AddReclamo(DtoReclamo dto)
         {
-            List<string> colErrors = new List<string>();
-            dto.idCiudadano = Session[CLogin.KEY_SESSION_USERNAME].ToString();
-            dto.fechaYhora = DateTime.Now;
-            dto.estado = EnumEstado.PENDIENTE;
-            LReclamoController lgc = new LReclamoController();
-            colErrors = lgc.AddReclamo(dto);
-
-            if (colErrors.Count == 0)
+            if (Session[CLogin.KEY_SESSION_USERNAME] != null)
             {
-                Session[CGlobals.USER_MESSAGE] = "Reclamo registrado con éxito";
-                ModelState.Clear();
+                List<string> colErrors = new List<string>();
+                dto.idCiudadano = Session[CLogin.KEY_SESSION_USERNAME].ToString();
+                LReclamoController lgc = new LReclamoController();
+                colErrors = lgc.AddReclamo(dto);
 
+                if (colErrors.Count == 0)
+                {
+                    Session[CGlobals.USER_MESSAGE] = "Reclamo registrado con éxito";
+                    ModelState.Clear();
+                }
+                else
+                {
+                    string errorShow = "";
+                    foreach (string item in colErrors)
+                        errorShow += "<< " + item + " >>";
+
+                    Session[CGlobals.USER_ALERT] = errorShow;
+                }
+
+                return View();
             }
-
-            return View();
+            Session[CGlobals.USER_ALERT] = "La sesión expiró, vuelvea a loguearse.";
+            return RedirectToAction("Login", "Login");
         }
 
         public ActionResult List()
         {
-            LReclamoController lgc = new LReclamoController();
-            string user = Session[CLogin.KEY_SESSION_USERNAME].ToString();
-            List<DtoReclamo> colDto = lgc.GetAllReclamosByUser(user);
+            if (Session[CLogin.KEY_SESSION_USERNAME] != null)
+            {
+                LReclamoController lgc = new LReclamoController();
+                string user = Session[CLogin.KEY_SESSION_USERNAME].ToString();
+                List<DtoReclamo> colDto = lgc.GetAllReclamosByUser(user);
 
             return View(colDto);
+            }
+            Session[CGlobals.USER_ALERT] = "La sesión expiró, vuelvea a loguearse.";
+            return RedirectToAction("Login", "Login");
         }
+
         public ActionResult Grid()
         {
-            LReclamoController lgc = new LReclamoController();
-            string user = Session[CLogin.KEY_SESSION_USERNAME].ToString();
-            List<DtoReclamo> colDto = lgc.GetAllReclamosByUser(user);
+            if (Session[CLogin.KEY_SESSION_USERNAME] != null)
+            {
+                LReclamoController lgc = new LReclamoController();
+                string user = Session[CLogin.KEY_SESSION_USERNAME].ToString();
+                List<DtoReclamo> colDto = lgc.GetAllReclamosByUser(user);
 
-            return View(colDto);
+                return View(colDto);
+            }
+
+            Session[CGlobals.USER_ALERT] = "La sesión expiró, vuelvea a loguearse.";
+            return RedirectToAction("Login", "Login");
         }
 
         public ActionResult Details(int id)
         {
-            LLogReclamoController lgc = new LLogReclamoController();
-            
+            LLogReclamoController lgc = new LLogReclamoController(); 
             List<DtoLogReclamo> colDto = lgc.GetLogReclamoById(id);
 
             return View(colDto);
         }
+
         [HttpPost]
         public JsonResult Delete(DtoReclamo dto)
         {
             LReclamoController lgc = new LReclamoController();
             DtoReclamo DtoRec = lgc.GetReclamoById(dto.id);
             
-            List<string> colErrores = lgc.DeleteReclamo(DtoRec);
+            List<string> colErrors = lgc.DeleteReclamo(DtoRec);
 
-            foreach (string error in colErrores)
+            if (colErrors.Count == 0)
             {
-                ModelState.AddModelError("ErrorGeneral", error);
+                Session[CGlobals.USER_MESSAGE] = "Reclamo dado de baja con éxito";
+                ModelState.Clear();
             }
+            else
+            {
+                string errorShow = "";
+                foreach (string item in colErrors)
+                    errorShow += "<< " + item + " >>";
 
+                Session[CGlobals.USER_ALERT] = errorShow;
+            }
 
             return Json(JsonRequestBehavior.AllowGet);
         }
 
-        //DeleteReclamo
     }
 }

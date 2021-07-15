@@ -89,8 +89,7 @@ namespace MVCAlcaldia.Controllers
             if (colErrors.Count == 0)
             {
                 Session[CGlobals.USER_MESSAGE] = "Usuario actualizado con éxito";
-            }
-            else
+            }            else
             {
                 string errorShow = "";
                 foreach (string item in colErrors)

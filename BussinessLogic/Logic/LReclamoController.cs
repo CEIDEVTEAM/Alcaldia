@@ -1,5 +1,6 @@
 ﻿using CommonSolution.Constants;
 using CommonSolution.DTOs;
+using CommonSolution.ENUMs;
 using DataAccess.Persistence;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,8 @@ namespace BussinessLogic.Logic
 
         public List<string> AddReclamo(DtoReclamo dto)
         {
+            dto.fechaYhora = DateTime.Now;
+            dto.estado = EnumEstado.PENDIENTE;
             List<string> colerrors = this.ValidateReclamo(dto, true);
 
             if (colerrors.Count == 0)
