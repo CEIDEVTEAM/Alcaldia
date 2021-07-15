@@ -34,7 +34,7 @@ namespace MVCAlcaldia.Controllers
             return View("Add");
         }
 
-        [HttpPost]
+        
         public ActionResult DeleteUsuario(string nombreDeUsuario)
         {
             LUsuarioController lgc = new LUsuarioController();
@@ -46,7 +46,7 @@ namespace MVCAlcaldia.Controllers
                 Session[CGlobals.USER_MESSAGE] = "Usuario dado de baja con éxito";
             }
 
-            return RedirectToAction("List");
+            return RedirectToAction("ListFuncionario");
         }
 
 

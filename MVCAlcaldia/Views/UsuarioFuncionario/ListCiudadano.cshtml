@@ -1,53 +1,27 @@
 ﻿@model IEnumerable<CommonSolution.DTOs.DtoUsuario>
-
+@using GridMvc.Html
 @{
     ViewBag.Title = "Listado de Ciudadanos";
 }
+@Styles.Render("~/Content/gridmvc")
+
+<h2>Ciudadanos Registrados</h2>
+<hr />
+
+@Html.Grid(Model).Columns(columns =>
+{
+columns.Add(c => c.nombreDeUsuario).Titled("Nombre de Usuario").SetWidth(30);
+columns.Add(c => c.nombre).Titled("Nombre").SetWidth(30);
+columns.Add(c => c.apellido).Titled("Apellido").SetWidth(30);
+columns.Add(c => c.telefono).Titled("Teléfono").SetWidth(20);
+columns.Add(c => c.email).Titled("e-mail").SetWidth(20);
 
 
-<h2>Listado de Ciudadanos</h2>
-<br />
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nombreDeUsuario)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.apellido)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.telefono)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.email)
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombreDeUsuario)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.apellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.telefono)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.email)
-            </td>
+}).WithPaging(8).EmptyText("No hay nada que mostrar").Selectable(true).Sortable(true).Filterable(true)
 
-        </tr>
-    }
 
-</table>
-
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/grid")
+}

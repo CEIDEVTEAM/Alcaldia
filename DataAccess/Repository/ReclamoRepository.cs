@@ -111,6 +111,11 @@ namespace DataAccess.Repository
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
                 return context.Reclamo.AsNoTracking().Any(a => a.id == idReclamo);
         }
+        public bool ExistenReclamosParaCuadilla(int idCuadrilla)
+        {
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
+                return context.Reclamo.AsNoTracking().Any(a => a.idCuadrilla == idCuadrilla);
+        }
 
         public List<DtoReclamo> GetAllReclamos()
         {
@@ -184,5 +189,7 @@ namespace DataAccess.Repository
 
             return colReclamos;
         }
+
+        
     }
 }

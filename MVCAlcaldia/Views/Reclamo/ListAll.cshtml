@@ -27,7 +27,7 @@
     columns.Add(c => c.idCuadrilla).Titled("Cuadrilla").SetWidth(20).Filterable(true);
     columns.Add(c => c.estado).Titled("Estado").SetWidth(20);
 
-    columns.Add().Encoded(false).Sanitized(false).SetWidth(10).RenderValueAs(o => Html.ActionLink("Estado", "Modify", new { id = o.id }, new { @class = "btn btn-success" }));
+    columns.Add().Encoded(false).Sanitized(false).SetWidth(10).RenderValueAs(o => Html.ActionLink("Modf.Estado", "Modify", new { id = o.id }, new { @class = "btn btn-success" }));
     columns.Add().Encoded(false).Sanitized(false).SetWidth(10).RenderValueAs(o => Html.ActionLink("Detalle", "Details", new { id = o.id }, new { @class = "btn btn-success" }));
     columns.Add().Encoded(false).Sanitized(false).SetWidth(10).RenderValueAs(o => Html.ActionLink("Ord. Cuadr.", "CreatePdf", new { id = o.id }, new { @class = "btn btn-success" }));
 

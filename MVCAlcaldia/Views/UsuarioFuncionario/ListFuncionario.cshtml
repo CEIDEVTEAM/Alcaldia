@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<CommonSolution.DTOs.DtoUsuario>
-
+@using GridMvc.Html
 @{
     ViewBag.Title = "Listado de Funcionarios";
 }
-
+@Styles.Render("~/Content/gridmvc")
 <div class="row">
     <div class="col-sm-4">
         <div class="panel panel-default">
@@ -30,55 +30,24 @@
 
 <h2>Listado de Funcionarios</h2>
 
-<html>
 
-<body>
-    <br>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.nombreDeUsuario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.apellido)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.telefono)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.email)
-            </th>
-            <th></th>
-        </tr>
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(c => c.nombreDeUsuario).Titled("Nombre de Usuario").SetWidth(30);
+    columns.Add(c => c.nombre).Titled("Nombre").SetWidth(30);
+    columns.Add(c => c.apellido).Titled("Apellido").SetWidth(30);
+    columns.Add(c => c.telefono).Titled("Teléfono").SetWidth(20);
+    columns.Add(c => c.email).Titled("e-mail").SetWidth(20);
+    columns.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(o => Html.ActionLink("Borrar", "DeleteUsuario", new { nombreDeUsuario = o.nombreDeUsuario }, new { @class = "btn btn-danger" }));
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nombreDeUsuario)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.apellido)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.telefono)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.email)
-                </td>
-                <td>
-                    @Html.ActionLink("Actualizar", "Modify", new { nombreDeUsuario = item.nombreDeUsuario })
 
-                </td>
-            </tr>
-        }
 
-    </table>
-</body>
-</html>
+}).WithPaging(8).EmptyText("No hay nada que mostrar").Selectable(true).Sortable(true).Filterable(true)
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/grid")
+}
+
+

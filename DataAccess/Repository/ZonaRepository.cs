@@ -41,11 +41,9 @@ namespace DataAccess.Repository
                             context.Vertice.Add(vertice);
                         }
                         
-                       
                         context.SaveChanges();
                         trann.Commit();
 
-                     
                     }
                     catch (Exception ex)
                     {
