@@ -84,8 +84,9 @@ namespace BussinessLogic.Logic
                 colerrors.Add("El nombre no puede ser nulo");
                 return colerrors;
             }
-
-            if (isAdd == true && this._Repository.GetZonaRepository().ExistZonaByNombre(dto.nombre))
+            if (isAdd && dto.colVertices.Count < 3)
+                colerrors.Add("No hay markers suficientes para generar la zona.");
+            if (isAdd && this._Repository.GetZonaRepository().ExistZonaByNombre(dto.nombre))
                 colerrors.Add("El nombre ya existe, ingrese otro.");
 
             return colerrors;

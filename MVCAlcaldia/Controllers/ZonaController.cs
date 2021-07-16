@@ -26,6 +26,14 @@ namespace MVCAlcaldia.Controllers
             {
                 Session[CGlobals.USER_MESSAGE] = "Zona ingresada con éxito";
             }
+            else
+            {
+                string errorShow = "";
+                foreach (string item in colErrors)
+                    errorShow += "<< " + item + " >>";
+
+                Session[CGlobals.USER_ALERT] = errorShow;
+            }
 
 
             return View();

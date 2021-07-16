@@ -41,27 +41,39 @@ namespace MVCAlcaldia.Controllers
             return View("Add");
         }
 
-        
+
         public ActionResult DeleteUsuario(string nombreDeUsuario)
         {
-            LUsuarioController lgc = new LUsuarioController();
-            DtoUsuario dto = lgc.GetUserByNombre(nombreDeUsuario);
-            List<string> colErrors = lgc.DeleteUsuario(dto);
-
-            if (colErrors.Count == 0)
+            if (Session[CLogin.KEY_SESSION_USERNAME] != null)
             {
-                Session[CGlobals.USER_MESSAGE] = "Usuario dado de baja con éxito";
-            }
-            else
-            {
-                string errorShow = "";
-                foreach (string item in colErrors)
-                    errorShow += "<< " + item + " >>";
+                LUsuarioController lgc = new LUsuarioController();
+                DtoUsuario dto = lgc.GetUserByNombre(nombreDeUsuario);
+                if (Session[CLogin.KEY_SESSION_USERNAME].ToString() == dto.nombreDeUsuario)
+                {
+                    Session[CGlobals.USER_ALERT] = "No puede darse de baja a si mismo";
+                }
+                else
+                {
+                    List<string> colErrors = lgc.DeleteUsuario(dto);
+                    if (colErrors.Count == 0)
+                    {
+                        Session[CGlobals.USER_MESSAGE] = "Usuario dado de baja con éxito";
+                    }
+                    else
+                    {
+                        string errorShow = "";
+                        foreach (string item in colErrors)
+                            errorShow += "<< " + item + " >>";
 
-                Session[CGlobals.USER_ALERT] = errorShow;
+                        Session[CGlobals.USER_ALERT] = errorShow;
+                    }
+                }
+
+                return RedirectToAction("ListFuncionario");
             }
 
-            return RedirectToAction("ListFuncionario");
+            Session[CGlobals.USER_ALERT] = "La sesión expiró, vuelvea a loguearse.";
+            return RedirectToAction("Login", "Login");
         }
 
 
@@ -89,7 +101,8 @@ namespace MVCAlcaldia.Controllers
             if (colErrors.Count == 0)
             {
                 Session[CGlobals.USER_MESSAGE] = "Usuario actualizado con éxito";
-            }            else
+            }
+            else
             {
                 string errorShow = "";
                 foreach (string item in colErrors)

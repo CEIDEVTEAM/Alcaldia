@@ -59,7 +59,7 @@ namespace DataAccess.Repository
                             currReclamo.estado = dto.estado.ToString();
                             currReclamo.observacionFuncionario = dto.observacionFuncionario;
                             currReclamo.observacionCuadrilla = dto.observacionCuadrilla;
-
+                            currReclamo.idCuadrilla = dto.idCuadrilla;
                         }
 
                         context.SaveChanges();
