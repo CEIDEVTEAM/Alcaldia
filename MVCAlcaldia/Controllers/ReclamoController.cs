@@ -186,7 +186,7 @@ namespace MVCAlcaldia.Controllers
             stream.Position = 0;
 
 
-            return new FileStreamResult(stream, "aplicacion/pdf");
+            return new FileStreamResult(stream, ".pdf");
         }
     }
 }

@@ -106,9 +106,7 @@ namespace MVCAlcaldia.Controllers
             LCuadrillaController lgc = new LCuadrillaController();
             DtoCuadrilla dto = lgc.GetCuadrillaById(id);
             List<string> colErrors = lgc.DeleteCuadrilla(dto);
-            colErrors.Add("asdfasdf");
-            colErrors.Add("LInea 2           fdsf");
-            colErrors.Add("asdfasdfasdf");
+            
             if (colErrors.Count == 0)
             {
                 Session[CGlobals.USER_MESSAGE] = "Cuadrilla dada de baja con éxito";
