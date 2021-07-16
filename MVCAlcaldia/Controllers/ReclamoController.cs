@@ -1,6 +1,7 @@
 ﻿using BussinessLogic.Logic;
 using CommonSolution.Constants;
 using CommonSolution.DTOs;
+using CommonSolution.ENUMs;
 using iText.Barcodes;
 using iText.Kernel.Colors;
 using iText.Kernel.Pdf;
@@ -23,7 +24,7 @@ namespace MVCAlcaldia.Controllers
     public class ReclamoController : Controller
     {
         public ActionResult List()
-        {          
+        {
 
             return View();
         }
@@ -34,14 +35,14 @@ namespace MVCAlcaldia.Controllers
             LReclamoController lgc = new LReclamoController();
 
             List<DtoReclamo> colDto = lgc.GetAllReclamosByFechaYestado(dto);
-            
+
             return PartialView("_D_List", colDto);
         }
         public ActionResult ListAll()
         {
             LReclamoController lgc = new LReclamoController();
 
-            List<DtoReclamo> colDto = lgc.GetAllReclamos(); 
+            List<DtoReclamo> colDto = lgc.GetAllReclamos();
 
             return View(colDto);
         }
@@ -66,21 +67,56 @@ namespace MVCAlcaldia.Controllers
             LReclamoController lgc = new LReclamoController();
             DtoReclamo dto = lgc.GetReclamoById(id);
 
+            IEnumerable<EnumEstado> colEnumEstado = Enum.GetValues(typeof(EnumEstado)).Cast<EnumEstado>();
+            List<SelectListItem> estadoEnum = new List<SelectListItem>();
+            if (dto.estado == EnumEstado.DESESTIMADO || dto.estado == EnumEstado.RESUELTO)
+            {
+                SelectListItem option = new SelectListItem();
+                option.Value = dto.estado.ToString();
+                option.Text = dto.estado.ToString();
+                option.Selected = true;
+                option.Disabled = true;
+                estadoEnum.Add(option);
+            }
+            else
+            {
+                foreach (EnumEstado item in colEnumEstado)
+                {
+                    SelectListItem option = new SelectListItem();
+                    option.Value = item.ToString();
+                    option.Text = item.ToString();
+                    if (item <= dto.estado)
+                    {
+                        option.Disabled = true;
+                    }
+                    estadoEnum.Add(option);
+                }
+            }
+
+            ViewBag.colEstadoSelect = estadoEnum;
+
             return View(dto);
         }
 
         [HttpPost]
         public ActionResult ModifyReclamo(DtoReclamo dto)
         {
-            LReclamoController lgc = new LReclamoController();
-           
-            List<string> colErrors = lgc.ModifyReclamo(dto);
-            if (colErrors.Count == 0)
+            if (Session[CLogin.KEY_SESSION_USERNAME] != null)
             {
-                Session[CGlobals.USER_MESSAGE] = "Reclamo actualizado con éxito";
-            }
+                dto.idFuncionario = Session[CLogin.KEY_SESSION_USERNAME].ToString();
+                LReclamoController lgc = new LReclamoController();
+                List<string> colErrors = lgc.ModifyReclamo(dto);
+                if (colErrors.Count == 0)
+                {
+                    Session[CGlobals.USER_MESSAGE] = "Reclamo actualizado con éxito";
+                }
 
                 return RedirectToAction("ListAll");
+            }
+
+            Session[CGlobals.USER_ALERT] = "La sesión expiró, vuelvea a loguearse.";
+            return RedirectToAction("Login", "Login");
+
         }
         public ActionResult Details(int id)
         {
@@ -94,7 +130,7 @@ namespace MVCAlcaldia.Controllers
         {
             LReclamoController lgc = new LReclamoController();
             DtoReclamo dto = lgc.GetReclamoById(id);
-            
+
             var stream = new MemoryStream();
             var writer = new PdfWriter(stream);
             var pdf = new PdfDocument(writer);
@@ -140,11 +176,11 @@ namespace MVCAlcaldia.Controllers
             Cell cell11 = new Cell(1, 1)
                .SetBackgroundColor(ColorConstants.GRAY)
                .SetTextAlignment(TextAlignment.CENTER)
-               .Add(new Paragraph("Tipo: "+dto.nombreTipoReclamo));
+               .Add(new Paragraph("Tipo: " + dto.nombreTipoReclamo));
             Cell cell12 = new Cell(1, 1)
                .SetBackgroundColor(ColorConstants.GRAY)
                .SetTextAlignment(TextAlignment.CENTER)
-               .Add(new Paragraph("Fecha: "+ dto.fechaYhora));
+               .Add(new Paragraph("Fecha: " + dto.fechaYhora));
 
 
             table.AddCell(cell11);
@@ -153,7 +189,7 @@ namespace MVCAlcaldia.Controllers
             document.Add(newline);
             document.Add(table);
 
-            Paragraph paragraph2 = new Paragraph("OBSERVACIÓN CIUDADANO: "+dto.observaciones);
+            Paragraph paragraph2 = new Paragraph("OBSERVACIÓN CIUDADANO: " + dto.observaciones);
             document.Add(paragraph2);
 
             // Hyper link

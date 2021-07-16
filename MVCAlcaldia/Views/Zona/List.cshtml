@@ -31,7 +31,7 @@
     )).SetWidth(50);
 
     columns.Add(c => c.reclamosActivos).Titled("Reclamos activos").SetWidth(10).Filterable(true); ;
-    columns.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(o => Html.ActionLink("Borrar", "Delete", new { id = o.id }, new { @class = "btn btn-danger" }));
+    columns.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(o => Html.ActionLink("Dar de baja", "Delete", new { id = o.id }, new { @class = "btn btn-danger" }));
 
 
 }).WithPaging(8).EmptyText("No hay nada que mostrar").Sortable()

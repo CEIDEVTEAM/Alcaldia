@@ -42,9 +42,10 @@ namespace MVCAlcaldia.Controllers
 
 
 
-        public ActionResult DeleteTipoDeReclamo(DtoTipoDeReclamo dto)
+        public ActionResult Delete(string nombre)
         {
             LTipoDeReclamoController lgc = new LTipoDeReclamoController();
+            DtoTipoDeReclamo dto = lgc.GetTipoDeReclamoByName(nombre);
             List<string> colErrors = lgc.DeleteTipoDeReclamo(dto);
 
             if (colErrors.Count == 0)

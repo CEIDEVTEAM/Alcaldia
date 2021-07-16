@@ -14,6 +14,7 @@ namespace CommonSolution.DTOs
         [DisplayName("Nro")]
         public int id { get; set; }
 
+        [Required(ErrorMessage = "El estado es requerido")]
         [DisplayName("Estado")]
         public EnumEstado estado { get; set; }
 
@@ -52,6 +53,8 @@ namespace CommonSolution.DTOs
         [DisplayName("Comentarios Funcionario")]
         [Required(ErrorMessage = "La descripción es requerida")]
         public string observacionFuncionario { get; set; }
+
+        public string idFuncionario { get; set; }
         public DateTime fechaInicial { get; set; }
         public DateTime fechaFinal { get; set; }
     }

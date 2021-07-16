@@ -38,7 +38,7 @@
     columns.Add(c => c.apellido).Titled("Apellido").SetWidth(30);
     columns.Add(c => c.telefono).Titled("Teléfono").SetWidth(20);
     columns.Add(c => c.email).Titled("e-mail").SetWidth(20);
-    columns.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(o => Html.ActionLink("Borrar", "DeleteUsuario", new { nombreDeUsuario = o.nombreDeUsuario }, new { @class = "btn btn-danger" }));
+    columns.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(o => Html.ActionLink("Dar de baja", "DeleteUsuario", new { nombreDeUsuario = o.nombreDeUsuario }, new { @class = "btn btn-danger" }));
 
 
 
