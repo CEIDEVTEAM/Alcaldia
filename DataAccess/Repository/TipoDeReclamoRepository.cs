@@ -81,7 +81,7 @@ namespace DataAccess.Repository
 
                         if (currTipoDeReclamo != null)
                         {
-                            context.Tipo_De_Reclamo.Remove(currTipoDeReclamo);
+                            currTipoDeReclamo.situacion = CGlobals.ESTADO_INACTIVO;
                             context.SaveChanges();
                             trann.Commit();
                         }

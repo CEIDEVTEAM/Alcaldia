@@ -62,7 +62,7 @@ namespace MVCAlcaldia.Controllers
                 Session[CGlobals.USER_ALERT] = errorShow;
             }
 
-            return View("List");
+            return RedirectToAction("List");
         }
 
 

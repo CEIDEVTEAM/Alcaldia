@@ -33,12 +33,12 @@
 
 @Html.Grid(Model).Columns(columns =>
 {
-    columns.Add(c => c.nombre).Titled("Nombre").SetWidth(30);
-    columns.Add(c => c.descripcion).Titled("Descripción").SetWidth(30);
-    columns.Add().Encoded(false).Sanitized(false).SetWidth(10).RenderValueAs(o => Html.ActionLink("Actualizar", "Modify", new { nombre = o.nombre }, new { @class = "btn btn-success" }));
-    columns.Add().Encoded(false).Sanitized(false).SetWidth(10).RenderValueAs(o => Html.ActionLink("Dar de baja", "Delete", new { nombre = o.nombre }, new { @class = "btn btn-danger" }));
+    columns.Add(c => c.nombre).Titled("Nombre").SetWidth(30).Filterable(true);
+    columns.Add(c => c.descripcion).Titled("Descripción").SetWidth(600);    
+    columns.Add().Encoded(false).Sanitized(false).SetWidth(50).RenderValueAs(o => Html.ActionLink("Actualizar", "Modify", new { nombre = o.nombre }, new { @class = "btn btn-success" }));
+    columns.Add().Encoded(false).Sanitized(false).RenderValueAs(o => Html.ActionLink(" ", "Delete", new { nombre = o.nombre }, new { @class = "btn btn-danger glyphicon glyphicon-remove-circle" }));
 
-}).WithPaging(8).EmptyText("No hay nada que mostrar").Selectable(true).Filterable()
+}).WithPaging(8).EmptyText("No hay nada que mostrar").Selectable(true)
 
 
 @section Scripts {

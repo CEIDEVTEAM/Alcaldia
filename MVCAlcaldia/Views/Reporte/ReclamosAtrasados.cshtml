@@ -9,14 +9,14 @@
 
 @Html.Grid(Model).Columns(columns =>
 {
-    columns.Add(c => c.id).Titled("Nro Reclamo").SetWidth(30);
-    columns.Add(c => c.fechaYhora).Titled("Fecha").SetWidth(30);
-    columns.Add(c => c.observaciones).Titled("Comentarios").SetWidth(30);
-    columns.Add(c => c.estado).Titled("Id Ciudadano").SetWidth(20);
-    columns.Add(c => c.idCiudadano).Titled("Id Ciudadano").SetWidth(20);
-    columns.Add(c => c.nombreTipoReclamo).Titled("Tipo").SetWidth(20);
-    columns.Add(c => c.idCuadrilla).Titled("Cuadrilla").SetWidth(20);
-    columns.Add(c => c.idZona).Titled("Zona").SetWidth(20);
+    columns.Add(c => c.id).Titled("Nro Reclamo");
+    columns.Add(c => c.fechaYhora).Titled("Fecha");
+    columns.Add(c => c.observaciones).Titled("Comentarios");
+    columns.Add(c => c.estado).Titled("Id Ciudadano");
+    columns.Add(c => c.idCiudadano).Titled("Id Ciudadano");
+    columns.Add(c => c.nombreTipoReclamo).Titled("Tipo");
+    columns.Add(c => c.idCuadrilla).Titled("Cuadrilla");
+    columns.Add(c => c.idZona).Titled("Zona");
 
 
 }).WithPaging(8).EmptyText("No hay nada que mostrar").Sortable(true)

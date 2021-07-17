@@ -16,12 +16,12 @@
 
 @Html.Grid(Model).Columns(columns =>
 {
-    columns.Add(c => c.idReclamo).Titled("Nro Reclamo").SetWidth(30);
-    columns.Add(c => c.fechaYhoraLog).Titled("Fecha").SetWidth(30);
-    columns.Add(c => c.comentarioLog).Titled("Comentarios").SetWidth(80);
-    columns.Add(c => c.observacionesCuadrilla).Titled("Comentarios Cuadrilla").SetWidth(80);
-    columns.Add(c => c.estadoLog).Titled("Evolución Estado").SetWidth(20);
-    columns.Add(c => c.nombreDeUsuario).Titled("Usuario Fun/Ciu").SetWidth(20);
+    columns.Add(c => c.idReclamo).Titled("Nro");
+    columns.Add(c => c.fechaYhoraLog).Titled("Fecha");
+    columns.Add(c => c.comentarioLog).Titled("Comentarios");
+    columns.Add(c => c.observacionesCuadrilla).Titled("Comentarios Cuadrilla");
+    columns.Add(c => c.estadoLog).Titled("Evolución Estado");
+    columns.Add(c => c.nombreDeUsuario).Titled("Usuario Fun/Ciu");
 
 
 
