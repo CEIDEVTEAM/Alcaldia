@@ -59,8 +59,9 @@ namespace DataAccess.Repository
                             currReclamo.estado = dto.estado.ToString();
                             currReclamo.observacionFuncionario = dto.observacionFuncionario;
                             currReclamo.observacionCuadrilla = dto.observacionCuadrilla;
-                            currReclamo.idCuadrilla = dto.idCuadrilla;
                             currReclamo.idFuncionario = dto.idFuncionario;
+                            if (dto.idCuadrilla != null) 
+                            currReclamo.idCuadrilla = dto.idCuadrilla;
                         }
 
                         context.SaveChanges();
