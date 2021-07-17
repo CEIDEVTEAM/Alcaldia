@@ -21,7 +21,8 @@ namespace DataAccess.Mapper
                 nombre = entity.nombre,
                 encargado = entity.encargado,
                 idZona = entity.idZona,
-                cantidadDePeones = entity.cantidadDePeones
+                cantidadDePeones = entity.cantidadDePeones,
+                nombreZona = entity.Zona.nombre
             };
         }
 

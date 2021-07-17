@@ -126,8 +126,9 @@ namespace DataAccess.Repository
 
         public List<DtoCuadrilla> GetAllCuadrillas()
         {
+            List<DtoCuadrilla> colCuadrillas = new List<DtoCuadrilla>();
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
-                return this._cuadrillaMapper.MapToDto(context.Cuadrilla.AsNoTracking().Where(w => w.situacion == CGlobals.ESTADO_ACTIVO).ToList());
+                return colCuadrillas = this._cuadrillaMapper.MapToDto(context.Cuadrilla.AsNoTracking().Include("Zona").Where(w => w.situacion == CGlobals.ESTADO_ACTIVO).ToList());
         }
 
         public DtoCuadrilla GetCuadrillaById(int idCuadrilla)

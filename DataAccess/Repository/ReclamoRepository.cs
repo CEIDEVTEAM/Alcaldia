@@ -185,8 +185,8 @@ namespace DataAccess.Repository
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
                 colReclamos = this._ReclamoMapper.MapToDto(context.Reclamo.AsNoTracking().Where(w => w.idCuadrilla == idCuadrilla &&
-                w.estado == EnumEstado.ASIGNADO.ToString()
-                || w.estado == EnumEstado.EN_PROCESO.ToString()).ToList());
+                (w.estado == EnumEstado.ASIGNADO.ToString()
+                || w.estado == EnumEstado.EN_PROCESO.ToString())).ToList());
             }
 
             return colReclamos;

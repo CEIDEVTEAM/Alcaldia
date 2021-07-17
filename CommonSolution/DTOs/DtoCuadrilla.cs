@@ -44,6 +44,7 @@ namespace CommonSolution.DTOs
         [DisplayName("Promedio de resolución")]
         public string promedioStg { get; set; }
         public string task { get; set; }
+        public string nombreZona { get; set; }
 
     }
 }
