@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BussinessLogic.Logic
 {
-   public class LZonaController
+    public class LZonaController
     {
         private Repository _Repository;
 
@@ -56,10 +56,20 @@ namespace BussinessLogic.Logic
         public List<string> DeleteZona(DtoZona dto)
         {
             List<string> colerrors = this.ValidateZona(dto, false);
+            int recAct = this._Repository.GetZonaRepository().GetReclamosActivosZona(dto.id);
+            
+            if (recAct > 0)
+                colerrors.Add("No se pueden eliminar zonas con reclamos activos");
 
             if (colerrors.Count == 0)
             {
+                List<DtoCuadrilla> dtoCuadrillas = this._Repository.GetCuadrillaRepository().GetCuadrillaByZona(dto.id);
                 this._Repository.GetZonaRepository().DeleteZona(dto.id);
+                foreach (DtoCuadrilla item in dtoCuadrillas)
+                {
+                    this._Repository.GetCuadrillaRepository().RemoveZonaToCuadrilla(item.id);
+                }
+                
             }
 
             return colerrors;

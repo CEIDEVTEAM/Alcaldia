@@ -72,7 +72,31 @@ namespace DataAccess.Repository
             }
         }
 
+        public void RemoveZonaToCuadrilla(int idCuadrilla)
+        {
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
+            {
+                using (DbContextTransaction trann = context.Database.BeginTransaction(IsolationLevel.ReadCommitted))
+                {
+                    try
+                    {
+                        Cuadrilla currCuadrilla = context.Cuadrilla.FirstOrDefault(f => f.id == idCuadrilla);
 
+                        if (currCuadrilla != null)
+                        {
+                            currCuadrilla.idZona = null;
+                        }
+
+                        context.SaveChanges();
+                        trann.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        trann.Rollback();
+                    }
+                }
+            }
+        }
 
         public void DeleteCuadrilla(int idCuadrilla)
         {
@@ -143,7 +167,16 @@ namespace DataAccess.Repository
             return nroCuadrilla;
         }
 
+        public List<DtoCuadrilla> GetCuadrillaByZona(int idZona)
+        {
+            List<DtoCuadrilla> coldto = new List<DtoCuadrilla>();
+            using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
+            {
+                return coldto = this._cuadrillaMapper.MapToDto(context.Cuadrilla.AsNoTracking().Where(w => w.idZona == idZona).ToList());
+                              
+            }
 
+        }
 
         public List<DtoCuadrilla> GetCuadrillasWithAvg()
         {
