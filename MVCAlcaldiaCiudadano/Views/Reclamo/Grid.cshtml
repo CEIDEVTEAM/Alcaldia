@@ -23,15 +23,15 @@
 
 @Html.Grid(Model).Columns(columns =>
 {
-    columns.Add(c => c.id).Titled("Nro");
+    columns.Add(c => c.id).Titled("Nro").Filterable(true);
     columns.Add(c => c.fechaYhora).Titled("Fecha");
     columns.Add(c => c.observaciones).Titled("Descripción");
     columns.Add(c => c.estado).Titled("Estado");
-    columns.Add(c => c.nombreTipoReclamo).Titled("Tipo");
+    columns.Add(c => c.nombreTipoReclamo).Titled("Tipo").Filterable(true);
     columns.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(o => Html.ActionLink("Detalle", "Details", new { id = o.id }, new { @class = "btn btn-success" }));
 
 
-}).WithPaging(8).EmptyText("No hay nada que mostrar").Sortable().Filterable().Selectable(true)
+}).WithPaging(8).EmptyText("No hay nada que mostrar").Sortable().Selectable(true)
 
 
 

@@ -13,12 +13,12 @@ function buscar() {
     var valorTxtNombre = document.getElementById("selectValue").value;
    
 
-    var id = valorTxtNombre;
+    var json = { id: valorTxtNombre };
 
     $.ajax({
         url: 'GetReclamosActivosPorCuadrilla',
         type: 'POST',
-        data: id,
+        data: json,
         success: function (result) {
 
             var test = result;

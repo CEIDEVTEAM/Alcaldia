@@ -16,7 +16,7 @@
 
 @Html.Grid(Model).Columns(columns =>
 {
-    columns.Add(c => c.idReclamo).Titled("Nro Reclamo");
+    columns.Add(c => c.idReclamo).Titled("Nro Reclamo").Filterable(true);
     columns.Add(c => c.fechaYhoraLog).Titled("Fecha");
     columns.Add(c => c.comentarioLog).Titled("Comentarios del ayuntamiento");
     columns.Add(c => c.estadoLog).Titled("Evolución Estado");
@@ -25,7 +25,7 @@
 
 
 
-}).WithPaging(8).EmptyText("No hay nada que mostrar").Sortable().Filterable()
+}).WithPaging(8).EmptyText("No hay nada que mostrar").Sortable()
 
 @section Scripts {
 

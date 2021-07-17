@@ -105,11 +105,11 @@ namespace MVCAlcaldia.Controllers
             
         }
         [HttpPost]
-        public ActionResult GetReclamosActivosPorCuadrilla(int id)
+        public ActionResult GetReclamosActivosPorCuadrilla(DtoCuadrilla dto)
         {
             LReclamoController lgc = new LReclamoController();
 
-            List<DtoReclamo> colDto = lgc.GetAllReclamosActivosByCuadrilla(id);
+            List<DtoReclamo> colDto = lgc.GetAllReclamosActivosByCuadrilla(dto.id);
 
             return PartialView("_Listado", colDto);
 
