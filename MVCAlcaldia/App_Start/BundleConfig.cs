@@ -48,6 +48,9 @@ namespace MVCAlcaldia
 
             bundles.Add(new StyleBundle("~/Content/cards").Include(
                      "~/Content/reclamosCards.css"));
+
+            bundles.Add(new StyleBundle("~/Content/login").Include(
+                "~/Content/signin.css"));
         }
     }
 }
