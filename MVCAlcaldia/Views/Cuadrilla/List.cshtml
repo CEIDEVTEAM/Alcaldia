@@ -32,6 +32,7 @@
 
 @Html.Grid(Model).Columns(columns =>
 {
+    columns.Add(c => c.id).Titled("Nro").SetWidth(20);
     columns.Add(c => c.nombre).Titled("Nombre").SetWidth(200);
     columns.Add(c => c.encargado).Titled("Encargado").SetWidth(200);
     columns.Add(c => c.idZona).Titled("Nro. Zona").SetWidth(30);

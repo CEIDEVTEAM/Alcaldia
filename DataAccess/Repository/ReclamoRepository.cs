@@ -181,11 +181,11 @@ namespace DataAccess.Repository
         public List<DtoReclamo> GetAllReclamosActivosPorCuadrilla(int idCuadrilla)
         {
             List<DtoReclamo> colReclamos = new List<DtoReclamo>();
+            List<Reclamo> reclamos = new List<Reclamo>();
             using (ReclamosAlcaldiaEntities context = new ReclamosAlcaldiaEntities())
             {
-                colReclamos = this._ReclamoMapper.MapToDto(context.Reclamo.AsNoTracking().Where(w => w.idCuadrilla == idCuadrilla &&
-                w.estado == EnumEstado.ASIGNADO.ToString()
-                || w.estado == EnumEstado.EN_PROCESO.ToString()).ToList());
+                reclamos = context.Reclamo.AsNoTracking().Where(w => w.idCuadrilla == idCuadrilla && (w.estado == EnumEstado.ASIGNADO.ToString() || w.estado == EnumEstado.EN_PROCESO.ToString())).ToList();
+                colReclamos = this._ReclamoMapper.MapToDto(reclamos);
             }
 
             return colReclamos;

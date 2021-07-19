@@ -37,7 +37,7 @@ namespace MVCAlcaldiaCiudadano.Controllers
                 FormsAuthentication.SetAuthCookie(dto.user, false);
                 Session[CLogin.KEY_SESSION_USERNAME] = dto.user;
                 string completeName = lgc.GetCompleteNameByUsuario(dto.user);
-                Session[CGlobals.USER_MESSAGE] = "Bienvenido " + completeName;
+                Session[CGlobals.USER_MESSAGE] = "Bienvenido/a " + completeName;
                 if (String.IsNullOrEmpty(returnUrl))
                 {
                     return Redirect("/Home");
